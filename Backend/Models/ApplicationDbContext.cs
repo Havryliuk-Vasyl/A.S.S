@@ -14,7 +14,7 @@ namespace Backend.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasKey(u => u.id); // Приклад встановлення первинного ключа
+                .HasKey(Users => Users.id);
         }
     }
 }
