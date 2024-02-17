@@ -14,10 +14,10 @@ namespace Backend.Services
             _context = context;
         }
 
-        public void AddUser(User newUser)
+        public async Task AddUserAsync(User newUser)
         {
-            _context.Users.Add(newUser);
-            _context.SaveChanges();
+            await _context.Users.AddAsync(newUser);
+            await _context.SaveChangesAsync();
         }
 
         public List<User> GetUsers()

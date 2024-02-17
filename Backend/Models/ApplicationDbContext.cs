@@ -6,7 +6,6 @@ namespace Backend.Models
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
-        // Додайте цей конструктор без параметрів
         public ApplicationDbContext() { }
 
         public DbSet<User> Users { get; set; }
@@ -14,7 +13,7 @@ namespace Backend.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-                .HasKey(Users => Users.id);
+                .HasKey(u => u.id);
         }
     }
 }
