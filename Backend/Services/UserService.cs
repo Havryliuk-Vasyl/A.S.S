@@ -16,19 +16,47 @@ namespace Backend.Services
 
         public async Task AddUserAsync(User newUser)
         {
-            await _context.Users.AddAsync(newUser);
-            await _context.SaveChangesAsync();
+            try
+            {
+                await _context.Users.AddAsync(newUser);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Обробка помилок
+                Console.WriteLine($"Error adding user: {ex.Message}");
+                throw;
+            }
         }
 
-        public List<User> GetUsers()
+        public async Task<List<User>> GetUsersAsync()
         {
-            return _context.Users.ToList();
+            try
+            {
+                return await _context.Users.ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                // Обробка помилок
+                Console.WriteLine($"Error getting users: {ex.Message}");
+                throw;
+            }
         }
 
-        public void RemoveUser(User delUser)
+        public async Task RemoveUserAsync(User delUser)
         {
-            _context.Users.Remove(delUser);
-            _context.SaveChanges();
+            try
+            {
+                _context.Users.Remove(delUser);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Обробка помилок
+                Console.WriteLine($"Error removing user: {ex.Message}");
+                throw;
+            }
         }
+
     }
 }

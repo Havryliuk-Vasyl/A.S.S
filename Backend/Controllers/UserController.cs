@@ -19,7 +19,7 @@ namespace Backend.Controllers
         [HttpGet]
         public IActionResult GetUser()
         {
-            var users = _userService.GetUsers();
+            var users = _userService.GetUsersAsync();
             return Ok(users);
         }
 
