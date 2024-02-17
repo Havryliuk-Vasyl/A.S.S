@@ -24,10 +24,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddUser([FromBody] User newUser)
+        public async Task<IActionResult> Post([FromBody] User newUser)
         {
-            _userService.AddUser(newUser);
-            return Ok("User added successfully");
+            if(ModelState.IsValid)
+            {
+                await _userService.AddUserAsync(newUser);
+                return Ok("User added successfully");
+            }
+            return BadRequest();
         }
     }
 }

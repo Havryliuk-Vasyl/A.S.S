@@ -6,7 +6,7 @@ namespace Backend.Services
     public interface IUserService
     {
         List<User> GetUsers();
-        void AddUser(User newUser);
+        Task AddUserAsync(User newUser);
         void RemoveUser(User delUser);
     }
 }
