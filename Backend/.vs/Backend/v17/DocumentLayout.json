@@ -19,10 +19,6 @@
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -34,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 389,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -47,19 +43,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "D:\\A.S.S\\Backend\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAqAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-02-17T17:32:06.727Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "IUserService.cs",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\IUserService.cs",
               "RelativeDocumentMoniker": "Services\\IUserService.cs",
@@ -67,8 +50,7 @@
               "RelativeToolTip": "Services\\IUserService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-17T17:29:10.884Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-17T17:29:10.884Z"
             },
             {
               "$type": "Document",
@@ -78,7 +60,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\A.S.S\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAYwBYAAAAaAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAYwBkAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-02-17T17:23:53.001Z",
               "EditorCaption": ""
@@ -93,8 +75,7 @@
               "RelativeToolTip": "Services\\UserService.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAABcAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-17T17:23:18.032Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-17T17:23:18.032Z"
             },
             {
               "$type": "Document",
@@ -106,8 +87,7 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAIwBwAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-17T17:22:43.128Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-17T17:22:43.128Z"
             },
             {
               "$type": "Document",
@@ -119,8 +99,7 @@
               "RelativeToolTip": "Models\\ApplicationDbContext.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-17T17:21:19.017Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-02-17T17:21:19.017Z"
             }
           ]
         }
