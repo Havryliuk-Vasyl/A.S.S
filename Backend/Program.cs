@@ -20,6 +20,11 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+var cultureInfo = new CultureInfo("en-US");
+CultureInfo.DefaultThreadCurrentCulture = cultureInfo;
+CultureInfo.DefaultThreadCurrentUICulture = cultureInfo;
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,9 +33,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-CultureInfo.DefaultThreadCurrentCulture = new CultureInfo("en-US");
-CultureInfo.DefaultThreadCurrentUICulture = new CultureInfo("en-US");
 
 app.UseHttpsRedirection();
 
