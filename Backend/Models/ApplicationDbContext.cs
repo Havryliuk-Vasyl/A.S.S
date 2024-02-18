@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Backend.Models
 {
@@ -12,6 +13,7 @@ namespace Backend.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>().ToTable("_user");   
             modelBuilder.Entity<User>()
                 .HasKey(u => u.id);
         }
