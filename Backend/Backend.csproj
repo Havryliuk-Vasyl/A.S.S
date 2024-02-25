@@ -25,8 +25,8 @@
 
   <ItemGroup>
 	<Folder Include="Models\" />
-	<Folder Include="Controllers" />
-	<Folder Include="Services" />
+	<Folder Include="Controllers\" />
+	<Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
