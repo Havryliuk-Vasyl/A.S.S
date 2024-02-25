@@ -1,4 +1,5 @@
 ﻿using Backend.Models;
+using Backend.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,19 +8,18 @@ namespace Backend.Services
 {
     public class UserService : IUserService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IUserRepository userRepository;
 
-        public UserService(ApplicationDbContext context)
+        public UserService(IUserRepository userRepository)
         {
-            _context = context;
+            this.userRepository = userRepository;
         }
 
         public async Task AddUserAsync(User newUser)
         {
             try
             {
-                await _context.Users.AddAsync(newUser);
-                await _context.SaveChangesAsync();
+
             }
             catch (Exception ex)
             {
@@ -33,7 +33,7 @@ namespace Backend.Services
         {
             try
             {
-                return await _context.Users.ToListAsync();
+                await userRepository.getAll();
             }
             catch (Exception ex)
             {
@@ -47,8 +47,7 @@ namespace Backend.Services
         {
             try
             {
-                _context.Users.Remove(delUser);
-                await _context.SaveChangesAsync();
+                await userRepository.deleteById(delUser.id);
             }
             catch (Exception ex)
             {

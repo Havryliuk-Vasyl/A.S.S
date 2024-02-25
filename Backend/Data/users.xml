@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Users>
+	<User>
+		<id>1</id>
+		<username>Flamerman</username>
+		<name>Vasyl Havryliuk</name>
+		<password>gavryluk4</password>
+		<email>vasiagavryluk20@gmail.com</email>
+		<date_joined>2024-02-25</date_joined>
+		<status>administrator</status>
+	</User>
+	<User>
+		<id>2</id>
+		<username>john_doe</username>
+		<name>John Doe</name>
+		<password>password123</password>
+		<email>john@example.com</email>
+		<date_joined>2024-02-25</date_joined>
+		<status>listener</status>
+	</User>
+	<User>
+		<id>3</id>
+		<username>jane_smith</username>
+		<name>Jane Smith</name>
+		<password>secret456</password>
+		<email>jane@example.com</email>
+		<date_joined>2024-02-24</date_joined>
+		<status>listener</status>
+	</User>
+</Users>
