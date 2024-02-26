@@ -10,12 +10,12 @@ namespace Backend.Services
     {
         private readonly IUserRepository userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService()
         {
-            this.userRepository = userRepository;
+            userRepository = new UserRepository();
         }
 
-        public async Task AddUserAsync(User newUser)
+        public void AddUser(User newUser)
         {
             try
             {
@@ -29,11 +29,11 @@ namespace Backend.Services
             }
         }
 
-        public async Task<List<User>> GetUsersAsync()
+        public List<User> GetUsers()
         {
             try
             {
-                await userRepository.getAll();
+                return userRepository.getAll();
             }
             catch (Exception ex)
             {
@@ -43,19 +43,17 @@ namespace Backend.Services
             }
         }
 
-        public async Task RemoveUserAsync(User delUser)
+        public void RemoveUser(User delUser)
         {
             try
             {
-                await userRepository.deleteById(delUser.id);
+                userRepository.deleteById(delUser.id);
             }
             catch (Exception ex)
             {
-                // Обробка помилок
                 Console.WriteLine($"Error removing user: {ex.Message}");
                 throw;
             }
         }
-
     }
 }

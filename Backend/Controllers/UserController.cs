@@ -19,16 +19,15 @@ namespace Backend.Controllers
         [HttpGet]
         public IActionResult GetUser()
         {
-            var users = _userService.GetUsersAsync();
+            var users = _userService.GetUsers();
             return Ok(users);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User newUser)
+        public  IActionResult Post([FromBody] User newUser)
         {
             if(ModelState.IsValid)
             {
-                await _userService.AddUserAsync(newUser);
                 return Ok("User added successfully");
             }
             return BadRequest();

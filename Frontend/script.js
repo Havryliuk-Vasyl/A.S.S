@@ -5,24 +5,7 @@ document.addEventListener("DOMContentLoaded", function(){
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        // try{
-        //     const response = await fetch('https://localhost:7219/api/user', { method: 'GET'});
-            
-        //     if (response.ok) {
-        //         alert('User added successfully');
-        //     } else {
-        //         alert('Failed to add user');
-        //     }
-        // }
-        // catch(error){
-        //     console.error('Error adding user:', error);
-        //     alert('Error adding user'); 
-        // }
-        
-        //const formData = new FormData(form);
-
         var userData = {
-            id: 1,
             username: "john_doe",
             name: "John Doe",
             password: "securepassword",
@@ -47,16 +30,24 @@ document.addEventListener("DOMContentLoaded", function(){
         } catch (error) {
             console.error('Error adding user:', error);
             alert('Error adding user');
-        }
-
-        // const response = await fetch('https://localhost:7219/api/user', {
-        // method: 'POST',
-        // body: formData
-        // });
-        // if (response.ok) {
-        // alert('User added successfully');
-        // } else {
-        //     alert('Failed to add user');
-        // }
+        }   
     });
 });
+
+function recieveData(){
+    fetch('https://localhost:7219/api/user')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); 
+        var userList = document.getElementById('user-list');
+        data.forEach(user => {
+          var listItem = document.createElement('li');
+          listItem.textContent = user.name;
+          userList.appendChild(listItem);
+        });
+     })
+    .catch(error => {
+        console.error('Помилка отримання даних:', error);
+    });
+
+}
