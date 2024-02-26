@@ -41,4 +41,9 @@ app.UseCors(builder =>
     .AllowAnyHeader()
 );
 
+app.UseCors(builder => 
+    builder.WithOrigins("192.168.0.107:8000")
+    .AllowAnyMethod()
+    .AllowAnyHeader());
+
 app.Run();

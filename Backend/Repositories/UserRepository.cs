@@ -12,7 +12,7 @@ namespace Backend.Repositories
 
         public UserRepository()
         {
-            this.filePath = "../Data/users.xml";
+            this.filePath = "Data/users.xml";
         }
 
         private List<User> LoadUsers()
