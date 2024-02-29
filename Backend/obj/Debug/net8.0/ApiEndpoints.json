@@ -1,5 +1,83 @@
 [
   {
+    "ContainingType": "Backend.Controllers.AudioStreamingController",
+    "Method": "GetAudioStreamingService",
+    "RelativePath": "api/AudioStreaming",
+    "HttpMethod": "",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Backend.Services.IAudioStreamingService",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Backend.Controllers.AudioStreamingController",
+    "Method": "Get",
+    "RelativePath": "api/AudioStreaming/audio/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.MediaController",
+    "Method": "Post",
+    "RelativePath": "api/Media",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "newMedia",
+        "Type": "Backend.Models.Media",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.MediaController",
+    "Method": "GetMediaList",
+    "RelativePath": "api/Media/media",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.MediaController",
+    "Method": "GetMediaById",
+    "RelativePath": "api/Media/media/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Backend.Controllers.UserController",
     "Method": "Post",
     "RelativePath": "api/User",
@@ -18,7 +96,7 @@
   {
     "ContainingType": "Backend.Controllers.UserController",
     "Method": "GetUserById",
-    "RelativePath": "api/User/user/id",
+    "RelativePath": "api/User/user/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -26,7 +104,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []

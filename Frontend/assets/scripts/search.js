@@ -6,7 +6,7 @@ document.getElementById("searchForm").addEventListener("submit", function(event)
     try {
         $.ajax({
             type: "GET",
-            url: "https://localhost:7219/api/User/user/id?id=" + userId,
+            url: "https://localhost:7219/api/User/user/" + userId,
             contentType: "application/json",
             success: function(response) {
                 console.log("Data recieved successfully:", response);

@@ -3,36 +3,32 @@
   "WorkspaceRootPath": "D:\\A.S.S\\Backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:repositories\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\iuserservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\data\\users.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:data\\users.xml||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\controllers\\audiostreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\audiostreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\mediacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\services\\audiostreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\audiostreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\services\\iaudiostreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\iaudiostreamingservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 389,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,104 +50,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAAC0AAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T11:35:18.582Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Backend.http",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Backend.http",
-              "RelativeDocumentMoniker": "Backend.http",
-              "ToolTip": "D:\\A.S.S\\Backend\\Backend.http",
-              "RelativeToolTip": "Backend.http",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAlAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-02-26T11:35:09.334Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Models\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Models\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-26T11:11:21.533Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "IUserService.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\IUserService.cs",
-              "RelativeDocumentMoniker": "Services\\IUserService.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Services\\IUserService.cs",
-              "RelativeToolTip": "Services\\IUserService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAhAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T10:12:31.63Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UserService.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\UserService.cs",
-              "RelativeDocumentMoniker": "Services\\UserService.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Services\\UserService.cs",
-              "RelativeToolTip": "Services\\UserService.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAgwCAAAAAJAAAA",
+              "Title": "MediaController.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Controllers\\MediaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\MediaController.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Controllers\\MediaController.cs",
+              "RelativeToolTip": "Controllers\\MediaController.cs",
+              "ViewState": "AQIAABAAAAAAAAAAAAAQwAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T10:10:37.8Z",
+              "WhenOpened": "2024-03-01T14:45:07.1Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAAABEAAAAAAAAA",
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAbAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T10:10:21.074Z",
+              "WhenOpened": "2024-03-01T14:38:26.196Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "users.xml",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Data\\users.xml",
-              "RelativeDocumentMoniker": "Data\\users.xml",
-              "ToolTip": "D:\\A.S.S\\Backend\\Data\\users.xml",
-              "RelativeToolTip": "Data\\users.xml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAACQAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
-              "WhenOpened": "2024-02-25T10:01:19.655Z",
+              "Title": "IAudioStreamingService.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\IAudioStreamingService.cs",
+              "RelativeDocumentMoniker": "Services\\IAudioStreamingService.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Services\\IAudioStreamingService.cs",
+              "RelativeToolTip": "Services\\IAudioStreamingService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAOAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T14:29:57.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Controllers\\UserController.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAAQwA4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T14:28:03.332Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Services\\UserService.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Services\\UserService.cs",
+              "RelativeToolTip": "Services\\UserService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T14:27:36.814Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserRepository.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Repositories\\UserRepository.cs",
-              "RelativeDocumentMoniker": "Repositories\\UserRepository.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Repositories\\UserRepository.cs",
-              "RelativeToolTip": "Repositories\\UserRepository.cs",
-              "ViewState": "AQIAAF4AAAAAAAAAAAAYwGoAAAAmAAAA",
+              "Title": "AudioStreamingController.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Controllers\\AudioStreamingController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AudioStreamingController.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Controllers\\AudioStreamingController.cs",
+              "RelativeToolTip": "Controllers\\AudioStreamingController.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwBEAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-02-25T10:01:17.094Z",
+              "WhenOpened": "2024-03-01T14:27:03.957Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AudioStreamingService.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\AudioStreamingService.cs",
+              "RelativeDocumentMoniker": "Services\\AudioStreamingService.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Services\\AudioStreamingService.cs",
+              "RelativeToolTip": "Services\\AudioStreamingService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAuwA4AAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-01T14:26:47.709Z",
               "EditorCaption": ""
             }
           ]
