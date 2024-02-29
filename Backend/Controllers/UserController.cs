@@ -30,14 +30,10 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public  IActionResult Post([FromBody] User newUser)
+        public IActionResult Post([FromBody] User newUser)
         {
-            if(ModelState.IsValid)
-            {
-                _userService.AddUser(newUser);
-                return Ok("User added successfully");
-            }
-            return BadRequest();
+            _userService.AddUser(newUser);
+            return Ok("User added successfully");
         }
     }
 }
