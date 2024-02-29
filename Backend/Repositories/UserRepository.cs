@@ -103,12 +103,18 @@ namespace Backend.Repositories
 
         public User getById(int id)
         {
-            return LoadUsers().Find(user => user.id == id);
+            User? userSerarching = LoadUsers().Find(user => user.id == id);
+            User user = userSerarching;
+            return user;
         }
 
         public void save(User user)
         {
             List<User> users = LoadUsers();
+            
+            int maxId = users.Count > 0 ? users.Max(u => u.id) : 0;
+            user.id = maxId + 1;
+            
             users.Add(user);
             SaveUsers(users);
         }

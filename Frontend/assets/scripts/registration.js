@@ -6,11 +6,12 @@ document.addEventListener("DOMContentLoaded", function(){
         event.preventDefault();
 
         var userData = {
+            id: 0,
             username: "john_doe",
             name: "John Doe",
             password: "securepassword",
             email: "john@example.com",
-            date_joined: "2024-02-17", // Рядок, який представляє дату
+            date_joined: "2024-02-17",
             status: "artist"
         };
 
@@ -33,21 +34,3 @@ document.addEventListener("DOMContentLoaded", function(){
         }   
     });
 });
-
-function recieveData(){
-    fetch('https://localhost:7219/api/user')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); 
-        var userList = document.getElementById('user-list');
-        data.forEach(user => {
-          var listItem = document.createElement('li');
-          listItem.textContent = user.name;
-          userList.appendChild(listItem);
-        });
-     })
-    .catch(error => {
-        console.error('Помилка отримання даних:', error);
-    });
-
-}
