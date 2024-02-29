@@ -16,11 +16,17 @@ namespace Backend.Controllers
             _userService = userService;
         }
 
-        [HttpGet]
-        public IActionResult GetUser()
+        [HttpGet("users")]
+        public IActionResult GetUsers()
         {
             var users = _userService.GetUsers();
             return Ok(users);
+        }
+
+        [HttpGet("user/id")]
+        public IActionResult GetUserById(int id) {
+            var user = _userService.GetUserByID(id);
+            return Ok(user);
         }
 
         [HttpPost]
@@ -28,6 +34,7 @@ namespace Backend.Controllers
         {
             if(ModelState.IsValid)
             {
+                _userService.AddUser(newUser);
                 return Ok("User added successfully");
             }
             return BadRequest();

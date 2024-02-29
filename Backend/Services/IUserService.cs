@@ -7,6 +7,7 @@ namespace Backend.Services
     {
         void AddUser(User newUser);
         List<User> GetUsers();
+        User GetUserByID(int id);
         void RemoveUser(User delUser);
     }
 }

@@ -19,12 +19,25 @@ namespace Backend.Services
         {
             try
             {
-
+                userRepository.save(newUser);
             }
             catch (Exception ex)
             {
                 // Обробка помилок
                 Console.WriteLine($"Error adding user: {ex.Message}");
+                throw;
+            }
+        }
+
+        public User GetUserByID(int id)
+        {
+            try
+            {
+                return userRepository.getById(id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error getting user: {ex.Message}");
                 throw;
             }
         }
