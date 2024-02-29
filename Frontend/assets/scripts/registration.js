@@ -1,31 +1,31 @@
 document.addEventListener("DOMContentLoaded", function(){
-    const form = document.querySelector('form');
+    const form = document.getElementById('userForm');
 
     console.log(form);
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
-        var userData = {
-            id: 0,
-            username: "john_doe",
-            name: "John Doe",
-            password: "securepassword",
-            email: "john@example.com",
-            date_joined: "2024-02-17",
-            status: "artist"
+        const user = {
+            username: form.username.value,
+            name: form.name.value,
+            password: form.password.value,
+            email: form.email.value,
+            date_joined: form.date_joined.value,
+            status: form.status.value
         };
 
+        console.log(user);
         try {
             $.ajax({
                 type: "POST",
-                url: "https://localhost:7219/api/user",
+                url: "https://localhost:7219/api/User",
                 contentType: "application/json",
-                data: JSON.stringify(userData),
+                data: JSON.stringify(user),
                 success: function(response) {
                     console.log("Data sent successfully:", response);
                 },
                 error: function(error) {
-                    console.error("Error while sending data:", error);
+                    console.error("Error while sending data:", error.response);
                 }
             });
         } catch (error) {

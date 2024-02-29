@@ -15,7 +15,7 @@ namespace Backend.Models
         {
             modelBuilder.Entity<User>().ToTable("_user");   
             modelBuilder.Entity<User>()
-                .HasKey(u => u.id);
+                .HasKey(u => u.GetId());
         }
     }
 }

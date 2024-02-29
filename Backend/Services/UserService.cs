@@ -60,7 +60,7 @@ namespace Backend.Services
         {
             try
             {
-                userRepository.deleteById(delUser.id);
+                userRepository.deleteById(delUser.GetId());
             }
             catch (Exception ex)
             {

@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 // Add your services here
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IMediaService, MediaService>();
+builder.Services.AddScoped<IAudioStreamingService, AudioStreamingService>();
 
 // Використовуйте AddDbContext для додавання ApplicationDbContext в контейнер служб
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

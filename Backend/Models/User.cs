@@ -19,5 +19,21 @@
             this.date_joined = date_joined;
             this.status = status;
         }
+
+        public void SetId(int id) { this.id = id; }
+        public void SetUsername(string username) { this.username = username; }
+        public void SetName(string name) { this.name = name; }
+        public void SetPassword(string password) { this.password = password; }
+        public void SetEmail(string email) { this.email = email; }
+        public void SetDateJoined(string date_joined) { this.date_joined = date_joined; }
+        public void SetStatus(string status) { this.status = status; }
+
+        public int GetId() { return this.id; }
+        public string GetUsername() { return this.username; }
+        public string GetName() { return this.name; }
+        public string GetPassword() { return this.password; }
+        public string GetEmail() { return this.email; }
+        public string GetDateJoined() { return this.date_joined; }
+        public string GetStatus() { return this.status; }
     }
 }

@@ -28,7 +28,7 @@ namespace Backend.Repositories
 
                 foreach (XmlNode userNode in userNodes)
                 {
-                    int id = int.Parse(userNode.SelectSingleNode("id").InnerText);
+                    int id = int.Parse(userNode.SelectSingleNode(   "id").InnerText);
                     string username = userNode.SelectSingleNode("username").InnerText;
                     string name = userNode.SelectSingleNode("name").InnerText;
                     string password = userNode.SelectSingleNode("password").InnerText;
@@ -37,7 +37,7 @@ namespace Backend.Repositories
                     string status = userNode.SelectSingleNode("status").InnerText;
 
                     User user = new User(username, name, password, email, dateJoined, status);
-                    user.id = id;
+                    user.SetId(id);
                     users.Add(user);
                 }
             }
@@ -56,31 +56,31 @@ namespace Backend.Repositories
                 XmlElement userElement = xmlDoc.CreateElement("User");
 
                 XmlElement idElement = xmlDoc.CreateElement("id");
-                idElement.InnerText = user.id.ToString();
+                idElement.InnerText = user.GetId().ToString();
                 userElement.AppendChild(idElement);
 
                 XmlElement usernameElement = xmlDoc.CreateElement("username");
-                usernameElement.InnerText = user.username;
+                usernameElement.InnerText = user.GetUsername();
                 userElement.AppendChild(usernameElement);
 
                 XmlElement nameElement = xmlDoc.CreateElement("name");
-                nameElement.InnerText = user.name;
+                nameElement.InnerText = user.GetName();
                 userElement.AppendChild(nameElement);
 
                 XmlElement passwordElement = xmlDoc.CreateElement("password");
-                passwordElement.InnerText = user.password;
+                passwordElement.InnerText = user.GetPassword();
                 userElement.AppendChild(passwordElement);
 
                 XmlElement emailElement = xmlDoc.CreateElement("email");
-                emailElement.InnerText = user.email;
+                emailElement.InnerText = user.GetEmail();
                 userElement.AppendChild(emailElement);
 
                 XmlElement dateJoinedElement = xmlDoc.CreateElement("date_joined");
-                dateJoinedElement.InnerText = user.date_joined;
+                dateJoinedElement.InnerText = user.GetDateJoined();
                 userElement.AppendChild(dateJoinedElement);
 
                 XmlElement statusElement = xmlDoc.CreateElement("status");
-                statusElement.InnerText = user.status;
+                statusElement.InnerText = user.GetStatus();
                 userElement.AppendChild(statusElement);
 
                 root.AppendChild(userElement);
@@ -92,7 +92,7 @@ namespace Backend.Repositories
         public void deleteById(int id)
         {
             List<User> users = LoadUsers();
-            users.RemoveAll(user => user.id == id);
+            users.RemoveAll(user => user.GetId() == id);
             SaveUsers(users);
         }
 
@@ -103,7 +103,7 @@ namespace Backend.Repositories
 
         public User getById(int id)
         {
-            User? userSerarching = LoadUsers().Find(user => user.id == id);
+            User? userSerarching = LoadUsers().Find(user => user.GetId() == id);
             User user = userSerarching;
             return user;
         }
@@ -112,8 +112,8 @@ namespace Backend.Repositories
         {
             List<User> users = LoadUsers();
             
-            int maxId = users.Count > 0 ? users.Max(u => u.id) : 0;
-            user.id = maxId + 1;
+            int maxId = users.Count > 0 ? users.Max(u => u.GetId()) : 0;
+            user.SetId(maxId + 1);
             
             users.Add(user);
             SaveUsers(users);
@@ -122,7 +122,7 @@ namespace Backend.Repositories
         public void update(User user)
         {
             List<User> users = LoadUsers();
-            int index = users.FindIndex(u => u.id == user.id);
+            int index = users.FindIndex(u => u.GetId() == user.GetId());
             if (index != -1)
             {
                 users[index] = user;
