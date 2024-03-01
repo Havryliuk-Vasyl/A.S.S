@@ -4,7 +4,7 @@ using Backend.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.SqlServer;
-using System.Globalization;
+using System.Globalization; 
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +16,7 @@ builder.Services.AddSwaggerGen();
 // Add your services here
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IMediaService, MediaService>();
-builder.Services.AddScoped<IAudioStreamingService, AudioStreamingService>();
+//builder.Services.AddScoped<IAudioStreamingService, AudioStreamingService>();
 
 // Використовуйте AddDbContext для додавання ApplicationDbContext в контейнер служб
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

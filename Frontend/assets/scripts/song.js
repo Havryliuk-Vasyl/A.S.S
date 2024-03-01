@@ -1,22 +1,45 @@
-function play(songId){
-    const apiUrl = `https://localhost:7219/api/audio/${songId}`;
-    axios.get(apiUrl, {
-        responseType: 'arraybuffer' // Вказуємо, що очікуємо отримати відповідь у вигляді масиву байтів
-    })
-    .then(response => {
-        const audioData = response.data;
-        const audioUrl = URL.createObjectURL(new Blob([audioData]));
+document.addEventListener("DOMContentLoaded", function() {
+    const apiUrl = 'https://localhost:7219/api/Media/media';
 
-        // Отримуємо аудіоелемент
-        const audioElement = document.querySelector('audio');
+    // Функція, яка завантажує список пісень з сервера
+    function loadMediaList() {
+        axios.get(apiUrl)
+            .then(response => {
+                const mediaList = response.data;
+                displayMediaList(mediaList);
+            })
+            .catch(error => {
+                console.error('Error loading media list:', error);
+            });
+    }
+    console.log("Hi");
+    // Функція, яка відображає список пісень на сторінці
+    function displayMediaList(mediaList) {
+        const songsContainer = document.getElementById('songs');
 
-        // Встановлюємо джерело для аудіоелемента
-        audioElement.src = audioUrl;
+        mediaList.forEach(media => {
+            const songDiv = document.createElement('div');
+            songDiv.classList.add('song');
 
-        // Відтворюємо аудіофайл
-        audioElement.play();
-    })
-    .catch(error => {
-        console.error('Error fetching audio file:', error);
-    });
-}
+            const nameDiv = document.createElement('div');
+            nameDiv.innerText = media.title;
+            nameDiv.classList.add('name');
+
+            const playButton = document.createElement('button');
+            playButton.innerText = '>';
+            playButton.classList.add('play-song');
+            playButton.value = media.id;
+            playButton.addEventListener('click', function() {
+                play(media.id);
+            });
+
+            songDiv.appendChild(nameDiv);
+            songDiv.appendChild(playButton);
+
+            songsContainer.appendChild(songDiv);
+        });
+    }
+
+    // Викликаємо функцію для завантаження списку пісень при завантаженні сторінки
+    loadMediaList();
+});

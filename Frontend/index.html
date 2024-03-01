@@ -3,14 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
-    <link rel="stylesheet" href="assets/styles/style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-    <button onclick="window.location.href = 'assets/pages/registration.html';">Go to Registration</button>
-
-    <button onclick="window.location.href = 'assets/pages/search.html';">Go to Search</button>
-
-    <button onclick="window.location.href = 'assets/pages/songs.html'">Go to songs</button>
+    <header class="menu">
+        <nav>
+            <ul>
+                <li>Search</li>
+                <li>Registration</li>
+                <li>Songs</li>
+            </ul>
+        </nav>
+    </header>
+    <iframe id="pageFrame" src="" frameborder="0" width="100%" height="600"></iframe>
+    <div class="audio-player">
+        <button onclick="play(1)">></button>
+        <audio controls>
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script src="script.js"></script>
 </body>
+</html>

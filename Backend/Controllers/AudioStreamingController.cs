@@ -14,11 +14,6 @@ namespace Backend.Controllers
             audioStreamingService = new AudioStreamingService();
         }
 
-        public IAudioStreamingService GetAudioStreamingService()
-        {
-            return audioStreamingService;
-        }
-
         [HttpGet("audio/{id}")]
         public IActionResult Get(int id)
         {
