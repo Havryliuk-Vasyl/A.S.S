@@ -1,0 +1,67 @@
+.menu {
+    background-color: #000000; /* колір фону меню */
+    color: #fff; /* колір тексту в меню */
+    padding: 10px; /* відступи всередині меню */
+}
+
+.menu nav ul {
+    list-style-type: none; /* видаляємо маркери списку */
+    margin: 0; /* знімаємо зовнішні відступи */
+    padding: 0; /* знімаємо внутрішні відступи */
+}
+
+.menu nav ul li {
+    display: inline-block; /* вирівнюємо пункти меню в ряд */
+    margin-right: 20px; /* відступ між пунктами меню */
+}
+
+.menu nav ul li a {
+    color: #fff; /* колір тексту посилань */
+    text-decoration: none; /* видаляємо підкреслення з посилань */
+    font-weight: bold; /* жирний текст */
+}
+
+.menu nav ul li a:hover {
+   text-decoration: underline; /* підкреслюємо посилання при наведенні */
+}
+
+.menu nav ul li:hover{
+    cursor:pointer;
+}
+
+button {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    width: auto;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: #0056b3;
+}
+.audio-player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000000;
+    padding: 10px;
+    box-shadow: 0 -2px 5px rgba(246, 0, 147, 0.1);
+}
+
+audio::-webkit-media-controls-panel {
+    background-color: #f9f9f9;
+}
+
+audio::-webkit-media-controls-play-button {
+    color: #fff;
+}

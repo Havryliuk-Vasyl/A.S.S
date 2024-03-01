@@ -1,26 +1,6 @@
 [
   {
     "ContainingType": "Backend.Controllers.AudioStreamingController",
-    "Method": "GetAudioStreamingService",
-    "RelativePath": "api/AudioStreaming",
-    "HttpMethod": "",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": [
-      {
-        "Type": "Backend.Services.IAudioStreamingService",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
-  },
-  {
-    "ContainingType": "Backend.Controllers.AudioStreamingController",
     "Method": "Get",
     "RelativePath": "api/AudioStreaming/audio/{id}",
     "HttpMethod": "GET",
