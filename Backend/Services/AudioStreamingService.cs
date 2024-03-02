@@ -5,14 +5,29 @@ namespace Backend.Services
 {
     public class AudioStreamingService : IAudioStreamingService
     {
-        public AudioStreamingService() { 
-            
+        public AudioStreamingService()
+        {
+
         }
 
-        public byte[] GetAudioFile(Media media)
+        public byte[]? GetAudioFile(Media media)
         {
-            byte[] audioBytes = File.ReadAllBytes(media.url);
-            return audioBytes;
+            try
+            {
+                if (media == null)
+                {
+                    throw new Exception();
+                }
+                else
+                {
+                    byte[] audioBytes = File.ReadAllBytes(media.url);
+                    return audioBytes;
+                }
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

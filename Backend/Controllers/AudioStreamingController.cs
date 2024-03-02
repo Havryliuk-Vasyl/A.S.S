@@ -21,8 +21,12 @@ namespace Backend.Controllers
 
             byte[] audioBytes = audioStreamingService.GetAudioFile(mediaService.GetMediaById(id));
 
-            var stream = new MemoryStream(audioBytes);
-            return File(stream, "audio/mpeg");
+            if (audioBytes != null)
+            {
+                var stream = new MemoryStream(audioBytes);
+                return File(stream, "audio/wav");
+            }
+            return BadRequest();
         }
     }
 }
