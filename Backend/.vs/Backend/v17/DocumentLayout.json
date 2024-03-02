@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\A.S.S\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\media.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\controllers\\audiostreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\audiostreamingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -34,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 389,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,7 +50,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
+              "Title": "Media.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\Media.cs",
+              "RelativeDocumentMoniker": "Models\\Media.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Models\\Media.cs",
+              "RelativeToolTip": "Models\\Media.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-03-02T11:55:23.646Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MediaService.cs",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\MediaService.cs",
               "RelativeDocumentMoniker": "Services\\MediaService.cs",
@@ -54,12 +71,11 @@
               "RelativeToolTip": "Services\\MediaService.cs",
               "ViewState": "AQIAABUAAAAAAAAAAAAYwCIAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-02T10:33:39.77Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T10:33:39.77Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AudioStreamingService.cs",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\Services\\AudioStreamingService.cs",
               "RelativeDocumentMoniker": "Services\\AudioStreamingService.cs",
@@ -67,25 +83,24 @@
               "RelativeToolTip": "Services\\AudioStreamingService.cs",
               "ViewState": "AQIAAAQAAAAAAAAAAAAcwBYAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-02T10:30:27.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-02T10:30:27.352Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "AudioStreamingController.cs",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\Controllers\\AudioStreamingController.cs",
               "RelativeDocumentMoniker": "Controllers\\AudioStreamingController.cs",
               "ToolTip": "D:\\A.S.S\\Backend\\Controllers\\AudioStreamingController.cs",
               "RelativeToolTip": "Controllers\\AudioStreamingController.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAABoAAAAuAAAA",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwBoAAAAuAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-03-01T15:09:35.594Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "MediaController.cs",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\Controllers\\MediaController.cs",
               "RelativeDocumentMoniker": "Controllers\\MediaController.cs",
@@ -93,12 +108,11 @@
               "RelativeToolTip": "Controllers\\MediaController.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAAAAwBQAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-01T15:09:35.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-01T15:09:35.047Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -110,7 +124,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
