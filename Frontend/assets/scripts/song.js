@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
             });
     }
     console.log("Hi");
-    // Функція, яка відображає список пісень на сторінці
+    
     function displayMediaList(mediaList) {
         const songsContainer = document.getElementById('songs');
 

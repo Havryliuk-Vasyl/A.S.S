@@ -8,16 +8,19 @@ namespace Backend.Services
     public class MediaService : IMediaService
     {
         private readonly IMediaRepository mediaRepository;
+        private readonly IAudioFileRepository audioFileRepository;
 
         public MediaService()
         {
             mediaRepository = new MediaRepository();
+            audioFileRepository = new AudioFileRepository();
         }
 
-        public void AddMedia(Media newMedia)
+        public void AddMedia(IFormFile file, Media newMedia)
         {
             try
             {
+                audioFileRepository.Save(file, newMedia);
                 mediaRepository.Save(newMedia);
             }
             catch (Exception ex)

@@ -35,9 +35,10 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Media newMedia)
+        public IActionResult Post([FromForm] IFormFile file, [FromBody] Media newMedia)
         {
-            _mediaService.AddMedia(newMedia);
+            newMedia.url = "media-files/audio" + newMedia.title;
+            _mediaService.AddMedia(file, newMedia);
             return Ok("Media added successfully");
         }
     }
