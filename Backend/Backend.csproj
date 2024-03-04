@@ -25,7 +25,6 @@
 
   <ItemGroup>
 	<Folder Include="media-files\audio\" />
-	<Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
