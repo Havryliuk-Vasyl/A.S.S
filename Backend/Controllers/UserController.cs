@@ -1,5 +1,4 @@
 ﻿using Backend.Models;
-using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -33,10 +32,14 @@ namespace Backend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] User newUser)
+        public async Task<IActionResult> Post([FromBody] UserRegistrate user)
         {
             if (ModelState.IsValid)
             {
+                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
+
+                User newUser = new User(user.username, user.name, user.email, user.password, currentDate, "listener");
+
                 context.Users.Add(newUser);
                 await context.SaveChangesAsync();
                 return Ok("User added successfully");

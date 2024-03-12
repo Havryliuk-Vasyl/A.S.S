@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Реєстрація та Логін</title>
+    <link rel="stylesheet" href="../styles/authorization.css">
+    <script src="../scripts/authorization.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2 id="formTitle">Реєстрація</h2>
+        <div id="registrationForm">
+            <form action="#" method="post">
+                <input type="text" name="username" placeholder="Псевдонім користувача" required>
+                <input type="text" name="name" placeholder="Ім'я" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <input type="submit" value="Зареєструватися" onclick="showLoginForm()">
+                <button onclick="showLoginForm()">Увійти</button>
+            </form>
+        </div>
+        <div id="loginForm" style="display: none;">
+            <form action="#" method="post">
+                <input type="text" name="username" placeholder="Ім'я користувача" required>
+                <input type="password" name="password" placeholder="Пароль" required>
+                <input type="submit" value="Увійти" >
+                <button onclick="showRegistrationForm()">Зареєструватися</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

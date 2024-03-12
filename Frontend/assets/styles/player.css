@@ -1,41 +1,10 @@
-.menu {
-    background-color: #000000; /* колір фону меню */
-    color: #fff; /* колір тексту в меню */
-    padding: 10px; /* відступи всередині меню */
-}
-
-.menu nav ul {
-    list-style-type: none; /* видаляємо маркери списку */
-    margin: 0; /* знімаємо зовнішні відступи */
-    padding: 0; /* знімаємо внутрішні відступи */
-}
-
-.menu nav ul li {
-    display: inline-block; /* вирівнюємо пункти меню в ряд */
-    margin-right: 20px; /* відступ між пунктами меню */
-}
-
-.menu nav ul li a {
-    color: #fff; /* колір тексту посилань */
-    text-decoration: none; /* видаляємо підкреслення з посилань */
-    font-weight: bold; /* жирний текст */
-}
-
-.menu nav ul li a:hover {
-   text-decoration: underline; /* підкреслюємо посилання при наведенні */
-}
-
-.menu nav ul li:hover{
-    cursor:pointer;
-}
-
 button {
     display: flex;
     flex-direction: column;
     margin: 1em;
     width: auto;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #6a5acd;;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -88,7 +57,7 @@ button:hover{
 }
 
 button {
-    background-color: #4CAF50; /* Green */
+    background-color: #6a5acd;
     border: none;
     color: white;
     padding: 10px 20px;
