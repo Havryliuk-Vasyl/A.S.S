@@ -1,63 +1,5 @@
 [
   {
-    "ContainingType": "Backend.Controllers.AudioStreamingController",
-    "Method": "Get",
-    "RelativePath": "api/AudioStreaming/audio/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.MediaController",
-    "Method": "GetMediaList",
-    "RelativePath": "api/Media/media",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.MediaController",
-    "Method": "GetMediaById",
-    "RelativePath": "api/Media/media/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.MediaController",
-    "Method": "_upload",
-    "RelativePath": "api/Media/media/upload",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "file",
-        "Type": "Microsoft.AspNetCore.Http.IFormFile",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "Backend.Controllers.UserController",
     "Method": "Post",
     "RelativePath": "api/User",
@@ -66,8 +8,8 @@
     "Order": 0,
     "Parameters": [
       {
-        "Name": "newUser",
-        "Type": "Backend.Models.User",
+        "Name": "user",
+        "Type": "Backend.Models.UserRegistrate",
         "IsRequired": true
       }
     ],

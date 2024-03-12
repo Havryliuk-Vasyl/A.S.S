@@ -8,10 +8,8 @@ document.addEventListener("DOMContentLoaded", function(){
         const user = {
             username: form.username.value,
             name: form.name.value,
-            password: form.password.value,
             email: form.email.value,
-            date_joined: form.date_joined.value,
-            status: form.status.value
+            password: form.password.value,
         };
 
         console.log(user);
