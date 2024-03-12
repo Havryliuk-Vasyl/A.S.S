@@ -21,25 +21,25 @@ namespace Backend.Repositories
 
             if (File.Exists(filePath))
             {
-                XmlDocument xmlDoc = new XmlDocument();
-                xmlDoc.Load(filePath);
+                //XmlDocument xmlDoc = new XmlDocument();
+                //xmlDoc.Load(filePath);
 
-                XmlNodeList userNodes = xmlDoc.SelectNodes("//User");
+                //XmlNodeList userNodes = xmlDoc.SelectNodes("//User");
 
-                foreach (XmlNode userNode in userNodes)
-                {
-                    int id = int.Parse(userNode.SelectSingleNode(   "id").InnerText);
-                    string username = userNode.SelectSingleNode("username").InnerText;
-                    string name = userNode.SelectSingleNode("name").InnerText;
-                    string password = userNode.SelectSingleNode("password").InnerText;
-                    string email = userNode.SelectSingleNode("email").InnerText;
-                    string dateJoined = userNode.SelectSingleNode("date_joined").InnerText;
-                    string status = userNode.SelectSingleNode("status").InnerText;
+                //foreach (XmlNode userNode in userNodes)
+                //{
+                //    int id = int.Parse(userNode.SelectSingleNode(   "id").InnerText);
+                //    string username = userNode.SelectSingleNode("username").InnerText;
+                //    string name = userNode.SelectSingleNode("name").InnerText;
+                //    string password = userNode.SelectSingleNode("password").InnerText;
+                //    string email = userNode.SelectSingleNode("email").InnerText;
+                //    string dateJoined = userNode.SelectSingleNode("date_joined").InnerText;
+                //    string status = userNode.SelectSingleNode("status").InnerText;
 
-                    User user = new User(username, name, password, email, dateJoined, status);
-                    user.SetId(id);
-                    users.Add(user);
-                }
+                //    User user = new User(id, username, name, password, email, dateJoined, status);
+                //    user.SetId(id);
+                //    users.Add(user);
+                //}
             }
 
             return users;
@@ -53,37 +53,37 @@ namespace Backend.Repositories
 
             foreach (User user in users)
             {
-                XmlElement userElement = xmlDoc.CreateElement("User");
+                //XmlElement userElement = xmlDoc.CreateElement("User");
 
-                XmlElement idElement = xmlDoc.CreateElement("id");
-                idElement.InnerText = user.GetId().ToString();
-                userElement.AppendChild(idElement);
+                //XmlElement idElement = xmlDoc.CreateElement("id");
+                //idElement.InnerText = user.GetId().ToString();
+                //userElement.AppendChild(idElement);
 
-                XmlElement usernameElement = xmlDoc.CreateElement("username");
-                usernameElement.InnerText = user.GetUsername();
-                userElement.AppendChild(usernameElement);
+                //XmlElement usernameElement = xmlDoc.CreateElement("username");
+                //usernameElement.InnerText = user.GetUsername();
+                //userElement.AppendChild(usernameElement);
 
-                XmlElement nameElement = xmlDoc.CreateElement("name");
-                nameElement.InnerText = user.GetName();
-                userElement.AppendChild(nameElement);
+                //XmlElement nameElement = xmlDoc.CreateElement("name");
+                //nameElement.InnerText = user.GetName();
+                //userElement.AppendChild(nameElement);
 
-                XmlElement passwordElement = xmlDoc.CreateElement("password");
-                passwordElement.InnerText = user.GetPassword();
-                userElement.AppendChild(passwordElement);
+                //XmlElement passwordElement = xmlDoc.CreateElement("password");
+                //passwordElement.InnerText = user.GetPassword();
+                //userElement.AppendChild(passwordElement);
 
-                XmlElement emailElement = xmlDoc.CreateElement("email");
-                emailElement.InnerText = user.GetEmail();
-                userElement.AppendChild(emailElement);
+                //XmlElement emailElement = xmlDoc.CreateElement("email");
+                //emailElement.InnerText = user.GetEmail();
+                //userElement.AppendChild(emailElement);
 
-                XmlElement dateJoinedElement = xmlDoc.CreateElement("date_joined");
-                dateJoinedElement.InnerText = user.GetDateJoined();
-                userElement.AppendChild(dateJoinedElement);
+                //XmlElement dateJoinedElement = xmlDoc.CreateElement("date_joined");
+                //dateJoinedElement.InnerText = user.GetDateJoined();
+                //userElement.AppendChild(dateJoinedElement);
 
-                XmlElement statusElement = xmlDoc.CreateElement("status");
-                statusElement.InnerText = user.GetStatus();
-                userElement.AppendChild(statusElement);
+                //XmlElement statusElement = xmlDoc.CreateElement("status");
+                //statusElement.InnerText = user.GetStatus();
+                //userElement.AppendChild(statusElement);
 
-                root.AppendChild(userElement);
+                //root.AppendChild(userElement);
             }
 
             xmlDoc.Save(filePath);

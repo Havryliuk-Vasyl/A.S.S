@@ -1,5 +1,8 @@
-﻿namespace Backend.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Backend.Models
 {
+    [Table("user")]
     public class User
     {
         public int id { get; set; }
@@ -7,11 +10,12 @@
         public string name { get; set; }
         public string password { get; set; }
         public string email { get; set; }
-        public string date_joined { get; set; }
+        public DateOnly date_joined { get; set; }
         public string status { get; set; }
 
-        public User(string username, string name, string password, string email, string date_joined, string status)
+        public User(int id, string username, string name, string password, string email, DateOnly date_joined, string status)
         {
+            this.id = id;
             this.username = username;
             this.name = name;
             this.password = password;
@@ -25,7 +29,7 @@
         public void SetName(string name) { this.name = name; }
         public void SetPassword(string password) { this.password = password; }
         public void SetEmail(string email) { this.email = email; }
-        public void SetDateJoined(string date_joined) { this.date_joined = date_joined; }
+        public void SetDateJoined(DateOnly date_joined) { this.date_joined = date_joined; }
         public void SetStatus(string status) { this.status = status; }
 
         public int GetId() { return this.id; }
@@ -33,7 +37,7 @@
         public string GetName() { return this.name; }
         public string GetPassword() { return this.password; }
         public string GetEmail() { return this.email; }
-        public string GetDateJoined() { return this.date_joined; }
+        public DateOnly GetDateJoined() { return this.date_joined; }
         public string GetStatus() { return this.status; }
     }
 }

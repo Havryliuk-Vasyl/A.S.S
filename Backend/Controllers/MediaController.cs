@@ -1,7 +1,11 @@
 ﻿using Backend.Models;
 using Backend.Services;
+using Google.Protobuf.WellKnownTypes;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.Json;
+using Newtonsoft.Json;
 using System.Collections.Generic;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Backend.Controllers
 {
@@ -34,12 +38,12 @@ namespace Backend.Controllers
             return Ok(media);
         }
 
-        [HttpPost]
-        public IActionResult Post([FromForm] IFormFile file, [FromBody] Media newMedia)
+        [HttpPost("media/upload")]
+        [Consumes("multipart/form-data")]
+        public IActionResult _upload(IFormFile file)
         {
-            newMedia.url = "media-files/audio" + newMedia.title;
-            _mediaService.AddMedia(file, newMedia);
-            return Ok("Media added successfully");
+            
+            return Ok();
         }
     }
 }
