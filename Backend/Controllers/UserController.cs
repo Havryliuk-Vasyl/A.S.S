@@ -23,21 +23,7 @@ namespace Backend.Controllers
 
         [HttpGet("user/{id}")]
         public async Task<ActionResult<User>> GetUserById(int id) {
-            //var user = context._user.Select(s => new User(
-            //    s.id,
-            //    s.username,
-            //    s.name,
-            //    s.password,
-            //    s.email,
-            //    s.date_joined,
-            //    s.status
-            //))
-            //    .Where(s => s.id == id)
-            //    .FirstOrDefault(s => s.id == id);
-            
-            var user = context.Users
-    .FirstOrDefault(s => s.id == id);
-
+            var user = context.Users.FirstOrDefault(s => s.id == id);
 
             if (user == null)
             {
