@@ -9,17 +9,20 @@ namespace Backend.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository userRepository;
+        private readonly ApplicationDbContext context;
 
-        public UserService()
+        public UserService(ApplicationDbContext context)
         {
             userRepository = new UserRepository();
+            this.context = context;
         }
 
         public void AddUser(User newUser)
         {
             try
             {
-                userRepository.save(newUser);
+                //userRepository.save(newUser);
+                
             }
             catch (Exception ex)
             {

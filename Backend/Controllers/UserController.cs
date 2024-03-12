@@ -9,35 +9,54 @@ namespace Backend.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
-
-        public UserController(IUserService userService)
+        private readonly ApplicationDbContext context;
+        public UserController( ApplicationDbContext context)
         {
-            _userService = userService;
+            this.context = context;
         }
 
         [HttpGet("users")]
         public IActionResult GetUsers()
         {
-            var users = _userService.GetUsers();
-            return Ok(users);
+            return Ok();
         }
 
         [HttpGet("user/{id}")]
-        public IActionResult GetUserById(int id) {
-            var user = _userService.GetUserByID(id);
+        public async Task<ActionResult<User>> GetUserById(int id) {
+            //var user = context._user.Select(s => new User(
+            //    s.id,
+            //    s.username,
+            //    s.name,
+            //    s.password,
+            //    s.email,
+            //    s.date_joined,
+            //    s.status
+            //))
+            //    .Where(s => s.id == id)
+            //    .FirstOrDefault(s => s.id == id);
+            
+            var user = context.Users
+    .FirstOrDefault(s => s.id == id);
+
+
             if (user == null)
             {
-                return BadRequest();
+                return NotFound();
             }
-            return Ok(user);
+            return user;
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] User newUser)
+        public async Task<IActionResult> Post([FromBody] User newUser)
         {
-            _userService.AddUser(newUser);
-            return Ok("User added successfully");
+            if (ModelState.IsValid)
+            {
+                context.Users.Add(newUser);
+                await context.SaveChangesAsync();
+                return Ok("User added successfully");
+            }
+            return BadRequest("Invalid user data");
         }
+
     }
 }

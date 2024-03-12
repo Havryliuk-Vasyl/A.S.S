@@ -20,12 +20,11 @@ namespace Backend.Services
         {
             try
             {
-                audioFileRepository.Save(file, newMedia);
+                audioFileRepository.Save(file, newMedia.title);
                 mediaRepository.Save(newMedia);
             }
             catch (Exception ex)
             {
-                // Обробка помилок
                 Console.WriteLine($"Error adding media: {ex.Message}");
                 throw;
             }
@@ -52,7 +51,6 @@ namespace Backend.Services
             }
             catch (Exception ex)
             {
-                // Обробка помилок
                 Console.WriteLine($"Error getting media list: {ex.Message}");
                 throw;
             }

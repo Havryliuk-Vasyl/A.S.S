@@ -4,11 +4,15 @@ function uploadMedia(){
     const titleInput = document.getElementById('title');
 
     const file = fileInput.files[0];
-    const title = titleInput.value;
+    const media = {
+        id: 0,
+        title: titleInput.value,
+        url: ""  
+    };
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('title', title);
+    formData.append('Media', media);
 
     const apiUrl = 'https://localhost:7219/api/Media';
     axios.post(apiUrl, formData, {

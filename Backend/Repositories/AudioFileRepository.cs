@@ -1,5 +1,4 @@
-﻿
-using Backend.Models;
+﻿using Backend.Models;
 using System.Drawing.Drawing2D;
 
 namespace Backend.Repositories
@@ -11,9 +10,9 @@ namespace Backend.Repositories
         {
             _filePath = "media-files/audio";
         }
-        public void Save(IFormFile file, Media media)
+        public void Save(IFormFile file, string name)
         {
-            var filePath = Path.Combine(_filePath, media.title);
+            var filePath = Path.Combine(_filePath, name);
 
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
