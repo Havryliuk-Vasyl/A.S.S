@@ -27,7 +27,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors(builder =>
-    builder.WithOrigins("http://127.0.0.1:5500", "http://192.168.0.107:8000")
+    builder.WithOrigins("http://127.0.0.1:5500")
     .AllowAnyMethod()
     .AllowAnyHeader());
 

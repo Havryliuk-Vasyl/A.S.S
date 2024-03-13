@@ -6,7 +6,7 @@
     <title>Реєстрація та Логін</title>
     <link rel="stylesheet" href="../styles/authorization.css">
     <script src="../scripts/authorization.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -17,7 +17,7 @@
                 <input type="text" name="name" placeholder="Ім'я" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Пароль" required>
-                <input type="submit" value="Зареєструватися" onclick="showLoginForm()">
+                <input type="submit" value="Зареєструватися" onclick="register()">
                 <button onclick="showLoginForm()">Увійти</button>
             </form>
         </div>
