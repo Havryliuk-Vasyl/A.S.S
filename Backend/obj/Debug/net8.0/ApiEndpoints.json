@@ -1,24 +1,8 @@
 [
   {
     "ContainingType": "Backend.Controllers.UserController",
-    "Method": "Post",
-    "RelativePath": "api/User",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "user",
-        "Type": "Backend.Models.UserRegistrate",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "Backend.Controllers.UserController",
     "Method": "GetUserById",
-    "RelativePath": "api/User/user/{id}",
+    "RelativePath": "User/user/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -43,12 +27,44 @@
   },
   {
     "ContainingType": "Backend.Controllers.UserController",
-    "Method": "GetUsers",
-    "RelativePath": "api/User/users",
+    "Method": "Post",
+    "RelativePath": "User/user/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "Backend.Models.UserRegistrate",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "GetUserByUsername",
+    "RelativePath": "User/users/{username}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Backend.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

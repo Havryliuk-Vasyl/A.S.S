@@ -11,8 +11,8 @@
     <header class="menu">
         <nav>
             <ul>
-                <li>Search</li>
-                <li><a href="assets/pages/authorization.html">Registration</a></li>
+                <li><a href="assets/pages/authorization.html">A</a></li>
+                <li><a href="#">S</a></li>
             </ul>
         </nav>
     </header>
@@ -20,11 +20,24 @@
     <div class="player">
         <div class="audio-player">
             <div class="controls">
-                <div id="currentTime">0:00</div>
-                <div id="duration">0:00</div>
+                <div class="song-information">
+                    <div class="song-image"><img src="" alt=""></div>
+                    <div class="song-name">Квін</div>
+                    <div class="artist-name">Flamerman</div>
+                </div>
+                <div class="audio-control">
+                    <div class="control-buttons">
+                        <button id="prebSongBtn" onclick="play(1)">|&lt;</button>
+                        <button id="playPauseBtn" onclick="play(1)">></button>
+                        <button id="nextSongBtn" onclick="play(1)">&gt;|</button>
+                    </div>
+                    <div class="time-control">
+                        <div id="currentTime">0:00</div>
+                        <input type="range" id="timeSlider" min="0" max="1" step="0.001" value="0">
+                        <div id="duration">0:00</div>
+                    </div>
+                </div>
                 <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
-                <button id="playPauseBtn" onclick="play(1)">Play</button>
-                <input type="range" id="timeSlider" min="0" max="1" step="0.001" value="0">
             </div>
             <audio id="audioPlayer">
             </audio>
