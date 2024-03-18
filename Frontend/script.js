@@ -7,12 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const durationDisplay = document.getElementById('duration');
 
     playPauseBtn.addEventListener('click', function() {
-        if (audioPlayer.paused || audioPlayer.ended) {
+        if (audioPlayer.paused) {
             audioPlayer.play();
-            playPauseBtn.innerHTML = 'Pause';
+            playPauseBtn.innerHTML = '| |';
         } else {
             audioPlayer.pause();
-            playPauseBtn.innerHTML = 'Play';
+            playPauseBtn.innerHTML = '&gt;';
         }
     });
 
@@ -50,13 +50,9 @@ document.addEventListener("DOMContentLoaded", function() {
     audioPlayer.addEventListener('timeupdate', function() {
         const currentTime = audioPlayer.currentTime;
         const duration = audioPlayer.duration;
-
-        // Оновлюємо регулятор часу, лише якщо не відбувається зміна через timeSlider
         if (!isSeeking) {
             timeSlider.value = currentTime / duration;
         }
-
-        // Оновлюємо відображення часу
         currentTimeDisplay.textContent = formatTime(currentTime);
         durationDisplay.textContent = formatTime(duration);
     });

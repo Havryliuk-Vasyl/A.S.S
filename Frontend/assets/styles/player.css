@@ -143,11 +143,8 @@ iframe {
     padding-left: 1em;
 }
 
-.volume-slider,
-.seek-bar {
-    width: 100%;
-    margin: 0 10px;
-}
+
+
 
 input[type="range"] {
     -webkit-appearance: none;
@@ -185,6 +182,7 @@ input[type="range"]::-moz-range-thumb {
 
 #volumeSlider{
     width: 10%;
+    margin-top: 5.25em;
 }
 
 audio::-webkit-media-controls-panel {
