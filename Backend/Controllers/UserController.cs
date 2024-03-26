@@ -1,5 +1,6 @@
 ﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -7,16 +8,19 @@ namespace Backend.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        private const string id = "{id}";
+        private const string username = "{username}";
+        private const string email = "{email}";
         private readonly ApplicationDbContext context;
         public UserController(ApplicationDbContext context)
         {
             this.context = context;
         }
 
-        [HttpGet("users/{username}")]
+        [HttpGet("username/" + username)]
         public async Task<ActionResult<User>> GetUserByUsername(string username)
         {
-            var user = context.Users.FirstOrDefault(u => u.username == username);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.username == username);
 
             if (user == null)
             {
@@ -26,33 +30,45 @@ namespace Backend.Controllers
             return user;
         }
 
-    [HttpGet("user/{id}")]  
-    public async Task<ActionResult<User>> GetUserById(int id)
-    {
-        var user = context.Users.FirstOrDefault(s => s.id == id);
-
-        if (user == null)
+        [HttpGet("email/" + username)]
+        public async Task<ActionResult<User>> GetUserByEmail(string email)
         {
-            return NotFound();
-        }
-        return user;
-    }
+            var user = await context.Users.FirstOrDefaultAsync(u => u.email == email);
 
-    [HttpPost("user/register")]
-    public async Task<IActionResult> Post([FromBody] UserRegistrate user)
-    {
-        if (ModelState.IsValid)
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return user;
+        }
+
+        [HttpGet("id/" + id)]
+        public async Task<ActionResult<User>> GetUserById(int id)
         {
-            DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
+            var user = await context.Users.FirstOrDefaultAsync(s => s.id == id);
 
-            User newUser = new User(user.username, user.name, user.email, user.password, currentDate, "listener");
-
-            context.Users.Add(newUser);
-            await context.SaveChangesAsync();
-            return Ok("User added successfully");
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return user;
         }
-        return BadRequest("Invalid user data");
-    }
 
-}
+        [HttpPost("register")]
+        public async Task<IActionResult> Post([FromBody] UserRegistrate user)
+        {
+            if (ModelState.IsValid)
+            {
+                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
+
+                User newUser = new User(user.username, user.name, user.email, user.password, currentDate, "listener");
+
+                await context.Users.AddAsync(newUser);
+                await context.SaveChangesAsync();
+                return Ok("User added successfully");
+            }
+            return BadRequest("Invalid user data");
+        }
+    }
 }

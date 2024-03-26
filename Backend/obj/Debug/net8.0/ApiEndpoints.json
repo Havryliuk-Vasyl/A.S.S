@@ -2,7 +2,7 @@
   {
     "ContainingType": "Backend.Controllers.UserController",
     "Method": "GetUserById",
-    "RelativePath": "User/user/{id}",
+    "RelativePath": "User/id/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -28,7 +28,7 @@
   {
     "ContainingType": "Backend.Controllers.UserController",
     "Method": "Post",
-    "RelativePath": "User/user/register",
+    "RelativePath": "User/register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -44,7 +44,7 @@
   {
     "ContainingType": "Backend.Controllers.UserController",
     "Method": "GetUserByUsername",
-    "RelativePath": "User/users/{username}",
+    "RelativePath": "User/username/{username}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -52,6 +52,37 @@
       {
         "Name": "username",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Backend.Models.User",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Backend.Controllers.UserController",
+    "Method": "GetUserByEmail",
+    "RelativePath": "User/username/{username}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "username",
+        "Type": "",
         "IsRequired": true
       }
     ],
