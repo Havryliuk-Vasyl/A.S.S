@@ -1,16 +1,17 @@
 function showLoginForm() {
     document.getElementById('formTitle').innerHTML = 'Логін';
-    document.getElementById('registrationForm').style.display = 'none';
+    document.getElementById('registration').style.display = 'none';
     document.getElementById('loginForm').style.display = 'block';
 }
 
 function showRegistrationForm() {
     document.getElementById('formTitle').innerHTML = 'Реєстрація';
     document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('registrationForm').style.display = 'block';
+    document.getElementById('registration').style.display = 'block';
 }
 
-function register() {
+document.getElementById("registrationForm").addEventListener("submit", function(event){
+    event.preventDefault();
     const form = document.getElementById('registrationForm');
 
     const user = {
@@ -34,4 +35,4 @@ function register() {
             alert('Error adding user');
         }
     });
-}
+});
