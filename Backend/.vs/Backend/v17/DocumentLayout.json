@@ -7,40 +7,24 @@
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\mediacontent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\mediacontent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\userregistrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\userregistrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\audio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\audio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\image.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\video.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\video.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\iaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\iaudio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\usermodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\userregistrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\userregistrate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\models\\userlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\userlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|d:\\a.s.s\\backend\\backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,55 +46,53 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "IAudio.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\IAudio.cs",
-              "RelativeDocumentMoniker": "Models\\IAudio.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\IAudio.cs",
-              "RelativeToolTip": "Models\\IAudio.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 2,
+              "Title": "UserModel.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\UserModel.cs",
+              "RelativeDocumentMoniker": "Models\\UserModel.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Models\\UserModel.cs",
+              "RelativeToolTip": "Models\\UserModel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:19:53.658Z",
+              "WhenOpened": "2024-03-27T20:20:07.823Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "MediaContent.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\MediaContent.cs",
-              "RelativeDocumentMoniker": "Models\\MediaContent.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\MediaContent.cs",
-              "RelativeToolTip": "Models\\MediaContent.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAABjAAAA",
+              "Title": "UserRegistrate.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\UserRegistrate.cs",
+              "RelativeDocumentMoniker": "Models\\UserRegistrate.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Models\\UserRegistrate.cs",
+              "RelativeToolTip": "Models\\UserRegistrate.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:17:27.942Z",
+              "WhenOpened": "2024-03-27T19:23:51.375Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "Video.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\Video.cs",
-              "RelativeDocumentMoniker": "Models\\Video.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\Video.cs",
-              "RelativeToolTip": "Models\\Video.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAAAAAAA",
+              "Title": "UserLogin.cs",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\UserLogin.cs",
+              "RelativeDocumentMoniker": "Models\\UserLogin.cs",
+              "ToolTip": "D:\\A.S.S\\Backend\\Models\\UserLogin.cs",
+              "RelativeToolTip": "Models\\UserLogin.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:15:26.217Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-03-27T19:23:48.971Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Image.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\Image.cs",
-              "RelativeDocumentMoniker": "Models\\Image.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\Image.cs",
-              "RelativeToolTip": "Models\\Image.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:14:11.745Z",
-              "EditorCaption": ""
+              "DocumentIndex": 5,
+              "Title": "Backend.csproj",
+              "DocumentMoniker": "D:\\A.S.S\\Backend\\Backend.csproj",
+              "RelativeDocumentMoniker": "Backend.csproj",
+              "ToolTip": "D:\\A.S.S\\Backend\\Backend.csproj",
+              "RelativeToolTip": "Backend.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-03-27T19:17:14.937Z"
             },
             {
               "$type": "Document",
@@ -120,74 +102,22 @@
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
               "ToolTip": "D:\\A.S.S\\Backend\\Controllers\\UserController.cs",
               "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABAAAAAjAAAA",
+              "ViewState": "AQIAAIAAAAAAAAAAAAAswJAAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:11:43.721Z",
+              "WhenOpened": "2024-03-27T15:14:02.85Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ApplicationDbContext.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\ApplicationDbContext.cs",
-              "RelativeDocumentMoniker": "Models\\ApplicationDbContext.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\ApplicationDbContext.cs",
-              "RelativeToolTip": "Models\\ApplicationDbContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:11:36.947Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\User.cs",
-              "RelativeDocumentMoniker": "Models\\User.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\User.cs",
-              "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:11:15.126Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Audio.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\Audio.cs",
-              "RelativeDocumentMoniker": "Models\\Audio.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\Audio.cs",
-              "RelativeToolTip": "Models\\Audio.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:11:06.498Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\A.S.S\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\A.S.S\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:10:36.315Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "UserRegistrate.cs",
-              "DocumentMoniker": "D:\\A.S.S\\Backend\\Models\\UserRegistrate.cs",
-              "RelativeDocumentMoniker": "Models\\UserRegistrate.cs",
-              "ToolTip": "D:\\A.S.S\\Backend\\Models\\UserRegistrate.cs",
-              "RelativeToolTip": "Models\\UserRegistrate.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-03-25T09:10:23.244Z",
+              "WhenOpened": "2024-03-27T15:07:20.6Z",
               "EditorCaption": ""
             }
           ]

@@ -1,4 +1,5 @@
 using Backend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +12,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
+
 
 WebApplication app = builder.Build();
 
@@ -27,8 +29,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.UseCors(builder =>
-    builder.WithOrigins("http://127.0.0.1:5500")
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+    builder.AllowAnyOrigin()
+           .AllowAnyMethod()
+           .AllowAnyHeader());
 
 app.Run();

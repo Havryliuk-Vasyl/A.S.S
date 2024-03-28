@@ -10,6 +10,7 @@
 </head>
 <body>
     <div class="container">
+        <h1>FlamerMusic</h1>
         <h2 id="formTitle">Реєстрація</h2>
         <div id="registration">
             <form method="post" id="registrationForm">
@@ -17,15 +18,15 @@
                 <input type="text" name="name" placeholder="Ім'я" required>
                 <input type="email" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Пароль" required>
-                <input type="submit" value="Зареєструватися">
+                <input type="button" onclick="registrate()" value="Зареєструватися">
                 <button onclick="showLoginForm()">Увійти</button>
             </form>
         </div>
-        <div id="loginForm" style="display: none;">
-            <form action="#" method="post">
-                <input type="text" name="username" placeholder="Ім'я користувача" required>
+        <div id="login" style="display: none;">
+            <form method="post" id="loginForm">
+                <input type="text" name="email" placeholder="Email" required>
                 <input type="password" name="password" placeholder="Пароль" required>
-                <input type="submit" value="Увійти" >
+                <input type="button" onclick="login()" value="Увійти" >
                 <button onclick="showRegistrationForm()">Зареєструватися</button>
             </form>
         </div>

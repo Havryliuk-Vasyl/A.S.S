@@ -32,7 +32,8 @@ form{
 input[type="text"],
 input[type="email"],
 input[type="password"],
-input[type="submit"] {
+input[type="submit"],
+input[type="button"] {
     width: 90%;
     padding: 10px;
     margin-bottom: 15px;
@@ -53,12 +54,12 @@ button{
     border-radius: 5px;
 }
 
-input[type="submit"] {
+input[type="button"] {
     cursor: pointer;
     background-color: #6a5acd;
     transition: background-color 0.3s ease;
 }
 
-input[type="submit"]:hover {
+input[type="button"]:hover {
     background-color: #7b68ee;
 }

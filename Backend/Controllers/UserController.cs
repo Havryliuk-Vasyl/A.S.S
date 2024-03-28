@@ -1,6 +1,11 @@
-﻿using Backend.Models;
+﻿using Azure.Core;
+using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace Backend.Controllers
 {
@@ -18,7 +23,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("username/" + username)]
-        public async Task<ActionResult<User>> GetUserByUsername(string username)
+        public async Task<ActionResult<UserModel>> GetUserByUsername(string username)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.username == username);
 
@@ -30,8 +35,8 @@ namespace Backend.Controllers
             return user;
         }
 
-        [HttpGet("email/" + username)]
-        public async Task<ActionResult<User>> GetUserByEmail(string email)
+        [HttpGet("email/" + email)]
+        public async Task<ActionResult<UserModel>> GetUserByEmail(string email)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.email == email);
 
@@ -44,7 +49,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("id/" + id)]
-        public async Task<ActionResult<User>> GetUserById(int id)
+        public async Task<ActionResult<UserModel>> GetUserById(int id)
         {
             var user = await context.Users.FirstOrDefaultAsync(s => s.id == id);
 
@@ -56,19 +61,98 @@ namespace Backend.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Post([FromBody] UserRegistrate user)
+        public IActionResult Post([FromBody] UserRegistrate userReg)
         {
             if (ModelState.IsValid)
             {
-                DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
+                var user = context.Users.FirstOrDefault(u => u.email == userReg.email);
+                if (user == null)
+                {
+                    DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
 
-                User newUser = new User(user.username, user.name, user.email, user.password, currentDate, "listener");
+                    UserModel newUser = new UserModel(userReg.username, userReg.name, userReg.email, userReg.password, currentDate, "listener");
 
-                await context.Users.AddAsync(newUser);
-                await context.SaveChangesAsync();
-                return Ok("User added successfully");
+                    context.Users.Add(newUser);
+                    context.SaveChanges();
+                    return Ok("User added successfully");
+                }
+                return StatusCode(409, "User with this email already exists");
             }
-            return BadRequest("Invalid user data");
+            return BadRequest(ModelState);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
+        {
+            UserModel user = null;
+            user = await context.Users.FirstOrDefaultAsync(u => u.email == userLogin.email);
+            if (user != null && user.password == userLogin.password)
+            {
+                var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.username),
+                    new Claim("email", user.email),
+                    new Claim("status", user.status),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
+
+                var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("feajfw8v8rr2nv0ruwrm2rnr2ar9a2ir9uv990mq29rvm2ar"));
+                var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+                var expires = DateTime.UtcNow.AddDays(7);
+
+                var token = new JwtSecurityToken(
+                    issuer: "flamermusic.com",
+                    audience: "flamermusicapi",
+                    claims: claims,
+                    expires: expires,
+                    signingCredentials: creds
+                );
+
+                return Ok(new
+                {
+                    token = new JwtSecurityTokenHandler().WriteToken(token),
+                    expiration = expires
+                });
+            }
+            return Unauthorized();
+        }
+
+        [HttpGet("validateToken")]
+        public IActionResult ValidateToken()
+        {
+            var token = Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            if (token == null || string.IsNullOrWhiteSpace(token))
+            {
+                return BadRequest("Token is missing");
+            }
+
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes("feajfw8v8rr2nv0ruwrm2rnr2ar9a2ir9uv990mq29rvm2ar");
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "flamermusic.com",
+                    ValidAudience = "flamermusicapi",
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                }, out SecurityToken validatedToken);
+                
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var username = jwtToken.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
+                var email = jwtToken.Claims.FirstOrDefault(x => x.Type == "email")?.Value;
+                var status = jwtToken.Claims.FirstOrDefault(x => x.Type == "status")?.Value;
+
+                return Ok(new { Username = username, Email = email, Status = status });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Invalid token");
+            }
         }
     }
 }
