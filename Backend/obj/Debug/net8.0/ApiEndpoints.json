@@ -15,7 +15,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Backend.Models.UserModel",
+        "Type": "Backend.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -41,7 +41,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Backend.Models.UserModel",
+        "Type": "Backend.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -99,7 +99,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "Backend.Models.UserModel",
+        "Type": "Backend.Models.User",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -37,6 +37,12 @@ body {
     text-decoration: none;
 }
 
+a{
+    color: #fff;
+    text-decoration: none
+    
+}
+
 .menu ul li a:hover {
     background-color: #777;
 }
@@ -100,7 +106,7 @@ iframe {
     align-items: center;
     justify-content: space-between;
     color: white;
-    width: 100%;
+    width: 98%;
 }
 
 .song-information {
@@ -141,7 +147,7 @@ iframe {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
 }
 
@@ -183,8 +189,14 @@ input[type="range"]::-moz-range-thumb {
     width: 100%; 
 }
 
+#timeSlider{
+    min-width: 65em;
+    max-width: 10em;
+}
+
 #volumeSlider{
-    width: auto;
+    min-width: 120px;
+    max-width: 120px;
     margin-top: 5.25em;
 }
 

@@ -9,9 +9,17 @@ document.addEventListener("DOMContentLoaded", function(){
             console.log("User profile:", response);
 
             const username = response.username;
+            const email = response.email;
+            const status = response.status;
+
+            console.log(username, email, status);
 
             const profileUsername = document.getElementById('username');
             profileUsername.innerText = username;
+            const profileEmail = document.getElementById('email');
+            profileEmail.innerText = email;
+            const profileStatus = document.getElementById('status');
+            profileStatus.innerText = status;
         },
         error: function(error) {
             console.error("Error fetching user profile:", error.response);
