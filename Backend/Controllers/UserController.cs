@@ -23,7 +23,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("username/" + username)]
-        public async Task<ActionResult<UserModel>> GetUserByUsername(string username)
+        public async Task<ActionResult<User>> GetUserByUsername(string username)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.username == username);
 
@@ -36,7 +36,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("email/" + email)]
-        public async Task<ActionResult<UserModel>> GetUserByEmail(string email)
+        public async Task<ActionResult<User>> GetUserByEmail(string email)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.email == email);
 
@@ -49,7 +49,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("id/" + id)]
-        public async Task<ActionResult<UserModel>> GetUserById(int id)
+        public async Task<ActionResult<User>> GetUserById(int id)
         {
             var user = await context.Users.FirstOrDefaultAsync(s => s.id == id);
 
@@ -70,7 +70,7 @@ namespace Backend.Controllers
                 {
                     DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
 
-                    UserModel newUser = new UserModel(userReg.username, userReg.name, userReg.email, userReg.password, currentDate, "listener");
+                    User newUser = new User(userReg.username, userReg.name, userReg.email, userReg.password, currentDate, "listener");
 
                     context.Users.Add(newUser);
                     context.SaveChanges();
@@ -81,10 +81,11 @@ namespace Backend.Controllers
             return BadRequest(ModelState);
         }
 
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
         {
-            UserModel user = null;
+            User user = null;
             user = await context.Users.FirstOrDefaultAsync(u => u.email == userLogin.email);
             if (user != null && user.password == userLogin.password)
             {
@@ -149,7 +150,7 @@ namespace Backend.Controllers
 
                 return Ok(new { Username = username, Email = email, Status = status });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return BadRequest("Invalid token");
             }
