@@ -2,17 +2,17 @@
 {
     public class Audio
     {
-        private int id;
-        private string url;
-        private float duration;
-        private float frequency;
+        public int Id { get; set; }
+        public int SongId { get; set; }
+        public float Duration { get; set; }
+        public string FilePath { get; set; }
 
-        public Audio(int id, string url, float duration, float frequency)
+        public Audio(int id, int songId, float duration, string filePath)
         {
-            this.id = id;
-            this.url = url;
-            this.duration = duration;
-            this.frequency = frequency;
+            this.Id = id;
+            this.SongId = songId;
+            this.Duration = duration;
+            this.FilePath = filePath;
         }
     }
 }
