@@ -45,6 +45,7 @@ a{
 
 .menu ul li a:hover {
     background-color: #777;
+    cursor: pointer;
 }
 
 h2 {

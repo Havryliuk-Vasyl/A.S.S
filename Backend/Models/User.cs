@@ -25,7 +25,6 @@ namespace Backend.Models
         }
         public User(string username, string name, string email, string password, DateOnly date_joined, string status)
         {
-            this.id = id;
             this.username = username;
             this.name = name;
             this.email = email;

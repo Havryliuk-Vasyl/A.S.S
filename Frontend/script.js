@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
         type: "GET",
         url: "https://localhost:7219/User/validateToken",
         headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token') // Передача токену у заголовку Authorization
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         success: function(response) {
             console.log("User profile:", response);
@@ -12,6 +12,9 @@ document.addEventListener("DOMContentLoaded", function() {
             const username = response.username;
             
             const profileUsername = document.getElementById('profile-username');
+
+            renderUsersFunctionality(response);
+
             profileUsername.textContent = username;
         },
         error: function(error) {
@@ -60,11 +63,10 @@ document.addEventListener("DOMContentLoaded", function() {
     let isSeeking = false;
 
     timeSlider.addEventListener('input', function() {
-        isSeeking = true; // Встановлюємо, що відбувається зміна через timeSlider
+        isSeeking = true;
         const duration = audioPlayer.duration;
         const seekTo = duration * timeSlider.value;
 
-        // Зміна часу програвання за допомогою регулятора
         audioPlayer.currentTime = seekTo;
     });
 
@@ -82,7 +84,34 @@ document.addEventListener("DOMContentLoaded", function() {
         durationDisplay.textContent = formatTime(duration);
     });
 
+    function renderUsersFunctionality(user){
+        if (user.status === "administrator"){
+            let navigationOnMenu = document.getElementById("navigation-on-menu");
+            
+            let adminPanel = document.createElement("li");
+            let linkOnAdminPanel = document.createElement("a");
+            linkOnAdminPanel.id = "adminPanel";
+            linkOnAdminPanel.innerText="Панель адміна";
+            linkOnAdminPanel.href = "#";
 
+            adminPanel.appendChild(linkOnAdminPanel);
+            
+            navigationOnMenu.appendChild(adminPanel);
+        }
+        else if (user.status === "artist"){
+            let navigationOnMenu = document.getElementById("navigation-on-menu");
+            
+            let artistPanel = document.createElement("li");
+            let linkOnArtistPanel = document.createElement("a");
+            linkOnArtistPanel.id = "artistPanel";
+            linkOnArtistPanel.innerText="Панель артиста";
+            linkOnArtistPanel.href = "#";
+
+            artistPanel.appendChild(linkOnArtistPanel);
+            
+            navigationOnMenu.appendChild(artistPanel);
+        }
+    }
 });
 
 function formatTime(seconds) {
@@ -101,13 +130,10 @@ function play(songId){
         const audioData = response.data;
         const audioUrl = URL.createObjectURL(new Blob([audioData]));
     
-        // Отримуємо аудіоелемент
         const audioElement = document.getElementById('audioPlayer');
     
-        // Встановлюємо джерело для аудіоелемента
         audioElement.src = audioUrl;
     
-        // Відтворюємо аудіофайл
         audioElement.play();
     })
     .catch(error => {
