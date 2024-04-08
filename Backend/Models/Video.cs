@@ -1,7 +1,9 @@
 ﻿using Google.Protobuf.WellKnownTypes;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
+    [Table("videos")]
     public class Video
     {
         public int Id { get; set; }

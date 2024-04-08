@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Audio</title>
+    <link rel="stylesheet" href="../styles/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Upload Audio</h1>
+    <input type="file" id="audioFile" accept=".wav" required>
+    <input type="file" id="photoFile" accept=".png, .jpg" required>
+    <input type="text" id="title" placeholder="Title" required>
+    <input type="text" id="albumTitle" placeholder="Album Title" required>
+    <button id="uploadButton">Upload</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            let artistId = 0;
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7219/User/validateToken",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                success: function(response) {
+                    console.log("User profile:", response);
+
+                    artistId = response.id;
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+
+            function uploadAudio() {
+                var audioFile = document.getElementById('audioFile').files[0];
+                var title = document.getElementById('title').value;
+                var albumTitle = document.getElementById('albumTitle').value;
+                var photoFile = document.getElementById('photoFile').files[0];
+
+                var formData = new FormData();
+                formData.append('ArtistId', artistId);
+                formData.append('Title', title);
+                formData.append('AlbumTitle', albumTitle);
+                formData.append('AudioFile', audioFile, audioFile.name);
+                formData.append('PhotoFile', photoFile, photoFile.name);
+
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', 'https://localhost:7219/AudioUpload/uploadsong', true);
+                xhr.onload = function () {
+                    if (xhr.status === 200) {
+                        alert('Audio uploaded successfully.');
+                    } else {
+                        alert('Error uploading audio: ' + xhr.responseText);
+                    }
+                };
+                xhr.send(formData);
+            }
+
+            // Додавання обробника події для кнопки
+            document.getElementById('uploadButton').addEventListener('click', uploadAudio);
+        });
+    </script>
+</body>
+</html>

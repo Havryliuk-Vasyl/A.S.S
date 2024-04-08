@@ -18,12 +18,6 @@ namespace Backend.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Song>()
-                .HasOne(s => s.Artist)
-                .WithMany(u => u.Songs)
-                .HasForeignKey(s => s.ArtistId)
-                .OnDelete(DeleteBehavior.Cascade);
-
             base.OnModelCreating(modelBuilder);
         }
     }

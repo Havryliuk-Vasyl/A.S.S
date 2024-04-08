@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: #fff;
+    margin: 0;
+    padding-left: 1em;
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    background: linear-gradient(to bottom, #4e3780, #222);
+    min-height: 100vh; /* Забезпечення повного охоплення екрану */
+    overflow-y: auto; 
+}
+
+.catalog {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.my-playlists {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 20px;
+}
+
+.playlist {
+    flex: 0 0 auto;
+    width: 200px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.playlist-photo {
+    width: 100%;
+    height: 150px;
+    background-color: #eee;
+}
+
+.playlist-name {
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    background-color: #222;
+}
+
+.song-name{
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+.artist{
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: #bbbbbb;
+    cursor: pointer;
+}
+
+.recently-songs {
+    margin-top: 40px;
+}
+
+.song {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.song-information {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.song-play-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.song-photo {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    cursor: pointer;
+}
+
+.duration {
+    margin-right: 2em;
+    margin-left: auto;
+    font-size: 14px;
+}
+
+.play-button{
+    padding: 1em;
+    cursor: pointer;
+}

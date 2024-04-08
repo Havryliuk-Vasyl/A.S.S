@@ -1,20 +1,40 @@
-﻿namespace Backend.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Backend.Models
 {
+    [Table("songs")]
     public class Song
     {
+        [Column("id")]
         public int Id { get; set; }
+        [Column("title")]
         public string Title { get; set; }
-        public int ArtistId { get; set; }
+        [Column("artist")]
+        public int Artist { get; set; }
+        [Column("albumTitle")]
         public string AlbumTitle { get; set; }
+        [Column("date_shared")]
         public DateOnly DateShared { get; set; }
-
-        public Song(int id, string title, int artistId, string albumTitle, DateOnly dateShared)
+        
+        public Song()
         {
-            Id = id;
-            Title = title;
-            ArtistId = artistId;
-            AlbumTitle = albumTitle;
-            DateShared = dateShared;
+
+        }
+
+        public Song(int id, string title, int artist, string albumTitle, DateOnly date_shared)
+        {
+            this.Id = id;
+            this.Title = title;
+            this.Artist = artist;
+            this.AlbumTitle = albumTitle;
+            this.DateShared = date_shared;
+        }
+        public Song( string title, int artist, string albumTitle, DateOnly date_shared)
+        {
+            this.Title = title;
+            this.Artist = artist;
+            this.AlbumTitle = albumTitle;
+            this.DateShared = date_shared;
         }
     }
 }
