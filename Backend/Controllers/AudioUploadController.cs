@@ -27,7 +27,7 @@ namespace Backend.Controllers
 
             try
             {
-                var filePath = Path.Combine(_audioFilePath, audioUploadModel.AudioFile.FileName + ".wav");
+                var filePath = Path.Combine(_audioFilePath, audioUploadModel.AudioFile.FileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await audioUploadModel.AudioFile.CopyToAsync(stream);

@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", function(){
             songPhotoImg.alt = "Photo";
             songPhotoImg.style.maxWidth = "50px";
             songPhotoImg.style.maxHeight = "50px"; 
+            songPhotoImg.style.width = "100%";
+            songPhotoImg.style.height = "100%";
             songPhotoDiv.appendChild(songPhotoImg);
     
             var songNameDiv = document.createElement("div");
