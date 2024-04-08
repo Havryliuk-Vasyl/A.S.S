@@ -25,7 +25,7 @@ namespace Backend.Controllers
         [HttpGet("username/" + username)]
         public async Task<ActionResult<User>> GetUserByUsername(string username)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.username == username);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
             if (user == null)
             {
@@ -38,7 +38,7 @@ namespace Backend.Controllers
         [HttpGet("email/" + email)]
         public async Task<ActionResult<User>> GetUserByEmail(string email)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.email == email);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Email == email);
 
             if (user == null)
             {
@@ -51,7 +51,7 @@ namespace Backend.Controllers
         [HttpGet("id/" + id)]
         public async Task<ActionResult<User>> GetUserById(int id)
         {
-            var user = await context.Users.FirstOrDefaultAsync(s => s.id == id);
+            var user = await context.Users.FirstOrDefaultAsync(s => s.Id == id);
 
             if (user == null)
             {
@@ -65,7 +65,7 @@ namespace Backend.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = context.Users.FirstOrDefault(u => u.email == userReg.email);
+                var user = context.Users.FirstOrDefault(u => u.Email == userReg.email);
                 if (user == null)
                 {
                     DateOnly currentDate = DateOnly.FromDateTime(DateTime.Today);
@@ -86,14 +86,15 @@ namespace Backend.Controllers
         public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
         {
             User user = null;
-            user = await context.Users.FirstOrDefaultAsync(u => u.email == userLogin.email);
-            if (user != null && user.password == userLogin.password)
+            user = await context.Users.FirstOrDefaultAsync(u => u.Email == userLogin.email);
+            if (user != null && user.Password == userLogin.password)
             {
                 var claims = new[]
                 {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.username),
-                    new Claim("email", user.email),
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                    new Claim("email", user.Email),
                     new Claim("status", user.status),
+                    new Claim("id", user.Id.ToString()),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
                 };
 
@@ -147,8 +148,9 @@ namespace Backend.Controllers
                 var username = jwtToken.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
                 var email = jwtToken.Claims.FirstOrDefault(x => x.Type == "email")?.Value;
                 var status = jwtToken.Claims.FirstOrDefault(x => x.Type == "status")?.Value;
+                var id = jwtToken.Claims.FirstOrDefault(x => x.Type == "id")?.Value;
 
-                return Ok(new { Username = username, Email = email, Status = status });
+                return Ok(new { Username = username, Email = email, Status = status, Id = id });
             }
             catch (Exception)
             {

@@ -22,6 +22,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
+    var catalogURL = "assets/pages/catalog.html";
+    document.getElementById("pageFrame").src = catalogURL;
+
     document.getElementById("profile").addEventListener("click", function(){
         var userProfileURL = "assets/pages/profile.html";
         document.getElementById("pageFrame").src = userProfileURL;
@@ -105,7 +108,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let linkOnArtistPanel = document.createElement("a");
             linkOnArtistPanel.id = "artistPanel";
             linkOnArtistPanel.innerText="Панель артиста";
-            linkOnArtistPanel.href = "#";
+            linkOnArtistPanel.href = "assets/pages/uploadAudio.html";
 
             artistPanel.appendChild(linkOnArtistPanel);
             

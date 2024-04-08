@@ -280,3 +280,9 @@ D:\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
 D:\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNet.Identity.EntityFramework.dll
 D:\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 D:\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+D:\A.S.S\Backend\bin\Debug\net8.0\NAudio.dll
+D:\A.S.S\Backend\bin\Debug\net8.0\NAudio.Asio.dll
+D:\A.S.S\Backend\bin\Debug\net8.0\NAudio.Core.dll
+D:\A.S.S\Backend\bin\Debug\net8.0\NAudio.Midi.dll
+D:\A.S.S\Backend\bin\Debug\net8.0\NAudio.Wasapi.dll
+D:\A.S.S\Backend\bin\Debug\net8.0\NAudio.WinMM.dll
