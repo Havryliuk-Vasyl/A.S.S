@@ -13,6 +13,7 @@ namespace Backend.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
+        private readonly string _userPhotoFilePath = "./media-files/userphotos";
         private const string id = "{id}";
         private const string username = "{username}";
         private const string email = "{email}";
@@ -143,13 +144,27 @@ namespace Backend.Controllers
                     ValidAudience = "flamermusicapi",
                     IssuerSigningKey = new SymmetricSecurityKey(key)
                 }, out SecurityToken validatedToken);
-                
+
                 var jwtToken = (JwtSecurityToken)validatedToken;
                 var username = jwtToken.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
                 var email = jwtToken.Claims.FirstOrDefault(x => x.Type == "email")?.Value;
                 var status = jwtToken.Claims.FirstOrDefault(x => x.Type == "status")?.Value;
                 var id = jwtToken.Claims.FirstOrDefault(x => x.Type == "id")?.Value;
 
+                // Отримання інформації про користувача з бази даних за ідентифікатором
+                var user = context.Users.FirstOrDefault(u => u.Id == int.Parse(id));
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                // Перевірка, чи інформація про користувача співпадає з тим, що міститься в токені
+                if (user.Username != username || user.Email != email || user.status != status)
+                {
+                    return BadRequest("User information mismatch");
+                }
+
+                // Повернення інформації про користувача
                 return Ok(new { Username = username, Email = email, Status = status, Id = id });
             }
             catch (Exception)
@@ -157,5 +172,93 @@ namespace Backend.Controllers
                 return BadRequest("Invalid token");
             }
         }
+
+
+        [HttpPost("uploadAvatar")]
+        public async Task<IActionResult> UploadAvatar([FromForm] IFormFile avatar, [FromForm] int userId)
+        {
+            try
+            {
+                // Перевірка наявності файлу
+                if (avatar == null || avatar.Length == 0)
+                {
+                    return BadRequest("No file uploaded");
+                }
+
+                // Перевірка типу файлу (зображення)
+                if (!avatar.ContentType.StartsWith("image/"))
+                {
+                    return BadRequest("Only image files are allowed");
+                }
+
+                // Перевірка наявності ідентифікатора користувача
+                if (userId <= 0)
+                {
+                    return BadRequest("Invalid user ID");
+                }
+
+                // Пошук існуючої аватарки користувача
+                var existingPhoto = await context.UsersPhoto.FirstOrDefaultAsync(p => p.User == userId);
+                if (existingPhoto != null)
+                {
+                    // Видалення існуючої аватарки з файлової системи
+                    if (System.IO.File.Exists(existingPhoto.FilePath))
+                    {
+                        System.IO.File.Delete(existingPhoto.FilePath);
+                    }
+                    // Видалення існуючої аватарки з бази даних
+                    context.UsersPhoto.Remove(existingPhoto);
+                }
+
+                // Генерація унікального імені файлу
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(avatar.FileName);
+
+                // Папка для збереження файлів
+                var uploadsFolder = Path.Combine(_userPhotoFilePath, uniqueFileName);
+
+                // Збереження файлу на сервері
+                using (var stream = new FileStream(uploadsFolder, FileMode.Create))
+                {
+                    await avatar.CopyToAsync(stream);
+                }
+
+                // Додавання нової аватарки до бази даних
+                var userPhoto = new UserPhoto
+                {
+                    User = userId,
+                    FilePath = uploadsFolder
+                };
+                context.UsersPhoto.Add(userPhoto);
+                await context.SaveChangesAsync();
+
+                return Ok("Avatar uploaded successfully");
+            }
+            catch (Exception ex)
+            {
+                // Логування помилок
+                Console.WriteLine($"Error uploading avatar: {ex}");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("avatar/{userId}")]
+        public async Task<IActionResult> GetAvatar(int userId)
+        {
+            var userPhoto = await context.UsersPhoto.FirstOrDefaultAsync(p => p.User == userId);
+            if (userPhoto == null)
+            {
+                return NotFound();
+            }
+
+            if (!System.IO.File.Exists(userPhoto.FilePath))
+            {
+                return NotFound();
+            }
+
+            byte[] photoBytes = System.IO.File.ReadAllBytes(userPhoto.FilePath);
+
+            return File(photoBytes, "image/jpeg");
+        }
+
     }
 }

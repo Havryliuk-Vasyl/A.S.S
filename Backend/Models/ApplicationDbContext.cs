@@ -6,6 +6,7 @@ namespace Backend.Models
     public class ApplicationDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
+        public DbSet<UserPhoto> UsersPhoto { get; set; }
         public DbSet<Song> Songs { get; set; }
         public DbSet<Audio> Audios { get; set; }
         public DbSet<Photo> Photos { get; set; }
