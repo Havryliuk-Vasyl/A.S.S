@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    
+    username = "";
     $.ajax({
         type: "GET",
         url: "https://localhost:7219/User/validateToken",
@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         success: function(response) {
             console.log("User profile:", response);
 
-            const username = response.username;
+            username = response.username;
             
             const profileUsername = document.getElementById('profile-username');
 
@@ -26,8 +26,15 @@ document.addEventListener("DOMContentLoaded", function() {
     document.getElementById("pageFrame").src = catalogURL;
 
     document.getElementById("profile").addEventListener("click", function(){
-        var userProfileURL = "assets/pages/profile.html";
-        document.getElementById("pageFrame").src = userProfileURL;
+        if (document.getElementById("profile-username").textContent == "Назад") {
+            document.getElementById("pageFrame").src = catalogURL;
+            document.getElementById("profile-username").innerText = username;
+        }
+        else{
+            var userProfileURL = "assets/pages/profile.html";
+            document.getElementById("pageFrame").src = userProfileURL;
+            document.getElementById("profile-username").innerText = "Назад";
+        }
     });
 
     const audioPlayer = document.getElementById('audioPlayer');

@@ -179,50 +179,40 @@ namespace Backend.Controllers
         {
             try
             {
-                // Перевірка наявності файлу
                 if (avatar == null || avatar.Length == 0)
                 {
                     return BadRequest("No file uploaded");
                 }
 
-                // Перевірка типу файлу (зображення)
                 if (!avatar.ContentType.StartsWith("image/"))
                 {
                     return BadRequest("Only image files are allowed");
                 }
 
-                // Перевірка наявності ідентифікатора користувача
                 if (userId <= 0)
                 {
                     return BadRequest("Invalid user ID");
                 }
 
-                // Пошук існуючої аватарки користувача
                 var existingPhoto = await context.UsersPhoto.FirstOrDefaultAsync(p => p.User == userId);
                 if (existingPhoto != null)
                 {
-                    // Видалення існуючої аватарки з файлової системи
                     if (System.IO.File.Exists(existingPhoto.FilePath))
                     {
                         System.IO.File.Delete(existingPhoto.FilePath);
                     }
-                    // Видалення існуючої аватарки з бази даних
                     context.UsersPhoto.Remove(existingPhoto);
                 }
 
-                // Генерація унікального імені файлу
                 var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(avatar.FileName);
 
-                // Папка для збереження файлів
-                var uploadsFolder = Path.Combine(_userPhotoFilePath, uniqueFileName);
+                var uploadsFolder = Path.Combine(_userPhotoFilePath, uniqueFileName);   
 
-                // Збереження файлу на сервері
                 using (var stream = new FileStream(uploadsFolder, FileMode.Create))
                 {
                     await avatar.CopyToAsync(stream);
                 }
 
-                // Додавання нової аватарки до бази даних
                 var userPhoto = new UserPhoto
                 {
                     User = userId,
@@ -235,7 +225,6 @@ namespace Backend.Controllers
             }
             catch (Exception ex)
             {
-                // Логування помилок
                 Console.WriteLine($"Error uploading avatar: {ex}");
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
