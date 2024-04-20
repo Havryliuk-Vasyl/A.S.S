@@ -52,10 +52,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-iframe{
-    max-width: 50%;
-}
-
 button {
     display: flex;
     flex-direction: column;
@@ -71,11 +67,6 @@ button {
 
 button:hover {
     background-color: #0056b3;
-}
-
-iframe {
-    padding: 0;
-    margin: 0;
 }
 
 .player {
