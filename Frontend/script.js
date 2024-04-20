@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const profileUsername = document.getElementById('profile-username');
 
             renderUsersFunctionality(response);
-
+            
             profileUsername.textContent = username;
         },
         error: function(error) {
@@ -22,9 +22,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    var catalogURL = "assets/pages/catalog.html";
-    document.getElementById("pageFrame").src = catalogURL;
-
+    $.ajax({
+        type: "GET",
+        url: "assets/scripts/catalog.js",
+        success: function(response) {
+            // Створюємо елемент <script>
+            var scriptElement = document.createElement("script");
+            // Встановлюємо вміст отриманого скрипту
+            scriptElement.innerHTML = response;
+            // Додаємо елемент <script> до DOM
+            document.getElementById("catalog").appendChild(scriptElement);
+        },
+        error: function(error) {
+            console.error("Помилка при отриманні скрипту catalog.js:", error);
+        }
+    });
+    
     document.getElementById("profile").addEventListener("click", function(){
         if (document.getElementById("profile-username").textContent == "Назад") {
             document.getElementById("pageFrame").src = catalogURL;
@@ -35,63 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("pageFrame").src = userProfileURL;
             document.getElementById("profile-username").innerText = "Назад";
         }
-    });
-
-    const audioPlayer = document.getElementById('audioPlayer');
-    const playPauseBtn = document.getElementById('playPauseBtn');
-    const volumeSlider = document.getElementById('volumeSlider');
-    const timeSlider = document.getElementById('timeSlider');
-    const currentTimeDisplay = document.getElementById('currentTime');
-    const durationDisplay = document.getElementById('duration');
-
-    playPauseBtn.addEventListener('click', function() {
-        if (audioPlayer.paused) {
-            audioPlayer.play();
-            playPauseBtn.innerHTML = '| |';
-        } else {
-            audioPlayer.pause();
-            playPauseBtn.innerHTML = '&gt;';
-        }
-    });
-
-    volumeSlider.addEventListener('input', function() {
-        audioPlayer.volume = volumeSlider.value;
-    });
-
-    audioPlayer.addEventListener('timeupdate', function() {
-        const currentTime = audioPlayer.currentTime;
-        const duration = audioPlayer.duration;
-
-        // Оновлення регулятора часу
-        timeSlider.value = currentTime / duration;
-
-        // Оновлення відображення часу
-        currentTimeDisplay.textContent = formatTime(currentTime);
-        durationDisplay.textContent = formatTime(duration);
-    });
-
-    let isSeeking = false;
-
-    timeSlider.addEventListener('input', function() {
-        isSeeking = true;
-        const duration = audioPlayer.duration;
-        const seekTo = duration * timeSlider.value;
-
-        audioPlayer.currentTime = seekTo;
-    });
-
-    timeSlider.addEventListener('mouseup', function() {
-        isSeeking = false; 
-    });
-
-    audioPlayer.addEventListener('timeupdate', function() {
-        const currentTime = audioPlayer.currentTime;
-        const duration = audioPlayer.duration;
-        if (!isSeeking) {
-            timeSlider.value = currentTime / duration;
-        }
-        currentTimeDisplay.textContent = formatTime(currentTime);
-        durationDisplay.textContent = formatTime(duration);
     });
 
     function renderUsersFunctionality(user){
