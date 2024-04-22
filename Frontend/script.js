@@ -1,5 +1,8 @@
+import Catalog from './assets/scripts/catalog.js';
+import Player from './assets/player/player.js';
+
 document.addEventListener("DOMContentLoaded", function() {
-    username = "";
+    let username = "";
     $.ajax({
         type: "GET",
         url: "https://localhost:7219/User/validateToken",
@@ -22,21 +25,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    $.ajax({
-        type: "GET",
-        url: "assets/scripts/catalog.js",
-        success: function(response) {
-            // Створюємо елемент <script>
-            var scriptElement = document.createElement("script");
-            // Встановлюємо вміст отриманого скрипту
-            scriptElement.innerHTML = response;
-            // Додаємо елемент <script> до DOM
-            document.getElementById("catalog").appendChild(scriptElement);
-        },
-        error: function(error) {
-            console.error("Помилка при отриманні скрипту catalog.js:", error);
-        }
-    });
+    const catalog = new Catalog();
+    catalog.renderRecentSongs();
+
+    const player = new Player();
+    player.renderPlayer();
     
     document.getElementById("profile").addEventListener("click", function(){
         if (document.getElementById("profile-username").textContent == "Назад") {
@@ -44,9 +37,8 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("profile-username").innerText = username;
         }
         else{
-            var userProfileURL = "assets/pages/profile.html";
-            document.getElementById("pageFrame").src = userProfileURL;
-            document.getElementById("profile-username").innerText = "Назад";
+            var userProfileURL = 'assets/pages/profile.html';
+            window.location.href = userProfileURL;
         }
     });
 
@@ -80,29 +72,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainderSeconds = Math.floor(seconds % 60);
-    const formattedSeconds = remainderSeconds < 10 ? '0' + remainderSeconds : remainderSeconds;
-    return `${minutes}:${formattedSeconds}`;
-}
-
-function play(songId){
-    const apiUrl = `https://localhost:7219/api/AudioStreaming/audio/${songId}`;
-    axios.get(apiUrl, {
-        responseType: 'arraybuffer'
-    })
-    .then(response => {
-        const audioData = response.data;
-        const audioUrl = URL.createObjectURL(new Blob([audioData]));
-    
-        const audioElement = document.getElementById('audioPlayer');
-    
-        audioElement.src = audioUrl;
-    
-        audioElement.play();
-    })
-    .catch(error => {
-        console.error('Error fetching audio file:', error);
-    });
-}

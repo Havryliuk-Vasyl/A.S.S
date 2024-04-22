@@ -27,7 +27,8 @@ namespace Backend.Controllers
 
             try
             {
-                var filePath = Path.Combine(_audioFilePath, audioUploadModel.AudioFile.FileName);
+                var uniqueFileName = Guid.NewGuid().ToString() + "_" + audioUploadModel.AudioFile.FileName;
+                var filePath = Path.Combine(_audioFilePath, uniqueFileName);
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await audioUploadModel.AudioFile.CopyToAsync(stream);
@@ -54,7 +55,7 @@ namespace Backend.Controllers
                     DateShared = DateOnly.FromDateTime(DateTime.Today)
                 };
 
-                context.Songs.Add(song);
+                context.Songs.AddAsync(song);
                 await context.SaveChangesAsync();
 
                 var audio = new Audio
@@ -63,14 +64,14 @@ namespace Backend.Controllers
                     FilePath = filePath,
                     Duration = fileDuration
                 };
-                context.Audios.Add(audio);
+                context.Audios.AddAsync(audio);
 
                 var photo = new Photo
                 {
                     SongId = song.Id,
                     FilePath = photoFilePath
                 };
-                context.Photos.Add(photo);
+                context.Photos.AddAsync(photo);
 
                 await context.SaveChangesAsync();
 

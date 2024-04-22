@@ -1,7 +1,5 @@
-﻿using NAudio.Wave;
-using System.IO;
+﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using Backend.Models;
 
 namespace Backend.Controllers
 {
@@ -31,14 +29,14 @@ namespace Backend.Controllers
         }
         private byte[] GetAudioBytesById(string id)
         {
-            var audio = context.Audios.FirstOrDefault(s => s.Id == Convert.ToInt32(id));
-            if (audio == null)
-            {
-                return null;
-            }
-
             try
             {
+                var audio = context.Audios.FirstOrDefault(s => s.Song == Convert.ToInt32(id));
+                if (audio == null)
+                {
+                    return null;
+                }
+
                 return System.IO.File.ReadAllBytes(audio.FilePath);
             }
             catch (Exception ex)
