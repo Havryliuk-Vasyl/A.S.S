@@ -1,11 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-}
-
-body {
+.catalog{
     font-family: Arial, sans-serif;
     background-color: #222;
     color: #fff;
@@ -15,29 +8,20 @@ body {
     flex-direction: row;
     height: auto;
     background: linear-gradient(to bottom, #4e3780, #222);
-    min-height: 100vh; 
+    min-height: fit-content;
+    width: 100%; 
     overflow-y: auto; 
+    user-select: none;
 }
 
-.catalog {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-}
-
-.my-playlists {
+.catalog-my-playlists {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
     gap: 20px;
 }
 
-.playlist {
+.catalog-playlist {
     flex: 0 0 auto;
     width: 200px;
     border-radius: 8px;
@@ -46,13 +30,13 @@ h1 {
     cursor: pointer;
 }
 
-.playlist-photo {
+.catalog-playlist-photo {
     width: 100%;
     height: 150px;
     background-color: #eee;
 }
 
-.playlist-name {
+.catalog-playlist-name {
     padding: 10px;
     font-size: 16px;
     text-align: center;
@@ -60,13 +44,13 @@ h1 {
     background-color: #222;
 }
 
-.song-name{
+.catalog-song-name{
     padding: 10px;
     font-size: 16px;
     text-align: center;
     cursor: pointer;
 }
-.artist{
+.catalog-artist{
     padding: 10px;
     font-size: 16px;
     text-align: center;
@@ -74,11 +58,11 @@ h1 {
     cursor: pointer;
 }
 
-.recently-songs {
+.catalog-recently-songs {
     margin-top: 40px;
 }
 
-.song {
+.catalog-song {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -86,33 +70,37 @@ h1 {
     margin-bottom: 10px;
 }
 
-.song-information {
+.catalog-song:hover{
+    background-color: rgba(128, 128, 128, 0.5);
+}
+
+.catalog-song-information {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-.song-play-control {
+.catalog-song-play-control {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.song-photo {
+.catalog-song-photo {
     width: 50px;
     height: 50px;
     background-color: #eee;
     cursor: pointer;
 }
 
-.duration {
+.catalog-duration {
     margin-right: 2em;
     margin-left: auto;
     font-size: 14px;
 }
 
-.play-button{
+.catalog-play-button{
     padding: 1em;
     cursor: pointer;
 }

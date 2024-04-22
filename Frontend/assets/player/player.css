@@ -111,8 +111,8 @@ input[type="range"]::-moz-range-thumb {
 }
 
 #timeSlider{
-    min-width: 65em;
-    max-width: 10em;
+    min-width: 35em;
+    max-width: 35em;
 }
 
 #volumeSlider{

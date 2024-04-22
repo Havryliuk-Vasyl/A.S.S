@@ -18,16 +18,31 @@ namespace Backend.Controllers
         }
 
         [HttpGet("id")]
-        public async Task<ActionResult<Song>> GetAudioById(int id)
+        public async Task<ActionResult<object>> GetAudioById(int id)
         {
             var song = await context.Songs.FirstOrDefaultAsync(s => s.Id == id);
+
             if (song == null)
             {
                 return NotFound();
             }
 
-            return song;
+            var artist = await context.Users.FirstOrDefaultAsync(u => u.Id == song.Artist);
+            if (artist == null)
+            {
+                return NotFound();
+            }
+
+            var result = new
+            {
+                song,
+                ArtistId = song.Artist,
+                ArtistName = artist.Username
+            };
+
+            return result;
         }
+
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetAllSongs()
