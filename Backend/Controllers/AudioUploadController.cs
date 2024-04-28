@@ -55,7 +55,7 @@ namespace Backend.Controllers
                     DateShared = DateOnly.FromDateTime(DateTime.Today)
                 };
 
-                context.Songs.AddAsync(song);
+                await context.Songs.AddAsync(song);
                 await context.SaveChangesAsync();
 
                 var audio = new Audio
@@ -64,14 +64,14 @@ namespace Backend.Controllers
                     FilePath = filePath,
                     Duration = fileDuration
                 };
-                context.Audios.AddAsync(audio);
+                await context.Audios.AddAsync(audio);
 
                 var photo = new Photo
                 {
                     SongId = song.Id,
                     FilePath = photoFilePath
                 };
-                context.Photos.AddAsync(photo);
+                await context.Photos.AddAsync(photo);
 
                 await context.SaveChangesAsync();
 

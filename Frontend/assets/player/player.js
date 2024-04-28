@@ -168,6 +168,12 @@ class Player{
         audioPlayer.addEventListener('play', function(){
             playPauseBtn.innerHTML = '| |';
         });
+
+        audioPlayer.addEventListener('ended', function(){
+            playPauseBtn.innerHTML = '&gt;';
+            timeSliderInput.value= 0;
+            currentTimeDiv.textContent = '0:00';
+        });
     
         document.addEventListener('keydown', function(event) {
             if (event.code === 'Space') {
