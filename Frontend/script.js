@@ -1,5 +1,6 @@
 import Catalog from './assets/scripts/catalog.js';
 import Player from './assets/player/player.js';
+import Playlist from './assets/scripts/playlist.js';
 
 document.addEventListener("DOMContentLoaded", function() {
     let username = "";
@@ -24,6 +25,9 @@ document.addEventListener("DOMContentLoaded", function() {
             window.location.href = 'assets/pages/authorization.html';
         }
     });
+
+    const playlist = new Playlist();
+    playlist.renderUserPlaylist();
 
     const catalog = new Catalog();
     catalog.renderRecentSongs();
