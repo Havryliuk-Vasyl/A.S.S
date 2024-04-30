@@ -13,114 +13,116 @@ class Catalog {
         document.head.appendChild(link);
     }
 
-    getAudioList(){
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                type: "GET",
-                url: "https://localhost:7219/Song",
-                success: function(response) {
-                    console.log("Songs:", response);
-                    resolve(response);
-                },
-                error: function(error) {
-                    console.error("Помилка при отриманні списку пісень:", error);
-                    reject(error);
-                }
-            });
-        });
+    async getAudioList(){
+        try {
+            const response = await fetch("https://localhost:7219/Song");
+            if (!response.ok) {
+                throw new Error("Помилка при отриманні списку пісень");
+            }
+            const data = await response.json();
+            console.log("Songs:", data);
+            return data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
     }
+
     async renderRecentSongs() {
         this.includeStyles();
         try {
             const songs = await this.getAudioList();
             console.log(songs);
 
-            var songsContainer = document.createElement("div");
+            const songsContainer = document.createElement("div");
             songsContainer.id = "songs-container";
             songsContainer.classList.add("container-style");
 
-            console.log(songs);
-            const self = this;
-            songs.forEach(function(item) {
-            var songDiv = document.createElement("div");
-            songDiv.classList.add("catalog-song");
-            songDiv.setAttribute("data-id", item.song.id);
+            const songElements = songs.$values.map(item => {
+                const songDiv = document.createElement("div");
+                songDiv.classList.add("catalog-song");
+                songDiv.setAttribute("data-id", item.song.id);
 
-            var songInformationDiv = document.createElement("div");
-            songInformationDiv.classList.add("catalog-song-information");
+                const songInformationDiv = document.createElement("div");
+                songInformationDiv.classList.add("catalog-song-information");
 
-            var songPhotoDiv = document.createElement("div");
-            songPhotoDiv.classList.add("catalog-song-photo");
-            var songPhotoImg = document.createElement("img");
-            songPhotoImg.src = "https://localhost:7219/Song/photo/" + item.photo.id;
-            songPhotoImg.alt = "Photo";
-            songPhotoImg.style.maxWidth = "50px";
-            songPhotoImg.style.maxHeight = "50px";
-            songPhotoImg.style.width = "100%";
-            songPhotoImg.style.height = "100%";
-            songPhotoDiv.appendChild(songPhotoImg);
+                const songPhotoDiv = document.createElement("div");
+                songPhotoDiv.classList.add("catalog-song-photo");
+                const songPhotoImg = document.createElement("img");
+                songPhotoImg.src = "https://localhost:7219/Song/photo/" + item.photo.id;
+                songPhotoImg.alt = "Photo";
+                songPhotoImg.style.maxWidth = "50px";
+                songPhotoImg.style.maxHeight = "50px";
+                songPhotoImg.style.width = "100%";
+                songPhotoImg.style.height = "100%";
+                songPhotoDiv.appendChild(songPhotoImg);
 
-            var songNameDiv = document.createElement("div");
-            songNameDiv.classList.add("catalog-song-name");
-            songNameDiv.textContent = item.song.title;
+                const songNameDiv = document.createElement("div");
+                songNameDiv.classList.add("catalog-song-name");
+                songNameDiv.textContent = item.song.title;
 
-            var artistDiv = document.createElement("div");
-            artistDiv.classList.add("catalog-artist");
-            artistDiv.textContent = item.artist;
+                const artistDiv = document.createElement("div");
+                artistDiv.classList.add("catalog-artist");
+                artistDiv.textContent = item.artist;
 
-            songInformationDiv.appendChild(songPhotoDiv);
-            songInformationDiv.appendChild(songNameDiv);
-            songInformationDiv.appendChild(artistDiv);
+                songInformationDiv.appendChild(songPhotoDiv);
+                songInformationDiv.appendChild(songNameDiv);
+                songInformationDiv.appendChild(artistDiv);
 
-            var songPlayControlDiv = document.createElement("div");
-            songPlayControlDiv.classList.add("catalog-song-play-control");
+                const songPlayControlDiv = document.createElement("div");
+                songPlayControlDiv.classList.add("catalog-song-play-control");
 
-            var durationDiv = document.createElement("div");
-            durationDiv.classList.add("catalog-duration");
-            durationDiv.textContent = formatDuration(item.duration);
+                const durationDiv = document.createElement("div");
+                durationDiv.classList.add("catalog-duration");
+                durationDiv.textContent = this.formatDuration(item.duration);
 
-            var playButtonDiv = document.createElement("div");
-            playButtonDiv.classList.add("catalog-play-button");
-            playButtonDiv.textContent = ">";
+                const playButtonDiv = document.createElement("div");
+                playButtonDiv.classList.add("catalog-play-button");
+                playButtonDiv.textContent = ">";
 
-            playButtonDiv.addEventListener("click", () => {
-                self.player.play(item.song.id);
+                playButtonDiv.addEventListener("click", () => {
+                    this.player.play(item.song.id);
+                });
+
+                songPlayControlDiv.appendChild(durationDiv);
+                songPlayControlDiv.appendChild(playButtonDiv);
+
+                songDiv.appendChild(songInformationDiv);
+                songDiv.appendChild(songPlayControlDiv);
+
+                songDiv.addEventListener('dblclick', () => {
+                    this.player.play(item.song.id);
+                });
+
+                return songDiv;
             });
 
-            songPlayControlDiv.appendChild(durationDiv);
-            songPlayControlDiv.appendChild(playButtonDiv);
-
-            songDiv.appendChild(songInformationDiv);
-            songDiv.appendChild(songPlayControlDiv);
-
-            songDiv.addEventListener('dblclick', () => {
-                self.player.play(item.song.id);
+            songElements.forEach(songElement => {
+                songsContainer.appendChild(songElement);
             });
 
-            songsContainer.appendChild(songDiv);
-            });
             document.getElementById("catalog").appendChild(songsContainer);
         } catch (error) {
             console.error("Помилка під час відображення пісень:", error);
         }
     }  
-}
 
-function formatDuration(durationInSeconds) {
-    var hours = Math.floor(durationInSeconds / 3600);
-    var minutes = Math.floor((durationInSeconds % 3600) / 60);
-    var seconds = Math.floor(durationInSeconds % 60);
+    formatDuration(durationInSeconds) {
+        const hours = Math.floor(durationInSeconds / 3600);
+        const minutes = Math.floor((durationInSeconds % 3600) / 60);
+        const seconds = Math.floor(durationInSeconds % 60);
 
-    var formattedDuration = "";
+        let formattedDuration = "";
 
-    if (hours > 0) {
-        formattedDuration += hours + ":";
+        if (hours > 0) {
+            formattedDuration += hours + ":";
+        }
+
+        formattedDuration += (minutes < 10 ? "0" : "") + minutes + ":";
+        formattedDuration += (seconds < 10 ? "0" : "") + seconds;
+
+        return formattedDuration;
     }
-
-    formattedDuration += (minutes < 10 ? "0" : "") + minutes + ":";
-    formattedDuration += (seconds < 10 ? "0" : "") + seconds;
-
-    return formattedDuration;
 }
 
 export default Catalog;
