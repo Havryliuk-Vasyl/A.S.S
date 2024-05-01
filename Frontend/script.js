@@ -2,8 +2,28 @@ import Catalog from './assets/scripts/catalog.js';
 import Player from './assets/player/player.js';
 import Playlist from './assets/scripts/playlist.js';
 
+var modal = document.getElementById("createPlaylistModal");
+var okButton = document.getElementById("okButton");
+var cancelButton = document.getElementById("cancelButton");
+var inputData = document.getElementById("inputData");
+
+function openCreatePlaylistModal() {
+  modal.style.display = "block";
+}
+
+function closeCreatePlaylistModal() {
+  modal.style.display = "none";
+}
+
+
+cancelButton.onclick = function() {
+  closeCreatePlaylistModal();
+}
+
+
 document.addEventListener("DOMContentLoaded", function() {
     let username = "";
+    let userId;
     $.ajax({
         type: "GET",
         url: "https://localhost:7219/User/validateToken",
@@ -14,10 +34,12 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("User profile:", response);
 
             username = response.username;
+            userId = response.id;
             
             const profileUsername = document.getElementById('profile-username');
 
             renderUsersFunctionality(response);
+            renderMain(response);
             
             profileUsername.textContent = username;
         },
@@ -26,24 +48,60 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    const playlist = new Playlist();
-    playlist.renderUserPlaylist();
+    function renderMain(user){
+        renderPlaylistControl(user.id);
 
-    const catalog = new Catalog();
-    catalog.renderRecentSongs();
-
-    const player = new Player();
-    player.renderPlayer();
+        const catalog = new Catalog();
+        catalog.renderRecentSongs();
     
+        const player = new Player();
+        player.renderPlayer();    
+    }
+    
+    function renderPlaylistControl(userId){
+        const playlistsContainer = document.getElementById("playlistsInMain");
+        playlistsContainer.innerHTML = ``;
+        let playlistControl = document.createElement("div");
+        playlistControl.classList.add("playlist-control-btn");
+
+        let createPlaylistBtn = document.createElement("div");
+        createPlaylistBtn.classList.add("create-playlist-btn");
+
+        createPlaylistBtn.addEventListener("click", function(){
+            openCreatePlaylistModal();
+        });
+
+        let createPlaylistImg = document.createElement("img");
+        createPlaylistImg.classList.add("playlist-control-img");
+        createPlaylistImg.src = 'assets/images/icons/plus_img.png'
+
+        createPlaylistBtn.appendChild(createPlaylistImg);
+
+        
+        let openAllPlaylistsBtn = document.createElement("div");
+        openAllPlaylistsBtn.classList.add("open-all-playlists-btn");
+
+        openAllPlaylistsBtn.addEventListener("click", function(){
+            
+        });
+
+        let openAllPlaylistsImg = document.createElement("img");
+        openAllPlaylistsImg.classList.add("playlist-control-img");
+        openAllPlaylistsImg.src = 'assets/images/icons/openAllPlaylists.png'
+
+        openAllPlaylistsBtn.appendChild(openAllPlaylistsImg);
+
+        playlistControl.appendChild(createPlaylistBtn);
+        playlistControl.appendChild(openAllPlaylistsBtn);
+        playlistsContainer.appendChild(playlistControl);
+
+        const playlist = new Playlist();
+        playlist.renderUserPlaylists(userId);
+    }
+
     document.getElementById("profile").addEventListener("click", function(){
-        if (document.getElementById("profile-username").textContent == "Назад") {
-            document.getElementById("pageFrame").src = catalogURL;
-            document.getElementById("profile-username").innerText = username;
-        }
-        else{
-            var userProfileURL = 'assets/pages/profile.html';
-            window.location.href = userProfileURL;
-        }
+        var userProfileURL = 'assets/pages/profile.html';
+        window.location.href = userProfileURL;
     });
 
     function renderUsersFunctionality(user){
@@ -74,5 +132,16 @@ document.addEventListener("DOMContentLoaded", function() {
             navigationOnMenu.appendChild(artistPanel);
         }
     }
+
+    okButton.onclick = function() {
+        var title = inputData.value; 
+      
+        const playlist = new Playlist();
+      
+        playlist.createPlaylist(userId, title);
+
+        closeCreatePlaylistModal();
+        renderPlaylistControl(userId);
+      }
 });
 
