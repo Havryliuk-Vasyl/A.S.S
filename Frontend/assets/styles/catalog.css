@@ -90,3 +90,21 @@
     padding: 1em;
     cursor: pointer;
 }
+
+.context-menu {
+    position: fixed;
+    background-color: black;
+    border: 1px solid black;
+    z-index: 1000;
+    border-radius: 0.3em;
+}
+
+.context-menu div {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.context-menu div:hover {
+    background-color: gray;
+}

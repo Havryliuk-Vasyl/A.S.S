@@ -1,8 +1,10 @@
 import Player from '../player/player.js';
+import Playlist from '../scripts/playlist.js';
 
 class Catalog {
     constructor(){
         this.player = new Player();
+        this.Playlist = new Playlist();
     }
 
     includeStyles(){
@@ -93,6 +95,50 @@ class Catalog {
                 songDiv.addEventListener('dblclick', () => {
                     this.player.play(item.song.id);
                 });
+
+                let contextMenuOpen = false;
+
+                songDiv.addEventListener('contextmenu', (event) => {
+                    event.preventDefault();
+                
+                    if (!contextMenuOpen) {
+                        const menu = document.createElement('div');
+                        menu.classList.add('context-menu');
+                    
+                        const menuItem1 = document.createElement('div');
+                        menuItem1.textContent = 'Menu Item 1';
+                        menuItem1.addEventListener('click', () => {
+                            console.log('Menu Item 1 clicked for song with id', item.song.id);
+                        });
+                    
+                        const menuItem2 = document.createElement('div');
+                        menuItem2.textContent = 'Menu Item 2';
+                        menuItem2.addEventListener('click', () => {
+                            console.log('Menu Item 2 clicked for song with id', item.song.id);
+                        });
+                    
+                        menu.appendChild(menuItem1);
+                        menu.appendChild(menuItem2);
+                    
+                        menu.style.top = event.clientY + 'px';
+                        menu.style.left = event.clientX + 'px';
+                    
+                        document.body.appendChild(menu);
+                    
+                        contextMenuOpen = true;
+                    
+                        document.addEventListener('click', () => {
+                            menu.remove();
+                            contextMenuOpen = false;
+                        }, { once: true });
+                    
+                        menu.addEventListener('click', () => {
+                            menu.remove();
+                            contextMenuOpen = false;
+                        });
+                    }
+                });
+
 
                 return songDiv;
             });
