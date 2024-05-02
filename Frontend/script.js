@@ -23,25 +23,32 @@ cancelButton.onclick = function() {
 
 document.addEventListener("DOMContentLoaded", function() {
     let username = "";
-    let userId;
-    $.ajax({
-        type: "GET",
-        url: "https://localhost:7219/User/validateToken",
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
-        success: function(response) {
-            console.log("User profile:", response);
+let userId;
+$.ajax({
+    type: "GET",
+    url: "https://localhost:7219/User/validateToken",
+    headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+    },
+    success: function(response) {
+        console.log("User profile:", response);
 
-            username = response.username;
-            userId = response.id;
-            
-            const profileUsername = document.getElementById('profile-username');
+        username = response.username;
+        userId = response.id;
+
+        $.ajax({
+            type: "GET",
+            url: "https://localhost:7219/User/avatar/" + userId,
+            success: function() {
+                document.getElementById('userImage').src = "https://localhost:7219/User/avatar/" + userId;
+            },
+            error: function(error) {
+                document.getElementById('userImage').src = "assets/images/icons/noimageuser.png";
+            }
+        });
 
             renderUsersFunctionality(response);
             renderMain(response);
-            
-            profileUsername.textContent = username;
         },
         error: function(error) {
             window.location.href = 'assets/pages/authorization.html';
@@ -111,11 +118,14 @@ document.addEventListener("DOMContentLoaded", function() {
             let adminPanel = document.createElement("li");
             let linkOnAdminPanel = document.createElement("a");
             linkOnAdminPanel.id = "adminPanel";
-            linkOnAdminPanel.innerText="Панель адміна";
             linkOnAdminPanel.href = "#";
 
+            let imgAdminPanel = document.createElement("img");
+            imgAdminPanel.src = "assets/images/icons/admin-icon.png";
+
+            linkOnAdminPanel.appendChild(imgAdminPanel);
             adminPanel.appendChild(linkOnAdminPanel);
-            
+
             navigationOnMenu.appendChild(adminPanel);
         }
         else if (user.status === "artist"){
