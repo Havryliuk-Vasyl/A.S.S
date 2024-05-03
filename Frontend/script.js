@@ -36,6 +36,7 @@ $.ajax({
         username = response.username;
         userId = response.id;
 
+        document.getElementById('userImage').src = "assets/images/icons/noimageuser.png";
         $.ajax({
             type: "GET",
             url: "https://localhost:7219/User/avatar/" + userId,
@@ -43,7 +44,7 @@ $.ajax({
                 document.getElementById('userImage').src = "https://localhost:7219/User/avatar/" + userId;
             },
             error: function(error) {
-                document.getElementById('userImage').src = "assets/images/icons/noimageuser.png";
+                
             }
         });
 

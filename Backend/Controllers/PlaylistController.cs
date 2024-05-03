@@ -97,27 +97,54 @@ namespace Backend.Controllers
         }
 
         [HttpGet("Playlist/{playlistId}")]
-        public async Task<ActionResult<Playlist>> GetPlaylistWithSongs(int playlistId)
+        public async Task<ActionResult<object>> GetPlaylistWithSongs(int playlistId)
         {
             try
             {
                 var playlist = await context.Playlists
                     .Where(p => p.Id == playlistId)
                     .Include(p => p.PlaylistSongs)
-                    .ThenInclude(ps => ps.Song) 
-                    .ToListAsync();
+                    .ThenInclude(ps => ps.Song)
+                    .FirstOrDefaultAsync();
 
                 if (playlist == null)
                 {
                     return NotFound($"Playlist with id {playlistId} not found.");
                 }
 
-                return Ok(playlist);
+                var songsResponse = new List<object>();
+
+                foreach (var ps in playlist.PlaylistSongs)
+                {
+                    var song = await context.Songs.FirstOrDefaultAsync(s => s.Id == ps.Song.Id);
+                    var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == ps.Song.Id);
+                    var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == ps.Song.Id);
+
+                    var songResponse = new
+                    {
+                        Song = song,
+                        Audio = audio,
+                        Photo = photo
+                    };
+
+                    songsResponse.Add(songResponse);
+                }
+
+                var response = new
+                {
+                    playlist = playlist,
+                    Songs = songsResponse
+                };
+
+                return Ok(response);
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving playlist with songs: {ex.Message}");
             }
         }
+
+
+
     }
 }
