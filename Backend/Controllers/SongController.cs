@@ -1,4 +1,5 @@
-﻿using Backend.Models;
+﻿using Azure;
+using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -17,7 +18,7 @@ namespace Backend.Controllers
             this.context = context;
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<object>> GetAudioById(int id)
         {
             var song = await context.Songs.FirstOrDefaultAsync(s => s.Id == id);
@@ -33,15 +34,32 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            var result = new
-            {
-                song,
-                ArtistId = song.Artist,
-                ArtistName = artist.Username
-            };
+            object? response = null;
 
-            return result;
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == song.Artist);
+            var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == song.Id);
+            var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == song.Id);
+            if (user != null && audio != null && photo != null)
+            {
+                response = new
+                {
+                    song.Id,
+                    song.Title,
+                    ArtistId = song.Artist,
+                    ArtistName = artist.Username,
+                    duration = audio.Duration,
+                    photo
+                };
+            }
+
+            if (response == null)
+            {
+                return NotFound();
+            }
+
+            return response;
         }
+
 
 
         [HttpGet]

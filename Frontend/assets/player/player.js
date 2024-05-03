@@ -191,12 +191,12 @@ class Player{
     play(songId){
         $.ajax({
             type: "GET",
-            url: "https://localhost:7219/Song/id?id=" + songId,
+            url: "https://localhost:7219/Song/" + songId,
             success: (response) => {
                 console.log("Song:", response);
-                this.playSong(response.song.id)
+                this.playSong(songId)
     
-                document.getElementById("songName").textContent = response.song.title;
+                document.getElementById("songName").textContent = response.title;
                 document.getElementById("songArtist").textContent = response.artistName;
             },
             error: (error) => {

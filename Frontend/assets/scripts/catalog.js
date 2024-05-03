@@ -101,44 +101,44 @@ class Catalog {
                 songDiv.addEventListener('contextmenu', (event) => {
                     event.preventDefault();
                 
-                if (!contextMenuOpen) {
-                    const menu = document.createElement('div');
-                    menu.classList.add('context-menu');
-                
-                    const menuItem1 = document.createElement('div');
-                    menuItem1.textContent = 'Відтворити';
-                    menuItem1.addEventListener('click', () => {
-                        this.player.play(item.song.id);
-                    });
-                
-                    const menuItem2 = document.createElement('div');
-                    menuItem2.textContent = 'Додати в плейлист';
-                    menuItem2.addEventListener('click', () => {
-                        console.log('Menu Item 2 clicked for song with id', item.song.id);
-                    });
-                
-                    menu.appendChild(menuItem1);
-                    menu.appendChild(menuItem2);
-                
-                    menu.style.top = event.clientY + 'px';
-                    menu.style.left = event.clientX + 'px';
-                
-                    document.body.appendChild(menu);
-                
-                    contextMenuOpen = true;
-                
-                    document.addEventListener('click', () => {
-                        menu.remove();
-                        contextMenuOpen = false;
-                    }, { once: true });
-                
-                    menu.addEventListener('click', () => {
-                        menu.remove();
-                        contextMenuOpen = false;
-                    });
-                }
-            });
-            return songDiv;
+                    if (!contextMenuOpen) {
+                        const menu = document.createElement('div');
+                        menu.classList.add('context-menu');
+                    
+                        const menuItem1 = document.createElement('div');
+                        menuItem1.textContent = 'Відтворити';
+                        menuItem1.addEventListener('click', () => {
+                            this.player.play(item.song.id);
+                        });
+                    
+                        const menuItem2 = document.createElement('div');
+                        menuItem2.textContent = 'Додати в плейлист';
+                        menuItem2.addEventListener('click', () => {
+                            console.log('Menu Item 2 clicked for song with id', item.song.id);
+                        });
+                    
+                        menu.appendChild(menuItem1);
+                        menu.appendChild(menuItem2);
+                    
+                        menu.style.top = event.clientY + 'px';
+                        menu.style.left = event.clientX + 'px';
+                    
+                        document.body.appendChild(menu);
+                    
+                        contextMenuOpen = true;
+                    
+                        document.addEventListener('click', () => {
+                            menu.remove();
+                            contextMenuOpen = false;
+                        }, { once: true });
+                    
+                        menu.addEventListener('click', () => {
+                            menu.remove();
+                            contextMenuOpen = false;
+                        });
+                    }
+                });
+                return songDiv;
             });
 
             songElements.forEach(songElement => {

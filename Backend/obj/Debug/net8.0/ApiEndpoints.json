@@ -138,17 +138,7 @@
         "IsRequired": true
       }
     ],
-    "ReturnTypes": [
-      {
-        "Type": "Backend.Models.Playlist",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
+    "ReturnTypes": []
   },
   {
     "ContainingType": "Backend.Controllers.SongController",
@@ -173,7 +163,7 @@
   {
     "ContainingType": "Backend.Controllers.SongController",
     "Method": "GetAudioById",
-    "RelativePath": "Song/id",
+    "RelativePath": "Song/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -181,7 +171,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
