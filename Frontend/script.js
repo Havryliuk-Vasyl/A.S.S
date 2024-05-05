@@ -2,29 +2,30 @@ import Catalog from './assets/scripts/catalog.js';
 import Player from './assets/player/player.js';
 import Playlist from './assets/scripts/playlist.js';
 
-var modal = document.getElementById("createPlaylistModal");
-var okButton = document.getElementById("okButton");
-var cancelButton = document.getElementById("cancelButton");
-var inputData = document.getElementById("inputData");
+
+// Модальне вікно для створення плейлиста
+var modalCreatePlaylistModal = document.getElementById("createPlaylistModal");
+var okButtonCreatePlaylistModal = document.getElementById("createPlaylistOkButton");
+var cancelButtonCreatePlaylistModal = document.getElementById("createPlaylistCancelButton");
+var inputDataCreatePlaylistModal = document.getElementById("inputData");
 
 function openCreatePlaylistModal() {
-  modal.style.display = "block";
+    modalCreatePlaylistModal.style.display = "block";
 }
 
 function closeCreatePlaylistModal() {
-  modal.style.display = "none";
+    modalCreatePlaylistModal.style.display = "none";
 }
 
-
-cancelButton.onclick = function() {
+cancelButtonCreatePlaylistModal.onclick = function() {
   closeCreatePlaylistModal();
 }
 
-
+// Код, який виконується при загрузці всього контенту на сторінці
 document.addEventListener("DOMContentLoaded", function() {
     let username = "";
-let userId;
-$.ajax({
+    let userId;
+    $.ajax({
     type: "GET",
     url: "https://localhost:7219/User/validateToken",
     headers: {
@@ -59,7 +60,7 @@ $.ajax({
     function renderMain(user){
         renderPlaylistControl(user.id);
 
-        const catalog = new Catalog();
+        const catalog = new Catalog(user.id);
         catalog.renderRecentSongs();
     
         const player = new Player();
@@ -144,8 +145,8 @@ $.ajax({
         }
     }
 
-    okButton.onclick = function() {
-        var title = inputData.value; 
+    okButtonCreatePlaylistModal.onclick = function() {
+        var title = inputDataCreatePlaylistModal.value; 
       
         const playlist = new Playlist();
       
@@ -153,6 +154,6 @@ $.ajax({
 
         closeCreatePlaylistModal();
         renderPlaylistControl(userId);
-      }
+    }
 });
 

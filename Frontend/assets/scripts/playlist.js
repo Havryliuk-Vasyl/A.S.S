@@ -87,7 +87,8 @@ class Playlist {
             playlistData.songs.$values.forEach(item => {
                 const songDiv = document.createElement("div");
                 songDiv.classList.add("catalog-song");
-                const songId = item.song["$ref"];
+                const songId = item.audio.song;
+                console.log(item.audio.song);
                 songDiv.setAttribute("data-id", songId);
     
                 const songInformationDiv = document.createElement("div");
@@ -158,6 +159,7 @@ class Playlist {
                         const menuItem1 = document.createElement('div');
                         menuItem1.textContent = 'Відтворити';
                         menuItem1.addEventListener('click', () => {
+                            console.log("Song ID: " + songId);
                             this.player.play(songId);
                         });
     
@@ -202,14 +204,29 @@ class Playlist {
         }
     }
     
+    async addToPlaylist(songId, playlistId) {
+        try {
+            const response = await fetch(`https://localhost:7219/Playlist/${playlistId}/AddSong`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    songId: songId
+                })
+            });
     
+            if (!response.ok) {
+                throw new Error(`Failed to add song to playlist. Status: ${response.status}`);
+            }
     
-    
-
-    addToPlaylist(songId, playlistId) {
-
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Error adding song to playlist:', error);
+        }
     }
-
+    
     async createPlaylist(userId, playlistTitle) {
         console.log(userId + " " + playlistTitle)
         try {

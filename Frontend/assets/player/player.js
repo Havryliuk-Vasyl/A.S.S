@@ -189,6 +189,7 @@ class Player{
     }
 
     play(songId){
+        console.log("Song ID: " + songId);
         $.ajax({
             type: "GET",
             url: "https://localhost:7219/Song/" + songId,
