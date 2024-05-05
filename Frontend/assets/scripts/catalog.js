@@ -2,9 +2,24 @@ import Player from '../player/player.js';
 import Playlist from '../scripts/playlist.js';
 
 class Catalog {
-    constructor(){
+    constructor(userId){
+        this.modalAddSongToPlaylistModal = document.getElementById("addSongToPlaylistModal");
+        this.okButtonAddSongToPlaylistModal = document.getElementById("addSongToPlaylistOkButton");
+        this.cancelButtonAddSongToPlaylistModal = document.getElementById("addSongToPlaylistCancelButton");
+        this.selectAddSongToPlaylistModal = document.getElementById("playlistSelect");
+
+        this.includeStyles();
         this.player = new Player();
-        this.Playlist = new Playlist();
+        this.playlist = new Playlist();
+        this.userId = userId;
+
+        this.okButtonAddSongToPlaylistModal.onclick = () => {
+            
+        };
+
+        this.cancelButtonAddSongToPlaylistModal.onclick = () => {
+            this.closeAddSongToPlaylistModal();
+        };
     }
 
     includeStyles(){
@@ -31,7 +46,6 @@ class Catalog {
     }
 
     async renderRecentSongs() {
-        this.includeStyles();
         try {
             const songs = await this.getAudioList();
             console.log(songs);
@@ -114,7 +128,7 @@ class Catalog {
                         const menuItem2 = document.createElement('div');
                         menuItem2.textContent = 'Додати в плейлист';
                         menuItem2.addEventListener('click', () => {
-                            console.log('Menu Item 2 clicked for song with id', item.song.id);
+                            this.openAddSongToPlaylistModal(item.song.id);
                         });
                     
                         menu.appendChild(menuItem1);
@@ -150,6 +164,29 @@ class Catalog {
             console.error("Помилка під час відображення пісень:", error);
         }
     }  
+
+    // Модальне вікно для додавання пісні до плейлиста
+    async openAddSongToPlaylistModal(sondId) {
+        this.modalAddSongToPlaylistModal.style.display = "block";
+    
+        this.selectAddSongToPlaylistModal.innerHTML = "";
+    
+        try {
+            const playlists = await this.playlist.getUserPlaylists(this.userId);
+            for (const playlist of playlists.$values) {
+                const option = document.createElement('option');
+                option.value = playlist.id;
+                option.text = playlist.title;
+                this.selectAddSongToPlaylistModal.appendChild(option);
+            }
+        } catch (error) {
+            console.error('Error retrieving playlists:', error);
+        }
+    }
+        
+    closeAddSongToPlaylistModal(){
+        this.modalAddSongToPlaylistModal.style.display = "none";
+    }
 
     formatDuration(durationInSeconds) {
         const hours = Math.floor(durationInSeconds / 3600);

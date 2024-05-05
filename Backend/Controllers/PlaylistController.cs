@@ -122,7 +122,7 @@ namespace Backend.Controllers
 
                     var songResponse = new
                     {
-                        Song = song,
+                        Song = ps,
                         Audio = audio,
                         Photo = photo
                     };
