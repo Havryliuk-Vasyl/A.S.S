@@ -14,7 +14,11 @@ class Catalog {
         this.userId = userId;
 
         this.okButtonAddSongToPlaylistModal.onclick = () => {
-            
+            const playlistId = this.selectAddSongToPlaylistModal.value;
+            const songId = this.modalAddSongToPlaylistModal.getAttribute("data-song-id");
+
+            this.playlist.addToPlaylist(songId, playlistId);
+            this.closeAddSongToPlaylistModal();
         };
 
         this.cancelButtonAddSongToPlaylistModal.onclick = () => {
@@ -168,7 +172,8 @@ class Catalog {
     // Модальне вікно для додавання пісні до плейлиста
     async openAddSongToPlaylistModal(sondId) {
         this.modalAddSongToPlaylistModal.style.display = "block";
-    
+        this.modalAddSongToPlaylistModal.setAttribute("data-song-id", sondId);
+
         this.selectAddSongToPlaylistModal.innerHTML = "";
     
         try {

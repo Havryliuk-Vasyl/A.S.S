@@ -1,4 +1,5 @@
 import Player from '../player/player.js';
+import Catalog from './catalog.js';
 
 class Playlist {
     constructor() {
@@ -42,13 +43,14 @@ class Playlist {
         }
     }
 
-    async renderUserPlaylists(userId) {
+    async renderUserPlaylistsInQuikAccess(userId) {
         const playlistsContainer = document.getElementById("playlistsInMain");
         try {
             const playlists = await this.getUserPlaylists(userId);
             playlists.$values.forEach(playlist => {
                 const playlistElement = document.createElement("div");
-                playlistElement.classList.add("playlist");
+                playlistElement.classList.add("playlist-catalog");
+                playlistElement.classList.add("playlist-item");
                 playlistElement.innerHTML = `
                 <!-- <div class="playlist-photo"></div> -->
                     <div class="playlist-name">${playlist.title}</div>
@@ -166,7 +168,7 @@ class Playlist {
                         const menuItem2 = document.createElement('div');
                         menuItem2.textContent = 'Видалити з плейлиста';
                         menuItem2.addEventListener('click', () => {
-                            console.log('Menu Item 2 clicked for song with id', item.song.id);
+                            
                         });
     
                         menu.appendChild(menuItem1);
@@ -204,6 +206,34 @@ class Playlist {
         }
     }
     
+    async renderCatalogOfUsersPlaylist(userId) {
+        const displayField = document.getElementById("displayField");
+    
+        try {
+            const playlists = await this.getUserPlaylists(userId);
+    
+            displayField.innerHTML = "";
+    
+            playlists.$values.forEach(playlist => {
+                const playlistElement = document.createElement("div");
+                playlistElement.classList.add("playlist");
+                playlistElement.innerHTML = `
+                    <!-- <div class="playlist-photo"></div> -->
+                    <div class="playlist-name">${playlist.title}</div>
+                `;
+    
+                playlistElement.addEventListener("click", () => {
+                    this.renderSelectedPlaylist(playlist.id);
+                });
+    
+                displayField.appendChild(playlistElement);
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    
+
     async addToPlaylist(songId, playlistId) {
         try {
             const response = await fetch(`https://localhost:7219/Playlist/${playlistId}/AddSong`, {
@@ -211,9 +241,7 @@ class Playlist {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    songId: songId
-                })
+                body: songId.toString()
             });
     
             if (!response.ok) {
