@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
         openAllPlaylistsBtn.classList.add("open-all-playlists-btn");
 
         openAllPlaylistsBtn.addEventListener("click", function(){
-            
+            playlist.renderCatalogOfUsersPlaylist(userId);
         });
 
         let openAllPlaylistsImg = document.createElement("img");
@@ -105,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function() {
         playlistsContainer.appendChild(playlistControl);
 
         const playlist = new Playlist();
-        playlist.renderUserPlaylists(userId);
+        playlist.renderUserPlaylistsInQuikAccess(userId);
     }
 
     document.getElementById("profile").addEventListener("click", function(){
