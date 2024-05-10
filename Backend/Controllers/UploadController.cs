@@ -24,18 +24,29 @@ namespace Backend.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> UploadSong([FromForm] AudioUploadModel audioUploadModel)
         {
-            if (audioUploadModel == null || audioUploadModel.AudioFiles == null || !audioUploadModel.AudioFiles.Any() || audioUploadModel.PhotoFile == null)
+            if (audioUploadModel == null || audioUploadModel.AudioFiles == null || !audioUploadModel.AudioFiles.Any() || audioUploadModel.PhotoFile == null || audioUploadModel.SongTitles == null || audioUploadModel.SongTitles.Count != audioUploadModel.AudioFiles.Count)
             {
-                return BadRequest("No audio files or photo provided");
+                return BadRequest("Invalid input. Make sure all required fields are provided.");
             }
 
             using (var transaction = await _context.Database.BeginTransactionAsync())
             {
                 try
                 {
-                    foreach (var audioFile in audioUploadModel.AudioFiles)
+                    var album = new Album
                     {
-                        if (audioFile == null)
+                        User = audioUploadModel.ArtistId,
+                        Title = audioUploadModel.AlbumTitle
+                    };
+                    _context.Albums.Add(album);
+                    await _context.SaveChangesAsync();
+
+                    for (int i = 0; i < audioUploadModel.AudioFiles.Count; i++)
+                    {
+                        var audioFile = audioUploadModel.AudioFiles[i];
+                        var songTitle = audioUploadModel.SongTitles[i];
+
+                        if (audioFile == null || string.IsNullOrWhiteSpace(songTitle))
                         {
                             continue;
                         }
@@ -53,30 +64,15 @@ namespace Backend.Controllers
                             fileDuration = (float)audioFileReader.TotalTime.TotalSeconds;
                         }
 
-                        var uniquePhotoFileName = Guid.NewGuid().ToString() + "_" + audioUploadModel.PhotoFile.FileName;
-                        var photoFilePath = Path.Combine(_photoFilePath, uniquePhotoFileName);
-                        using (var photoStream = new FileStream(photoFilePath, FileMode.Create))
-                        {
-                            await audioUploadModel.PhotoFile.CopyToAsync(photoStream);
-                        }
-
                         var song = new Song
                         {
-                            Title = audioUploadModel.Title,
+                            Title = songTitle,
                             Artist = audioUploadModel.ArtistId,
                             AlbumTitle = audioUploadModel.AlbumTitle,
                             DateShared = DateOnly.FromDateTime(DateTime.Today),
                             Type = audioUploadModel.AudioFiles.Count == 1 ? "single" : (audioUploadModel.AudioFiles.Count >= 2 && audioUploadModel.AudioFiles.Count <= 5 ? "mini-album" : "album")
                         };
                         _context.Songs.Add(song);
-                        await _context.SaveChangesAsync();
-
-                        var album = new Album
-                        {
-                            User = audioUploadModel.ArtistId,
-                            Title = audioUploadModel.AlbumTitle
-                        };
-                        _context.Albums.Add(album);
                         await _context.SaveChangesAsync();
 
                         var albumSong = new AlbumSongs
@@ -93,6 +89,13 @@ namespace Backend.Controllers
                             Duration = fileDuration
                         };
                         _context.Audios.Add(audio);
+
+                        var uniquePhotoFileName = Guid.NewGuid().ToString() + "_" + audioUploadModel.PhotoFile.FileName;
+                        var photoFilePath = Path.Combine(_photoFilePath, uniquePhotoFileName);
+                        using (var photoStream = new FileStream(photoFilePath, FileMode.Create))
+                        {
+                            await audioUploadModel.PhotoFile.CopyToAsync(photoStream);
+                        }
 
                         var photo = new Photo
                         {
@@ -114,5 +117,6 @@ namespace Backend.Controllers
                 }
             }
         }
+
     }
 }

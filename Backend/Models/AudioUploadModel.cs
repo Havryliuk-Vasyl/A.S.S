@@ -7,7 +7,6 @@ namespace Backend.Models
     public class AudioUploadModel
     {
         public int ArtistId { get; set; }
-        public string Title { get; set; }
         public string AlbumTitle { get; set; }
         public List<IFormFile> AudioFiles { get; set; }
         public List<string> SongTitles { get; set; }
@@ -20,7 +19,6 @@ namespace Backend.Models
         public AudioUploadModel(int artistId, string title, string albumTitle, List<IFormFile> audioFiles, List<string> songTitles, IFormFile photoFile)
         {
             ArtistId = artistId;
-            Title = title;
             AlbumTitle = albumTitle;
             AudioFiles = audioFiles;
             SongTitles = songTitles;

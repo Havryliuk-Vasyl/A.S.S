@@ -149,7 +149,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     background: linear-gradient(to bottom, #4e3780, #222);
-    width: 100%; 
+    width: 100%;
     overflow-y: auto; 
     user-select: none;
     top: 0;

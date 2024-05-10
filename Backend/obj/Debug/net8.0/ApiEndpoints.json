@@ -1,5 +1,21 @@
 [
   {
+    "ContainingType": "Backend.Controllers.AlbumController",
+    "Method": "GetAlbumsByArtist",
+    "RelativePath": "Album/artist/{artistId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "artistId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Backend.Controllers.AudioController",
     "Method": "GetAudio",
     "RelativePath": "Audio/{id}",
@@ -193,11 +209,6 @@
       {
         "Name": "ArtistId",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "Title",
-        "Type": "System.String",
         "IsRequired": false
       },
       {
