@@ -11,6 +11,8 @@ namespace Backend.Models
         public string Title { get; set; }
         [Column("artist")]
         public int Artist { get; set; }
+        [Column("type")]
+        public string Type { get; set; }
         [Column("albumTitle")]
         public string AlbumTitle { get; set; }
         [Column("date_shared")]

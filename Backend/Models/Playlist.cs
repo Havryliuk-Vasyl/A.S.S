@@ -12,10 +12,6 @@ namespace Backend.Models
         public int User { get; set; }
         [Column("title")]
         public string Title { get; set; }
-
-        // Видаліть властивість PlaylistSongs
-
-        // Додайте властивість для зв'язку з піснями
         public ICollection<PlaylistSong> PlaylistSongs { get; set; }
     }
 

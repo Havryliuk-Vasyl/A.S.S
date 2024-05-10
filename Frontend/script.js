@@ -17,57 +17,57 @@ function closeCreatePlaylistModal() {
     modalCreatePlaylistModal.style.display = "none";
 }
 
-cancelButtonCreatePlaylistModal.onclick = function() {
-  closeCreatePlaylistModal();
+cancelButtonCreatePlaylistModal.onclick = function () {
+    closeCreatePlaylistModal();
 }
 
 // Код, який виконується при загрузці всього контенту на сторінці
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     let username = "";
     let userId;
     $.ajax({
-    type: "GET",
-    url: "https://localhost:7219/User/validateToken",
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('token')
-    },
-    success: function(response) {
-        console.log("User profile:", response);
+        type: "GET",
+        url: "https://localhost:7219/User/validateToken",
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        },
+        success: function (response) {
+            console.log("User profile:", response);
 
-        username = response.username;
-        userId = response.id;
+            username = response.username;
+            userId = response.id;
 
-        document.getElementById('userImage').src = "assets/images/icons/noimageuser.png";
-        $.ajax({
-            type: "GET",
-            url: "https://localhost:7219/User/avatar/" + userId,
-            success: function() {
-                document.getElementById('userImage').src = "https://localhost:7219/User/avatar/" + userId;
-            },
-            error: function(error) {
-                
-            }
-        });
+            document.getElementById('userImage').src = "assets/images/icons/noimageuser.png";
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7219/User/avatar/" + userId,
+                success: function () {
+                    document.getElementById('userImage').src = "https://localhost:7219/User/avatar/" + userId;
+                },
+                error: function (error) {
+
+                }
+            });
 
             renderUsersFunctionality(response);
             renderMain(response);
         },
-        error: function(error) {
+        error: function (error) {
             window.location.href = 'assets/pages/authorization.html';
         }
     });
 
-    function renderMain(user){
+    function renderMain(user) {
         renderPlaylistControl(user.id);
 
         const catalog = new Catalog(user.id);
         catalog.renderRecentSongs();
-    
+
         const player = new Player();
-        player.renderPlayer();    
+        player.renderPlayer();
     }
-    
-    function renderPlaylistControl(userId){
+
+    function renderPlaylistControl(userId) {
         const playlistsContainer = document.getElementById("playlistsInMain");
         playlistsContainer.innerHTML = ``;
         let playlistControl = document.createElement("div");
@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
         let createPlaylistBtn = document.createElement("div");
         createPlaylistBtn.classList.add("create-playlist-btn");
 
-        createPlaylistBtn.addEventListener("click", function(){
+        createPlaylistBtn.addEventListener("click", function () {
             openCreatePlaylistModal();
         });
 
@@ -86,11 +86,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
         createPlaylistBtn.appendChild(createPlaylistImg);
 
-        
+
         let openAllPlaylistsBtn = document.createElement("div");
         openAllPlaylistsBtn.classList.add("open-all-playlists-btn");
 
-        openAllPlaylistsBtn.addEventListener("click", function(){
+        openAllPlaylistsBtn.addEventListener("click", function () {
             playlist.renderCatalogOfUsersPlaylist(userId);
         });
 
@@ -108,15 +108,15 @@ document.addEventListener("DOMContentLoaded", function() {
         playlist.renderUserPlaylistsInQuikAccess(userId);
     }
 
-    document.getElementById("profile").addEventListener("click", function(){
+    document.getElementById("profile").addEventListener("click", function () {
         var userProfileURL = 'assets/pages/profile.html';
         window.location.href = userProfileURL;
     });
 
-    function renderUsersFunctionality(user){
-        if (user.status === "administrator"){
+    function renderUsersFunctionality(user) {
+        if (user.status === "administrator") {
             let navigationOnMenu = document.getElementById("navigation-on-menu");
-            
+
             let adminPanel = document.createElement("li");
             let linkOnAdminPanel = document.createElement("a");
             linkOnAdminPanel.id = "adminPanel";
@@ -130,26 +130,26 @@ document.addEventListener("DOMContentLoaded", function() {
 
             navigationOnMenu.appendChild(adminPanel);
         }
-        else if (user.status === "artist"){
+        else if (user.status === "artist") {
             let navigationOnMenu = document.getElementById("navigation-on-menu");
-            
+
             let artistPanel = document.createElement("li");
             let linkOnArtistPanel = document.createElement("a");
             linkOnArtistPanel.id = "artistPanel";
-            linkOnArtistPanel.innerText="Панель артиста";
-            linkOnArtistPanel.href = "assets/pages/uploadAudio.html";
+            linkOnArtistPanel.innerText = "Панель артиста";
+            linkOnArtistPanel.href = "assets/pages/artistPanel.html";
 
             artistPanel.appendChild(linkOnArtistPanel);
-            
+
             navigationOnMenu.appendChild(artistPanel);
         }
     }
 
-    okButtonCreatePlaylistModal.onclick = function() {
-        var title = inputDataCreatePlaylistModal.value; 
-      
+    okButtonCreatePlaylistModal.onclick = function () {
+        var title = inputDataCreatePlaylistModal.value;
+
         const playlist = new Playlist();
-      
+
         playlist.createPlaylist(userId, title);
 
         closeCreatePlaylistModal();

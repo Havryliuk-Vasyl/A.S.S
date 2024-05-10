@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.Metadata;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
@@ -8,16 +9,21 @@ namespace Backend.Models
         public int ArtistId { get; set; }
         public string Title { get; set; }
         public string AlbumTitle { get; set; }
-        public IFormFile AudioFile { get; set; }
+        public List<IFormFile> AudioFiles { get; set; }
+        public List<string> SongTitles { get; set; }
         public IFormFile PhotoFile { get; set; }
-        
-        public AudioUploadModel() { }
-        public AudioUploadModel(int id, string title, string albumTitle, IFormFile audioFile, IFormFile photoFile)
+        public AudioUploadModel() 
         {
-            ArtistId = id;
+            AudioFiles = new List<IFormFile>();
+            SongTitles = new List<string>();
+        }
+        public AudioUploadModel(int artistId, string title, string albumTitle, List<IFormFile> audioFiles, List<string> songTitles, IFormFile photoFile)
+        {
+            ArtistId = artistId;
             Title = title;
             AlbumTitle = albumTitle;
-            AudioFile = audioFile;
+            AudioFiles = audioFiles;
+            SongTitles = songTitles;
             PhotoFile = photoFile;
         }
     }
