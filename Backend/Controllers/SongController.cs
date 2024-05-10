@@ -60,8 +60,6 @@ namespace Backend.Controllers
             return response;
         }
 
-
-
         [HttpGet]
         public async Task<ActionResult<IEnumerable<object>>> GetAllSongs()
         {
@@ -83,6 +81,40 @@ namespace Backend.Controllers
                     {
                         song,
                         artist = user.Username,
+                        duration = audio.Duration,
+                        photo
+                    });
+                }
+            }
+
+            return response;
+        }
+
+        [HttpGet("user/{userId}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetSongsByUserId(int userId)
+        {
+            // Знайти всі пісні користувача за його id
+            var songs = await context.Songs.Where(s => s.Artist == userId).ToListAsync();
+
+            if (songs == null || songs.Count == 0)
+            {
+                return NotFound();
+            }
+
+            var response = new List<object>();
+            foreach (var song in songs)
+            {
+                var user = await context.Users.FirstOrDefaultAsync(u => u.Id == song.Artist);
+                var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == song.Id);
+                var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == song.Id);
+                if (user != null && audio != null && photo != null)
+                {
+                    response.Add(new
+                    {
+                        song.Id,
+                        song.Title,
+                        ArtistId = song.Artist,
+                        ArtistName = user.Username,
                         duration = audio.Duration,
                         photo
                     });
