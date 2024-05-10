@@ -17,6 +17,21 @@ namespace Backend.Controllers
             this.context = context;
         }
 
+        [HttpGet("artist/{artistId}")]
+        public async Task<IActionResult> GetAlbumsByArtist(int artistId)
+        {
+            try
+            {
+                var albums = await context.Albums
+                    .Where(a => a.User == artistId)
+                    .ToListAsync();
 
+                return Ok(albums);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
 }
