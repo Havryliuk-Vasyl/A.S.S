@@ -1,19 +1,20 @@
-.my-playlists {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 20px;
-}
 
-.playlist {
-    flex: 0 0 auto;
-    width: auto;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    padding-bottom: 0.5em;
-    align-content: center;
+
+.playlists {
+    width: max-content;
+    height: 53vh;
+    overflow-y: auto;
+    flex-direction: column;
+    display: flex;
+    gap: 20px;
+    background-color:rgb(29, 29, 29);
+    border-radius: 1em;
+    flex-direction: column;
+    margin-bottom: 1em;
+    align-items: center;
+    text-align: center;
+    padding: 0.3em;
+    z-index: 1; /* Додано для розташування поверх плеєра */
 }
 
 .playlist-photo {
@@ -34,29 +35,32 @@
     border-radius: 0.3em;
 }
 
-.playlist-in-display-field{
+.playlist-in-display-field {
     background-color: rgb(29, 29, 29);
     border-radius: 1em;
     height: fit-content;
     align-content: center;
 }
 
-.playlist-in-display-field .playlist-name{
+.playlist-in-display-field .playlist-name {
     padding: 1em;
     width: fit-content;
 }
 
 .playlist-catalog {
-    display: flex; /* Задаємо розміщення елементів у рядок */
-    flex-wrap: wrap; /* Забезпечуємо перенесення елементів на новий рядок при необхідності */
-    justify-content: space-between; /* Рівномірно розподіляємо простір між елементами */
-    align-items: center; /* Вирівнюємо елементи по вертикалі по центру */
-  }
-  
-  /* Додаткові стилі для кожного елемента */
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 0.5em;
+    padding: 10px;
+}
+
 .playlist-catalog .playlist-item {
-    /* Додайте стилі відповідно до потреб вашого дизайну */
-    /* Наприклад: */
-    width: calc(25% - 10px); /* Ширина елемента з урахуванням проміжку між елементами */
-    margin: 5px; /* Проміжок між елементами */
-}  
+    flex: 0 0 auto;
+    width: calc(25% - 20px);
+    margin-right: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
