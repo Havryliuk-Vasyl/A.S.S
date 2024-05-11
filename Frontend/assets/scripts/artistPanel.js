@@ -39,19 +39,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderArtistAlbums(albumsObj) {
         const displayField = document.getElementById("displayField");
-    
+
         displayField.innerHTML = '';
-    
+
         const albums = albumsObj.$values;
-    
+
         if (!Array.isArray(albums) || albums.length === 0) {
             displayField.textContent = 'Немає доступних альбомів';
             return;
         }
-    
+
         const table = document.createElement('table');
         table.classList.add('albums-table');
-    
+
         const headerRow = document.createElement('tr');
         const idHeader = document.createElement('th');
         idHeader.textContent = 'ID';
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         titleHeader.textContent = 'Назва';
         headerRow.appendChild(titleHeader);
         table.appendChild(headerRow);
-    
+
         albums.forEach(album => {
             const row = document.createElement('tr');
             const idCell = document.createElement('td');
@@ -71,12 +71,12 @@ document.addEventListener("DOMContentLoaded", function () {
             row.appendChild(titleCell);
             table.appendChild(row);
         });
-    
+
         displayField.appendChild(table);
     }
-    
-    
-    document.getElementById("showAllDiscography").addEventListener("click", async function(){
+
+
+    document.getElementById("showAllDiscography").addEventListener("click", async function () {
         try {
             const albums = await getArtistAlbums();
             renderArtistAlbums(albums);
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Error while fetching artist albums!");
         }
     });
-    
+
 
     document.getElementById("uploadNewSongs").addEventListener("click", function () {
         renderUpload();
@@ -153,9 +153,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Створення прихованого поля для збереження вибраного файлу
                     var selectedAudioFileInput = document.createElement('input');
-                    selectedAudioFileInput.type = 'hidden';
+                    selectedAudioFileInput.type = 'file';
+                    selectedAudioFileInput.style.display = 'none';
                     selectedAudioFileInput.name = 'selectedAudioFile';
-                    selectedAudioFileInput.value = targetInput.files[0].name;
+                    selectedAudioFileInput.files = targetInput.files; 
+
+
+                    console.log(selectedAudioFileInput);
 
                     // Створення текстового поля для введення назви пісні
                     var songTitleInput = document.createElement('input');
@@ -180,7 +184,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     choosenSongFileContainer.appendChild(songTitleInput);
                     choosenSongFileContainer.appendChild(deleteButton);
 
-                    section2Container.parentNode.insertBefore(choosenSongFileContainer, section2Container.nextSibling);
+                    section2Container.appendChild(choosenSongFileContainer, section2Container.nextSibling);
                 }
             }
         });
@@ -191,26 +195,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function uploadAudio() {
-        var title = document.getElementById('title').value; // Отримання назви релізу
+        var title = document.getElementById('title').value;
         var photoFile = document.getElementById('photoFile').files[0];
-        var audioFiles = document.getElementById('audioFile').files; // Отримання аудіофайлів
-        console.log(audioFiles);
-
+        var hiddenInputs = document.querySelectorAll('input[type="file"][name="selectedAudioFile"]');
+    
         var formData = new FormData();
         formData.append('ArtistId', artistId);
-        formData.append('AlbumTitle', title); // Додавання назви релізу до formData
+        formData.append('AlbumTitle', title);
         formData.append('PhotoFile', photoFile, photoFile.name);
-
-        // Додавання аудіофайлів та їх назв до formData
-        for (var i = 0; i < audioFiles.length; i++) {
-            var audioFile = audioFiles[i];
-            var songTitle = document.getElementById('songTitle' + (i + 1)).value; // Отримання назви пісні
-            console.log(audioFile);
-            console.log(songTitle);
+    
+        hiddenInputs.forEach(function(input, index) {
+            var audioFile = input.files[0];
+            var songTitle = document.getElementById('songTitle' + (index + 1)).value; 
+    
             formData.append('AudioFiles', audioFile);
             formData.append('SongTitles[]', songTitle);
-        }
-
+        });
+    
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://localhost:7219/Upload/upload', true);
         xhr.onload = function () {
@@ -222,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
         xhr.send(formData);
     }
-
+    
 
     function getArtistSongs() {
 

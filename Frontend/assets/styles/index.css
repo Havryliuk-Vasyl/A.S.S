@@ -7,7 +7,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-box-sizing: border-box;
 }
 
 body {
@@ -16,6 +15,7 @@ body {
     color: #fff;
     margin: 0;
     padding: 1em;
+    padding-bottom: 0;
     display: flex;
     flex-direction: column;
 }
@@ -27,17 +27,19 @@ html, body {
 .main {
     display: flex;
     flex-direction: row;
-    min-height: 100vh; 
+    max-height: 80vh; 
+    overflow: hidden;
 }
 
-.right-section{
+.right-section {
     border-radius: 1em;
     padding: 0.5em;
     padding-top: 0;
+    width: fit-content;
 }
 
 .menu {
-    background-color:rgb(29, 29, 29);
+    background-color: rgb(29, 29, 29);
     border-radius: 1em;
     min-width: auto;
     max-width: 15em;
@@ -64,7 +66,7 @@ html, body {
     display: inline-block;
 }
 
-.menu img{
+.menu img {
     border-radius: 50%;
     color: #fff;
     text-decoration: none;
@@ -72,10 +74,9 @@ html, body {
     height: 3em;
 }
 
-a{
+a {
     color: #fff;
-    text-decoration: none
-    
+    text-decoration: none;
 }
 
 .menu ul li a:hover {
@@ -93,7 +94,7 @@ button {
     margin: 1em;
     width: auto;
     padding: 10px;
-    background-color: #6a5acd;;
+    background-color: #6a5acd;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -104,16 +105,20 @@ button:hover {
     background-color: #0056b3;
 }
 
-.playlists{
-    background-color:rgb(29, 29, 29);
-    border-radius: 1em;
-    min-width: auto;
-    max-width: 15em;
-    height: fit-content;
-    margin-bottom: 1em;
-    align-items: center;
-    text-align: center;
-    padding: 0.3em;
+/* Стилі зони прокрутки */
+*::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Стилі для ползунка зони прокрутки */
+*::-webkit-scrollbar-thumb {
+    background-color: rgb(96, 96, 96);
+    border-radius: 5px; 
+}
+
+/* Стилі для треку (фону) зони прокрутки */
+*::-webkit-scrollbar-track {
+    background-color: transparent;
 }
 
 .playlist-control-btn {
@@ -123,12 +128,12 @@ button:hover {
 }
 
 .create-playlist-btn,
-.open-all-playlists-btn{
+.open-all-playlists-btn {
     width: auto;
     height: auto;
 }
 
-.playlist-control-img:hover{
+.playlist-control-img:hover {
     cursor: pointer;
     background-color: gray;
 }
@@ -152,12 +157,9 @@ button:hover {
     width: 100%;
     overflow-y: auto; 
     user-select: none;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
     border-radius: 1em;
     padding: 1em;
+    flex: 1; /* Додано для розтягнення вмісту */
 }
 
 /* Стилі для модального вікна для створення плейлиста */
@@ -171,7 +173,7 @@ button:hover {
     width: 100%;
     height: 100%; 
     overflow: auto; 
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 }
   
 .create-playlist-modal-content {
@@ -196,7 +198,7 @@ button:hover {
     cursor: pointer;
 }
   
-input[type="text"]{
+input[type="text"] {
     width: 90%;
     padding: 10px;
     margin-bottom: 15px;
