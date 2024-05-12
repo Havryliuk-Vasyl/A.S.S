@@ -33,5 +33,24 @@ namespace Backend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
             }
         }
+
+        [HttpGet("photo/{albumId}")]
+        public async Task<IActionResult> GetSongPhoto(int albumId)
+        {
+            var photo = await context.AlbumPhotos.FirstOrDefaultAsync(a => a.Album == albumId);
+            if (photo == null)
+            {
+                return NotFound();
+            }
+
+            if (!System.IO.File.Exists(photo.FilePath))
+            {
+                return NotFound();
+            }
+
+            byte[] photoBytes = System.IO.File.ReadAllBytes(photo.FilePath);
+
+            return File(photoBytes, "image/jpeg");
+        }
     }
 }

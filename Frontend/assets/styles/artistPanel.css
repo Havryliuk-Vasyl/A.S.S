@@ -168,3 +168,35 @@ button{
     margin: 1em;
     margin-left: 0;
 }
+
+
+/* Стилі для виводу альбомів */
+
+.albums-container {
+    display: flex;
+    flex-direction: row;
+    height: fit-content;
+    flex-wrap: wrap;
+}
+
+.album {
+    background-color: #333;
+    color: #fff;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em;
+}
+
+.album-photo {
+    font-weight: bold;
+}
+
+.album-photo img{
+    border-radius: 0.5em;
+    width: 10em;
+    height: 10em;
+}
+
+.album-title {
+    margin-top: 0.5em;
+}

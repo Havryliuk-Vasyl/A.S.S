@@ -163,6 +163,7 @@ class Catalog {
                 songsContainer.appendChild(songElement);
             });
 
+            document.getElementById("displayField").innerHTML = ``;
             document.getElementById("displayField").appendChild(songsContainer);
         } catch (error) {
             console.error("Помилка під час відображення пісень:", error);

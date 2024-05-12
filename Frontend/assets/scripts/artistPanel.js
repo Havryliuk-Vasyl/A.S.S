@@ -39,42 +39,40 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function renderArtistAlbums(albumsObj) {
         const displayField = document.getElementById("displayField");
-
         displayField.innerHTML = '';
-
+    
         const albums = albumsObj.$values;
-
+    
         if (!Array.isArray(albums) || albums.length === 0) {
             displayField.textContent = 'Немає доступних альбомів';
             return;
         }
-
-        const table = document.createElement('table');
-        table.classList.add('albums-table');
-
-        const headerRow = document.createElement('tr');
-        const idHeader = document.createElement('th');
-        idHeader.textContent = 'ID';
-        headerRow.appendChild(idHeader);
-        const titleHeader = document.createElement('th');
-        titleHeader.textContent = 'Назва';
-        headerRow.appendChild(titleHeader);
-        table.appendChild(headerRow);
-
+    
+        const albumsContainer = document.createElement('div');
+        albumsContainer.classList.add('albums-container');
+    
         albums.forEach(album => {
-            const row = document.createElement('tr');
-            const idCell = document.createElement('td');
-            idCell.textContent = album.id;
-            row.appendChild(idCell);
-            const titleCell = document.createElement('td');
-            titleCell.textContent = album.title;
-            row.appendChild(titleCell);
-            table.appendChild(row);
+            console.log(album);
+            const albumDiv = document.createElement('div');
+            albumDiv.classList.add('album');
+    
+            const photoDiv = document.createElement('div');
+            photoDiv.classList.add('album-photo');
+            const image = document.createElement('img');
+            image.src = "https://localhost:7219/Album/photo/" + album.id;
+            photoDiv.appendChild(image);
+            albumDiv.appendChild(photoDiv);
+    
+            const titleDiv = document.createElement('div');
+            titleDiv.classList.add('album-title');
+            titleDiv.textContent = album.title;
+            albumDiv.appendChild(titleDiv);
+    
+            albumsContainer.appendChild(albumDiv);
         });
-
-        displayField.appendChild(table);
-    }
-
+    
+        displayField.appendChild(albumsContainer);
+    }    
 
     document.getElementById("showAllDiscography").addEventListener("click", async function () {
         try {

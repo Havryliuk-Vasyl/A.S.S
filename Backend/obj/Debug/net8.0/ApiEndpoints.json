@@ -16,6 +16,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "Backend.Controllers.AlbumController",
+    "Method": "GetSongPhoto",
+    "RelativePath": "Album/photo/{albumId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "albumId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Backend.Controllers.AudioController",
     "Method": "GetAudio",
     "RelativePath": "Audio/{id}",
