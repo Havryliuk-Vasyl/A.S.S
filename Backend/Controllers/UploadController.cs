@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Backend.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
@@ -40,6 +41,27 @@ namespace Backend.Controllers
                     };
                     _context.Albums.Add(album);
                     await _context.SaveChangesAsync();
+
+                    var albumForPhoto = await _context.Albums.Where(a => a.User == audioUploadModel.ArtistId)
+                        .Where(a => a.Title == audioUploadModel.AlbumTitle)
+                        .FirstAsync();
+
+                    var uniqueAlbumPhotoFileName = Guid.NewGuid().ToString() + "_" + audioUploadModel.PhotoFile.FileName;
+                    var photoAlbumFilePath = Path.Combine(_photoFilePath, uniqueAlbumPhotoFileName);
+                    using (var photoStream = new FileStream(photoAlbumFilePath, FileMode.Create))
+                    {
+                        await audioUploadModel.PhotoFile.CopyToAsync(photoStream);
+                    }
+
+                    var photoAlbum = new AlbumPhoto
+                    {
+                        Album = albumForPhoto.Id,
+                        FilePath = photoAlbumFilePath
+                    };
+                    _context.AlbumPhotos.Add(photoAlbum);
+
+                    await _context.SaveChangesAsync(); 
+
 
                     for (int i = 0; i < audioUploadModel.AudioFiles.Count; i++)
                     {

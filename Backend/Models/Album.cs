@@ -27,4 +27,27 @@ namespace Backend.Models
         public Album Album { get; set; }
         public Song Song { get; set; }
     }
+
+    [Table("album_photos")]
+    public class AlbumPhoto
+    {
+        [Column("id")]
+        public int Id { get; set; }
+        [Column("album")]
+        public int Album { get; set; }
+        [Column("file_path")]
+        public string FilePath { get; set; }
+
+        public AlbumPhoto()
+        {
+
+        }
+
+        public AlbumPhoto(int id, int album, string file_path)
+        {
+            this.Id = id;
+            this.Album = album;
+            this.FilePath = file_path;
+        }
+    }
 }

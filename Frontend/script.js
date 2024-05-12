@@ -57,6 +57,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    document.getElementById("catalogBtn").addEventListener("click", function(){
+        const catalog = new Catalog(userId);    
+        catalog.renderRecentSongs();
+    });
+
     function renderMain(user) {
         renderPlaylistControl(user.id);
 
