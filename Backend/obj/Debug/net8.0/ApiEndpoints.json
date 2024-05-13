@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "Backend.Controllers.AlbumController",
+    "Method": "GetAlbumByAlbumId",
+    "RelativePath": "Album/album/{albumId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "albumId",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Backend.Controllers.AlbumController",
     "Method": "GetAlbumsByArtist",
     "RelativePath": "Album/artist/{artistId}",
     "HttpMethod": "GET",

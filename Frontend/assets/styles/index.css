@@ -27,7 +27,7 @@ html, body {
 .main {
     display: flex;
     flex-direction: row;
-    max-height: 80vh; 
+    height: 100%;
     overflow: hidden;
 }
 
@@ -35,7 +35,7 @@ html, body {
     border-radius: 1em;
     padding: 0.5em;
     padding-top: 0;
-    width: fit-content;
+    max-width: 20%;
 }
 
 .menu {
@@ -154,7 +154,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     background: linear-gradient(to bottom, #4e3780, #222);
-    width: 100%;
+    width: 80%;
     overflow-y: auto; 
     user-select: none;
     border-radius: 1em;

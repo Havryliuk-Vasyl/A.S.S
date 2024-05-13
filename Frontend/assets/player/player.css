@@ -9,8 +9,7 @@
     width: 100%;
     overflow: hidden;
     z-index: 999;
-    padding-bottom: 0.5em;
-    position: fixed; /* Змінено на фіксоване розташування */
+    padding-bottom: 2em;
 }
 
 .audio-player {

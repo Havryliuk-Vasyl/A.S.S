@@ -1,20 +1,14 @@
-
-
 .playlists {
-    width: max-content;
-    height: 53vh;
-    overflow-y: auto;
+    width: auto;
+    height: 55%;
     flex-direction: column;
     display: flex;
-    gap: 20px;
+    overflow-y: scroll;
     background-color:rgb(29, 29, 29);
     border-radius: 1em;
     flex-direction: column;
-    margin-bottom: 1em;
     align-items: center;
     text-align: center;
-    padding: 0.3em;
-    z-index: 1; /* Додано для розташування поверх плеєра */
 }
 
 .playlist-photo {
@@ -50,17 +44,8 @@
 .playlist-catalog {
     display: flex;
     flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 0.5em;
-    padding: 10px;
 }
 
-.playlist-catalog .playlist-item {
-    flex: 0 0 auto;
-    width: calc(25% - 20px);
-    margin-right: 20px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+.playlist-item{
+    margin-bottom: 0.5em;
 }

@@ -37,6 +37,19 @@ namespace Backend.Models
                 .WithMany()
                 .HasForeignKey(ps => ps.SongId);
 
+            modelBuilder.Entity<AlbumSongs>()
+            .HasKey(als => new { als.AlbumId, als.SongId });
+
+            modelBuilder.Entity<AlbumSongs>()
+                .HasOne(als => als.Album)
+                .WithMany(a => a.AlbumSongs)
+                .HasForeignKey(als => als.AlbumId);
+
+            modelBuilder.Entity<AlbumSongs>()
+                .HasOne(als => als.Song)
+                .WithMany()
+                .HasForeignKey(als => als.SongId);
+
             base.OnModelCreating(modelBuilder);
         }
     }

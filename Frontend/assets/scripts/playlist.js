@@ -85,7 +85,6 @@ class Playlist {
     
             console.log(playlistData);
 
-            // Ітеруємося по піснях зі списку
             playlistData.songs.$values.forEach(item => {
                 const songDiv = document.createElement("div");
                 songDiv.classList.add("catalog-song");
