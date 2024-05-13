@@ -34,6 +34,30 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet("album/{albumId}")]
+        public async Task<IActionResult> GetAlbumByAlbumId(int albumId)
+        {
+            try
+            {
+                var album = await context.Albums
+                    .Include(a => a.AlbumSongs)
+                    .ThenInclude(als => als.Song)
+                    .FirstOrDefaultAsync(a => a.Id == albumId);
+
+                if (album == null)
+                {
+                    return BadRequest();
+                }
+
+
+                return Ok(album);
+            }
+            catch(Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpGet("photo/{albumId}")]
         public async Task<IActionResult> GetSongPhoto(int albumId)
         {

@@ -40,39 +40,118 @@ document.addEventListener("DOMContentLoaded", function () {
     function renderArtistAlbums(albumsObj) {
         const displayField = document.getElementById("displayField");
         displayField.innerHTML = '';
-    
+
         const albums = albumsObj.$values;
-    
+
         if (!Array.isArray(albums) || albums.length === 0) {
             displayField.textContent = 'Немає доступних альбомів';
             return;
         }
-    
+
         const albumsContainer = document.createElement('div');
         albumsContainer.classList.add('albums-container');
-    
+
         albums.forEach(album => {
             console.log(album);
             const albumDiv = document.createElement('div');
             albumDiv.classList.add('album');
-    
+
             const photoDiv = document.createElement('div');
             photoDiv.classList.add('album-photo');
             const image = document.createElement('img');
             image.src = "https://localhost:7219/Album/photo/" + album.id;
             photoDiv.appendChild(image);
             albumDiv.appendChild(photoDiv);
-    
+
             const titleDiv = document.createElement('div');
             titleDiv.classList.add('album-title');
             titleDiv.textContent = album.title;
             albumDiv.appendChild(titleDiv);
-    
+
+            albumDiv.addEventListener("click", function () {
+                renderArtistAlbum(album.id);
+            });
+
             albumsContainer.appendChild(albumDiv);
         });
-    
+
         displayField.appendChild(albumsContainer);
-    }    
+    }
+
+    async function getArtistAlbum(albumID) {
+        try {
+            const response = await fetch(`https://localhost:7219/Album/album/` + albumID);
+            if (!response.ok) {
+                throw new Error("Помилка при отриманні списку плейлистів користувача");
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+
+    async function renderArtistAlbum(albumID) {
+        const displayField = document.getElementById("displayField");
+        displayField.innerHTML = '';
+    
+        try {
+            const albumDiv = document.createElement("div");
+            albumDiv.classList.add("album-in-display-field");
+
+            const album = await getArtistAlbum(albumID);
+    
+            const albumInfo= document.createElement("div");
+            albumInfo.classList.add("albumInfo");
+
+            const albumTitle = document.createElement('h2');
+            albumTitle.textContent = album.title;
+            albumInfo.appendChild(albumTitle);
+    
+            const albumPhoto = document.createElement('img');
+            albumPhoto.src = "https://localhost:7219/Album/photo/" + album.id;
+            albumInfo.appendChild(albumPhoto);
+    
+            const songsList = document.createElement('div');
+            album.albumSongs.$values.forEach(item => {
+                const songDiv = document.createElement("div");
+                songDiv.classList.add("catalog-song");
+    
+                const songInformationDiv = document.createElement("div");
+                songInformationDiv.classList.add("catalog-song-information");
+    
+                const songPhotoDiv = document.createElement("div");
+                songPhotoDiv.classList.add("catalog-song-photo");
+                const songPhotoImg = document.createElement("img");
+                songPhotoImg.src = "https://localhost:7219/Song/photo/" + item.song.id; 
+                songPhotoImg.alt = "Photo";
+                songPhotoImg.style.maxWidth = "50px";
+                songPhotoImg.style.maxHeight = "50px";
+                songPhotoImg.style.width = "100%";
+                songPhotoImg.style.height = "100%";
+                songPhotoDiv.appendChild(songPhotoImg);
+    
+                const songNameDiv = document.createElement("div");
+                songNameDiv.classList.add("catalog-song-name");
+                songNameDiv.textContent = item.song.title;
+
+                songInformationDiv.appendChild(songPhotoDiv);
+                songInformationDiv.appendChild(songNameDiv);
+                songDiv.appendChild(songInformationDiv);
+    
+                songsList.appendChild(songDiv);
+            });
+
+            albumDiv.appendChild(albumInfo);
+            albumDiv.appendChild(songsList)
+
+            displayField.appendChild(albumDiv);
+        } catch (error) {
+            console.error(error);
+            alert("Error while rendering artist album!");
+        }
+    }
 
     document.getElementById("showAllDiscography").addEventListener("click", async function () {
         try {
@@ -154,7 +233,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     selectedAudioFileInput.type = 'file';
                     selectedAudioFileInput.style.display = 'none';
                     selectedAudioFileInput.name = 'selectedAudioFile';
-                    selectedAudioFileInput.files = targetInput.files; 
+                    selectedAudioFileInput.files = targetInput.files;
 
 
                     console.log(selectedAudioFileInput);
@@ -196,20 +275,20 @@ document.addEventListener("DOMContentLoaded", function () {
         var title = document.getElementById('title').value;
         var photoFile = document.getElementById('photoFile').files[0];
         var hiddenInputs = document.querySelectorAll('input[type="file"][name="selectedAudioFile"]');
-    
+
         var formData = new FormData();
         formData.append('ArtistId', artistId);
         formData.append('AlbumTitle', title);
         formData.append('PhotoFile', photoFile, photoFile.name);
-    
-        hiddenInputs.forEach(function(input, index) {
+
+        hiddenInputs.forEach(function (input, index) {
             var audioFile = input.files[0];
-            var songTitle = document.getElementById('songTitle' + (index + 1)).value; 
-    
+            var songTitle = document.getElementById('songTitle' + (index + 1)).value;
+
             formData.append('AudioFiles', audioFile);
             formData.append('SongTitles[]', songTitle);
         });
-    
+
         var xhr = new XMLHttpRequest();
         xhr.open('POST', 'https://localhost:7219/Upload/upload', true);
         xhr.onload = function () {
@@ -220,15 +299,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
         xhr.send(formData);
-    }
-    
-
-    function getArtistSongs() {
-
-    }
-
-    function renderArtistSongs() {
-
     }
 
     function renderUploadFunctionality() {
