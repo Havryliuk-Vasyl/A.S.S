@@ -78,8 +78,12 @@
       "DocumentGroups": [
         {
           "DockedWidth": 212,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
@@ -102,8 +106,7 @@
               "RelativeToolTip": "Models\\ApplicationDbContext.cs",
               "ViewState": "AQIAABAAAAAAAAAAAAA2wDIAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-08T12:41:44.248Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-08T12:41:44.248Z"
             },
             {
               "$type": "Document",
@@ -113,7 +116,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\A.S.S\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAWwDQAAAAAAAAA",
+              "ViewState": "AQIAABsAAAAAAAAAAAAWwCkAAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-08T12:07:19.723Z",
               "EditorCaption": ""
@@ -188,8 +191,7 @@
               "RelativeToolTip": "Controllers\\PlaylistController.cs",
               "ViewState": "AQIAAFwAAAAAAAAAAAAAwJYAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T14:02:25.029Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-29T14:02:25.029Z"
             },
             {
               "$type": "Document",
@@ -225,8 +227,7 @@
               "RelativeToolTip": "Controllers\\AlbumController.cs",
               "ViewState": "AQIAAB4AAAAAAAAAAAAYwCsAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T14:40:40.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T14:40:40.391Z"
             },
             {
               "$type": "Document",
@@ -238,8 +239,7 @@
               "RelativeToolTip": "Models\\Album.cs",
               "ViewState": "AQIAABcAAAAAAAAAAAA5wCMAAAAZAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T14:42:07.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T14:42:07.802Z"
             },
             {
               "$type": "Document",
