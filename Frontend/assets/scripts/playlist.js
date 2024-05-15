@@ -45,6 +45,8 @@ class Playlist {
 
     async renderUserPlaylistsInQuikAccess(userId) {
         const playlistsContainer = document.getElementById("playlistsInMain");
+        const playlistList = document.createElement("div");
+        playlistList.classList.add("playlist-list");
         try {
             const playlists = await this.getUserPlaylists(userId);
             playlists.$values.forEach(playlist => {
@@ -59,8 +61,9 @@ class Playlist {
                 playlistElement.addEventListener("click", () => {
                     this.renderSelectedPlaylist(playlist.id);
                 });
-                playlistsContainer.appendChild(playlistElement);
+                playlistList.appendChild(playlistElement);
             });
+            playlistsContainer.appendChild(playlistList);
         } catch (error) {
             console.error(error);
         }
@@ -215,7 +218,7 @@ class Playlist {
     
             playlists.$values.forEach(playlist => {
                 const playlistElement = document.createElement("div");
-                playlistElement.classList.add("playlist");
+                playlistElement.classList.add("playlist-in-catalog");
                 playlistElement.innerHTML = `
                     <!-- <div class="playlist-photo"></div> -->
                     <div class="playlist-name">${playlist.title}</div>
