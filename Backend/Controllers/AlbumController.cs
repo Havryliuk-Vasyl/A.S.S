@@ -91,8 +91,8 @@ namespace Backend.Controllers
 
                 var albumSongs = await context.AlbumSongs.Where(als => als.AlbumId == albumId).Select(als => als.SongId).ToListAsync();
                 var albumPhotos = await context.AlbumPhotos.Where(ap => ap.Album == albumId).Select(ap => ap.FilePath).ToListAsync();
-
                 var audioFiles = await context.Audios.Where(a => albumSongs.Contains(a.Song)).ToListAsync();
+                var songPhotos = await context.Photos.Where(p => albumSongs.Contains(p.SongId)).ToListAsync();
 
                 foreach (var audioFile in audioFiles)
                 {
@@ -101,6 +101,10 @@ namespace Backend.Controllers
                 foreach (var albumPhotoPath in albumPhotos)
                 {
                     System.IO.File.Delete(albumPhotoPath);
+                }
+                foreach (var songPhotoPath in songPhotos)
+                {
+                    System.IO.File.Delete(songPhotoPath.FilePath);
                 }
 
                 context.AlbumSongs.RemoveRange(context.AlbumSongs.Where(als => als.AlbumId == albumId));

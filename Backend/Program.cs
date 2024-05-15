@@ -7,11 +7,22 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 100000000000; 
+});
+
+builder.WebHost.UseKestrel(options =>
+{
+    options.Limits.MaxRequestBodySize = 100000000000; // Приблизно 100 гігабайт
+});
+
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
     });
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -25,11 +36,6 @@ catch (Exception ex)
 {
 
 }
-
-builder.Services.Configure<FormOptions>(options =>
-{
-    options.MultipartBodyLengthLimit = 100000000;
-});
 
 WebApplication app = builder.Build();
 

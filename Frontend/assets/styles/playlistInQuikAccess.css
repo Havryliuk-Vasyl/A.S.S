@@ -14,10 +14,10 @@
     padding: 1em;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     overflow-y: scroll;
     width: 100%;
+    height: max-content;
 }
 
 .playlist-photo {
@@ -36,13 +36,17 @@
     cursor: pointer;
     background-color: #222;
     border-radius: 0.3em;
+    width: 100%;
 }
 
 .playlist-in-display-field {
     background-color: rgb(29, 29, 29);
     border-radius: 1em;
     height: fit-content;
+    justify-content: center;
+    text-align: center;
     align-content: center;
+    width: 60%;
 }
 
 .playlist-in-display-field .playlist-name {
@@ -58,8 +62,32 @@
 
 .playlist-item{
     margin-bottom: 0.5em;
+    width: 98%;
 }
 
 .playlist-in-catalog{
     
+}
+
+/* Playlist Control */
+
+.playlist-control{
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: right;
+}
+
+.delete-playlist{
+    background-color: red;
+    color: black;
+    width: fit-content;
+    height: auto;
+    padding: 0.5em;
+    border-radius: 0.2em;
+}
+
+.delete-playlist:hover{
+    background-color:rgb(144, 0, 0);
+    cursor: pointer;
 }
