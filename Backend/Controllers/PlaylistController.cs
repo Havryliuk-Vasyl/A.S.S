@@ -144,7 +144,58 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpDelete("{playlistId}/RemoveSong/{songId}")]
+        public async Task<ActionResult> RemoveSongFromPlaylist(int playlistId, int songId)
+        {
+            try
+            {
+                var playlist = await context.Playlists.FirstOrDefaultAsync(p => p.Id == playlistId);
 
+                if (playlist == null)
+                {
+                    return NotFound($"Playlist with id {playlistId} not found.");
+                }
+
+                var playlistSong = await context.PlaylistSongs.FirstOrDefaultAsync(ps => ps.PlaylistId == playlistId && ps.SongId == songId);
+
+                if (playlistSong == null)
+                {
+                    return NotFound($"Song with id {songId} not found in playlist with id {playlistId}.");
+                }
+
+                context.PlaylistSongs.Remove(playlistSong);
+                await context.SaveChangesAsync();
+
+                return Ok($"Song with id {songId} removed from playlist with id {playlistId} successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error removing song from playlist: {ex.Message}");
+            }
+        }
+
+        [HttpDelete("{playlistId}")]
+        public async Task<ActionResult> DeletePlaylist(int playlistId)
+        {
+            try
+            {
+                var playlist = await context.Playlists.FirstOrDefaultAsync(p => p.Id == playlistId);
+
+                if (playlist == null)
+                {
+                    return NotFound($"Playlist with id {playlistId} not found.");
+                }
+
+                context.Playlists.Remove(playlist);
+                await context.SaveChangesAsync();
+
+                return Ok($"Playlist with id {playlistId} deleted successfully.");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error deleting playlist: {ex.Message}");
+            }
+        }
 
     }
 }

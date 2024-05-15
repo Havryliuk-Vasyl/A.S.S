@@ -153,6 +153,7 @@ button:hover {
     padding-left: 1em;
     display: flex;
     flex-direction: row;
+    justify-content: center;
     background: linear-gradient(to bottom, #4e3780, #222);
     width: 80%;
     overflow-y: auto; 
