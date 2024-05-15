@@ -76,5 +76,47 @@ namespace Backend.Controllers
 
             return File(photoBytes, "image/jpeg");
         }
+
+        [HttpDelete("{albumId}")]
+        public async Task<IActionResult> DeleteAlbum(int albumId)
+        {
+            try
+            {
+                var album = await context.Albums.FindAsync(albumId);
+
+                if (album == null)
+                {
+                    return NotFound();
+                }
+
+                var albumSongs = await context.AlbumSongs.Where(als => als.AlbumId == albumId).Select(als => als.SongId).ToListAsync();
+                var albumPhotos = await context.AlbumPhotos.Where(ap => ap.Album == albumId).Select(ap => ap.FilePath).ToListAsync();
+
+                var audioFiles = await context.Audios.Where(a => albumSongs.Contains(a.Song)).ToListAsync();
+
+                foreach (var audioFile in audioFiles)
+                {
+                    System.IO.File.Delete(audioFile.FilePath);
+                }
+                foreach (var albumPhotoPath in albumPhotos)
+                {
+                    System.IO.File.Delete(albumPhotoPath);
+                }
+
+                context.AlbumSongs.RemoveRange(context.AlbumSongs.Where(als => als.AlbumId == albumId));
+                context.AlbumPhotos.RemoveRange(context.AlbumPhotos.Where(ap => ap.Album == albumId));
+                context.Audios.RemoveRange(audioFiles);
+                context.Albums.Remove(album);
+
+                await context.SaveChangesAsync();
+
+                return NoContent(); 
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
     }
 }

@@ -108,14 +108,14 @@ input[type="button"] {
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
-    background-color: #333;
+    background-color: rgb(29, 29, 29);
     color: #fff;
 }
 
 input[type="file"] {
     padding: 10px;
     border-radius: 5px;
-    background-color: #333;
+    background-color: rgb(29, 29, 29);
     font-size: 16px;
     transition: border-color 0.3s ease;
 }
@@ -164,7 +164,7 @@ button{
     border: 0.1em solid black;
     border-radius: 1em;
     padding: 0.5em;
-    background-color: #333;
+    background-color: rgb(29, 29, 29);
     margin: 1em;
     margin-left: 0;
 }
@@ -180,7 +180,7 @@ button{
 }
 
 .album {
-    background-color: #333;
+    background-color: rgb(29, 29, 29);
     color: #fff;
     border-radius: 1em;
     padding: 1em;
@@ -208,7 +208,23 @@ button{
 
 /* Стилі для вибраного альбому */
 
-.catalog-song {
+.album-in-display-field{
+    background-color: rgb(29, 29, 29);
+    width: max-content;
+    height: max-content;
+    padding: 1em;
+    border-radius: 1em;
+    align-items: center;
+    text-align: center;
+}
+
+.albumInfo img{
+    border-radius: 0.5em;
+    width: 20em;
+    height: 20em;
+}
+
+.album-song {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -216,30 +232,53 @@ button{
     margin: 0.5em;
 }
 
-.catalog-song:hover{
+.album-song:hover{
     background-color: rgba(128, 128, 128, 0.5);
     border-radius: 1em
 }
 
-.catalog-song-information {
+.album-song-information {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 }
 
-.catalog-song-play-control {
+.album-song-play-control {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.catalog-song-photo {
+.album-song-photo {
     width: 50px;
     height: 50px;
     cursor: pointer;  
 }
 
-.catalog-song-photo img{
+.album-song-photo img{
     border-radius: 0.5em;
+}
+
+/* Album Control */
+
+.album-control{
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: right;
+}
+
+.delete-album{
+    background-color: red;
+    color: black;
+    width: fit-content;
+    height: auto;
+    padding: 0.5em;
+    border-radius: 0.2em;
+}
+
+.delete-album:hover{
+    background-color:rgb(144, 0, 0);
+    cursor: pointer;
 }

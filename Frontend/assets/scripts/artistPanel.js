@@ -116,13 +116,13 @@ document.addEventListener("DOMContentLoaded", function () {
             const songsList = document.createElement('div');
             album.albumSongs.$values.forEach(item => {
                 const songDiv = document.createElement("div");
-                songDiv.classList.add("catalog-song");
+                songDiv.classList.add("album-song");
     
                 const songInformationDiv = document.createElement("div");
-                songInformationDiv.classList.add("catalog-song-information");
+                songInformationDiv.classList.add("album-song-information");
     
                 const songPhotoDiv = document.createElement("div");
-                songPhotoDiv.classList.add("catalog-song-photo");
+                songPhotoDiv.classList.add("album-song-photo");
                 const songPhotoImg = document.createElement("img");
                 songPhotoImg.src = "https://localhost:7219/Song/photo/" + item.song.id; 
                 songPhotoImg.alt = "Photo";
@@ -143,14 +143,45 @@ document.addEventListener("DOMContentLoaded", function () {
                 songsList.appendChild(songDiv);
             });
 
+            const albumConrolDiv = document.createElement("div");
+            albumConrolDiv.classList.add("album-control");
+
+            const deleteButton = document.createElement("div");
+            deleteButton.classList.add("delete-album");
+            deleteButton.textContent = "Видалити альбом";
+            deleteButton.addEventListener("click", function(){
+                deleteAlbum(album.id);
+            });
+            albumConrolDiv.appendChild(deleteButton);
+
             albumDiv.appendChild(albumInfo);
             albumDiv.appendChild(songsList)
+            albumDiv.appendChild(albumConrolDiv);
 
             displayField.appendChild(albumDiv);
         } catch (error) {
             console.error(error);
             alert("Error while rendering artist album!");
         }
+    }
+
+    function deleteAlbum(albumId) {
+        $.ajax({
+            type: "DELETE",
+            url: "https://localhost:7219/Album/" + albumId,
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            success: function (response) {
+                alert("Album deleted successfully.");
+                const albums = getArtistAlbums();
+                renderArtistAlbums(albums);              
+            },
+            error: function (error) {
+                console.log(error);
+                alert("Error deleting the album.");
+            }
+        });
     }
 
     document.getElementById("showAllDiscography").addEventListener("click", async function () {
