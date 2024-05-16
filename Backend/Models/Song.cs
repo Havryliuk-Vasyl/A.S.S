@@ -17,7 +17,7 @@ namespace Backend.Models
         public string AlbumTitle { get; set; }
         [Column("date_shared")]
         public DateOnly DateShared { get; set; }
-        
+
         public Song()
         {
 

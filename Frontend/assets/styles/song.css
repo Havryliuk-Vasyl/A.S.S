@@ -1,0 +1,9 @@
+.song-information-container{
+    background-color:rgb(29, 29, 29);
+    border-radius: 1em;
+    height: fit-content;
+    margin-bottom: 1em;
+    align-items: center;
+    text-align: center;
+    padding: 0.5em;
+}

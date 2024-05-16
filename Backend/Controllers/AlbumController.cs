@@ -122,5 +122,28 @@ namespace Backend.Controllers
             }
         }
 
+        [HttpGet("songs/{songId}")]
+        public async Task<IActionResult> GetAlbumBySongId(int songId)
+        {
+            try
+            {
+                var album = await context.Albums
+                    .Include(a => a.AlbumSongs)
+                    .ThenInclude(als => als.Song)
+                    .FirstOrDefaultAsync(a => a.AlbumSongs.Any(als => als.SongId == songId));
+
+                if (album == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(album);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
     }
 }

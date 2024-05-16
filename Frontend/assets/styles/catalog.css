@@ -15,12 +15,20 @@
     cursor: pointer;
 }
 
+.catalog-song-name:hover{
+    text-decoration: underline;
+}
+
 .catalog-artist{
     padding: 10px;
     font-size: 16px;
     text-align: center;
     color: #bbbbbb;
     cursor: pointer;
+}
+
+.catalog-artist:hover{
+    text-decoration: underline;
 }
 
 .catalog-recently-songs {
