@@ -1,5 +1,6 @@
 import Player from '../player/player.js';
 import Playlist from '../scripts/playlist.js';
+import Song from './album.js';
 
 class Catalog {
     constructor(userId){
@@ -12,6 +13,7 @@ class Catalog {
         this.player = new Player();
         this.playlist = new Playlist();
         this.userId = userId;
+        this.songClass = new Song(userId);
 
         this.okButtonAddSongToPlaylistModal.onclick = () => {
             const playlistId = this.selectAddSongToPlaylistModal.value;
@@ -80,6 +82,9 @@ class Catalog {
                 const songNameDiv = document.createElement("div");
                 songNameDiv.classList.add("catalog-song-name");
                 songNameDiv.textContent = item.song.title;
+                songNameDiv.addEventListener("click", () => {
+                    this.songClass.renderAlbumBySongId(item.song.id);
+                })
 
                 const artistDiv = document.createElement("div");
                 artistDiv.classList.add("catalog-artist");

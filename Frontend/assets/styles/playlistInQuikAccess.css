@@ -11,7 +11,7 @@
 }
 
 .playlist-list{
-    padding: 1em;
+    padding: 0.5em;
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -61,6 +61,7 @@
 }
 
 .playlist-item{
+    margin: 0;
     margin-bottom: 0.5em;
     width: 98%;
 }

@@ -45,6 +45,10 @@ class Playlist {
 
     async renderUserPlaylistsInQuikAccess(userId) {
         const playlistsContainer = document.getElementById("playlistsInMain");
+        const playlistListIf = document.querySelector(".playlist-list");
+        if (playlistListIf) {
+            playlistsContainer.removeChild(playlistListIf);
+        }
         const playlistList = document.createElement("div");
         playlistList.classList.add("playlist-list");
         try {
@@ -59,7 +63,7 @@ class Playlist {
                 `;
 
                 playlistElement.addEventListener("click", () => {
-                    this.renderSelectedPlaylist(playlist.id);
+                    this.renderSelectedPlaylist(playlist.id, userId);
                 });
                 playlistList.appendChild(playlistElement);
             });
@@ -69,7 +73,7 @@ class Playlist {
         }
     }
 
-    async renderSelectedPlaylist(playlistId) {
+    async renderSelectedPlaylist(playlistId, userId) {
         const displayField = document.getElementById("displayField");
 
         try {
@@ -217,7 +221,7 @@ class Playlist {
             deleteButton.classList.add("delete-playlist");
             deleteButton.textContent = "Видалити альбом";
             deleteButton.addEventListener("click", () => {
-                this.deletePlaylist(playlistId);
+                this.deletePlaylist(playlistId, userId);
             });
             playlistConrolDiv.appendChild(deleteButton);
 
@@ -298,6 +302,7 @@ class Playlist {
 
             const data = await response.json();
             console.log('Новий плейлист:', data);
+            this.renderUserPlaylistsInQuikAccess(userId);
         } catch (error) {
             console.error(error);
             throw error;
@@ -333,15 +338,12 @@ class Playlist {
             if (!response.ok) {
                 throw new Error(`Failed to delete song from playlist. Status: ${response.status}`);
             }
-
-            const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error('Error deleting song from playlist:', error);
         }
     }
 
-    async deletePlaylist(playlistId) {
+    async deletePlaylist(playlistId, userId) {
         try {
             const response = await fetch(`https://localhost:7219/Playlist/${playlistId}`, {
                 method: 'DELETE',
@@ -354,8 +356,8 @@ class Playlist {
                 throw new Error(`Failed to delete playlist. Status: ${response.status}`);
             }
 
-            const data = await response.json();
-            console.log(data);
+            this.renderUserPlaylistsInQuikAccess(userId);
+            this.renderCatalogOfUsersPlaylist(userId);
         } catch (error) {
             console.error('Error deleting playlist:', error);
         }
