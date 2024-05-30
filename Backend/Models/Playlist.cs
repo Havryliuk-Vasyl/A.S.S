@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Collections.Generic;
 
 namespace Backend.Models
 {
@@ -35,5 +34,23 @@ namespace Backend.Models
 
         public Playlist Playlist { get; set; }
         public Song Song { get; set; }
+    }
+
+    [Table("playlist_photos")]
+    public class PlaylistPhoto
+    {
+        [Column("id")]
+        public int Id { get; set; }
+        [Column("playlist")]
+        public int Playlist { get; set; }
+        [Column("file_path")]
+        public string FilePath { get; set; }
+        public PlaylistPhoto() { }
+
+        public PlaylistPhoto(int playlist, string filePath)
+        {
+            this.Playlist = playlist;
+            this.FilePath = filePath;
+        }
     }
 }

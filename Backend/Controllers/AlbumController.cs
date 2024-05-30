@@ -72,7 +72,7 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            byte[] photoBytes = System.IO.File.ReadAllBytes(photo.FilePath);
+            byte[] photoBytes = await System.IO.File.ReadAllBytesAsync(photo.FilePath); 
 
             return File(photoBytes, "image/jpeg");
         }

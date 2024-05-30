@@ -79,9 +79,10 @@ a {
     text-decoration: none;
 }
 
-.menu ul li a:hover {
+.menu ul li a img:hover {
     background-color: #777;
     cursor: pointer;
+    border-radius: 100%;
 }
 
 h2 {
@@ -136,6 +137,7 @@ button:hover {
 .playlist-control-img:hover {
     cursor: pointer;
     background-color: gray;
+    border-radius: 5em;
 }
 
 .playlist-control-img {
@@ -160,9 +162,9 @@ button:hover {
     user-select: none;
     border-radius: 1em;
     padding: 1em;
-    flex: 1; /* Додано для розтягнення вмісту */
+    flex: 1;
 }
-
+    
 /* Стилі для модального вікна для створення плейлиста */
 
 .createPlaylistModal {
@@ -207,4 +209,77 @@ input[type="text"] {
     border-radius: 5px;
     background-color: #333;
     color: #fff;
+}
+
+/* Стилі для пошуку */
+
+.search-div{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    align-items: center;
+    background-color: rgb(29, 29, 29);
+    border-radius: 1em;
+}
+
+.search-container{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content:space-between;
+    width: fit-content;
+    height: fit-content;
+}
+
+#searchResults{
+    display: flex;
+    flex-direction: column;
+}
+
+.result-info{
+    display: flex;
+    flex-direction: row;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+
+.result-info-type{
+
+}
+
+.result-info-show-more:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.search-album{
+    display: flex;
+    flex-direction: row;
+}
+
+.album{
+    background-color: rgb(29, 29, 29);
+    color: #fff;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 1em;
+    align-items: center;
+    width: fit-content;
+}
+
+.album-photo{
+    border-radius: 0.5em;
+    width: auto;
+    height: auto;
+}
+
+.album-photo img{
+    border-radius: 0.5em;
+    width: 10em;
+    height: 10em;
+}
+
+.album-title {
+    margin-top: 0.5em;
 }
