@@ -1,6 +1,6 @@
 .playlists {
     width: auto;
-    height: 55%;
+    height: 45%;
     flex-direction: column;
     display: flex;
     background-color:rgb(29, 29, 29);

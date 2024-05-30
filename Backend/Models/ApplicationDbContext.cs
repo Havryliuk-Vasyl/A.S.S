@@ -12,6 +12,7 @@ namespace Backend.Models
         public DbSet<Video> Videos { get; set; }
         public DbSet<Playlist> Playlists { get; set; }
         public DbSet<PlaylistSong> PlaylistSongs { get; set; }
+        public DbSet<PlaylistPhoto> PlaylistPhotos { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<AlbumSongs> AlbumSongs { get; set; }
         public DbSet<AlbumPhoto> AlbumPhotos { get; set; }

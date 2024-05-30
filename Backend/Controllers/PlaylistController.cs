@@ -11,6 +11,7 @@ namespace Backend.Controllers
     public class PlaylistController : ControllerBase
     {
         private readonly ApplicationDbContext context;
+        private readonly string _playlistPhotoFilePath = "./media-files/playlistphotos";
 
         public PlaylistController(ApplicationDbContext context)
         {
@@ -94,6 +95,77 @@ namespace Backend.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error adding song to playlist: {ex.Message}");
             }
+        }
+
+        [HttpPost("uploadPhoto")]
+        public async Task<ActionResult> SetPlaylistPhoto([FromForm] IFormFile photoFile, [FromForm] int playlistId)
+        {
+            try
+            {
+                if (photoFile == null || photoFile.Length == 0)
+                {
+                    return BadRequest("No file uploaded");
+                }
+
+                if (!photoFile.ContentType.StartsWith("image/"))
+                {
+                    return BadRequest("Only image files are allowed");
+                }
+
+                if (playlistId <= 0)
+                {
+                    return BadRequest("Invalid playlist ID");
+                }
+
+                var existingPhoto = await context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
+                if (existingPhoto != null)
+                {
+                    if (System.IO.File.Exists(existingPhoto.FilePath))
+                    {
+                        System.IO.File.Delete(existingPhoto.FilePath);
+                    }
+                    context.PlaylistPhotos.Remove(existingPhoto);
+                }
+
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(photoFile.FileName);
+
+                var uploadsFolder = Path.Combine(_playlistPhotoFilePath, uniqueFileName);
+
+                using (var stream = new FileStream(uploadsFolder, FileMode.Create))
+                {
+                    await photoFile.CopyToAsync(stream);
+                }
+
+                var playlistPhoto = new PlaylistPhoto
+                {
+                    Playlist = playlistId,
+                    FilePath = uploadsFolder
+                };
+                context.PlaylistPhotos.Add(playlistPhoto);
+                await context.SaveChangesAsync();
+
+                return Ok("Avatar uploaded successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error uploading avatar: {ex}");
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("photo")]
+        public async Task<ActionResult> GetPhoto(int playlistId)
+        {
+            var playlistPhoto = await context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
+            
+            if (playlistPhoto == null)
+                return NotFound();
+
+            if (!System.IO.File.Exists(playlistPhoto.FilePath))
+                return NotFound();
+
+            byte[] photoBytes = System.IO.File.ReadAllBytes(playlistPhoto.FilePath);
+            return File(photoBytes, "image/");
         }
 
         [HttpGet("Playlist/{playlistId}")]

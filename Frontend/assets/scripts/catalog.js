@@ -175,7 +175,6 @@ class Catalog {
         }
     }  
 
-    // Модальне вікно для додавання пісні до плейлиста
     async openAddSongToPlaylistModal(sondId) {
         this.modalAddSongToPlaylistModal.style.display = "block";
         this.modalAddSongToPlaylistModal.setAttribute("data-song-id", sondId);
