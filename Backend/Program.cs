@@ -14,7 +14,7 @@ builder.Services.Configure<FormOptions>(options =>
 
 builder.WebHost.UseKestrel(options =>
 {
-    options.Limits.MaxRequestBodySize = 100000000000; // Приблизно 100 гігабайт
+    options.Limits.MaxRequestBodySize = 100000000000; 
 });
 
 builder.Services.AddControllers()
@@ -37,7 +37,8 @@ catch (Exception ex)
 
 }
 
-WebApplication app = builder.Build();
+WebApplication app = builder.
+    Build();
 
 if (app.Environment.IsDevelopment())
 {

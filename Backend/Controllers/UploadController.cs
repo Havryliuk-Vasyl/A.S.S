@@ -37,7 +37,8 @@ namespace Backend.Controllers
                     var album = new Album
                     {
                         User = audioUploadModel.ArtistId,
-                        Title = audioUploadModel.AlbumTitle
+                        Title = audioUploadModel.AlbumTitle,
+                        DateShared = DateOnly.FromDateTime(DateTime.Today),
                     };
                     _context.Albums.Add(album);
                     await _context.SaveChangesAsync();

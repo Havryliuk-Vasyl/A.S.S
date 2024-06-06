@@ -12,6 +12,8 @@ namespace Backend.Models
         public int User { get; set; }
         [Column("title")]
         public string Title { get; set; }
+        [Column("date_shared")]
+        public DateOnly DateShared { get; set; }
         public ICollection<AlbumSongs> AlbumSongs { get; set; }
     }
 

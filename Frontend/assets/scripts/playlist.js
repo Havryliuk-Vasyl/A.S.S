@@ -22,6 +22,7 @@ class Playlist {
                 throw new Error("Помилка при отриманні списку плейлистів користувача");
             }
             const data = await response.json();
+            console.log(data);
             return data;
         } catch (error) {
             console.error(error);
@@ -129,6 +130,7 @@ class Playlist {
                     const songNameDiv = document.createElement("div");
                     songNameDiv.classList.add("catalog-song-name");
                     songNameDiv.textContent = item.song.title;
+                    console.log(item.song.title);
 
                     const artistDiv = document.createElement("div");
                     artistDiv.classList.add("catalog-artist");

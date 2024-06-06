@@ -2,6 +2,7 @@ import Catalog from './assets/scripts/catalog.js';
 import Player from './assets/player/player.js';
 import Playlist from './assets/scripts/playlist.js';
 import Song from './assets/scripts/album.js';
+import Profile from './assets/scripts/profile.js'
 
 // Модальне вікно для створення плейлиста
 var modalCreatePlaylistModal = document.getElementById("createPlaylistModal");
@@ -21,10 +22,13 @@ cancelButtonCreatePlaylistModal.onclick = function () {
     closeCreatePlaylistModal();
 }
 
+var modalAddSongToPlaylistModal = document.getElementById("addSongToPlaylistModal");
+var okButtonAddSongToPlaylistModal = document.getElementById("addSongToPlaylistOkButton");
+var cancelButtonAddSongToPlaylistModal = document.getElementById("addSongToPlaylistCancelButton");
+var selectAddSongToPlaylistModal = document.getElementById("playlistSelect");
+
 // Код, який виконується при загрузці всього контенту на сторінці
 document.addEventListener("DOMContentLoaded", function () {
-    
-
     let username = "";
     let userId;
     $.ajax({
@@ -59,8 +63,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    okButtonAddSongToPlaylistModal.onclick = () => {
+        const playlistId = this.selectAddSongToPlaylistModal.value;
+        const songId = this.modalAddSongToPlaylistModal.getAttribute("data-song-id");
+
+        this.playlist.addToPlaylist(songId, playlistId);
+        this.closeAddSongToPlaylistModal();
+    };
+
+    cancelButtonAddSongToPlaylistModal.onclick = () => {
+        this.closeAddSongToPlaylistModal();
+    };
+
     const player = new Player();
     const songClass = new Song(userId);
+    const playlist = new Playlist();
+    const profile = new Profile(userId);
+
+    document.getElementById("profile").addEventListener("click", ()=>{
+        profile.renderUserProfile(userId);
+    })
 
     document.getElementById("catalogBtn").addEventListener("click", function () {
         const catalog = new Catalog(userId);
@@ -274,7 +296,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     const menuItem2 = document.createElement('div');
                     menuItem2.textContent = 'Додати в плейлист';
                     menuItem2.addEventListener('click', () => {
-                        this.openAddSongToPlaylistModal(song.id);
+                        openAddSongToPlaylistModal(song.id);
                     });
 
                     menu.appendChild(menuItem1);
@@ -383,6 +405,7 @@ document.addEventListener("DOMContentLoaded", function () {
         albumDiv.appendChild(titleDiv);
     
         albumDiv.addEventListener("click", function () {
+            songClass.renderAlbumByAlbumId(item.id);
         });
     
         parentElement.appendChild(albumDiv);
@@ -446,11 +469,6 @@ document.addEventListener("DOMContentLoaded", function () {
         playlist.renderUserPlaylistsInQuikAccess(userId);
     }
 
-    document.getElementById("profile").addEventListener("click", function () {
-        var userProfileURL = 'assets/pages/profile.html';
-        window.location.href = userProfileURL;
-    });
-
     function renderUsersFunctionality(user) {
         if (user.status === "administrator") {
             let navigationOnMenu = document.getElementById("navigation-on-menu");
@@ -513,5 +531,24 @@ document.addEventListener("DOMContentLoaded", function () {
         formattedDuration += (seconds < 10 ? "0" : "") + seconds;
 
         return formattedDuration;
+    }
+
+    async function openAddSongToPlaylistModal(sondId) {
+        modalAddSongToPlaylistModal.style.display = "block";
+        modalAddSongToPlaylistModal.setAttribute("data-song-id", sondId);
+
+        selectAddSongToPlaylistModal.innerHTML = "";
+    
+        try {
+            const playlists = await playlist.getUserPlaylists(userId);
+            for (const playlist of playlists.$values) {
+                const option = document.createElement('option');
+                option.value = playlist.id;
+                option.text = playlist.title;
+                selectAddSongToPlaylistModal.appendChild(option);
+            }
+        } catch (error) {
+            console.error('Error retrieving playlists:', error);
+        }
     }
 });
