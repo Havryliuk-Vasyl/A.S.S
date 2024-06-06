@@ -1,5 +1,8 @@
+import Song from "../scripts/album.js";
+
 class Player{
-    constructor(){}
+    constructor(){
+    }
 
     renderPlayer(){
         var link = document.createElement("link");
@@ -30,6 +33,11 @@ class Player{
         var songNameDiv = document.createElement("div");
         songNameDiv.classList.add("song-name");
         songNameDiv.id = "song-name";
+
+        songNameDiv.addEventListener("click", () => {
+
+        })
+
         var songNameLink = document.createElement("a");
         songNameLink.href = "#";
         songNameLink.textContent = "No name";

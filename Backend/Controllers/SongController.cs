@@ -81,6 +81,7 @@ namespace Backend.Controllers
                     {
                         song,
                         artist = user.Username,
+                        artistId = user.Id,
                         duration = audio.Duration,
                         photo
                     });

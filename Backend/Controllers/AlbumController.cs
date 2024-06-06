@@ -49,8 +49,21 @@ namespace Backend.Controllers
                     return BadRequest();
                 }
 
+                var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
 
-                return Ok(album);
+                if (artist == null)
+                {
+                    return BadRequest();
+                }
+
+                var result = new
+                {
+                    Album = album,
+                    ArtistId = artist.Id,
+                    ArtistUsername = artist.Username,
+                };
+
+                return Ok(result);
             }
             catch(Exception ex)
             {
@@ -137,7 +150,21 @@ namespace Backend.Controllers
                     return NotFound();
                 }
 
-                return Ok(album);
+                var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
+
+                if (artist == null)
+                {
+                    return BadRequest();
+                }
+
+                var result = new
+                {
+                    Album = album,
+                    ArtistId = artist.Id,
+                    ArtistUsername = artist.Username,
+                };
+
+                return Ok(result);
             }
             catch (Exception ex)
             {

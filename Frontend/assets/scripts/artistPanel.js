@@ -1,23 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
     let artistId = 0;
-    $.ajax({
-        type: "GET",
-        url: "https://localhost:7219/User/validateToken",
-        headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token')
-        },
-        success: function (response) {
-            console.log("User profile:", response);
 
-            artistId = response.id;
-        },
-        error: function (error) {
-            console.log(error);
-            alert("Error, you are unathorized!");
-        }
-    });
+    // Функція для отримання ID артиста
+    function getArtistId() {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: "https://localhost:7219/User/validateToken",
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                },
+                success: function (response) {
+                    console.log("User profile:", response);
+                    resolve(response.id);
+                },
+                error: function (error) {
+                    console.log(error);
+                    alert("Error, you are unauthorized!");
+                    reject(error);
+                }
+            });
+        });
+    }
 
-    function getArtistAlbums() {
+    // Функція для отримання альбомів артиста
+    function getArtistAlbums(artistId) {
         return new Promise((resolve, reject) => {
             $.ajax({
                 type: "GET",
@@ -37,11 +44,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Функція для відображення альбомів артиста
     function renderArtistAlbums(albumsObj) {
         const displayField = document.getElementById("displayField");
         displayField.innerHTML = '';
 
-        const albums = albumsObj.$values;
+        console.log("Albums Object:", albumsObj);
+
+        const albums = albumsObj && albumsObj.$values ? albumsObj.$values : [];
 
         if (!Array.isArray(albums) || albums.length === 0) {
             displayField.textContent = 'Немає доступних альбомів';
@@ -78,6 +88,8 @@ document.addEventListener("DOMContentLoaded", function () {
         displayField.appendChild(albumsContainer);
     }
 
+
+    // Функція для отримання окремого альбому
     async function getArtistAlbum(albumID) {
         try {
             const response = await fetch(`https://localhost:7219/Album/album/` + albumID);
@@ -92,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
+    // Функція для відображення окремого альбому
     async function renderArtistAlbum(albumID) {
         const displayField = document.getElementById("displayField");
         displayField.innerHTML = '';
@@ -99,72 +112,83 @@ document.addEventListener("DOMContentLoaded", function () {
         try {
             const albumDiv = document.createElement("div");
             albumDiv.classList.add("album-in-display-field");
-
-            const album = await getArtistAlbum(albumID);
     
-            const albumInfo= document.createElement("div");
+            const albumResponse = await getArtistAlbum(albumID);
+            const album = albumResponse.album;
+            console.log("Album object:", album);
+    
+            const albumInfo = document.createElement("div");
             albumInfo.classList.add("albumInfo");
+
+            const albumPhoto = document.createElement('img');
+            albumPhoto.src = "https://localhost:7219/Album/photo/" + album.id;
+            albumInfo.appendChild(albumPhoto);
 
             const albumTitle = document.createElement('h2');
             albumTitle.textContent = album.title;
             albumInfo.appendChild(albumTitle);
-    
-            const albumPhoto = document.createElement('img');
-            albumPhoto.src = "https://localhost:7219/Album/photo/" + album.id;
-            albumInfo.appendChild(albumPhoto);
-    
+
             const songsList = document.createElement('div');
-            album.albumSongs.$values.forEach(item => {
-                const songDiv = document.createElement("div");
-                songDiv.classList.add("album-song");
+            const albumSongs = album.albumSongs && album.albumSongs.$values ? album.albumSongs.$values : [];
     
-                const songInformationDiv = document.createElement("div");
-                songInformationDiv.classList.add("album-song-information");
+            if (!Array.isArray(albumSongs) || albumSongs.length === 0) {
+                songsList.textContent = 'Немає доступних пісень';
+            } else {
+                albumSongs.forEach(item => {
+                    const songDiv = document.createElement("div");
+                    songDiv.classList.add("album-song");
     
-                const songPhotoDiv = document.createElement("div");
-                songPhotoDiv.classList.add("album-song-photo");
-                const songPhotoImg = document.createElement("img");
-                songPhotoImg.src = "https://localhost:7219/Song/photo/" + item.song.id; 
-                songPhotoImg.alt = "Photo";
-                songPhotoImg.style.maxWidth = "50px";
-                songPhotoImg.style.maxHeight = "50px";
-                songPhotoImg.style.width = "100%";
-                songPhotoImg.style.height = "100%";
-                songPhotoDiv.appendChild(songPhotoImg);
+                    const songInformationDiv = document.createElement("div");
+                    songInformationDiv.classList.add("album-song-information");
     
-                const songNameDiv = document.createElement("div");
-                songNameDiv.classList.add("catalog-song-name");
-                songNameDiv.textContent = item.song.title;
-
-                songInformationDiv.appendChild(songPhotoDiv);
-                songInformationDiv.appendChild(songNameDiv);
-                songDiv.appendChild(songInformationDiv);
+                    const songPhotoDiv = document.createElement("div");
+                    songPhotoDiv.classList.add("album-song-photo");
+                    const songPhotoImg = document.createElement("img");
+                    songPhotoImg.src = "https://localhost:7219/Song/photo/" + item.song.id;
+                    songPhotoImg.alt = "Photo";
+                    songPhotoImg.style.maxWidth = "50px";
+                    songPhotoImg.style.maxHeight = "50px";
+                    songPhotoImg.style.width = "100%";
+                    songPhotoImg.style.height = "100%";
+                    songPhotoDiv.appendChild(songPhotoImg);
     
-                songsList.appendChild(songDiv);
-            });
-
-            const albumConrolDiv = document.createElement("div");
-            albumConrolDiv.classList.add("album-control");
-
+                    const songNameDiv = document.createElement("div");
+                    songNameDiv.classList.add("catalog-song-name");
+                    songNameDiv.textContent = item.song.title;
+    
+                    songInformationDiv.appendChild(songPhotoDiv);
+                    songInformationDiv.appendChild(songNameDiv);
+                    songDiv.appendChild(songInformationDiv);
+    
+                    songsList.appendChild(songDiv);
+                });
+            }
+    
+            const albumControlDiv = document.createElement("div");
+            albumControlDiv.classList.add("album-control");
+    
             const deleteButton = document.createElement("div");
             deleteButton.classList.add("delete-album");
             deleteButton.textContent = "Видалити альбом";
-            deleteButton.addEventListener("click", function(){
+            deleteButton.addEventListener("click", function () {
                 deleteAlbum(album.id);
             });
-            albumConrolDiv.appendChild(deleteButton);
-
+            albumControlDiv.appendChild(deleteButton);
+    
             albumDiv.appendChild(albumInfo);
-            albumDiv.appendChild(songsList)
-            albumDiv.appendChild(albumConrolDiv);
-
+            albumDiv.appendChild(songsList);
+            albumDiv.appendChild(albumControlDiv);
+    
             displayField.appendChild(albumDiv);
         } catch (error) {
             console.error(error);
             alert("Error while rendering artist album!");
         }
     }
+    
 
+
+    // Функція для видалення альбому
     function deleteAlbum(albumId) {
         $.ajax({
             type: "DELETE",
@@ -174,8 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             success: function (response) {
                 alert("Album deleted successfully.");
-                const albums = getArtistAlbums();
-                renderArtistAlbums(albums);              
+                getArtistAlbums(artistId).then(renderArtistAlbums);
             },
             error: function (error) {
                 console.log(error);
@@ -184,16 +207,17 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
+    // Кнопка для показу всіх альбомів
     document.getElementById("showAllDiscography").addEventListener("click", async function () {
         try {
-            const albums = await getArtistAlbums();
+            artistId = await getArtistId();
+            const albums = await getArtistAlbums(artistId);
             renderArtistAlbums(albums);
         } catch (error) {
             console.error(error);
             alert("Error while fetching artist albums!");
         }
     });
-
 
     document.getElementById("uploadNewSongs").addEventListener("click", function () {
         renderUpload();
@@ -266,9 +290,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     selectedAudioFileInput.name = 'selectedAudioFile';
                     selectedAudioFileInput.files = targetInput.files;
 
-
-                    console.log(selectedAudioFileInput);
-
                     // Створення текстового поля для введення назви пісні
                     var songTitleInput = document.createElement('input');
                     songTitleInput.type = 'text';
@@ -330,11 +351,5 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         };
         xhr.send(formData);
-    }
-
-    function renderUploadFunctionality() {
-        const displayField = document.getElementById("displayField");
-
-
     }
 });

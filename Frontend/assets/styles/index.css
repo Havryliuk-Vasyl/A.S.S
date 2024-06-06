@@ -217,7 +217,7 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: auto;
+    height: fit-content;
     align-items: center;
     background-color: rgb(29, 29, 29);
     border-radius: 1em;
@@ -266,6 +266,10 @@ input[type="text"] {
     margin: 1em;
     align-items: center;
     width: fit-content;
+}
+
+.album:hover{
+    cursor: pointer;
 }
 
 .album-photo{
