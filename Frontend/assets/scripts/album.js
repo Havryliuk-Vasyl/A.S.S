@@ -82,6 +82,7 @@ class Song {
     }
 
     renderAlbum(albumData) {
+        console.log(albumData);
         const displayField = document.getElementById("displayField");
         displayField.innerHTML = '';
 
@@ -114,10 +115,13 @@ class Song {
             await profileClass.renderUserProfile(albumData.artistId);
         });
 
-        albumTitleAndArtistDiv.appendChild(albumArtist);
+        const dateShared = document.createElement('h5');
+        dateShared.classList.add("date-shared");
+        dateShared.textContent = album.dateShared;
 
         albumTitleAndArtistDiv.appendChild(albumTitle);
         albumTitleAndArtistDiv.appendChild(albumArtist);
+        albumTitleAndArtistDiv.appendChild(dateShared);
 
         albumInfo.appendChild(albumTitleAndArtistDiv);
 
