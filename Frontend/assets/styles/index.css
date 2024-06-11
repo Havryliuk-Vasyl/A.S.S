@@ -1,5 +1,5 @@
 @font-face {
-    font-family: Ubuntu-Medium; 
+    font-family: Ubuntu-Medium;
     src: url('../fonts/Ubuntu-Medium.ttf');
 }
 
@@ -20,7 +20,8 @@ body {
     flex-direction: column;
 }
 
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -35,6 +36,7 @@ html, body {
     border-radius: 1em;
     padding: 0.5em;
     padding-top: 0;
+    overflow: hidden;
     max-width: 20%;
 }
 
@@ -46,6 +48,7 @@ html, body {
     height: fit-content;
     margin-bottom: 1em;
     padding: 0.3em;
+    float: 50%;
 }
 
 .menu ul {
@@ -114,7 +117,7 @@ button:hover {
 /* Стилі для ползунка зони прокрутки */
 *::-webkit-scrollbar-thumb {
     background-color: rgb(96, 96, 96);
-    border-radius: 5px; 
+    border-radius: 5px;
 }
 
 /* Стилі для треку (фону) зони прокрутки */
@@ -158,27 +161,27 @@ button:hover {
     justify-content: center;
     background: linear-gradient(to bottom, #4e3780, #222);
     width: 80%;
-    overflow-y: auto; 
+    overflow-y: auto;
     user-select: none;
     border-radius: 1em;
     padding: 1em;
     flex: 1;
 }
-    
-/* Стилі для модального вікна для створення плейлиста */
 
-.createPlaylistModal {
-    display: none; 
+/* Стилі для модального вікна */
+
+.Modal {
+    display: none;
     position: fixed;
-    z-index: 1; 
+    z-index: 1;
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%; 
-    overflow: auto; 
+    height: 100%;
+    overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
-  
+
 .create-playlist-modal-content {
     background-color: rgb(29, 29, 29);
     margin: 15% auto;
@@ -186,21 +189,29 @@ button:hover {
     width: 30%;
     border-radius: 1em;
 }
-  
+
+.edit-profil-modal-content {
+    background-color: rgb(29, 29, 29);
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%;
+    border-radius: 1em;
+}
+
 .create-playlist-close {
     color: #aaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
-  
+
 .close:hover,
 .close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
 }
-  
+
 input[type="text"] {
     width: 90%;
     padding: 10px;
@@ -213,7 +224,7 @@ input[type="text"] {
 
 /* Стилі для пошуку */
 
-.search-div{
+.search-div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -223,42 +234,40 @@ input[type="text"] {
     border-radius: 1em;
 }
 
-.search-container{
+.search-container {
     display: flex;
     flex-direction: row;
     align-items: center;
-    align-content:space-between;
+    align-content: space-between;
     width: fit-content;
     height: fit-content;
 }
 
-#searchResults{
+#searchResults {
     display: flex;
     flex-direction: column;
 }
 
-.result-info{
+.result-info {
     display: flex;
     flex-direction: row;
     align-content: space-around;
     flex-wrap: wrap;
 }
 
-.result-info-type{
+.result-info-type {}
 
-}
-
-.result-info-show-more:hover{
+.result-info-show-more:hover {
     cursor: pointer;
     text-decoration: underline;
 }
 
-.search-album{
+.search-album {
     display: flex;
     flex-direction: row;
 }
 
-.album{
+.album {
     background-color: rgb(29, 29, 29);
     color: #fff;
     border-radius: 1em;
@@ -268,17 +277,17 @@ input[type="text"] {
     width: fit-content;
 }
 
-.album:hover{
+.album:hover {
     cursor: pointer;
 }
 
-.album-photo{
+.album-photo {
     border-radius: 0.5em;
     width: auto;
     height: auto;
 }
 
-.album-photo img{
+.album-photo img {
     border-radius: 0.5em;
     width: 10em;
     height: 10em;

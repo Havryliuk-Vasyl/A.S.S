@@ -249,5 +249,43 @@ namespace Backend.Controllers
             return File(photoBytes, "image/jpeg");
         }
 
+        [HttpPut("edituser")]
+        public async Task<ActionResult> EditUser(int userId, [FromBody] string newNickname)
+        {
+            try
+            {
+                User user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                if (!string.IsNullOrEmpty(newNickname))
+                {
+                    user.Username = newNickname;
+                }
+                else
+                {
+                    return BadRequest("New nickname is empty!");
+                }
+
+                context.Users.Update(user);
+                await context.SaveChangesAsync();
+                return Ok("Nickname updated successfully");
+            }
+            catch (DbUpdateException dbEx)
+            {
+                // Логувати виключення для налагодження
+                Console.WriteLine($"Error updating user: {dbEx.InnerException?.Message}");
+                return StatusCode(500, "An error occurred while updating the nickname. Please check the data and try again.");
+            }
+            catch (Exception ex)
+            {
+                // Обробити інші можливі виключення
+                Console.WriteLine($"Unexpected error: {ex.Message}");
+                return StatusCode(500, "An unexpected error occurred.");
+            }
+        }
     }
 }

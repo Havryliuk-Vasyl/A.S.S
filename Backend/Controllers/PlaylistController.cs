@@ -1,4 +1,5 @@
 ﻿using Backend.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -165,7 +166,7 @@ namespace Backend.Controllers
                 return NotFound();
 
             byte[] photoBytes = System.IO.File.ReadAllBytes(playlistPhoto.FilePath);
-            return File(photoBytes, "image/");
+            return File(photoBytes, "image/*");
         }
 
         [HttpGet("Playlist/{playlistId}")]
@@ -192,9 +193,14 @@ namespace Backend.Controllers
                     var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == ps.Song.Id);
                     var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == ps.Song.Id);
 
+                    var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == song.Artist);
+
                     var songResponse = new
                     {
-                        Song = ps,
+                        SongId = song.Id,
+                        SongTitle = song.Title,
+                        ArtistId = artist.Id,
+                        ArtistUsername = artist.Username,
                         Audio = audio,
                         Photo = photo
                     };
@@ -269,5 +275,36 @@ namespace Backend.Controllers
             }
         }
 
+
+        [HttpPut("editplaylist")]
+        public async Task<ActionResult> EditPlaylist(int playlistId, [FromBody] string newPlaylistName)
+        {
+            try
+            {
+                Playlist playlist = await context.Playlists.FirstOrDefaultAsync(p => p.Id == playlistId);
+
+                if (playlist == null )
+                {
+                    return NotFound();
+                }
+
+                if (!string.IsNullOrEmpty(newPlaylistName))
+                {
+                    playlist.Title= newPlaylistName;
+                }
+                else
+                {
+                    return BadRequest("New playlist name is empty!");
+                }
+
+                context.Playlists.Update(playlist);
+                await context.SaveChangesAsync();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500);
+            }
+        }
     }
 }

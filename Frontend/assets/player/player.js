@@ -127,11 +127,9 @@ class Player{
             if (audioPlayer.paused) {
                 audioPlayer.play();
                 playPauseBtn.innerHTML = '| |';
-                console.log(audioPlayer);
             } else {
                 audioPlayer.pause();
                 playPauseBtn.innerHTML = '&gt;';
-                console.log(audioPlayer);
             }
         });
     
@@ -196,17 +194,36 @@ class Player{
         });
     }
 
-    play(songId){
-        console.log("Song ID: " + songId);
+    play(songId) {
         $.ajax({
             type: "GET",
             url: "https://localhost:7219/Song/" + songId,
             success: (response) => {
-                console.log("Song:", response);
-                this.playSong(songId)
+                this.playSong(songId);
+                console.log(response);
     
-                document.getElementById("songName").textContent = response.title;
-                document.getElementById("songArtist").textContent = response.artistName;
+                const songTitle = document.getElementById("songName");
+                const songArtist = document.getElementById("songArtist");
+    
+                function removeAllEventListeners(element) {
+                    const clone = element.cloneNode(true);
+                    element.parentNode.replaceChild(clone, element);
+                    return clone;
+                }
+    
+                const newSongTitle = removeAllEventListeners(songTitle);
+                const newSongArtist = removeAllEventListeners(songArtist);
+    
+                newSongTitle.textContent = response.title;
+                newSongArtist.textContent = response.artistName;
+    
+                newSongTitle.id = "songName";
+                newSongArtist.id = "songArtist";
+
+                newSongTitle.addEventListener("click", () =>{
+                    const songClass = new Song();
+                    songClass.renderAlbumBySongId(songId);
+                });
             },
             error: (error) => {
                 console.error("Помилка при отриманні списку пісень:", error);
@@ -214,8 +231,8 @@ class Player{
         });
     }
     
+    
     playSong(songId){
-        console.log(songId + " is not playing!");
         const apiUrl = `https://localhost:7219/Audio/${songId}`;
         axios.get(apiUrl, {
                 responseType: 'arraybuffer'

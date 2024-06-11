@@ -1,10 +1,11 @@
 import Player from '../player/player.js';
+import Song from './album.js';
 import Catalog from './catalog.js';
+import Profile from './profile.js';
 
 class Playlist {
     constructor() {
         this.includeStyles();
-        this.player = new Player();
     }
 
     includeStyles() {
@@ -22,7 +23,6 @@ class Playlist {
                 throw new Error("Помилка при отриманні списку плейлистів користувача");
             }
             const data = await response.json();
-            console.log(data);
             return data;
         } catch (error) {
             console.error(error);
@@ -34,7 +34,7 @@ class Playlist {
         try {
             const response = await fetch(`https://localhost:7219/Playlist/Playlist/${playlistId}`);
             if (!response.ok) {
-                throw new Error("Помилка при отриманні плейлиста");
+                
             }
             const data = await response.json();
             return data;
@@ -44,30 +44,56 @@ class Playlist {
         }
     }
 
-    async renderUserPlaylistsInQuikAccess(userId) {
+    async renderUserPlaylistsInQuickAccess(userId) {
         const playlistsContainer = document.getElementById("playlistsInMain");
         const playlistListIf = document.querySelector(".playlist-list");
+
         if (playlistListIf) {
             playlistsContainer.removeChild(playlistListIf);
         }
+
         const playlistList = document.createElement("div");
         playlistList.classList.add("playlist-list");
+
         try {
             const playlists = await this.getUserPlaylists(userId);
-            playlists.$values.forEach(playlist => {
+
+            const playlistPromises = playlists.$values.map(async (playlist) => {
                 const playlistElement = document.createElement("div");
-                playlistElement.classList.add("playlist-catalog");
-                playlistElement.classList.add("playlist-item");
-                playlistElement.innerHTML = `
-                <!-- <div class="playlist-photo"></div> -->
-                    <div class="playlist-name">${playlist.title}</div>
-                `;
+                playlistElement.classList.add("playlist-catalog", "playlist-item");
+
+                const playlistImageInQuickAccessDiv = document.createElement("div");
+                playlistImageInQuickAccessDiv.classList.add("playlist-image-in-quick-access");
+
+                const playlistImageInQuickAccessImg = document.createElement("img");
+                playlistImageInQuickAccessImg.src = "../assets/images/icons/empty-playlist.png";
+
+                try {
+                    const response = await fetch(`https://localhost:7219/Playlist/photo?playlistId=${playlist.id}`);
+                    if (response.ok) {
+                        playlistImageInQuickAccessImg.src = `https://localhost:7219/Playlist/photo?playlistId=${playlist.id}`;
+                    }
+                } catch (error) {
+                }
+
+                playlistImageInQuickAccessDiv.appendChild(playlistImageInQuickAccessImg);
+                playlistElement.appendChild(playlistImageInQuickAccessDiv);
+
+                // const playlistNameDiv = document.createElement("div");
+                // playlistNameDiv.classList.add("playlist-name");
+                // playlistNameDiv.textContent = playlist.title;
+                // playlistElement.appendChild(playlistNameDiv);
 
                 playlistElement.addEventListener("click", () => {
                     this.renderSelectedPlaylist(playlist.id, userId);
                 });
-                playlistList.appendChild(playlistElement);
+
+                return playlistElement;
             });
+
+            const playlistElements = await Promise.all(playlistPromises);
+            playlistElements.forEach(playlistElement => playlistList.appendChild(playlistElement));
+
             playlistsContainer.appendChild(playlistList);
         } catch (error) {
             console.error(error);
@@ -78,37 +104,63 @@ class Playlist {
         const displayField = document.getElementById("displayField");
 
         try {
-            const playlistInfo = document.createElement("div");
-            playlistInfo.classList.add("playlist-in-display-field");
+            const playlistDiv = document.createElement("div");
+            playlistDiv.classList.add("playlist-in-display-field");
 
             const playlistData = await this.getUserPlaylist(playlistId);
+            console.log(playlistData);
+
+            const playlistInformationDiv = document.createElement("div");
+            playlistInformationDiv.classList.add("playlist-information");
+
+            const playlistImgDiv = document.createElement("div");
+            playlistImgDiv.classList.add("playlist-image");
+
+            const playlistImg = document.createElement("img");
+            playlistImg.id = "playlist-image";
+            playlistImg.src = "../assets/images/icons/empty-playlist.png";
+
+            try {
+                const response = await fetch(`https://localhost:7219/Playlist/photo?playlistId=${playlistData.playlist.id}`);
+                if (response.ok) {
+                    playlistImg.src = `https://localhost:7219/Playlist/photo?playlistId=${playlistData.playlist.id}`;
+                }
+            } catch (error) {
+            }
+
+            playlistImgDiv.appendChild(playlistImg);
 
             const playlistName = document.createElement("div");
             playlistName.classList.add("playlist-name");
+            playlistName.id = "playlist-name";
             playlistName.textContent = playlistData.playlist.title;
+
+            playlistInformationDiv.appendChild(playlistImgDiv);
+            playlistInformationDiv.appendChild(playlistName);
+
+            playlistInformationDiv.addEventListener("click", () => {
+                this.openEditPlaylistModal(playlistInformationDiv, playlistId, userId);
+            });
 
             const songsContainer = document.createElement("div");
             songsContainer.id = "songs-container";
             songsContainer.classList.add("container-style");
 
-            console.log(playlistData);
-
             displayField.innerHTML = "";
 
-            playlistInfo.appendChild(playlistName);
+            playlistDiv.appendChild(playlistInformationDiv);
 
             if (playlistData.songs.$values == 0) {
                 const emptyPlaylist = document.createElement("div");
                 emptyPlaylist.textContent = "Плейлист '" + playlistData.playlist.title + "' порожній!";
 
-                playlistInfo.appendChild(emptyPlaylist);
+                playlistDiv.appendChild(emptyPlaylist);
             }
             else {
                 playlistData.songs.$values.forEach(item => {
                     const songDiv = document.createElement("div");
                     songDiv.classList.add("catalog-song");
                     const songId = item.audio.song;
-                    console.log(item.audio.song);
                     songDiv.setAttribute("data-id", songId);
 
                     const songInformationDiv = document.createElement("div");
@@ -129,12 +181,21 @@ class Playlist {
                     // Додаємо ім'я та виконавця пісні
                     const songNameDiv = document.createElement("div");
                     songNameDiv.classList.add("catalog-song-name");
-                    songNameDiv.textContent = item.song.title;
-                    console.log(item.song.title);
+                    songNameDiv.textContent = item.songTitle;
+
+                    songNameDiv.addEventListener("click", ()=>{
+                        const songClass = new Song();
+                        songClass.renderAlbumBySongId(item.songId);
+                    });
 
                     const artistDiv = document.createElement("div");
                     artistDiv.classList.add("catalog-artist");
-                    artistDiv.textContent = item.song.artist;
+                    artistDiv.textContent = item.artistUsername;
+
+                    artistDiv.addEventListener("click", () =>{
+                        const userProfile = new Profile();
+                        userProfile.renderUserProfile(item.artistId);
+                    });
 
                     // Додаємо блок інформації про пісню до основного блоку пісні
                     songInformationDiv.appendChild(songPhotoDiv);
@@ -155,7 +216,8 @@ class Playlist {
                     playButtonDiv.classList.add("catalog-play-button");
                     playButtonDiv.textContent = ">";
                     playButtonDiv.addEventListener("click", () => {
-                        this.player.play(songId);
+                        const player = new Player();
+                        player.play(songId);
                     });
 
                     songPlayControlDiv.appendChild(durationDiv);
@@ -165,7 +227,8 @@ class Playlist {
                     songDiv.appendChild(songPlayControlDiv);
 
                     songDiv.addEventListener('dblclick', () => {
-                        this.player.play(songId);
+                        const player = new Player();
+                        player.play(songId);
                     });
 
                     let contextMenuOpen = false;
@@ -180,8 +243,8 @@ class Playlist {
                             const menuItem1 = document.createElement('div');
                             menuItem1.textContent = 'Відтворити';
                             menuItem1.addEventListener('click', () => {
-                                console.log("Song ID: " + songId);
-                                this.player.play(songId);
+                                const player = new Player();
+                                player.play(songId);
                             });
 
                             const menuItem2 = document.createElement('div');
@@ -213,7 +276,7 @@ class Playlist {
                     });
                     songsContainer.appendChild(songDiv);
                 });
-                playlistInfo.appendChild(songsContainer);
+                playlistDiv.appendChild(songsContainer);
             }
 
             const playlistConrolDiv = document.createElement("div");
@@ -227,9 +290,9 @@ class Playlist {
             });
             playlistConrolDiv.appendChild(deleteButton);
 
-            playlistInfo.appendChild(playlistConrolDiv);
+            playlistDiv.appendChild(playlistConrolDiv);
 
-            displayField.appendChild(playlistInfo);
+            displayField.appendChild(playlistDiv);
         } catch (error) {
             console.error(error);
         }
@@ -239,29 +302,59 @@ class Playlist {
         const displayField = document.getElementById("displayField");
 
         try {
+            console.log(userId);
             const playlists = await this.getUserPlaylists(userId);
 
             displayField.innerHTML = "";
 
-            playlists.$values.forEach(playlist => {
+            const catalogPlaylist = document.createElement("div");
+            catalogPlaylist.classList.add("catalog-playlist");
+
+            const playlistPromises = playlists.$values.map(async (playlist) => {
                 const playlistElement = document.createElement("div");
                 playlistElement.classList.add("playlist-in-catalog");
-                playlistElement.innerHTML = `
-                    <!-- <div class="playlist-photo"></div> -->
-                    <div class="playlist-name">${playlist.title}</div>
-                `;
+
+                const playlistImageDiv = document.createElement("div");
+                playlistImageDiv.classList.add("playlist-image");
+
+                const playlistImageImg = document.createElement("img");
+                playlistImageImg.src = "../../assets/images/icons/empty-playlist.png";
+
+                try {
+                    const response = await fetch("https://localhost:7219/Playlist/photo?playlistId=" + playlist.id);
+                    if (response.ok) {
+                        playlistImageImg.src = "https://localhost:7219/Playlist/photo?playlistId=" + playlist.id;
+                    } else {
+                        console.error("Помилка завантаження зображення для плейлиста " + playlist.id);
+                    }
+                } catch (error) {
+                    console.error("Помилка завантаження зображення для плейлиста " + playlist.id, error);
+                }
+
+                playlistImageDiv.appendChild(playlistImageImg);
+                playlistElement.appendChild(playlistImageDiv);
+
+                const playlistNameDiv = document.createElement("div");
+                playlistNameDiv.classList.add("playlist-name");
+                playlistNameDiv.textContent = playlist.title;
+
+                playlistElement.appendChild(playlistNameDiv);
 
                 playlistElement.addEventListener("click", () => {
                     this.renderSelectedPlaylist(playlist.id);
                 });
 
-                displayField.appendChild(playlistElement);
+                return playlistElement;
             });
+
+            const playlistElements = await Promise.all(playlistPromises);
+            playlistElements.forEach(playlistElement => catalogPlaylist.appendChild(playlistElement));
+
+            displayField.appendChild(catalogPlaylist);
         } catch (error) {
             console.error(error);
         }
     }
-
 
     async addToPlaylist(songId, playlistId) {
         try {
@@ -278,14 +371,12 @@ class Playlist {
             }
 
             const data = await response.json();
-            console.log(data);
         } catch (error) {
             console.error('Error adding song to playlist:', error);
         }
     }
 
     async createPlaylist(userId, playlistTitle) {
-        console.log(userId + " " + playlistTitle)
         try {
             const response = await fetch('https://localhost:7219/Playlist', {
                 method: 'POST',
@@ -299,12 +390,9 @@ class Playlist {
             });
 
             if (!response.ok) {
-                throw new Error('Помилка при створенні плейлиста');
             }
 
-            const data = await response.json();
-            console.log('Новий плейлист:', data);
-            this.renderUserPlaylistsInQuikAccess(userId);
+            this.renderUserPlaylistsInQuickAccess(userId);
         } catch (error) {
             console.error(error);
             throw error;
@@ -340,6 +428,8 @@ class Playlist {
             if (!response.ok) {
                 throw new Error(`Failed to delete song from playlist. Status: ${response.status}`);
             }
+
+            this.renderSelectedPlaylist(playlistId);
         } catch (error) {
             console.error('Error deleting song from playlist:', error);
         }
@@ -358,13 +448,149 @@ class Playlist {
                 throw new Error(`Failed to delete playlist. Status: ${response.status}`);
             }
 
-            this.renderUserPlaylistsInQuikAccess(userId);
+            this.renderUserPlaylistsInQuickAccess(userId);
+            console.log(userId);
             this.renderCatalogOfUsersPlaylist(userId);
         } catch (error) {
             console.error('Error deleting playlist:', error);
         }
     }
 
+    editUserPlaylist(playlistInformationDiv, playlistId, userId) {
+        this.openEditPlaylistModal(playlistInformationDiv, playlistId);
+    }
+
+    openEditPlaylistModal(playlistInformationDiv, playlistId, userId) {
+        const modalEditPlaylistModal = document.getElementById("editProfileModal");
+
+        const editPlaylistModal = document.getElementById("editProfile");
+        editPlaylistModal.innerHTML = ``;
+
+        const playlistInformationDivClone = playlistInformationDiv.cloneNode(true);
+
+        // Додаємо обробник подій для зміни username
+        const playlistNameDiv = playlistInformationDivClone.querySelector('#playlist-name');
+        playlistNameDiv.addEventListener('click', () => {
+            const currentPlaylistName = playlistNameDiv.textContent;
+            const inputField = document.createElement('input');
+            inputField.type = 'text';
+            inputField.value = currentPlaylistName;
+            inputField.classList.add('username-input');
+
+            playlistNameDiv.replaceWith(inputField);
+
+            inputField.addEventListener('blur', () => {
+                const newUsername = inputField.value;
+                playlistNameDiv.textContent = newUsername;
+                inputField.replaceWith(playlistNameDiv);
+            });
+
+            inputField.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    inputField.blur();
+                }
+            });
+
+            inputField.focus();
+        });
+
+        // Додаємо обробник подій для зміни фото
+        const playlistPhotoDiv = playlistInformationDivClone.querySelector('.playlist-image img');
+        let avatarFile = null;
+        playlistPhotoDiv.addEventListener('click', () => {
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = 'image/*';
+            fileInput.classList.add('photo-input');
+
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    avatarFile = file;
+                    const reader = new FileReader();
+                    reader.onload = (event) => {
+                        playlistPhotoDiv.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            fileInput.click();
+        });
+
+        editPlaylistModal.appendChild(playlistInformationDivClone);
+
+        const okButtonEditPlaylistModal = document.createElement("button");
+        okButtonEditPlaylistModal.classList.add("editProfileOkButton");
+        okButtonEditPlaylistModal.textContent = "OK";
+
+        const cancelButtonEditPlaylistModal = document.createElement("button");
+        cancelButtonEditPlaylistModal.classList.add("editProfileCancelButton");
+        cancelButtonEditPlaylistModal.textContent = "Cancel";
+
+        editPlaylistModal.appendChild(okButtonEditPlaylistModal);
+        editPlaylistModal.appendChild(cancelButtonEditPlaylistModal);
+
+        modalEditPlaylistModal.style.display = "block";
+
+        cancelButtonEditPlaylistModal.onclick = () => {
+            this.closeEditPlaylistModal();
+        };
+
+        okButtonEditPlaylistModal.onclick = () => {
+            this.updateUserPlaylist(playlistInformationDivClone, playlistId, avatarFile, userId);
+            this.closeEditPlaylistModal();
+        };
+    }
+
+    closeEditPlaylistModal() {
+        const modalEditPlaylistModal = document.getElementById("editProfileModal");
+        modalEditPlaylistModal.style.display = "none";
+    }
+
+    async updateUserPlaylist(playlistInformationDivClone, playlistId, playlistPhotoFile, userId) {
+        const playlistNameDiv = playlistInformationDivClone.querySelector('#playlist-name');
+        const newPlaylistName = playlistNameDiv.textContent;
+
+        if (!newPlaylistName) {
+            return;
+        }
+
+        try {
+            const response = await fetch(`https://localhost:7219/Playlist/editplaylist?playlistId=${playlistId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newPlaylistName)
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed');
+            }
+
+            if (playlistPhotoFile) {
+                const formData = new FormData();
+                formData.append('photoFile', playlistPhotoFile);
+                formData.append('playlistId', playlistId);
+
+                const photoResponse = await fetch(`https://localhost:7219/Playlist/uploadPhoto`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!photoResponse.ok) {
+                    
+                }
+            }
+
+            this.renderUserPlaylistsInQuickAccess(userId);
+            this.renderSelectedPlaylist(playlistId, userId);
+        }
+        catch (error) {
+
+        }
+    }
 }
 
 export default Playlist;

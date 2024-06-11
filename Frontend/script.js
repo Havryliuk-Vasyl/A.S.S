@@ -38,8 +38,6 @@ document.addEventListener("DOMContentLoaded", function () {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         },
         success: function (response) {
-            console.log("User profile:", response);
-
             username = response.username;
             userId = response.id;
 
@@ -80,8 +78,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const playlist = new Playlist();
     const profile = new Profile(userId);
 
-    document.getElementById("profile").addEventListener("click", ()=>{
-        profile.renderUserProfile(userId);
+    document.getElementById("profile").addEventListener("click", () => {
+        profile.renderPersonalProfile(userId);
     })
 
     document.getElementById("catalogBtn").addEventListener("click", function () {
@@ -114,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
         let searchDiv = document.createElement("div");
         searchDiv.classList.add("search-div");
         searchDiv.appendChild(searchContainer);
-        
 
         let searchResults = document.createElement("div");
         searchResults.id = "searchResults";
@@ -146,10 +143,10 @@ document.addEventListener("DOMContentLoaded", function () {
     function displaySearchResults(response, displayField) {
         const searchResults = document.getElementById("searchResults");
         searchResults.innerHTML = '';
-    
+
         const searchSongDiv = document.createElement("div");
         searchSongDiv.classList.add("search-song");
-    
+
         const resInfo = document.createElement("div");
         resInfo.classList.add("result-info");
         const resInfoType = document.createElement("div");
@@ -161,10 +158,10 @@ document.addEventListener("DOMContentLoaded", function () {
         resInfoShowMore.textContent = "Показати більше..";
         resInfo.appendChild(resInfoShowMore);
         searchSongDiv.appendChild(resInfo);
-    
+
         const searchAlbumDiv = document.createElement("div");
         searchAlbumDiv.classList.add("search-album");
-    
+
         const resAlbumInfo = document.createElement("div");
         resAlbumInfo.classList.add("result-info");
         const resAlbumInfoType = document.createElement("div");
@@ -176,10 +173,10 @@ document.addEventListener("DOMContentLoaded", function () {
         resAlbumInfoShowMore.textContent = "Показати більше..";
         resAlbumInfo.appendChild(resAlbumInfoShowMore);
         searchAlbumDiv.appendChild(resAlbumInfo);
-    
+
         displayField.appendChild(searchSongDiv);
         displayField.appendChild(searchAlbumDiv);
-    
+
         if (response && response.$values) {
             const resultElements = response.$values.map(item => {
                 switch (item.type) {
@@ -195,12 +192,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     default:
                 }
             });
-    
+
         } else {
             searchResults.innerText = "No results found.";
         }
     }
-    
+
 
     async function getSong(songId) {
         try {
@@ -248,6 +245,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const artistDiv = document.createElement("div");
             artistDiv.classList.add("catalog-artist");
             artistDiv.textContent = song.artistName;
+            artistDiv.addEventListener("click", () => {
+                profile.renderUserProfile(song.artistId);
+            });
 
             songInformationDiv.appendChild(songPhotoDiv);
             songInformationDiv.appendChild(songNameDiv);
@@ -338,16 +338,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const userNameDiv = document.createElement("div");
         userNameDiv.classList.add("catalog-user-name");
         userNameDiv.textContent = item.name;
-        userNameDiv.addEventListener("click", () => {
-            console.log(`User clicked with ID: ${item.id}`);
-        });
 
         userInformationDiv.appendChild(userNameDiv);
         userDiv.appendChild(userInformationDiv);
-
-        userDiv.addEventListener('dblclick', () => {
-            console.log(`User double clicked with ID: ${item.id}`);
-        });
 
         let contextMenuOpen = false;
 
@@ -361,7 +354,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 const menuItem1 = document.createElement('div');
                 menuItem1.textContent = 'Переглянути профіль';
                 menuItem1.addEventListener('click', () => {
-                    console.log(`View profile of user with ID: ${item.id}`);
                 });
 
                 menu.appendChild(menuItem1);
@@ -391,26 +383,26 @@ document.addEventListener("DOMContentLoaded", function () {
     function createAlbumElement(item, parentElement) {
         const albumDiv = document.createElement('div');
         albumDiv.classList.add('album');
-    
+
         const photoDiv = document.createElement('div');
         photoDiv.classList.add('album-photo');
         const image = document.createElement('img');
         image.src = "https://localhost:7219/Album/photo/" + item.id;
         photoDiv.appendChild(image);
         albumDiv.appendChild(photoDiv);
-    
+
         const titleDiv = document.createElement('div');
         titleDiv.classList.add('album-title');
         titleDiv.textContent = item.name;
         albumDiv.appendChild(titleDiv);
-    
+
         albumDiv.addEventListener("click", function () {
             songClass.renderAlbumByAlbumId(item.id);
         });
-    
+
         parentElement.appendChild(albumDiv);
     }
-    
+
 
     function createDefaultElement(item) {
         const defaultDiv = document.createElement("div");
@@ -466,7 +458,7 @@ document.addEventListener("DOMContentLoaded", function () {
         playlistsContainer.appendChild(playlistControl);
 
         const playlist = new Playlist();
-        playlist.renderUserPlaylistsInQuikAccess(userId);
+        playlist.renderUserPlaylistsInQuickAccess(userId);
     }
 
     function renderUsersFunctionality(user) {
@@ -495,16 +487,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
             let artistPanel = document.createElement("li");
             let linkOnArtistPanel = document.createElement("a");
-            linkOnArtistPanel.id = "artistPanel";
-            linkOnArtistPanel.innerText = "Панель артиста";
-            linkOnArtistPanel.href = "assets/pages/artistPanel.html";
+            linkOnArtistPanel.id = "adminPanel";
+            linkOnArtistPanel.href = "#";
 
+            let imgAdminPanel = document.createElement("img");
+            imgAdminPanel.src = "assets/images/icons/artist-panel.png";
+
+            linkOnArtistPanel.appendChild(imgAdminPanel);
             artistPanel.appendChild(linkOnArtistPanel);
-
+            
+            artistPanel.addEventListener("click", () => {
+                window.location.href = "assets/pages/artistPanel.html";
+            });
             navigationOnMenu.appendChild(artistPanel);
         }
     }
-    
+
     okButtonCreatePlaylistModal.onclick = function () {
         var title = inputDataCreatePlaylistModal.value;
 
@@ -538,7 +536,7 @@ document.addEventListener("DOMContentLoaded", function () {
         modalAddSongToPlaylistModal.setAttribute("data-song-id", sondId);
 
         selectAddSongToPlaylistModal.innerHTML = "";
-    
+
         try {
             const playlists = await playlist.getUserPlaylists(userId);
             for (const playlist of playlists.$values) {
