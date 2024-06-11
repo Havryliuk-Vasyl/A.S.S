@@ -29,7 +29,6 @@ class Profile {
     async renderUserProfile(userId) {
         const displayField = document.getElementById("displayField");
         if (!displayField) {
-            console.error("Display field not found");
             return;
         }
         displayField.innerHTML = '';

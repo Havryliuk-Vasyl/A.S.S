@@ -8,7 +8,6 @@
     flex-direction: column;
     text-align: center;
     color: white;
-    /* Додавання білого кольору тексту */
 }
 
 .albumInfo {
@@ -21,6 +20,10 @@
 
 .album-title {
     margin: 0;
+    margin-bottom: 1em;
+}
+
+.album-artist{
     margin-bottom: 1em;
 }
 

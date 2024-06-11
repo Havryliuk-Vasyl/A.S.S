@@ -1,10 +1,11 @@
-﻿using Backend.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Data.Entity;
 
 namespace Backend.Controllers
 {
+    [Authorize(Roles = "Admin")] 
     [Route("[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
@@ -14,6 +15,13 @@ namespace Backend.Controllers
         public AdminController(ApplicationDbContext context)
         {
             this.context = context;
+        }
+
+        [HttpGet("users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await context.Users.ToListAsync();
+            return Ok(users);
         }
 
         [HttpDelete("user")]
@@ -26,29 +34,28 @@ namespace Backend.Controllers
                 return BadRequest();
             }
 
-            context.Remove(userId);
+            context.Users.Remove(user);
             await context.SaveChangesAsync();
             return Ok();
         }
 
         [HttpPut("edituser")]
-        public async Task<ActionResult> EditUser(int userId, User newUser)
+        public async Task<IActionResult> EditUser(int userId, [FromBody] User newUser)
         {
-            User user = context.Users.FirstOrDefault(u => u.Id == userId);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
 
             if (user == null)
             {
                 return NotFound();
             }
 
-            user.Username = newUser.Username; 
+            user.Username = newUser.Username;
             user.Name = newUser.Name;
             user.Email = newUser.Email;
 
-            context.Update(user);
+            context.Users.Update(user);
             await context.SaveChangesAsync();
             return Ok();
         }
-
     }
 }
