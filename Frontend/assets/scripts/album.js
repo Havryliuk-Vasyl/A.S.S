@@ -82,7 +82,6 @@ class Song {
     }
 
     renderAlbum(albumData) {
-        console.log(albumData);
         const displayField = document.getElementById("displayField");
         displayField.innerHTML = '';
 

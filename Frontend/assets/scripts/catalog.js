@@ -45,7 +45,6 @@ class Catalog {
                 throw new Error("Помилка при отриманні списку пісень");
             }
             const data = await response.json();
-            console.log("Songs:", data);
             return data;
         } catch (error) {
             console.error(error);
@@ -56,8 +55,6 @@ class Catalog {
     async renderRecentSongs() {
         try {
             const songs = await this.getAudioList();
-            console.log(songs);
-
             const songsContainer = document.createElement("div");
             songsContainer.id = "songs-container";
             songsContainer.classList.add("container-style");
