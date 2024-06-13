@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
 {
-    [Authorize(Roles = "Admin")] 
     [Route("[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
