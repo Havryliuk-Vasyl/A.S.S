@@ -86,26 +86,26 @@ namespace Backend.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] UserLogin userLogin)
         {
-            User user = await context.Users.FirstOrDefaultAsync(u => u.Email == userLogin.email);
+            User user = null;
+            user = await context.Users.FirstOrDefaultAsync(u => u.Email == userLogin.email);
             if (user != null && user.Password == userLogin.password)
             {
                 var claims = new[]
                 {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Username),
-            new Claim("email", user.Email),
-            new Claim("status", user.status),
-            new Claim("id", user.Id.ToString()),
-            new Claim(ClaimTypes.Role, user.status),
-            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-        };
+                    new Claim(JwtRegisteredClaimNames.Sub, user.Username),
+                    new Claim("email", user.Email),
+                    new Claim("status", user.status),
+                    new Claim("id", user.Id.ToString()),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+                };
 
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("feajfw8v8rr2nv0ruwrm2rnr2ar9a2ir9uv990mq29rvm2ar"));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
                 var expires = DateTime.UtcNow.AddDays(7);
 
                 var token = new JwtSecurityToken(
-                    issuer: "flamermusicapi.com",
-                    audience: "yourapi",
+                    issuer: "flamermusic.com",
+                    audience: "flamermusicapi",
                     claims: claims,
                     expires: expires,
                     signingCredentials: creds
@@ -206,7 +206,7 @@ namespace Backend.Controllers
 
                 var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(avatar.FileName);
 
-                var uploadsFolder = Path.Combine(_userPhotoFilePath, uniqueFileName);   
+                var uploadsFolder = Path.Combine(_userPhotoFilePath, uniqueFileName);
 
                 using (var stream = new FileStream(uploadsFolder, FileMode.Create))
                 {
