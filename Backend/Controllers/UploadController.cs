@@ -1,10 +1,5 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using Backend.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
@@ -61,7 +56,7 @@ namespace Backend.Controllers
                     };
                     _context.AlbumPhotos.Add(photoAlbum);
 
-                    await _context.SaveChangesAsync(); 
+                    await _context.SaveChangesAsync();
 
 
                     for (int i = 0; i < audioUploadModel.AudioFiles.Count; i++)

@@ -1,8 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Backend.Models
+﻿namespace Backend.Models
 {
     public class AudioUploadModel
     {
@@ -11,7 +7,7 @@ namespace Backend.Models
         public List<IFormFile> AudioFiles { get; set; }
         public List<string> SongTitles { get; set; }
         public IFormFile PhotoFile { get; set; }
-        public AudioUploadModel() 
+        public AudioUploadModel()
         {
             AudioFiles = new List<IFormFile>();
             SongTitles = new List<string>();

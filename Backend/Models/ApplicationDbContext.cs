@@ -16,6 +16,7 @@ namespace Backend.Models
         public DbSet<Album> Albums { get; set; }
         public DbSet<AlbumSongs> AlbumSongs { get; set; }
         public DbSet<AlbumPhoto> AlbumPhotos { get; set; }
+        public DbSet<BecomeArtistModel> BecomeArtistModels { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)

@@ -53,7 +53,7 @@
     gap: 10px;
     width: 100%;
     color: white;
-    padding: 1.5%;
+    padding: 0.9em;
 }
 
 .album-song:hover {
@@ -66,9 +66,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
-    /* Вирівнювання елементів на початку */
     flex-grow: 1;
-    /* Розширення для зайняття доступного простору */
 }
 
 .album-song-name {

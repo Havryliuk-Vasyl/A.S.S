@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
@@ -23,7 +22,7 @@ namespace Backend.Models
         [Column("id")]
         public int Id { get; set; }
         [Column("album")]
-        public int AlbumId { get; set; } 
+        public int AlbumId { get; set; }
         [Column("song")]
         public int SongId { get; set; }
         public Album Album { get; set; }

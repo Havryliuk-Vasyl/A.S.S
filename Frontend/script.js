@@ -27,7 +27,100 @@ var okButtonAddSongToPlaylistModal = document.getElementById("addSongToPlaylistO
 var cancelButtonAddSongToPlaylistModal = document.getElementById("addSongToPlaylistCancelButton");
 var selectAddSongToPlaylistModal = document.getElementById("playlistSelect");
 
-// Код, який виконується при загрузці всього контенту на сторінці
+var modalSettingModal = document.getElementById("settingsModal");
+var backButtonSettingsModal = document.getElementById("backButton");
+
+var becomeArtistModal = document.getElementById("becomeArtistModal");
+var cancelBecomeArtistBtn = document.getElementById("cancelBecomeArtist");
+var sendBecomeArtistBtn = document.getElementById("sendBecomeArtist");
+
+async function openSettingsModal(userId) {
+    modalSettingModal.style.display = "block";
+
+    const settingsDiv = document.getElementById("settings");
+    settingsDiv.innerHTML = ``;
+
+    const user = await new Profile().getUserById(userId);
+
+    if (user.status === "listener") {
+        const becomeArtistBtn = document.createElement("button");
+        becomeArtistBtn.id = "becomeArtist";
+        becomeArtistBtn.textContent = "Стати артистом";
+
+        becomeArtistBtn.addEventListener("click", () => {
+            openBecomeArtistModal(user.id);
+        });
+
+        settingsDiv.appendChild(becomeArtistBtn);
+    }
+
+    const buttonExit = document.createElement("button");
+    buttonExit.id = "exit";
+    buttonExit.textContent = "Вийти";
+
+    buttonExit.addEventListener("click", function () {
+        localStorage.removeItem('token');
+        window.location.href = 'assets/pages/authorization.html';
+    });
+
+    settingsDiv.appendChild(buttonExit);
+}
+
+function closeSettingsModal() {
+    modalSettingModal.style.display = "none";
+}
+
+backButtonSettingsModal.onclick = () => {
+    closeSettingsModal();
+}
+
+function openBecomeArtistModal(userId) {
+    modalSettingModal.style.display = "none";
+    becomeArtistModal.style.display = "block";
+
+    sendBecomeArtistBtn.addEventListener("click", () => {
+        const description = document.getElementById("description");
+        console.log(description.value);
+        var request = {
+            id: 0,
+            userId: userId,
+            description: description.value
+        }
+        console.log(request);
+        becomeArtistSend(request);
+    });
+}
+
+function closeBecomeArtistModal() {
+    becomeArtistModal.style.display = "none";
+    modalSettingModal.style.display = "block";
+}
+
+cancelBecomeArtistBtn.addEventListener("click", () => {
+    closeBecomeArtistModal();
+});
+
+async function becomeArtistSend(request) {
+    try {
+        const response = await fetch(`https://localhost:7219/User/becomeArtist`, {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(request)
+        });
+
+        if (!response.ok){
+
+        }
+
+        else closeBecomeArtistModal();
+    }
+    catch (error) {
+
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     let username = "";
     let userId;
@@ -81,6 +174,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("profile").addEventListener("click", () => {
         profile.renderPersonalProfile(userId);
     })
+
+    document.getElementById("settingsBtn").addEventListener("click", () => {
+        openSettingsModal(userId);
+    });
 
     document.getElementById("catalogBtn").addEventListener("click", function () {
         const catalog = new Catalog(userId);
@@ -495,7 +592,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             linkOnArtistPanel.appendChild(imgAdminPanel);
             artistPanel.appendChild(linkOnArtistPanel);
-            
+
             artistPanel.addEventListener("click", () => {
                 window.location.href = "assets/pages/artistPanel.html";
             });
@@ -548,5 +645,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (error) {
             console.error('Error retrieving playlists:', error);
         }
+    }
+
+    async function becomeArtist(userId) {
+
     }
 });

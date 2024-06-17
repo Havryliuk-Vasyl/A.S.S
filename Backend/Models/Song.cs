@@ -31,7 +31,7 @@ namespace Backend.Models
             this.AlbumTitle = albumTitle;
             this.DateShared = date_shared;
         }
-        public Song( string title, int artist, string albumTitle, DateOnly date_shared)
+        public Song(string title, int artist, string albumTitle, DateOnly date_shared)
         {
             this.Title = title;
             this.Artist = artist;

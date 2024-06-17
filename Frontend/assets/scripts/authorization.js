@@ -55,9 +55,7 @@ function login(){
         data: JSON.stringify(userLogin), 
         success: function(response) {
             console.log("Logged in successfully:", response);
-            // Збереження токену у локальному сховищі
             localStorage.setItem('token', response.token);
-            // Перенаправлення на іншу сторінку після успішної авторизації
             window.location.href = '../../index.html';
         },
         error: function(error) {

@@ -23,9 +23,13 @@ class Player{
         var songInformationDiv = document.createElement("div");
         songInformationDiv.classList.add("song-information");
     
+        const songArtistAndTitle = document.createElement("div");
+        songArtistAndTitle.classList.add("song-artist-and-title");
+
         var songImageDiv = document.createElement("div");
         songImageDiv.classList.add("song-image");
         var songImage = document.createElement("img");
+        songImage.id = "song-image";
         songImage.src = "";
         songImage.alt = "";
         songImageDiv.appendChild(songImage);
@@ -33,10 +37,6 @@ class Player{
         var songNameDiv = document.createElement("div");
         songNameDiv.classList.add("song-name");
         songNameDiv.id = "song-name";
-
-        songNameDiv.addEventListener("click", () => {
-
-        })
 
         var songNameLink = document.createElement("a");
         songNameLink.href = "#";
@@ -53,9 +53,11 @@ class Player{
         artistNameLink.id = "songArtist";
         artistNameDiv.appendChild(artistNameLink);
     
+        songArtistAndTitle.appendChild(songNameDiv);
+        songArtistAndTitle.appendChild(artistNameDiv);
+
         songInformationDiv.appendChild(songImageDiv);
-        songInformationDiv.appendChild(songNameDiv);
-        songInformationDiv.appendChild(artistNameDiv);
+        songInformationDiv.appendChild(songArtistAndTitle);
     
         var audioControlDiv = document.createElement("div");
         audioControlDiv.classList.add("audio-control");
@@ -98,7 +100,8 @@ class Player{
         audioControlDiv.appendChild(timeControlDiv);
     
         var volumeController = document.createElement("div");
-    
+        volumeController.classList.add("volume-controller");
+
         var volumeSliderInput = document.createElement("input");
         volumeSliderInput.type = "range";
         volumeSliderInput.id = "volumeSlider";
@@ -201,7 +204,8 @@ class Player{
             success: (response) => {
                 this.playSong(songId);
                 console.log(response);
-    
+
+                const songImage = document.getElementById("song-image");
                 const songTitle = document.getElementById("songName");
                 const songArtist = document.getElementById("songArtist");
     
@@ -211,9 +215,11 @@ class Player{
                     return clone;
                 }
     
+                const newSongImage = removeAllEventListeners(songImage);
                 const newSongTitle = removeAllEventListeners(songTitle);
                 const newSongArtist = removeAllEventListeners(songArtist);
     
+                newSongImage.src = "https://localhost:7219/Song/photo/songId/" + songId;
                 newSongTitle.textContent = response.title;
                 newSongArtist.textContent = response.artistName;
     

@@ -1,20 +1,18 @@
 using Backend.Models;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.Configure<FormOptions>(options =>
 {
-    options.MultipartBodyLengthLimit = 100000000000; 
+    options.MultipartBodyLengthLimit = 100000000000;
 });
 
 builder.WebHost.UseKestrel(options =>
 {
-    options.Limits.MaxRequestBodySize = 100000000000; 
+    options.Limits.MaxRequestBodySize = 100000000000;
 });
 
 builder.Services.AddControllers()

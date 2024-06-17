@@ -37,6 +37,7 @@ class Profile {
         userProfileDiv.classList.add("user-profile");
 
         const user = await this.getUserById(userId);
+        console.log(user);
         if (!user) {
             console.error("User data not found");
             return;
@@ -65,8 +66,13 @@ class Profile {
         statusDiv.classList.add("status");
         statusDiv.innerText = user.status;
 
+        const dateJoinedDiv = document.createElement("div");
+        dateJoinedDiv.classList.add("date-joined");
+        dateJoinedDiv.innerText = user.dateJoined;
+
         userInfoDiv.appendChild(usernameDiv);
         userInfoDiv.appendChild(statusDiv);
+        userInfoDiv.appendChild(dateJoinedDiv);
 
         profileInformationDiv.appendChild(profilePhoto);
         profileInformationDiv.appendChild(userInfoDiv);
@@ -121,8 +127,13 @@ class Profile {
         statusDiv.classList.add("status");
         statusDiv.innerText = user.status;
 
+        const dateJoinedDiv = document.createElement("div");
+        dateJoinedDiv.classList.add("date-joined");
+        dateJoinedDiv.innerText = user.dateJoined;
+
         userInfoDiv.appendChild(usernameDiv);
         userInfoDiv.appendChild(statusDiv);
+        userInfoDiv.appendChild(dateJoinedDiv);
 
         profileInformationDiv.appendChild(profilePhoto);
         profileInformationDiv.appendChild(userInfoDiv);

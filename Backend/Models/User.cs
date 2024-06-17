@@ -28,7 +28,7 @@ namespace Backend.Models
             this.Username = username;
             this.Name = name;
             this.Email = email;
-            this.Password = password; 
+            this.Password = password;
             this.DateJoined = date_joined;
             this.status = status;
         }
@@ -66,6 +66,25 @@ namespace Backend.Models
             this.name = name;
             this.email = email;
             this.password = password;
+        }
+    }
+
+    [Table("become_artist_requests")]
+    public class BecomeArtistModel
+    {
+        [Column("id")]
+        public int Id { get; set; }
+        [Column("userId")]
+        public int UserId { get; set; }
+        [Column("description")]
+        public string Description { get; set; }
+
+        public BecomeArtistModel() { }
+        public BecomeArtistModel(int id, int userId, string description)
+        {
+            Id = id;
+            UserId = userId;
+            Description = description;
         }
     }
 }
