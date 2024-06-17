@@ -1,8 +1,8 @@
-﻿using Azure.Core;
-using Backend.Models;
+﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Org.BouncyCastle.Bcpg;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -286,6 +286,21 @@ namespace Backend.Controllers
                 Console.WriteLine($"Unexpected error: {ex.Message}");
                 return StatusCode(500, "An unexpected error occurred.");
             }
+        }
+
+        [HttpPost("becomeArtist")]
+        public async Task<ActionResult> BecomeArtist(BecomeArtistModel newArtist)
+        {
+            User user = await context.Users.FirstOrDefaultAsync(u => u.Id == newArtist.UserId);
+
+            if (user == null )
+            {
+                return BadRequest();
+            }
+
+            context.BecomeArtistModels.Add(newArtist);
+            await context.SaveChangesAsync();
+            return Ok();
         }
     }
 }

@@ -1,9 +1,6 @@
 ﻿using Backend.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.AccessControl;
 
 namespace Backend.Controllers
 {
@@ -158,7 +155,7 @@ namespace Backend.Controllers
         public async Task<ActionResult> GetPhoto(int playlistId)
         {
             var playlistPhoto = await context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
-            
+
             if (playlistPhoto == null)
                 return NotFound();
 
@@ -283,14 +280,14 @@ namespace Backend.Controllers
             {
                 Playlist playlist = await context.Playlists.FirstOrDefaultAsync(p => p.Id == playlistId);
 
-                if (playlist == null )
+                if (playlist == null)
                 {
                     return NotFound();
                 }
 
                 if (!string.IsNullOrEmpty(newPlaylistName))
                 {
-                    playlist.Title= newPlaylistName;
+                    playlist.Title = newPlaylistName;
                 }
                 else
                 {

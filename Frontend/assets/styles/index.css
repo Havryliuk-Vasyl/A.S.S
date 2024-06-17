@@ -198,6 +198,22 @@ button:hover {
     border-radius: 1em;
 }
 
+.settings-modal-content{
+    background-color: rgb(29, 29, 29);
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%;
+    border-radius: 1em;
+}
+
+.become-artist-modal{
+    background-color: rgb(29, 29, 29);
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%;
+    border-radius: 1em;
+}
+
 .create-playlist-close {
     color: #aaa;
     float: right;

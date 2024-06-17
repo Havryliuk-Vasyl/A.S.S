@@ -1,8 +1,6 @@
 ﻿using Backend.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Security.AccessControl;
 
 namespace Backend.Controllers
 {
@@ -65,7 +63,7 @@ namespace Backend.Controllers
 
                 return Ok(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
@@ -85,7 +83,7 @@ namespace Backend.Controllers
                 return NotFound();
             }
 
-            byte[] photoBytes = await System.IO.File.ReadAllBytesAsync(photo.FilePath); 
+            byte[] photoBytes = await System.IO.File.ReadAllBytesAsync(photo.FilePath);
 
             return File(photoBytes, "image/jpeg");
         }
@@ -127,7 +125,7 @@ namespace Backend.Controllers
 
                 await context.SaveChangesAsync();
 
-                return NoContent(); 
+                return NoContent();
             }
             catch (Exception ex)
             {

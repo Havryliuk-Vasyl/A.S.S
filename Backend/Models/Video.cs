@@ -1,5 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
@@ -12,7 +11,8 @@ namespace Backend.Models
         public int FrameRate { get; set; }
         public string FilePath { get; set; }
 
-        public Video(int id, int songId, float duration, int frameRate, string filePath) {
+        public Video(int id, int songId, float duration, int frameRate, string filePath)
+        {
             Id = id;
             SongId = songId;
             Duration = duration;

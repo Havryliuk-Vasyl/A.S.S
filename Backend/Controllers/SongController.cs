@@ -1,6 +1,8 @@
 ﻿using Azure;
 using Backend.Models;
+using K4os.Compression.LZ4.Streams;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
@@ -130,6 +132,25 @@ namespace Backend.Controllers
         public async Task<IActionResult> GetSongPhoto(int id)
         {
             var photo = await context.Photos.FirstOrDefaultAsync(p => p.Id == id);
+            if (photo == null)
+            {
+                return NotFound();
+            }
+
+            if (!System.IO.File.Exists(photo.FilePath))
+            {
+                return NotFound();
+            }
+
+            byte[] photoBytes = System.IO.File.ReadAllBytes(photo.FilePath);
+            
+            return File(photoBytes, "image/jpeg");
+        }
+        
+        [HttpGet("photo/songId/{id}")]
+        public async Task<IActionResult> GetSongPhotoBySong(int id)
+        {
+            var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == id);
             if (photo == null)
             {
                 return NotFound();

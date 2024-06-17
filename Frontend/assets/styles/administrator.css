@@ -224,3 +224,35 @@ a{
 .user-control .user-control-delete-user:hover{
     background-color: rgb(144, 0, 0);
 }
+
+button{
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin: 0.5em;
+    padding: 1em;
+    background-color: #6a5acd;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#confirm{
+    background-color: green;
+}
+
+#cancel{
+    background-color: red;
+}
+
+.requests{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    width: 100%;
+    height: fit-content;
+    background-color: rgb(29, 29, 29);
+    border-radius: 1em;
+    padding: 1em;
+}
