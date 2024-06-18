@@ -25,7 +25,7 @@ namespace Backend.Controllers
 
             var userResults = await context.Users
                 .Where(u => u.Username.Contains(data))
-                .Select(u => new SearchResult { Type = "User", Name = u.Name, Id = u.Id })
+                .Select(u => new SearchResult { Type = "User", Name = u.Username, Id = u.Id })
                 .ToListAsync();
 
             var songResults = await context.Songs

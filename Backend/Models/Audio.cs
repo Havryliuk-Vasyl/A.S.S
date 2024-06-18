@@ -13,7 +13,8 @@ namespace Backend.Models
         public float Duration { get; set; }
         [Column("file_path")]
         public string FilePath { get; set; }
-
+        [ForeignKey("Song")]
+        public Song SongNavigation { get; set; }
         public Audio() { }
         public Audio(int id, int song, float duration, string filePath)
         {

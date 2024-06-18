@@ -39,7 +39,8 @@ namespace Backend.Controllers
             {
                 var album = await context.Albums
                     .Include(a => a.AlbumSongs)
-                    .ThenInclude(als => als.Song)
+                        .ThenInclude(als => als.Song)
+                            .ThenInclude(s => s.Audios)
                     .FirstOrDefaultAsync(a => a.Id == albumId);
 
                 if (album == null)
@@ -54,11 +55,26 @@ namespace Backend.Controllers
                     return BadRequest();
                 }
 
+                var albumSongs = album.AlbumSongs.Select(als => new
+                {
+                    SongId = als.Song.Id,
+                    SongTitle = als.Song.Title,
+                    Audios = als.Song.Audios.Select(audio => new
+                    {
+                        AudioId = audio.Id,
+                        audio.Duration,
+                        audio.FilePath
+                    })
+                });
+
                 var result = new
                 {
-                    Album = album,
+                    AlbumId = album.Id,
+                    AlbumTitle = album.Title,
+                    DateShared = album.DateShared,
                     ArtistId = artist.Id,
                     ArtistUsername = artist.Username,
+                    Songs = albumSongs
                 };
 
                 return Ok(result);
@@ -138,9 +154,11 @@ namespace Backend.Controllers
         {
             try
             {
+                // Знаходимо альбом, який містить дану пісню
                 var album = await context.Albums
                     .Include(a => a.AlbumSongs)
-                    .ThenInclude(als => als.Song)
+                        .ThenInclude(als => als.Song)
+                            .ThenInclude(s => s.Audios)
                     .FirstOrDefaultAsync(a => a.AlbumSongs.Any(als => als.SongId == songId));
 
                 if (album == null)
@@ -148,6 +166,7 @@ namespace Backend.Controllers
                     return NotFound();
                 }
 
+                // Знаходимо артиста, який створив альбом
                 var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
 
                 if (artist == null)
@@ -155,20 +174,34 @@ namespace Backend.Controllers
                     return BadRequest();
                 }
 
+                var albumSongs = album.AlbumSongs.Select(als => new
+                {
+                    SongId = als.Song.Id,
+                    SongTitle = als.Song.Title,
+                    Audios = als.Song.Audios.Select(audio => new
+                    {
+                        AudioId = audio.Id,
+                        audio.Duration,
+                        audio.FilePath
+                    })
+                });
+
                 var result = new
                 {
-                    Album = album,
+                    AlbumId = album.Id,
+                    AlbumTitle = album.Title,
+                    DateShared = album.DateShared,
                     ArtistId = artist.Id,
                     ArtistUsername = artist.Username,
+                    Songs = albumSongs
                 };
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+                return BadRequest(ex.Message);
             }
         }
-
     }
 }

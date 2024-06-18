@@ -244,7 +244,7 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: fit-content;
+    height: 100%;
     align-items: center;
     background-color: rgb(29, 29, 29);
     border-radius: 1em;
@@ -281,6 +281,15 @@ input[type="text"] {
 .search-album {
     display: flex;
     flex-direction: row;
+}
+
+.user-div{
+    display: flex;
+    flex-direction: row;
+}
+
+.catalog-user{
+    margin: 0.5em;
 }
 
 .album {

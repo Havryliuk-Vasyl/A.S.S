@@ -102,115 +102,116 @@ class Playlist {
 
     async renderSelectedPlaylist(playlistId, userId) {
         const displayField = document.getElementById("displayField");
-
+    
         try {
             const playlistDiv = document.createElement("div");
             playlistDiv.classList.add("playlist-in-display-field");
-
+    
             const playlistData = await this.getUserPlaylist(playlistId);
             console.log(playlistData);
-
+    
             const playlistInformationDiv = document.createElement("div");
             playlistInformationDiv.classList.add("playlist-information");
-
+    
             const playlistImgDiv = document.createElement("div");
             playlistImgDiv.classList.add("playlist-image");
-
+    
             const playlistImg = document.createElement("img");
             playlistImg.id = "playlist-image";
             playlistImg.src = "../assets/images/icons/empty-playlist.png";
-
+    
             try {
-                const response = await fetch(`https://localhost:7219/Playlist/photo?playlistId=${playlistData.playlist.id}`);
+                const response = await fetch(`https://localhost:7219/Playlist/photo?playlistId=${playlistData.playlistId}`);
                 if (response.ok) {
-                    playlistImg.src = `https://localhost:7219/Playlist/photo?playlistId=${playlistData.playlist.id}`;
+                    playlistImg.src = `https://localhost:7219/Playlist/photo?playlistId=${playlistData.playlistId}`;
                 }
             } catch (error) {
+                console.error(error);
             }
-
+    
             playlistImgDiv.appendChild(playlistImg);
-
+    
             const playlistName = document.createElement("div");
             playlistName.classList.add("playlist-name");
             playlistName.id = "playlist-name";
-            playlistName.textContent = playlistData.playlist.title;
-
+            playlistName.textContent = playlistData.playlistTitle;
+    
             playlistInformationDiv.appendChild(playlistImgDiv);
             playlistInformationDiv.appendChild(playlistName);
-
+    
             playlistInformationDiv.addEventListener("click", () => {
                 this.openEditPlaylistModal(playlistInformationDiv, playlistId, userId);
             });
-
+    
             const songsContainer = document.createElement("div");
             songsContainer.id = "songs-container";
             songsContainer.classList.add("container-style");
-
+    
             displayField.innerHTML = "";
-
+    
             playlistDiv.appendChild(playlistInformationDiv);
-
-            if (playlistData.songs.$values == 0) {
+    
+            if (playlistData.songs.$values.length === 0) {
                 const emptyPlaylist = document.createElement("div");
-                emptyPlaylist.textContent = "Плейлист '" + playlistData.playlist.title + "' порожній!";
-
+                emptyPlaylist.textContent = `Плейлист '${playlistData.playlistTitle}' порожній!`;
+    
                 playlistDiv.appendChild(emptyPlaylist);
-            }
-            else {
+            } else {
                 playlistData.songs.$values.forEach(item => {
+                    console.log(item);
                     const songDiv = document.createElement("div");
                     songDiv.classList.add("catalog-song");
-                    const songId = item.audio.song;
+                    const songId = item.songId;
                     songDiv.setAttribute("data-id", songId);
-
+    
                     const songInformationDiv = document.createElement("div");
                     songInformationDiv.classList.add("catalog-song-information");
-
+    
                     const songPhotoDiv = document.createElement("div");
                     songPhotoDiv.classList.add("catalog-song-photo");
                     const songPhotoImg = document.createElement("img");
-
-                    songPhotoImg.src = "https://localhost:7219/Song/photo/" + item.photo.id;
+    
+                    songPhotoImg.src = `https://localhost:7219/Song/photo/${item.photo.id}`;
                     songPhotoImg.alt = "Photo";
                     songPhotoImg.style.maxWidth = "50px";
                     songPhotoImg.style.maxHeight = "50px";
                     songPhotoImg.style.width = "100%";
                     songPhotoImg.style.height = "100%";
                     songPhotoDiv.appendChild(songPhotoImg);
-
+    
                     // Додаємо ім'я та виконавця пісні
                     const songNameDiv = document.createElement("div");
                     songNameDiv.classList.add("catalog-song-name");
                     songNameDiv.textContent = item.songTitle;
-
-                    songNameDiv.addEventListener("click", ()=>{
+    
+                    songNameDiv.addEventListener("click", () => {
                         const songClass = new Song();
                         songClass.renderAlbumBySongId(item.songId);
                     });
-
+    
                     const artistDiv = document.createElement("div");
                     artistDiv.classList.add("catalog-artist");
                     artistDiv.textContent = item.artistUsername;
-
-                    artistDiv.addEventListener("click", () =>{
+    
+                    artistDiv.addEventListener("click", () => {
                         const userProfile = new Profile();
                         userProfile.renderUserProfile(item.artistId);
                     });
-
+    
                     // Додаємо блок інформації про пісню до основного блоку пісні
                     songInformationDiv.appendChild(songPhotoDiv);
                     songInformationDiv.appendChild(songNameDiv);
                     songInformationDiv.appendChild(artistDiv);
-
+    
                     // Створюємо блок управління піснею
                     const songPlayControlDiv = document.createElement("div");
                     songPlayControlDiv.classList.add("catalog-song-play-control");
-
+    
                     // Додаємо блок тривалості пісні
                     const durationDiv = document.createElement("div");
                     durationDiv.classList.add("catalog-duration");
-                    durationDiv.textContent = this.formatDuration(item.audio.duration);
-
+                    durationDiv.textContent = this.formatDuration(item.audios.$values[0].duration);
+    
                     // Додаємо кнопку "Відтворити"
                     const playButtonDiv = document.createElement("div");
                     playButtonDiv.classList.add("catalog-play-button");
@@ -219,55 +220,55 @@ class Playlist {
                         const player = new Player();
                         player.play(songId);
                     });
-
+    
                     songPlayControlDiv.appendChild(durationDiv);
                     songPlayControlDiv.appendChild(playButtonDiv);
-
+    
                     songDiv.appendChild(songInformationDiv);
                     songDiv.appendChild(songPlayControlDiv);
-
+    
                     songDiv.addEventListener('dblclick', () => {
                         const player = new Player();
                         player.play(songId);
                     });
-
+    
                     let contextMenuOpen = false;
-
+    
                     songDiv.addEventListener('contextmenu', (event) => {
                         event.preventDefault();
-
+    
                         if (!contextMenuOpen) {
                             const menu = document.createElement('div');
                             menu.classList.add('context-menu');
-
+    
                             const menuItem1 = document.createElement('div');
                             menuItem1.textContent = 'Відтворити';
                             menuItem1.addEventListener('click', () => {
                                 const player = new Player();
                                 player.play(songId);
                             });
-
+    
                             const menuItem2 = document.createElement('div');
                             menuItem2.textContent = 'Видалити з плейлиста';
                             menuItem2.addEventListener('click', () => {
                                 this.deleteSongFromPlaylist(playlistId, songId);
                             });
-
+    
                             menu.appendChild(menuItem1);
                             menu.appendChild(menuItem2);
-
+    
                             menu.style.top = event.clientY + 'px';
                             menu.style.left = event.clientX + 'px';
-
+    
                             document.body.appendChild(menu);
-
+    
                             contextMenuOpen = true;
-
+    
                             document.addEventListener('click', () => {
                                 menu.remove();
                                 contextMenuOpen = false;
                             }, { once: true });
-
+    
                             menu.addEventListener('click', () => {
                                 menu.remove();
                                 contextMenuOpen = false;
@@ -278,25 +279,26 @@ class Playlist {
                 });
                 playlistDiv.appendChild(songsContainer);
             }
-
-            const playlistConrolDiv = document.createElement("div");
-            playlistConrolDiv.classList.add("playlist-control");
-
+    
+            const playlistControlDiv = document.createElement("div");
+            playlistControlDiv.classList.add("playlist-control");
+    
             const deleteButton = document.createElement("div");
             deleteButton.classList.add("delete-playlist");
-            deleteButton.textContent = "Видалити альбом";
+            deleteButton.textContent = "Видалити плейлист";
             deleteButton.addEventListener("click", () => {
                 this.deletePlaylist(playlistId, userId);
             });
-            playlistConrolDiv.appendChild(deleteButton);
-
-            playlistDiv.appendChild(playlistConrolDiv);
-
+            playlistControlDiv.appendChild(deleteButton);
+    
+            playlistDiv.appendChild(playlistControlDiv);
+    
             displayField.appendChild(playlistDiv);
         } catch (error) {
             console.error(error);
         }
     }
+    
 
     async renderCatalogOfUsersPlaylist(userId) {
         const displayField = document.getElementById("displayField");

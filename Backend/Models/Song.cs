@@ -17,10 +17,10 @@ namespace Backend.Models
         public string AlbumTitle { get; set; }
         [Column("date_shared")]
         public DateOnly DateShared { get; set; }
-
+        public ICollection<Audio> Audios { get; set; }
         public Song()
         {
-
+            Audios = new List<Audio>();
         }
 
         public Song(int id, string title, int artist, string albumTitle, DateOnly date_shared)
@@ -29,7 +29,8 @@ namespace Backend.Models
             this.Title = title;
             this.Artist = artist;
             this.AlbumTitle = albumTitle;
-            this.DateShared = date_shared;
+            this.DateShared = date_shared; 
+            Audios = new List<Audio>();
         }
         public Song(string title, int artist, string albumTitle, DateOnly date_shared)
         {
@@ -37,6 +38,7 @@ namespace Backend.Models
             this.Artist = artist;
             this.AlbumTitle = albumTitle;
             this.DateShared = date_shared;
+            Audios = new List<Audio>();
         }
     }
 }

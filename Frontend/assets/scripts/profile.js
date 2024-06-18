@@ -123,6 +123,11 @@ class Profile {
         usernameDiv.id = "username";
         usernameDiv.innerText = user.username;
 
+        const nameDiv = document.createElement("div");
+        nameDiv.classList.add("name");
+        nameDiv.id = "name";
+        nameDiv.innerText = user.name;
+
         const statusDiv = document.createElement("div");
         statusDiv.classList.add("status");
         statusDiv.innerText = user.status;
@@ -130,8 +135,9 @@ class Profile {
         const dateJoinedDiv = document.createElement("div");
         dateJoinedDiv.classList.add("date-joined");
         dateJoinedDiv.innerText = user.dateJoined;
-
+        
         userInfoDiv.appendChild(usernameDiv);
+        userInfoDiv.appendChild(nameDiv);
         userInfoDiv.appendChild(statusDiv);
         userInfoDiv.appendChild(dateJoinedDiv);
 

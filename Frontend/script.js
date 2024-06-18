@@ -250,11 +250,11 @@ document.addEventListener("DOMContentLoaded", function () {
         resInfoType.classList.add("result-info-type");
         resInfoType.textContent = "Пісні";
         resInfo.appendChild(resInfoType);
-        const resInfoShowMore = document.createElement("div");
-        resInfoShowMore.classList.add("result-info-show-more");
-        resInfoShowMore.textContent = "Показати більше..";
-        resInfo.appendChild(resInfoShowMore);
-        searchSongDiv.appendChild(resInfo);
+        // const resInfoShowMore = document.createElement("div");
+        // resInfoShowMore.classList.add("result-info-show-more");
+        // resInfoShowMore.textContent = "Показати більше..";
+        // resInfo.appendChild(resInfoShowMore);
+        //searchSongDiv.appendChild(resInfo);
 
         const searchAlbumDiv = document.createElement("div");
         searchAlbumDiv.classList.add("search-album");
@@ -265,14 +265,36 @@ document.addEventListener("DOMContentLoaded", function () {
         resAlbumInfoType.classList.add("result-info-type");
         resAlbumInfoType.textContent = "Альбоми";
         resAlbumInfo.appendChild(resAlbumInfoType);
-        const resAlbumInfoShowMore = document.createElement("div");
-        resAlbumInfoShowMore.classList.add("result-info-show-more");
-        resAlbumInfoShowMore.textContent = "Показати більше..";
-        resAlbumInfo.appendChild(resAlbumInfoShowMore);
-        searchAlbumDiv.appendChild(resAlbumInfo);
+        // const resAlbumInfoShowMore = document.createElement("div");
+        // resAlbumInfoShowMore.classList.add("result-info-show-more");
+        // resAlbumInfoShowMore.textContent = "Показати більше..";
+        // resAlbumInfo.appendChild(resAlbumInfoShowMore);
+        //searchAlbumDiv.appendChild(resAlbumInfo);
+        const albumsDiv = document.createElement("div");
+        albumsDiv.classList.add("albums-div");
+
+        const searchUserDiv = document.createElement("div");
+        searchUserDiv.classList.add("search-user");
+
+        const searchUserInfo = document.createElement("div");
+        searchUserInfo.classList.add("result-info");
+        const resUserType = document.createElement("div");
+        resUserType.classList.add("result-info-type");
+        resUserType.textContent = "Користувачі";
+        searchUserInfo.appendChild(resUserType);
+        // const resUserInfoShowMore = document.createElement("div");
+        // resUserInfoShowMore.classList.add("result-info-show-more");
+        // resUserInfoShowMore.textContent = "Показати більше..";
+        // searchUserInfo.appendChild(resUserInfoShowMore);
+        const usersDiv = document.createElement("div");
+        usersDiv.classList.add("user-div");
+        
+        //searchUserDiv.appendChild(searchUserInfo);
+        searchUserDiv.appendChild(usersDiv);
 
         displayField.appendChild(searchSongDiv);
         displayField.appendChild(searchAlbumDiv);
+        displayField.appendChild(searchUserDiv);
 
         if (response && response.$values) {
             const resultElements = response.$values.map(item => {
@@ -281,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         createSongElement(item, searchSongDiv);
                         break;
                     case 'User':
-                        // resultDiv = createUserElement(item);
+                        createUserElement(item, usersDiv);
                         break;
                     case 'Album':
                         createAlbumElement(item, searchAlbumDiv);
@@ -424,57 +446,35 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    function createUserElement(item) {
+    function createUserElement(item, searchUserDiv) {
+        console.log(item);
         const userDiv = document.createElement("div");
         userDiv.classList.add("catalog-user");
         userDiv.setAttribute("data-id", item.id);
-
+    
         const userInformationDiv = document.createElement("div");
         userInformationDiv.classList.add("catalog-user-information");
+    
+        const photoDiv = document.createElement('div');
+        photoDiv.classList.add('album-photo');
+        const image = document.createElement('img');
+        image.src = "https://localhost:7219/User/avatar/" + item.id;
+        photoDiv.appendChild(image);
+        userDiv.appendChild(photoDiv);
 
         const userNameDiv = document.createElement("div");
         userNameDiv.classList.add("catalog-user-name");
         userNameDiv.textContent = item.name;
-
         userInformationDiv.appendChild(userNameDiv);
+    
         userDiv.appendChild(userInformationDiv);
-
-        let contextMenuOpen = false;
-
-        userDiv.addEventListener('contextmenu', (event) => {
-            event.preventDefault();
-
-            if (!contextMenuOpen) {
-                const menu = document.createElement('div');
-                menu.classList.add('context-menu');
-
-                const menuItem1 = document.createElement('div');
-                menuItem1.textContent = 'Переглянути профіль';
-                menuItem1.addEventListener('click', () => {
-                });
-
-                menu.appendChild(menuItem1);
-
-                menu.style.top = event.clientY + 'px';
-                menu.style.left = event.clientX + 'px';
-
-                document.body.appendChild(menu);
-
-                contextMenuOpen = true;
-
-                document.addEventListener('click', () => {
-                    menu.remove();
-                    contextMenuOpen = false;
-                }, { once: true });
-
-                menu.addEventListener('click', () => {
-                    menu.remove();
-                    contextMenuOpen = false;
-                });
-            }
+        
+        userDiv.addEventListener('click', () => {
+            const userProfile = new Profile();
+            userProfile.renderUserProfile(item.id); 
         });
-
-        return userDiv;
+    
+        searchUserDiv.appendChild(userDiv);
     }
 
     function createAlbumElement(item, parentElement) {
