@@ -179,12 +179,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         function saveChanges() {
             const fields = ["username", "name"];
+            const updatedValues = {};
+
+            updatedValues["userId"] = user.id;
+
             fields.forEach(field => {
                 const input = document.getElementById(`input-${field}`);
                 const value = input.value;
+                updatedValues[field] = value;
                 const div = document.getElementById(field);
                 div.innerText = `${field.charAt(0).toUpperCase() + field.slice(1)}: ${value}`;
             });
+
+            updateUser(updatedValues);
 
             editButton.textContent = "Редагувати користувача";
             editButton.removeEventListener("click", saveChanges);
@@ -205,6 +212,27 @@ document.addEventListener("DOMContentLoaded", () => {
             editButton.addEventListener("click", enableEditing);
 
             cancelButton.style.display = "none";
+        }
+
+        async function updateUser(updatedValues) {
+            try {
+                const response = await fetch(`https://localhost:7219/Admin/edituser`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(updatedValues)
+                });
+
+                if (!response.ok) {
+
+                }
+                console.log(updatedValues.userId);
+                loadUsers();
+            }
+            catch (error) {
+                loadUsers();
+            }
         }
 
         const userProfileDiv = document.createElement("div");
@@ -332,11 +360,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 requestsList.appendChild(requestElement);
 
                 confirmButton.addEventListener("click", () => {
-
+                    confirmRequest(request);
                 });
 
-                cancelButton.addEventListener("click", () =>{
-                    
+                cancelButton.addEventListener("click", () => {
+                    cencelRequest(request);
                 });
             });
 
@@ -359,6 +387,46 @@ document.addEventListener("DOMContentLoaded", () => {
             return data;
         } catch (error) {
             console.error('An error occurred while fetching data:', error);
+        }
+    }
+
+    async function confirmRequest(request) {
+        try {
+            const response = await fetch(`https://localhost:7219/Admin/confirmBecomeArtist`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(request)
+            });
+
+            if (!response.ok) {
+            }
+
+            loadRequests();
+        }
+        catch (error) {
+
+        }
+    }
+
+    async function cencelRequest(request) {
+        try {
+            const response = await fetch(`https://localhost:7219/Admin/cancleBecomeArtist`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(request)
+            });
+
+            if (!response.ok) {
+            }
+
+            loadRequests();
+        }
+        catch (error) {
+
         }
     }
 });

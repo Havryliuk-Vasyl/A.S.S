@@ -174,7 +174,8 @@ namespace Backend.Controllers
                 var playlist = await context.Playlists
                     .Where(p => p.Id == playlistId)
                     .Include(p => p.PlaylistSongs)
-                    .ThenInclude(ps => ps.Song)
+                        .ThenInclude(ps => ps.Song)
+                            .ThenInclude(s => s.Audios)
                     .FirstOrDefaultAsync();
 
                 if (playlist == null)
@@ -186,11 +187,10 @@ namespace Backend.Controllers
 
                 foreach (var ps in playlist.PlaylistSongs)
                 {
-                    var song = await context.Songs.FirstOrDefaultAsync(s => s.Id == ps.Song.Id);
-                    var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == ps.Song.Id);
-                    var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == ps.Song.Id);
-
+                    var song = ps.Song;
                     var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == song.Artist);
+
+                    var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == song.Id);
 
                     var songResponse = new
                     {
@@ -198,7 +198,12 @@ namespace Backend.Controllers
                         SongTitle = song.Title,
                         ArtistId = artist.Id,
                         ArtistUsername = artist.Username,
-                        Audio = audio,
+                        Audios = song.Audios.Select(audio => new
+                        {
+                            AudioId = audio.Id,
+                            audio.Duration,
+                            audio.FilePath
+                        }),
                         Photo = photo
                     };
 
@@ -207,7 +212,8 @@ namespace Backend.Controllers
 
                 var response = new
                 {
-                    playlist = playlist,
+                    PlaylistId = playlist.Id,
+                    PlaylistTitle = playlist.Title,
                     Songs = songsResponse
                 };
 
@@ -218,6 +224,7 @@ namespace Backend.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving playlist with songs: {ex.Message}");
             }
         }
+
 
         [HttpDelete("{playlistId}/RemoveSong/{songId}")]
         public async Task<ActionResult> RemoveSongFromPlaylist(int playlistId, int songId)

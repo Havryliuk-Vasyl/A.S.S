@@ -39,9 +39,9 @@ namespace Backend.Controllers
         }
 
         [HttpPut("edituser")]
-        public async Task<IActionResult> EditUser(int userId, [FromBody] User newUser)
+        public async Task<IActionResult> EditUser([FromBody] EditUserModel newUser)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == newUser.UserId);
 
             if (user == null)
             {
@@ -50,7 +50,6 @@ namespace Backend.Controllers
 
             user.Username = newUser.Username;
             user.Name = newUser.Name;
-            user.Email = newUser.Email;
 
             context.Users.Update(user);
             await context.SaveChangesAsync();
@@ -88,7 +87,7 @@ namespace Backend.Controllers
                 return BadRequest();
             }
 
-            context.BecomeArtistModels.Remove(model);
+            context.BecomeArtistModels.Remove(becomeArtistModel);
 
             await context.SaveChangesAsync();
 
@@ -98,7 +97,6 @@ namespace Backend.Controllers
         [HttpGet("requests")]
         public async Task<ActionResult<List<RequestResponse>>> GetRequests()
         {
-            // Use a join to combine the two lists based on UserId and Id
             var requests = await (
                 from bam in context.BecomeArtistModels
                 join u in context.Users on bam.UserId equals u.Id
@@ -120,6 +118,12 @@ namespace Backend.Controllers
             public int UserId { get; set; }
             public string UserUsername { get; set; }
             public string Description { get; set; }
+        }
+        public class EditUserModel
+        {
+            public int UserId { get; set; }
+            public string Username { get; set; }
+            public string Name { get; set; }
         }
     }
 }
