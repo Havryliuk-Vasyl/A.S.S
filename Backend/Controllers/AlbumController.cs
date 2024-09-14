@@ -1,6 +1,8 @@
 ﻿using Backend.Models;
+using Backend.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace Backend.Controllers
 {
@@ -8,200 +10,99 @@ namespace Backend.Controllers
     [ApiController]
     public class AlbumController : ControllerBase
     {
-        private readonly ApplicationDbContext context;
+        private readonly IAlbumService _albumService;
 
-        public AlbumController(ApplicationDbContext context)
+        public AlbumController(IAlbumService albumService)
         {
-            this.context = context;
+            _albumService = albumService;
         }
 
         [HttpGet("artist/{artistId}")]
         public async Task<IActionResult> GetAlbumsByArtist(int artistId)
         {
-            try
+            var response = await _albumService.GetAlbumsByArtist(artistId);
+            if (response.Success)
             {
-                var albums = await context.Albums
-                    .Where(a => a.User == artistId)
-                    .ToListAsync();
-
-                return Ok(albums);
+                return Ok(response);
             }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+            return StatusCode(StatusCodes.Status500InternalServerError, response);
         }
 
         [HttpGet("album/{albumId}")]
         public async Task<IActionResult> GetAlbumByAlbumId(int albumId)
         {
-            try
+            var response = await _albumService.GetAlbumByAlbumId(albumId);
+            if (response.Success)
             {
-                var album = await context.Albums
-                    .Include(a => a.AlbumSongs)
-                        .ThenInclude(als => als.Song)
-                            .ThenInclude(s => s.Audios)
-                    .FirstOrDefaultAsync(a => a.Id == albumId);
-
-                if (album == null)
-                {
-                    return BadRequest();
-                }
-
-                var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
-
-                if (artist == null)
-                {
-                    return BadRequest();
-                }
-
-                var albumSongs = album.AlbumSongs.Select(als => new
-                {
-                    SongId = als.Song.Id,
-                    SongTitle = als.Song.Title,
-                    Audios = als.Song.Audios.Select(audio => new
-                    {
-                        AudioId = audio.Id,
-                        audio.Duration,
-                        audio.FilePath
-                    })
-                });
-
-                var result = new
-                {
-                    AlbumId = album.Id,
-                    AlbumTitle = album.Title,
-                    DateShared = album.DateShared,
-                    ArtistId = artist.Id,
-                    ArtistUsername = artist.Username,
-                    Songs = albumSongs
-                };
-
-                return Ok(result);
+                return Ok(response);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return NotFound(response);
         }
 
         [HttpGet("photo/{albumId}")]
-        public async Task<IActionResult> GetSongPhoto(int albumId)
+        public async Task<IActionResult> GetAlbumPhoto(int albumId)
         {
-            var photo = await context.AlbumPhotos.FirstOrDefaultAsync(a => a.Album == albumId);
-            if (photo == null)
+            var response = await _albumService.GetPhoto(albumId);
+            if (response.Success)
             {
-                return NotFound();
+                return File(response.Data, "image/jpeg");
             }
-
-            if (!System.IO.File.Exists(photo.FilePath))
-            {
-                return NotFound();
-            }
-
-            byte[] photoBytes = await System.IO.File.ReadAllBytesAsync(photo.FilePath);
-
-            return File(photoBytes, "image/jpeg");
+            return NotFound(response);
         }
 
         [HttpDelete("{albumId}")]
         public async Task<IActionResult> DeleteAlbum(int albumId)
         {
-            try
+            var response = await _albumService.DeleteAlbum(albumId);
+            if (response.Success)
             {
-                var album = await context.Albums.FindAsync(albumId);
-
-                if (album == null)
-                {
-                    return NotFound();
-                }
-
-                var albumSongs = await context.AlbumSongs.Where(als => als.AlbumId == albumId).Select(als => als.SongId).ToListAsync();
-                var albumPhotos = await context.AlbumPhotos.Where(ap => ap.Album == albumId).Select(ap => ap.FilePath).ToListAsync();
-                var audioFiles = await context.Audios.Where(a => albumSongs.Contains(a.Song)).ToListAsync();
-                var songPhotos = await context.Photos.Where(p => albumSongs.Contains(p.SongId)).ToListAsync();
-
-                foreach (var audioFile in audioFiles)
-                {
-                    System.IO.File.Delete(audioFile.FilePath);
-                }
-                foreach (var albumPhotoPath in albumPhotos)
-                {
-                    System.IO.File.Delete(albumPhotoPath);
-                }
-                foreach (var songPhotoPath in songPhotos)
-                {
-                    System.IO.File.Delete(songPhotoPath.FilePath);
-                }
-
-                context.AlbumSongs.RemoveRange(context.AlbumSongs.Where(als => als.AlbumId == albumId));
-                context.AlbumPhotos.RemoveRange(context.AlbumPhotos.Where(ap => ap.Album == albumId));
-                context.Audios.RemoveRange(audioFiles);
-                context.Albums.Remove(album);
-
-                await context.SaveChangesAsync();
-
                 return NoContent();
             }
-            catch (Exception ex)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-            }
+            return StatusCode(StatusCodes.Status500InternalServerError, response);
         }
 
-        [HttpGet("songs/{songId}")]
+        [HttpPost("photo/{albumId}")]
+        public async Task<IActionResult> SetAlbumPhoto(IFormFile photoFile, int albumId)
+        {
+            var response = await _albumService.SetAlbumPhoto(photoFile, albumId);
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpDelete("song/{albumId}/{songId}")]
+        public async Task<IActionResult> DeleteSongFromAlbum(int albumId, int songId)
+        {
+            var response = await _albumService.DeleteSongFromAlbum(albumId, songId);
+            if (response.Success)
+            {
+                return NoContent();
+            }
+            return BadRequest(response);
+        }
+
+        [HttpPut("{albumId}")]
+        public async Task<IActionResult> EditAlbum(int albumId, [FromBody] string newAlbumName)
+        {
+            var response = await _albumService.EditAlbum(albumId, newAlbumName);
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return NotFound(response);
+        }
+
+        [HttpGet("song/{songId}")]
         public async Task<IActionResult> GetAlbumBySongId(int songId)
         {
-            try
+            var response = await _albumService.GetAlbumBySongId(songId);
+            if (response.Success)
             {
-                // Знаходимо альбом, який містить дану пісню
-                var album = await context.Albums
-                    .Include(a => a.AlbumSongs)
-                        .ThenInclude(als => als.Song)
-                            .ThenInclude(s => s.Audios)
-                    .FirstOrDefaultAsync(a => a.AlbumSongs.Any(als => als.SongId == songId));
-
-                if (album == null)
-                {
-                    return NotFound();
-                }
-
-                // Знаходимо артиста, який створив альбом
-                var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
-
-                if (artist == null)
-                {
-                    return BadRequest();
-                }
-
-                var albumSongs = album.AlbumSongs.Select(als => new
-                {
-                    SongId = als.Song.Id,
-                    SongTitle = als.Song.Title,
-                    Audios = als.Song.Audios.Select(audio => new
-                    {
-                        AudioId = audio.Id,
-                        audio.Duration,
-                        audio.FilePath
-                    })
-                });
-
-                var result = new
-                {
-                    AlbumId = album.Id,
-                    AlbumTitle = album.Title,
-                    DateShared = album.DateShared,
-                    ArtistId = artist.Id,
-                    ArtistUsername = artist.Username,
-                    Songs = albumSongs
-                };
-
-                return Ok(result);
+                return Ok(response);
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return NotFound(response);
         }
     }
 }

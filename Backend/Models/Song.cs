@@ -29,7 +29,7 @@ namespace Backend.Models
             this.Title = title;
             this.Artist = artist;
             this.AlbumTitle = albumTitle;
-            this.DateShared = date_shared; 
+            this.DateShared = date_shared;
             Audios = new List<Audio>();
         }
         public Song(string title, int artist, string albumTitle, DateOnly date_shared)

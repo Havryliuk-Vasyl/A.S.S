@@ -1,82 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FlamerMusic</title>
-    <link rel="stylesheet" href="assets/styles/index.css">
+    <link rel="stylesheet" href="assets/styles/index.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="main">
-        <div class="right-section">
-            <div class="menu" id="menu">
-                <nav>
-                    <ul id="navigation-on-menu">
-                        <li id="profile"><a href="#" id="profile"><img src="#" alt="users-image" id="userImage"></a>
-                        </li>
-                        <li id="settingsBtn"><a href="#"><img src="assets/images/icons/settings-icon.png"
-                                    alt="settings"></a></li>
-                        <li id="catalogBtn"><a href="#"><img src="assets/images/icons/openAllPlaylists.png"
-                                    alt="catalog"></a></li>
-                        <li id="searchBtn"><a href="#"><img src="assets/images/icons/search-icon.png" alt="Search"></a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="playlists" id="playlistsInMain">
-
-            </div>
+      <div class="right-section">
+        <div class="menu" id="menu">
+          <nav>
+            <ul id="navigation-on-menu">
+              <li id="profile">
+                <a href="#" id="profile"
+                  ><img src="#" alt="users-image" id="userImage"
+                /></a>
+              </li>
+              <li id="settingsBtn">
+                <a href="#"
+                  ><img
+                    src="assets/images/icons/settings-icon.png"
+                    alt="settings"
+                /></a>
+              </li>
+              <li id="catalogBtn">
+                <a href="#"
+                  ><img
+                    src="assets/images/icons/openAllPlaylists.png"
+                    alt="catalog"
+                /></a>
+              </li>
+              <li id="searchBtn">
+                <a href="#"
+                  ><img src="assets/images/icons/search-icon.png" alt="Search"
+                /></a>
+              </li>
+            </ul>
+          </nav>
         </div>
-        <div id="displayField" class="displayField"></div>
+        <div class="playlists" id="playlistsInMain"></div>
+      </div>
+      <div id="displayField" class="displayField"></div>
     </div>
 
     <div id="createPlaylistModal" class="Modal">
-        <div class="create-playlist-modal-content">
-            <h1>Створення плейлиста</h1>
-            <input type="text" id="inputData" placeholder="Введіть назву плейлиста">
-            <button id="createPlaylistOkButton">OK</button>
-            <button id="createPlaylistCancelButton">Cancel</button>
-        </div>
+      <div class="create-playlist-modal-content">
+        <h1>Створення плейлиста</h1>
+        <input
+          type="text"
+          id="inputData"
+          placeholder="Введіть назву плейлиста"
+        />
+        <button id="createPlaylistOkButton">OK</button>
+        <button id="createPlaylistCancelButton">Cancel</button>
+      </div>
     </div>
 
     <div id="addSongToPlaylistModal" class="Modal">
-        <div class="create-playlist-modal-content">
-            <h1>Виберіть плейлист</h1>
-            <select id="playlistSelect">
-            </select>
-            <button id="addSongToPlaylistOkButton">OK</button>
-            <button id="addSongToPlaylistCancelButton">Cancel</button>
-        </div>
+      <div class="create-playlist-modal-content">
+        <h1>Виберіть плейлист</h1>
+        <select id="playlistSelect"></select>
+        <button id="addSongToPlaylistOkButton">OK</button>
+        <button id="addSongToPlaylistCancelButton">Cancel</button>
+      </div>
     </div>
 
     <div id="editProfileModal" class="Modal">
-        <div class="edit-profil-modal-content" id="editProfile">
-        </div>
+      <div class="edit-profil-modal-content" id="editProfile"></div>
     </div>
 
     <div id="settingsModal" class="Modal">
-        <div class="settings-modal-content" id="settings-content">
-            <h1>Налаштування</h1>
-            <div id="settings">
-            </div>
-            <button id="backButton">Back</button>
-        </div>
+      <div class="settings-modal-content" id="settings-content">
+        <h1>Налаштування</h1>
+        <div id="settings"></div>
+        <button id="backButton">Back</button>
+      </div>
     </div>
 
     <div id="becomeArtistModal" class="Modal">
-        <div class="become-artist-modal" id="become-artist-modal">
-            <h1>Введіть причину:</h1>
-            <input type="text" id="description">
-            <button id="sendBecomeArtist">Send</button>
-            <button id="cancelBecomeArtist">Cancel</button>
-        </div>
+      <div class="become-artist-modal" id="become-artist-modal">
+        <h1>Введіть причину:</h1>
+        <input type="text" id="description" />
+        <button id="sendBecomeArtist">Send</button>
+        <button id="cancelBecomeArtist">Cancel</button>
+      </div>
     </div>
 
     <script type="module" src="script.js"></script>
-</body>
-
+  </body>
 </html>

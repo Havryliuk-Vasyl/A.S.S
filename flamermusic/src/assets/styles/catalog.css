@@ -1,0 +1,101 @@
+.container-style{
+    background-color:rgb(29, 29, 29);
+    border-radius: 1em;
+    height: fit-content;
+    margin-bottom: 1em;
+    align-items: center;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.catalog-song-name{
+    padding: 0.6em;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+}
+
+.catalog-song-name:hover{
+    text-decoration: underline;
+}
+
+.catalog-artist{
+    padding: 10px;
+    font-size: 16px;
+    text-align: center;
+    color: #bbbbbb;
+    cursor: pointer;
+}
+
+.catalog-artist:hover{
+    text-decoration: underline;
+}
+
+.catalog-recently-songs {
+    margin-top: 40px;
+}
+
+.catalog-song {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0.5em;
+}
+
+.catalog-song:hover{
+    background-color: rgba(128, 128, 128, 0.5);
+    border-radius: 1em
+}
+
+.catalog-song-information {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.catalog-song-play-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.catalog-song-photo {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;  
+}
+
+.catalog-song-photo img{
+    border-radius: 0.5em;
+}
+
+.catalog-duration {
+    margin-right: 2em;
+    margin-left: auto;
+    font-size: 14px;
+}
+
+.catalog-play-button{
+    padding: 1em;
+    cursor: pointer;
+}
+
+.context-menu {
+    position: fixed;
+    background-color: black;
+    border: 1px solid black;
+    z-index: 1000;
+    border-radius: 0.3em;
+}
+
+.context-menu div {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.context-menu div:hover {
+    background-color: gray;
+}

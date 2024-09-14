@@ -1,9 +1,15 @@
 using Backend.Models;
+using Backend.Services;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Logging.ClearProviders().AddConsole();
+builder.Services
+    .AddScoped<IPlaylistService, PlaylistService>()
+    .AddScoped<IAlbumService, AlbumService>()
+    .AddScoped<IAuthorizationService, AuthorizationService>();
 
 builder.Services.Configure<FormOptions>(options =>
 {

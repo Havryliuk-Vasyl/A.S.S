@@ -1,8 +1,5 @@
-﻿using Azure;
-using Backend.Models;
-using K4os.Compression.LZ4.Streams;
+﻿using Backend.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Controllers
@@ -143,10 +140,10 @@ namespace Backend.Controllers
             }
 
             byte[] photoBytes = System.IO.File.ReadAllBytes(photo.FilePath);
-            
+
             return File(photoBytes, "image/jpeg");
         }
-        
+
         [HttpGet("photo/songId/{id}")]
         public async Task<IActionResult> GetSongPhotoBySong(int id)
         {

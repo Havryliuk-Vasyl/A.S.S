@@ -1,0 +1,20 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.flamerstudio.flamermusic
+productName: MyElectronApp
+files:
+  - filter:
+      - src/**/*
+      - node_modules/**/*
+      - package.json
+      - assets/**/*
+win:
+  target: nsis
+  certificateFile: null
+  signingHashAlgorithms: []
+mac:
+  target: dmg
+linux:
+  target: AppImage
+electronVersion: 32.0.2

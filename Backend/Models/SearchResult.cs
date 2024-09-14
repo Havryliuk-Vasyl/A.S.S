@@ -1,6 +1,9 @@
-﻿public class SearchResult
+﻿namespace Backend.Models
 {
-    public string Type { get; set; }
-    public string Name { get; set; }
-    public int Id { get; set; }
+    public class SearchResult
+    {
+        public string Type { get; set; }
+        public string Name { get; set; }
+        public int Id { get; set; }
+    }
 }
