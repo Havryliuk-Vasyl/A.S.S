@@ -249,8 +249,7 @@ class Player{
             }
         });
     }
-    
-    
+
     playSong(songId){
         const apiUrl = `https://localhost:7219/Audio/${songId}`;
         axios.get(apiUrl, {
