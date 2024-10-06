@@ -216,6 +216,8 @@ class Player{
                 this.playSong(songId);
                 console.log(response);
 
+                var song = response.data;
+
                 const songImage = document.getElementById("song-image");
                 const songTitle = document.getElementById("songName");
                 const songArtist = document.getElementById("songArtist");
@@ -231,8 +233,8 @@ class Player{
                 const newSongArtist = removeAllEventListeners(songArtist);
     
                 newSongImage.src = "https://localhost:7219/Song/photo/songId/" + songId;
-                newSongTitle.textContent = response.title;
-                newSongArtist.textContent = response.artistName;
+                newSongTitle.textContent = song.title;
+                newSongArtist.textContent = song.artistName;
     
                 newSongTitle.id = "songName";
                 newSongArtist.id = "songArtist";

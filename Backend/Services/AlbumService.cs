@@ -1,15 +1,13 @@
 ﻿using Backend.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Backend.Services
 {
     public class AlbumService : IAlbumService
     {
+        /// <summary>
+        /// Realization of IAlbumService
+        /// </summary>
         private readonly ApplicationDbContext _context;
 
         public AlbumService(ApplicationDbContext context)
@@ -140,56 +138,6 @@ namespace Backend.Services
                 };
             }
         }
-
-        public async Task<ApiResponse<object>> SetAlbumPhoto(IFormFile photoFile, int albumId)
-        {
-            try
-            {
-                if (photoFile == null || photoFile.Length == 0)
-                {
-                    return new ApiResponse<object>
-                    {
-                        Success = false,
-                        Message = "No file uploaded."
-                    };
-                }
-
-                if (!photoFile.ContentType.StartsWith("image/"))
-                {
-                    return new ApiResponse<object>
-                    {
-                        Success = false,
-                        Message = "Only image files are allowed."
-                    };
-                }
-
-                if (albumId <= 0)
-                {
-                    return new ApiResponse<object>
-                    {
-                        Success = false,
-                        Message = "Invalid album ID."
-                    };
-                }
-
-                // Save file logic here...
-
-                return new ApiResponse<object>
-                {
-                    Success = true,
-                    Message = "Photo uploaded successfully."
-                };
-            }
-            catch (Exception ex)
-            {
-                return new ApiResponse<object>
-                {
-                    Success = false,
-                    Message = $"Error uploading photo: {ex.Message}"
-                };
-            }
-        }
-
         public async Task<ApiResponse<object>> DeleteSongFromAlbum(int albumId, int songId)
         {
             try

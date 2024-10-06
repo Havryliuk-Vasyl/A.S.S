@@ -1,7 +1,9 @@
 ﻿using Backend.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Runtime;
 using System.Security.Claims;
 using System.Text;
 
@@ -115,6 +117,59 @@ namespace Backend.Services
             }
 
             return user;
+        }
+
+        public ApiResponse<object> ValidateToken(string token)
+        {
+            var response = new ApiResponse<object>();
+
+            if (token == null || string.IsNullOrWhiteSpace(token))
+            {
+                return response.BadRequest("Token is not valid!");
+            }
+
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var key = Encoding.UTF8.GetBytes("feajfw8v8rr2nv0ruwrm2rnr2ar9a2ir9uv990mq29rvm2ar");
+                tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "flamermusic.com",
+                    ValidAudience = "flamermusicapi",
+                    IssuerSigningKey = new SymmetricSecurityKey(key)
+                }, out SecurityToken validatedToken);
+
+                var jwtToken = (JwtSecurityToken)validatedToken;
+                var username = jwtToken.Claims.FirstOrDefault(x => x.Type == JwtRegisteredClaimNames.Sub)?.Value;
+                var email = jwtToken.Claims.FirstOrDefault(x => x.Type == "email")?.Value;
+                var status = jwtToken.Claims.FirstOrDefault(x => x.Type == "status")?.Value;
+                var id = jwtToken.Claims.FirstOrDefault(x => x.Type == "id")?.Value;
+
+                var user = _context.Users.FirstOrDefault(u => u.Id == int.Parse(id));
+                if (user == null)
+                {
+                    return response.BadRequest("User not found");
+                }
+
+                if (user.Username != username || user.Email != email || user.status != status)
+                {
+                    return response.BadRequest("Token is not valid!");
+                }
+
+                response.Success = true;
+                response.Data = new { Username = username, Email = email, Status = status, Id = id };
+                response.Message = "Token is valid!";
+
+                return response;
+            }
+            catch (Exception)
+            {
+                return response.BadRequest("Token is not valid!");
+            }
         }
 
     }

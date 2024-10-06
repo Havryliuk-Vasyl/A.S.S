@@ -13,19 +13,25 @@ class Profile {
         document.head.appendChild(link);
     }
 
-    getUserById(userId) {
-        $.ajax({
-            type: "GET",
-            url: "https://localhost:7219/User/id/" + userId,
-            headers: {
-                'Authorization': 'Bearer ' + localStorage.getItem('token')
-            },
-            success: function (data) {
-                console.log(data);
-                return data;
-            },
+    async getUserById(userId) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                type: "GET",
+                url: `https://localhost:7219/User/id/${userId}`, // Використання шаблонних рядків
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                },
+                success: function (response) {
+                    resolve(response.data); // Передаємо отримані дані
+                },
+                error: function (error) {
+                    console.log(error); // Логування помилки
+                    reject(error); // Відхиляємо проміс з фактичною помилкою для кращої обробки
+                }
+            });
         });
     }
+    
 
     async renderUserProfile(userId) {
         const displayField = document.getElementById("displayField");
@@ -98,10 +104,11 @@ class Profile {
         const userProfileDiv = document.createElement("div");
         userProfileDiv.classList.add("user-profile");
 
-        const user = this.getUserById(userId);
+        const user = await this.getUserById(userId);
+        console.log(user);
         if (!user) {
             console.error("User data not found");
-            return;
+            //return;
         }
 
         const profileInformationDiv = document.createElement("div");
@@ -305,7 +312,8 @@ class Profile {
             const response = await fetch(`https://localhost:7219/User/edituser?userId=${userId}`, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 },
                 body: JSON.stringify(newNickname)
             });
@@ -313,22 +321,27 @@ class Profile {
             if (!response.ok) {
                 throw new Error('Failed to update username');
             }
-
-            if (avatarFile) {
-                const formData = new FormData();
-                formData.append('avatar', avatarFile);
-                formData.append('userId', userId);
     
-                const avatarResponse = await fetch(`https://localhost:7219/User/uploadAvatar`, {
+            if (avatarFile) {
+                const avatarBytes = await this.readFileAsBytes(avatarFile);
+            
+                const formData = new FormData();
+                formData.append("avatarFile", avatarFile);
+            
+                const avatarResponse = await fetch(`https://localhost:7219/User/uploadAvatar?userId=${userId}`, {
                     method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    },
                     body: formData
                 });
-    
+            
                 if (!avatarResponse.ok) {
                     throw new Error('Failed to upload avatar');
                 }
+            
                 document.getElementById('userImage').src = "https://localhost:7219/User/avatar/" + userId;
-            }
+            }            
     
             this.closeEditProfileModal();
             this.renderPersonalProfile(userId);
@@ -336,6 +349,20 @@ class Profile {
             console.error('Error updating user profile:', error);
         }
     }
+    
+        readFileAsBytes(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => {
+                    const arrayBuffer = reader.result;
+                    const bytes = new Uint8Array(arrayBuffer);
+                    resolve(Array.from(bytes));
+                };
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(file);
+            });
+        }
+    
     
 
     closeEditProfileModal() {

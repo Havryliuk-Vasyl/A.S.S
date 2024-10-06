@@ -1,4 +1,5 @@
 ﻿using Backend.Models;
+using Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,121 +9,76 @@ namespace Backend.Controllers
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly ApplicationDbContext context;
+        private readonly IAdministratorService administratorService;
 
-        public AdminController(ApplicationDbContext context)
+        public AdminController(AdministratorService administratorService)
         {
-            this.context = context;
+            this.administratorService = administratorService;
         }
 
         [HttpGet("users")]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await context.Users.ToListAsync();
-            return Ok(users);
+            var response = await administratorService.GetUsers();
+            if (response.Success) {
+                return Ok(response);
+            }
+            return BadRequest();
         }
 
         [HttpDelete("user")]
         public async Task<IActionResult> DeleteUserById(int userId)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == userId);
-
-            if (user == null)
+            var response = await administratorService.DeleteUserById(userId);
+            if (response.Success)
             {
-                return BadRequest();
+                return Ok(response);
             }
-
-            context.Users.Remove(user);
-            await context.SaveChangesAsync();
-            return Ok();
+            return BadRequest();
         }
 
         [HttpPut("edituser")]
-        public async Task<IActionResult> EditUser([FromBody] EditUserModel newUser)
+        public async Task<IActionResult> EditUser([FromBody] EditUserModel editedUser)
         {
-            var user = await context.Users.FirstOrDefaultAsync(u => u.Id == newUser.UserId);
-
-            if (user == null)
+            var response = await administratorService.EditUser(editedUser);
+            if (response.Success)
             {
-                return NotFound();
+                return Ok(response);
             }
-
-            user.Username = newUser.Username;
-            user.Name = newUser.Name;
-
-            context.Users.Update(user);
-            await context.SaveChangesAsync();
-            return Ok();
+            return BadRequest();
         }
 
         [HttpPut("confirmBecomeArtist")]
         public async Task<ActionResult> ConfitmBecomeArtist(BecomeArtistModel model)
         {
-            User user = await context.Users.FirstOrDefaultAsync(u => u.Id == model.UserId);
-
-            if (model == null)
+            var response = await administratorService.ConfitmBecomeArtist(model);
+            if (response.Success)
             {
-                return BadRequest();
+                return Ok(response);
             }
-
-            user.status = "artist";
-            context.Users.Update(user);
-
-            BecomeArtistModel model1 = await context.BecomeArtistModels.FirstOrDefaultAsync(bc => bc.Id == model.Id);
-            context.BecomeArtistModels.Remove(model1);
-
-            await context.SaveChangesAsync();
-
-            return Ok();
+            return BadRequest();
         }
 
         [HttpPut("cancleBecomeArtist")]
         public async Task<ActionResult> CancleBecomeArtist(BecomeArtistModel model)
         {
-            BecomeArtistModel becomeArtistModel = await context.BecomeArtistModels.FirstOrDefaultAsync(bc => bc.Id == model.Id);
-
-            if (becomeArtistModel == null)
+            var response = await administratorService.CancleBecomeArtist(model);
+            if (response.Success)
             {
-                return BadRequest();
+                return Ok(response);
             }
-
-            context.BecomeArtistModels.Remove(becomeArtistModel);
-
-            await context.SaveChangesAsync();
-
-            return Ok();
+            return BadRequest();
         }
 
         [HttpGet("requests")]
         public async Task<ActionResult<List<RequestResponse>>> GetRequests()
         {
-            var requests = await (
-                from bam in context.BecomeArtistModels
-                join u in context.Users on bam.UserId equals u.Id
-                select new RequestResponse
-                {
-                    Id = bam.Id,
-                    UserId = u.Id,
-                    UserUsername = u.Username,
-                    Description = bam.Description
-                }
-            ).ToListAsync();
-
-            return Ok(requests);
-        }
-
-        public class RequestResponse
-        {
-            public int Id { get; set; }
-            public int UserId { get; set; }
-            public string UserUsername { get; set; }
-            public string Description { get; set; }
-        }
-        public class EditUserModel
-        {
-            public int UserId { get; set; }
-            public string Username { get; set; }
-            public string Name { get; set; }
+            var response = await administratorService.GetRequests();
+            if (response.Success)
+            {
+                return Ok(response);
+            }
+            return BadRequest();
         }
     }
 }

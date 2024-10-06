@@ -45,7 +45,7 @@ class Catalog {
                 throw new Error("Помилка при отриманні списку пісень");
             }
             const data = await response.json();
-            return data;
+            return data.data;
         } catch (error) {
             console.error(error);
             throw error;

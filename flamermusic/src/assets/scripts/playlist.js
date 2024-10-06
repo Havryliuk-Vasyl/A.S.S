@@ -1,6 +1,5 @@
 import Player from '../player/player.js';
 import Song from './album.js';
-import Catalog from './catalog.js';
 import Profile from './profile.js';
 
 class Playlist {
@@ -23,7 +22,8 @@ class Playlist {
                 throw new Error("Помилка при отриманні списку плейлистів користувача");
             }
             const data = await response.json();
-            return data;
+            console.log(data);
+            return data.data;
         } catch (error) {
             console.error(error);
             throw error;
@@ -37,7 +37,7 @@ class Playlist {
                 
             }
             const data = await response.json();
-            return data;
+            return data.data;
         } catch (error) {
             console.error(error);
             throw error;

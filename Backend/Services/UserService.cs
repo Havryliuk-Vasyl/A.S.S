@@ -77,21 +77,12 @@ namespace Backend.Services
                 Message = "User with this ID found successful!"
             };
         }
-        public async Task<ApiResponse<object>> UploadAvatar(IFormFile avatar, int userId)
+        public async Task<ApiResponse<object>> UploadAvatar(IFormFile avatarFile, int userId)
         {
-            ApiResponse<object> response = null;
+            ApiResponse<object> response = new ApiResponse<object>();
+
             try
             {
-                if (avatar == null || avatar.Length == 0)
-                {
-                    return response.BadRequest("No file uploaded");
-                }
-
-                if (!avatar.ContentType.StartsWith("image/"))
-                {
-                    return response.BadRequest("Only image files are allowed");
-                }
-
                 if (userId <= 0)
                 {
                     return response.BadRequest("Invalid user ID");
@@ -100,20 +91,20 @@ namespace Backend.Services
                 var existingPhoto = await _context.UsersPhoto.FirstOrDefaultAsync(p => p.User == userId);
                 if (existingPhoto != null)
                 {
-                    if (System.IO.File.Exists(existingPhoto.FilePath))
+                    if (File.Exists(existingPhoto.FilePath))
                     {
-                        System.IO.File.Delete(existingPhoto.FilePath);
+                        File.Delete(existingPhoto.FilePath);
                     }
                     _context.UsersPhoto.Remove(existingPhoto);
                 }
 
-                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(avatar.FileName);
-
+                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(avatarFile.FileName);
                 var uploadsFolder = Path.Combine(_userPhotoFilePath, uniqueFileName);
 
-                using (var stream = new FileStream(uploadsFolder, FileMode.Create))
+                // Збереження файлу на сервері
+                using (var fileStream = new FileStream(uploadsFolder, FileMode.Create))
                 {
-                    await avatar.CopyToAsync(stream);
+                    await avatarFile.CopyToAsync(fileStream);
                 }
 
                 var userPhoto = new UserPhoto
@@ -124,18 +115,19 @@ namespace Backend.Services
                 _context.UsersPhoto.Add(userPhoto);
                 await _context.SaveChangesAsync();
 
-                return new ApiResponse<object>()
+                return new ApiResponse<object>
                 {
                     Success = true,
                     Data = null,
-                    Message = "Avatar uploaded successful!"
+                    Message = "Avatar uploaded successfully!"
                 };
             }
             catch (Exception ex)
             {
-                return response.BadRequest($"Something went wrong: + {ex}");
+                return response.BadRequest($"Something went wrong: {ex.Message}");
             }
         }
+
         public async Task<ApiResponse<byte[]>> GetAvatar(int userId)
         {
             var userPhoto = await _context.UsersPhoto.FirstOrDefaultAsync(p => p.User == userId);
