@@ -1,0 +1,24 @@
+.playlist-in-display-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(29, 29, 29);
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.playlist-information {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+.playlist-image img {
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+}

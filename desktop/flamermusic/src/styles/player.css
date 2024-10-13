@@ -1,0 +1,209 @@
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 7em;
+    margin: 0%;
+    padding: 1em;
+    padding-bottom: 0%;
+    padding-top: 0%;
+    width: 100%;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.player-audio-player {
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    margin: 0;
+    margin-bottom: 1em;
+}
+
+.player-controls {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+    width: 100%;
+}
+
+.player-song-information {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    max-width: 40%;
+}
+
+.player-song-information .player-song-image {
+    align-self: center;
+    margin-right: 0.5em;
+}
+
+.player-song-information .player-song-image img {
+    width: 5em; 
+    height: 5em;
+    border-radius: 0.5em;
+    object-fit: cover; 
+}
+
+.player-song-information .player-song-artist-and-title {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    padding: 1em 0;
+}
+
+.player-song-information .player-song-artist-and-title .player-song-artist-and-title .player-song-name {
+    width: 100%;
+    font-size: 1em;
+}
+
+.player-song-information .player-song-artist-and-title .player-artist-name {
+    font-size: 1em;
+    color: rgb(176, 176, 176);
+}
+
+.player-audio-control {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+}
+
+.player-control-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#player-prevSongBtn, #player-playPauseBtn, #player-nextSongBtn, #player-queueBtn{
+    margin: 1em;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+#player-prevSongBtn:hover, #player-playPauseBtn:hover, #player-nextSongBtn:hover, #player-queueBtn:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+#player-queueBtn:hover{
+    transform: scale(1.05);
+}
+
+.player-control-buttons button {
+    padding: 1em;
+    height: 100%;
+}
+
+.player-time-control {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.player-time-control div {
+    padding: 0 1em;
+}
+
+input[type="range"] {
+    width: 100%;
+    height: 5px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    border-radius: 1em;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #8c8c8c;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+input[type="range"]:hover::-webkit-slider-thumb {
+    background: #DC5F00;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #8c8c8c;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+    background: #DC5F00; 
+}
+
+.player-other-controllers {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 5em;
+}
+
+#player-volumeSlider{
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .player-song-information {
+        width: 8em;
+    }
+
+    .player-song-information .player-song-artist-and-title .player-song-name {
+        font-size: 0.85em;
+    }
+
+    #player-timeSlider {
+        min-width: 25em;
+        max-width: 25em;
+    }
+
+    .player-volume-controller {
+        width: 15%;
+    }
+}
+
+@media (max-width: 480px) {
+    .player-song-information {
+        width: 6em;
+    }
+
+    .player-song-information .player-song-artist-and-title .player-song-name {
+        font-size: 0.75em;
+    }
+
+    #player-timeSlider {
+        min-width: 20em;
+        max-width: 20em;
+    }
+
+    .player-volume-controller {
+        width: 20%;
+    }
+}
+
+

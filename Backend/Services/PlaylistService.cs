@@ -145,10 +145,9 @@ namespace Backend.Services
                 };
             }
         }
-
-        public async Task<ApiResponse<object>> SetPlaylistPhoto(IFormFile photoFile, int playlistId)
+        public async Task<ApiResponse<object>> SetPlaylistPhoto(byte[] photoBytes, int playlistId)
         {
-            if (photoFile == null || photoFile.Length == 0)
+            if (photoBytes == null || photoBytes.Length == 0)
             {
                 return new ApiResponse<object>
                 {
@@ -158,18 +157,11 @@ namespace Backend.Services
                 };
             }
 
-            if (!photoFile.ContentType.StartsWith("image/"))
-            {
-                return new ApiResponse<object>
-                {
-                    Success = false,
-                    Data = null,
-                    Message = "Only image files are allowed."
-                };
-            }
-
             try
             {
+                // Можна перевірити, чи це зображення, за допомогою спеціальних бібліотек або сигнатур файлів, але тут просто приклад:
+                // Якщо необхідно перевірити формат, це можна зробити додатково
+
                 var existingPhoto = await _context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
                 if (existingPhoto != null)
                 {
@@ -180,13 +172,12 @@ namespace Backend.Services
                     _context.PlaylistPhotos.Remove(existingPhoto);
                 }
 
-                var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(photoFile.FileName);
+                // Генерація унікального імені для файлу
+                var uniqueFileName = Guid.NewGuid().ToString() + ".jpg"; // Припускаємо, що це JPG файл
                 var uploadsFolder = Path.Combine(_playlistPhotoFilePath, uniqueFileName);
 
-                using (var stream = new FileStream(uploadsFolder, FileMode.Create))
-                {
-                    await photoFile.CopyToAsync(stream);
-                }
+                // Запис масиву байтів у файл
+                await File.WriteAllBytesAsync(uploadsFolder, photoBytes);
 
                 var playlistPhoto = new PlaylistPhoto
                 {
@@ -214,6 +205,7 @@ namespace Backend.Services
                 };
             }
         }
+
 
         public async Task<ApiResponse<byte[]>> GetPhoto(int playlistId)
         {

@@ -6,5 +6,6 @@ namespace Backend.Services
     {
         Task<ApiResponse<object>> Register(UserRegistrate userRegistrate);
         Task<ApiResponse<object>> Login(UserLogin userLogin);
+        ApiResponse<object> ValidateToken(string token);
     }
 }
