@@ -8,7 +8,16 @@ export const PlayerProvider = ({ children }) => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(1);
+    const [songList, setSongList] = useState([]);
+    const currentSongIndex = useRef(0);
     const audioRef = useRef(null);
+
+    const playFromList = async (songId, songs) => {
+        setSongList(songs);
+        console.log(songs.findIndex(song => song.song.id === songId));
+        currentSongIndex.current = songs.findIndex(song => song.song.id === songId);
+        await play(songId);
+    };
 
     const playSong = async (songId) => {
         const apiUrl = `https://localhost:7219/Audio/${songId}`;
@@ -43,6 +52,29 @@ export const PlayerProvider = ({ children }) => {
         }
     };
 
+    const playNextSong = () => {
+        if (songList.length > 0){
+            console.log(currentSongIndex.current);
+            currentSongIndex.current += 1;
+            if (currentSongIndex.current >= songList.length) {
+                currentSongIndex.current = 0;
+            }
+            const nextSong = songList[currentSongIndex.current];
+            play(nextSong.song.id);
+        }
+    }
+
+    const playPrevSong = () => {
+        if (songList.length > 0){
+            currentSongIndex.current -= 1;
+            if (currentSongIndex.current < 0) {
+                currentSongIndex.current = songList.length - 1;
+            }
+            const prevSong = songList[currentSongIndex.current];
+            play(prevSong.song.id);
+        }
+    }
+
     const handlePlayPause = () => {
         if (audioRef.current) {
             if (audioRef.current.paused) {
@@ -65,11 +97,11 @@ export const PlayerProvider = ({ children }) => {
     }, [isPlaying]);
 
     return (
-        <PlayerContext.Provider value={{ play, currentSong, isPlaying, handlePlayPause, currentTime, duration, volume, setVolume, audioRef }}>
+        <PlayerContext.Provider value={{ play, playFromList, playNextSong, playPrevSong, currentSong, currentSongIndex, isPlaying, handlePlayPause, currentTime, duration, volume, setVolume, audioRef }}>
             {children}
             <audio 
                 ref={audioRef} 
-                onEnded={() => setIsPlaying(false)} 
+                onEnded={playNextSong} 
                 volume={volume}
             />
         </PlayerContext.Provider>

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../styles/sidebar.css";
 
 const Sidebar = () => {
@@ -8,9 +9,9 @@ const Sidebar = () => {
           <nav>
             <ul id="navigation-on-menu">
               <li id="profileBtnInMenu">
-                <a href="#" id="profile">
+                <Link to="/profile" id="profile">
                     <img src={require('../../public/assets/icons/noimageuser.png')} alt="users-image" id="userImage"/>
-                </a>
+                </Link>
               </li>
               <li id="settingsBtnInMenu">
                 <a href="#">
@@ -18,9 +19,9 @@ const Sidebar = () => {
                 </a>
               </li>
               <li id="catalogBtnInMenu">
-                <a href="#">
+                <Link to="/main_window">
                     <img src={require('../../public/assets/icons/openAllPlaylists.png')} alt="catalog"/>
-                </a>
+                </Link>
               </li>
               <li id="searchBtnInMenu">
                 <a href="#">

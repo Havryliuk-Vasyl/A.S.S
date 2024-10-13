@@ -8,6 +8,7 @@ const Player = () => {
     const { currentSong, isPlaying, handlePlayPause, currentTime, duration, volume, setVolume, audioRef } = usePlayer();
     const [isDragging, setIsDragging] = useState(false);
     const [sliderValue, setSliderValue] = useState(currentTime);
+    const { playNextSong, playPrevSong } = usePlayer();
 
     const formatTime = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -41,34 +42,36 @@ const Player = () => {
         }
     };
 
-    // Додати обробник подій клавіатури
     useEffect(() => {
         const handleKeyDown = (e) => {
-            // Грати/Пауза на пробілі
             if (e.code === 'Space') {
-                e.preventDefault(); // Запобігти стандартному поведінці пробілу
+                e.preventDefault();
                 handlePlayPause();
             }
 
-            // Збільшення гучності на Ctrl + Стрілка вгору
             if (e.ctrlKey && e.code === 'ArrowUp') {
                 e.preventDefault();
-                const newVolume = Math.min(volume + 0.1, 1); // Максимум 1
+                const newVolume = Math.min(volume + 0.1, 1);
                 handleVolumeChange(newVolume);
             }
 
-            // Зменшення гучності на Ctrl + Стрілка вниз
             if (e.ctrlKey && e.code === 'ArrowDown') {
                 e.preventDefault();
-                const newVolume = Math.max(volume - 0.1, 0); // Мінімум 0
+                const newVolume = Math.max(volume - 0.1, 0);
                 handleVolumeChange(newVolume);
+            }
+
+            if (e.code === 'ArrowRight' && e.ctrlKey) {
+                playNextSong();
+            }
+
+            if (e.code === 'ArrowLeft' && e.ctrlKey) {
+                playPrevSong();
             }
         };
 
-        // Додати обробник клавіш
         window.addEventListener('keydown', handleKeyDown);
 
-        // Очистити обробник при розмонтуванні компонента
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };

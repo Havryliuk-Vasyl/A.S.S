@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-import '../styles/index.css'
+import '../styles/playlist.css';
 
-const PlaylistCard = (playlist) => {
+const PlaylistCard = ({playlist}) => {
     return (
         <div className="playlist-card">
-            <div className="playlist-card-image"><img src="" alt={playlist.name} /></div>
-            <div className="playlist-card-name">{playlist.name}</div>
+            <div className="playlist-card-image"><img src={`https://localhost:7219/Playlist/photo?playlistId=${playlist.id}`} alt={playlist.title} /></div>
+            <div className="playlist-card-name">{playlist.title}</div>
         </div>
     );
 }
+
+export default PlaylistCard;

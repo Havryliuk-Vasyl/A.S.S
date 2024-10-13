@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { usePlayer } from '../context/PlayerContext.jsx';
 
-const SongItem = ({ song }) => {
+const SongItem = ({ song, onPlay }) => {
   const [isHovered, setIsHovered] = useState(false);
   const { play } = usePlayer();
 
   const handlePlaySong = () =>{
-    play(song.song.id);
+    onPlay(song.song.id);
   }
 
   const formatTime = (seconds) => {

@@ -23,7 +23,6 @@ const AuthWrapper = () => {
             "Authorization": `Bearer ${token}`
           },
         });
-
         console.log(response);
         if (!response.ok) {
           throw new Error('Invalid token');
