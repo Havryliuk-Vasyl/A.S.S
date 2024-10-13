@@ -127,7 +127,6 @@ input[type="range"]::-moz-range-thumb {
     width: 10%;
 }
 
-/* Адаптивність для елементів при зменшенні екрану */
 @media (max-width: 768px) {
     .song-information {
         width: 8em;

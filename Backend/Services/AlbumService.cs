@@ -8,18 +8,18 @@ namespace Backend.Services
         /// <summary>
         /// Realization of IAlbumService
         /// </summary>
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
 
         public AlbumService(ApplicationDbContext context)
         {
-            _context = context;
+            this.context = context;
         }
 
         public async Task<ApiResponse<IEnumerable<Album>>> GetAlbumsByArtist(int artistId)
         {
             try
             {
-                var albums = await _context.Albums
+                var albums = await context.Albums
                     .Where(a => a.User == artistId)
                     .ToListAsync();
 
@@ -78,7 +78,7 @@ namespace Backend.Services
         {
             try
             {
-                var photo = await _context.AlbumPhotos.FirstOrDefaultAsync(a => a.Album == albumId);
+                var photo = await context.AlbumPhotos.FirstOrDefaultAsync(a => a.Album == albumId);
                 if (photo == null || !File.Exists(photo.FilePath))
                 {
                     return new ApiResponse<byte[]>
@@ -112,7 +112,7 @@ namespace Backend.Services
         {
             try
             {
-                Album album = await _context.Albums.FindAsync(albumId);
+                Album album = await context.Albums.FindAsync(albumId);
                 if (album == null)
                 {
                     return new ApiResponse<object>
@@ -142,7 +142,7 @@ namespace Backend.Services
         {
             try
             {
-                var albumSong = await _context.AlbumSongs
+                var albumSong = await context.AlbumSongs
                     .FirstOrDefaultAsync(als => als.AlbumId == albumId && als.SongId == songId);
 
                 if (albumSong == null)
@@ -154,8 +154,8 @@ namespace Backend.Services
                     };
                 }
 
-                _context.AlbumSongs.Remove(albumSong);
-                await _context.SaveChangesAsync();
+                context.AlbumSongs.Remove(albumSong);
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -177,7 +177,7 @@ namespace Backend.Services
         {
             try
             {
-                var album = await _context.Albums.FindAsync(albumId);
+                var album = await context.Albums.FindAsync(albumId);
                 if (album == null)
                 {
                     return new ApiResponse<object>
@@ -188,7 +188,7 @@ namespace Backend.Services
                 }
 
                 album.Title = newAlbumName;
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -241,7 +241,7 @@ namespace Backend.Services
 
         private async Task<object> GetAlbumDetails(int albumId)
         {
-            var album = await _context.Albums
+            var album = await context.Albums
                 .Include(a => a.AlbumSongs)
                     .ThenInclude(als => als.Song)
                         .ThenInclude(s => s.Audios)
@@ -250,7 +250,7 @@ namespace Backend.Services
             if (album == null)
                 return null;
 
-            var artist = await _context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
+            var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
             if (artist == null)
                 return null;
 
@@ -279,7 +279,7 @@ namespace Backend.Services
 
         private async Task<object> GetAlbumBySong(int songId)
         {
-            var album = await _context.Albums
+            var album = await context.Albums
                 .Include(a => a.AlbumSongs)
                     .ThenInclude(als => als.Song)
                         .ThenInclude(s => s.Audios)
@@ -288,7 +288,7 @@ namespace Backend.Services
             if (album == null)
                 return null;
 
-            var artist = await _context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
+            var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
             if (artist == null)
                 return null;
 
@@ -318,7 +318,7 @@ namespace Backend.Services
         {
             try
             {
-                var album = await _context.Albums.FindAsync(albumId);
+                var album = await context.Albums.FindAsync(albumId);
                 if (album == null)
                 {
                     return new ApiResponse<object>
@@ -328,21 +328,21 @@ namespace Backend.Services
                     };
                 }
 
-                var albumSongs = await _context.AlbumSongs
+                var albumSongs = await context.AlbumSongs
                     .Where(als => als.AlbumId == albumId)
                     .Select(als => als.SongId)
                     .ToListAsync();
 
-                var albumPhotos = await _context.AlbumPhotos
+                var albumPhotos = await context.AlbumPhotos
                     .Where(ap => ap.Album == albumId)
                     .Select(ap => ap.FilePath)
                     .ToListAsync();
 
-                var audioFiles = await _context.Audios
+                var audioFiles = await context.Audios
                     .Where(a => albumSongs.Contains(a.Song))
                     .ToListAsync();
 
-                var songPhotos = await _context.Photos
+                var songPhotos = await context.Photos
                     .Where(p => albumSongs.Contains(p.SongId))
                     .ToListAsync();
 
@@ -372,12 +372,12 @@ namespace Backend.Services
                 }
 
                 // Remove database entries
-                _context.AlbumSongs.RemoveRange(_context.AlbumSongs.Where(als => als.AlbumId == albumId));
-                _context.AlbumPhotos.RemoveRange(_context.AlbumPhotos.Where(ap => ap.Album == albumId));
-                _context.Audios.RemoveRange(audioFiles);
-                _context.Albums.Remove(album);
+                context.AlbumSongs.RemoveRange(context.AlbumSongs.Where(als => als.AlbumId == albumId));
+                context.AlbumPhotos.RemoveRange(context.AlbumPhotos.Where(ap => ap.Album == albumId));
+                context.Audios.RemoveRange(audioFiles);
+                context.Albums.Remove(album);
 
-                await _context.SaveChangesAsync();
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {

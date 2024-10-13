@@ -6,7 +6,6 @@ namespace Backend.Services
     public class SearchService : ISearchService
     {
         private readonly ApplicationDbContext context;
-
         public SearchService(ApplicationDbContext context)
         {
             this.context = context;

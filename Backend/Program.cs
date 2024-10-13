@@ -83,6 +83,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Remove("Content-Security-Policy");
+    await next();
+});
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
@@ -93,6 +99,7 @@ app.UseCors(builder =>
     builder.AllowAnyOrigin()
            .AllowAnyMethod()
            .AllowAnyHeader());
+
 
 app.UseSwagger();
 app.UseSwaggerUI(c => {
