@@ -13,6 +13,11 @@
     z-index: 999;
 }
 
+.player.disabled {
+    pointer-events: none; /* Блокування всіх подій миші */
+    opacity: 0.5; /* Зменшення непрозорості, щоб показати, що плеєр неактивний */
+}
+
 .player-audio-player {
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;

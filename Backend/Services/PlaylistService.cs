@@ -7,18 +7,19 @@ using System.IO;
 using System.Linq;
 using System;
 using System.Threading.Tasks;
+using Org.BouncyCastle.Utilities;
 
 namespace Backend.Services
 {
     public class PlaylistService : IPlaylistService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext context;
         private readonly string _playlistPhotoFilePath = "./media-files/playlistphotos";
         private readonly ILogger<PlaylistService> _logger;
 
         public PlaylistService(ApplicationDbContext context, ILogger<PlaylistService> logger)
         {
-            _context = context;
+            this.context = context;
             _logger = logger;
         }
 
@@ -26,7 +27,7 @@ namespace Backend.Services
         {
             try
             {
-                var playlists = await _context.Playlists
+                var playlists = await context.Playlists
                     .Where(p => p.User == userId)
                     .ToListAsync();
 
@@ -70,8 +71,8 @@ namespace Backend.Services
                     User = request.UserId
                 };
 
-                _context.Playlists.Add(playlist);
-                await _context.SaveChangesAsync();
+                context.Playlists.Add(playlist);
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -107,7 +108,7 @@ namespace Backend.Services
                     };
                 }
 
-                var song = await _context.Songs.FindAsync(songId);
+                var song = await context.Songs.FindAsync(songId);
                 if (song == null)
                 {
                     return new ApiResponse<object>
@@ -124,8 +125,8 @@ namespace Backend.Services
                     SongId = songId
                 };
 
-                _context.PlaylistSongs.Add(playlistSong);
-                await _context.SaveChangesAsync();
+                context.PlaylistSongs.Add(playlistSong);
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -159,24 +160,19 @@ namespace Backend.Services
 
             try
             {
-                // Можна перевірити, чи це зображення, за допомогою спеціальних бібліотек або сигнатур файлів, але тут просто приклад:
-                // Якщо необхідно перевірити формат, це можна зробити додатково
-
-                var existingPhoto = await _context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
+                var existingPhoto = await context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
                 if (existingPhoto != null)
                 {
                     if (File.Exists(existingPhoto.FilePath))
                     {
                         File.Delete(existingPhoto.FilePath);
                     }
-                    _context.PlaylistPhotos.Remove(existingPhoto);
+                    context.PlaylistPhotos.Remove(existingPhoto);
                 }
 
-                // Генерація унікального імені для файлу
-                var uniqueFileName = Guid.NewGuid().ToString() + ".jpg"; // Припускаємо, що це JPG файл
+                var uniqueFileName = Guid.NewGuid().ToString() + ".png";
                 var uploadsFolder = Path.Combine(_playlistPhotoFilePath, uniqueFileName);
 
-                // Запис масиву байтів у файл
                 await File.WriteAllBytesAsync(uploadsFolder, photoBytes);
 
                 var playlistPhoto = new PlaylistPhoto
@@ -184,8 +180,8 @@ namespace Backend.Services
                     Playlist = playlistId,
                     FilePath = uploadsFolder
                 };
-                _context.PlaylistPhotos.Add(playlistPhoto);
-                await _context.SaveChangesAsync();
+                context.PlaylistPhotos.Add(playlistPhoto);
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -206,12 +202,11 @@ namespace Backend.Services
             }
         }
 
-
         public async Task<ApiResponse<byte[]>> GetPhoto(int playlistId)
         {
             try
             {
-                var playlistPhoto = await _context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
+                var playlistPhoto = await context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
                 if (playlistPhoto == null || !File.Exists(playlistPhoto.FilePath))
                 {
                     return new ApiResponse<byte[]>
@@ -246,11 +241,10 @@ namespace Backend.Services
         {
             try
             {
-                var playlist = await _context.Playlists
+                var playlist = await context.Playlists
                     .Where(p => p.Id == playlistId)
                     .Include(p => p.PlaylistSongs)
-                        .ThenInclude(ps => ps.Song)
-                            .ThenInclude(s => s.Audios)
+                    .ThenInclude(ps => ps.Song)
                     .FirstOrDefaultAsync();
 
                 if (playlist == null)
@@ -262,27 +256,38 @@ namespace Backend.Services
                         Message = "Playlist not found."
                     };
                 }
+                
+                var songResponse = new List<object>();
 
-                var songsResponse = playlist.PlaylistSongs.Select(ps => new
+                foreach (var s in playlist.PlaylistSongs)
                 {
-                    SongId = ps.Song.Id,
-                    SongTitle = ps.Song.Title,
-                    ArtistId = ps.Song.Artist,
-                    ArtistUsername = _context.Users.FirstOrDefault(a => a.Id == ps.Song.Artist)?.Username,
-                    Audios = ps.Song.Audios.Select(audio => new
+                    var song = await context.Songs.FirstOrDefaultAsync(so => so.Id == s.SongId);
+                    if (song != null)
                     {
-                        AudioId = audio.Id,
-                        audio.Duration,
-                        audio.FilePath
-                    }),
-                    Photo = _context.Photos.FirstOrDefault(p => p.SongId == ps.Song.Id)
-                }).ToList();
+                        var user = await context.Users.FirstOrDefaultAsync(u => u.Id == song.Artist);
+                        var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == song.Id);
+                        var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == song.Id);
+                        if (user != null && audio != null && photo != null)
+                        {
+                            songResponse.Add(new
+                            {
+                                id = song.Id,
+                                title = song.Title,
+                                albumTitle = song.AlbumTitle,
+                                artist = user.Username,
+                                artistId = user.Id,
+                                duration = audio.Duration,
+                                photo
+                            });
+                        }
+                    }
+                }
 
                 var response = new
                 {
                     PlaylistId = playlist.Id,
                     PlaylistTitle = playlist.Title,
-                    Songs = songsResponse
+                    Songs = songResponse
                 };
 
                 return new ApiResponse<object>
@@ -319,7 +324,7 @@ namespace Backend.Services
                     };
                 }
 
-                var playlistSong = await _context.PlaylistSongs
+                var playlistSong = await context.PlaylistSongs
                     .FirstOrDefaultAsync(ps => ps.PlaylistId == playlistId && ps.SongId == songId);
 
                 if (playlistSong == null)
@@ -332,8 +337,8 @@ namespace Backend.Services
                     };
                 }
 
-                _context.PlaylistSongs.Remove(playlistSong);
-                await _context.SaveChangesAsync();
+                context.PlaylistSongs.Remove(playlistSong);
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -369,8 +374,8 @@ namespace Backend.Services
                     };
                 }
 
-                _context.Playlists.Remove(playlist);
-                await _context.SaveChangesAsync();
+                context.Playlists.Remove(playlist);
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -417,8 +422,8 @@ namespace Backend.Services
                 }
 
                 playlist.Title = newPlaylistName;
-                _context.Playlists.Update(playlist);
-                await _context.SaveChangesAsync();
+                context.Playlists.Update(playlist);
+                await context.SaveChangesAsync();
 
                 return new ApiResponse<object>
                 {
@@ -440,6 +445,6 @@ namespace Backend.Services
         }
 
         private async Task<Playlist> GetPlaylist(int playlistId) =>
-            await _context.Playlists.FindAsync(playlistId);
+            await context.Playlists.FindAsync(playlistId);
     }
 }

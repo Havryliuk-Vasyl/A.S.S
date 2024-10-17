@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from '../context/UserContext.jsx'; 
 
 const Authorization = () => {
     const navigate = useNavigate();
+    const { updateUser } = useUser();
     const [isLoginForm, setIsLoginForm] = useState(false);
     const [formData, setFormData] = useState({
         username: '',
@@ -37,7 +39,6 @@ const Authorization = () => {
             });
 
             if (response.ok) {
-                console.log("Data sent successfully");
                 toggleForm();
             } else if (response.status === 409) {
                 const error = await response.text();
@@ -67,7 +68,6 @@ const Authorization = () => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log("Logged in successfully:", data);
                 localStorage.setItem('token', data.data.token);
                 navigate('/');
             } else {

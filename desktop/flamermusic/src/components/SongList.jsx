@@ -3,29 +3,12 @@ import SongItem from './SongItem.jsx';
 import { usePlayer } from '../context/PlayerContext.jsx';
 import '../styles/song.css';
 
-const SongList = () => {
-  const [songs, setSongs] = useState([]);
-  const [loading, setLoading] = useState(true);
+const SongList = ({ songs , showArtist, showAlbum}) => {
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { playFromList } = usePlayer();
 
   useEffect(() => {
-    const fetchSongs = async () => {
-      try {
-        const response = await fetch('https://localhost:7219/Song');
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        setSongs(data.data.$values);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSongs();
   }, []);
 
   const handlePlaySong = (songId) => {
@@ -46,14 +29,14 @@ const SongList = () => {
         <thead>
           <tr>
             <th>Title</th>
-            <th>Artist</th>
-            <th>Album</th>
+            {showArtist && <th>Artist</th>}
+            {showAlbum && <th>Album</th>}
             <th>Duration</th>
           </tr>
         </thead>
         <tbody>
           {songs.map(song => (
-            <SongItem key={song.id} song={song} onPlay={handlePlaySong}/>
+            <SongItem key={song.id} song={song} onPlay={handlePlaySong} showArtist={showArtist} showAlbum={showAlbum}/>
           ))}
         </tbody>
       </table>

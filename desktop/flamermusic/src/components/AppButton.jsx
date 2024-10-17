@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const PlayerButton = ({ defaultIcon, hoverIcon, onClick, altText, id }) => {
+const AppButton = ({ defaultIcon, hoverIcon, onClick, altText, id }) => {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -15,4 +15,4 @@ const PlayerButton = ({ defaultIcon, hoverIcon, onClick, altText, id }) => {
     );
 };
 
-export default PlayerButton;
+export default AppButton;

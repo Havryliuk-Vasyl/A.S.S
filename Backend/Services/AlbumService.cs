@@ -242,38 +242,66 @@ namespace Backend.Services
         private async Task<object> GetAlbumDetails(int albumId)
         {
             var album = await context.Albums
+                .Where(a => a.Id ==  albumId)
                 .Include(a => a.AlbumSongs)
-                    .ThenInclude(als => als.Song)
-                        .ThenInclude(s => s.Audios)
-                .FirstOrDefaultAsync(a => a.Id == albumId);
+                .ThenInclude(als => als.Song)
+                .FirstOrDefaultAsync();
 
             if (album == null)
-                return null;
+                return new ApiResponse<object>
+                {
+                    Success = false,
+                    Data = null,
+                    Message = "Album not found."
+                };
 
             var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
             if (artist == null)
-                return null;
-
-            var albumSongs = album.AlbumSongs.Select(als => new
-            {
-                SongId = als.Song.Id,
-                SongTitle = als.Song.Title,
-                Audios = als.Song.Audios.Select(audio => new
+                return new ApiResponse<object>
                 {
-                    AudioId = audio.Id,
-                    audio.Duration,
-                    audio.FilePath
-                })
-            });
+                    Success = false,
+                    Data = null,
+                    Message = "Album not found."
+                };
 
-            return new
+            var songResponse = new List<object>();
+
+            foreach (var s in album.AlbumSongs)
             {
-                AlbumId = album.Id,
-                AlbumTitle = album.Title,
-                DateShared = album.DateShared,
+                var song = await context.Songs.FirstOrDefaultAsync(so => so.Id == s.Id);
+                if (song != null)
+                {
+                    var user = await context.Users.FirstOrDefaultAsync(u => u.Id == song.Artist);
+                    var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == song.Id);
+                    var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == song.Id);
+                    if (user != null && audio != null && photo != null)
+                    {
+                        songResponse.Add(new
+                        {
+                            id = song.Id,
+                            title = song.Title,
+                            albumTitle = song.AlbumTitle,
+                            duration = audio.Duration,
+                            photo
+                        });
+                    }
+                }
+            }
+
+            var response = new
+            {
+                Id = album.Id,
+                Title = album.Title,
                 ArtistId = artist.Id,
-                ArtistUsername = artist.Username,
-                Songs = albumSongs
+                DateShared = album.DateShared,
+                Songs = songResponse
+            };
+
+            return new ApiResponse<object>
+            {
+                Success = true,
+                Data = response,
+                Message = "Album with songs retrieved successfully."
             };
         }
 
@@ -286,32 +314,60 @@ namespace Backend.Services
                 .FirstOrDefaultAsync(a => a.AlbumSongs.Any(als => als.SongId == songId));
 
             if (album == null)
-                return null;
+                return new ApiResponse<object>
+                {
+                    Success = false,
+                    Data = null,
+                    Message = "Album not found."
+                };
 
             var artist = await context.Users.FirstOrDefaultAsync(a => a.Id == album.User);
             if (artist == null)
-                return null;
-
-            var albumSongs = album.AlbumSongs.Select(als => new
-            {
-                SongId = als.Song.Id,
-                SongTitle = als.Song.Title,
-                Audios = als.Song.Audios.Select(audio => new
+                return new ApiResponse<object>
                 {
-                    AudioId = audio.Id,
-                    audio.Duration,
-                    audio.FilePath
-                })
-            });
+                    Success = false,
+                    Data = null,
+                    Message = "Album not found."
+                };
 
-            return new
+            var songResponse = new List<object>();
+
+            foreach (var s in album.AlbumSongs)
             {
-                AlbumId = album.Id,
-                AlbumTitle = album.Title,
-                DateShared = album.DateShared,
+                var song = await context.Songs.FirstOrDefaultAsync(so => so.Id == s.Id);
+                if (song != null)
+                {
+                    var user = await context.Users.FirstOrDefaultAsync(u => u.Id == song.Artist);
+                    var audio = await context.Audios.FirstOrDefaultAsync(a => a.Song == song.Id);
+                    var photo = await context.Photos.FirstOrDefaultAsync(p => p.SongId == song.Id);
+                    if (user != null && audio != null && photo != null)
+                    {
+                        songResponse.Add(new
+                        {
+                            id = song.Id,
+                            title = song.Title,
+                            albumTitle = song.AlbumTitle,
+                            duration = audio.Duration,
+                            photo
+                        });
+                    }
+                }
+            }
+
+            var response = new
+            {
+                Id = album.Id,
+                Title = album.Title,
                 ArtistId = artist.Id,
-                ArtistUsername = artist.Username,
-                Songs = albumSongs
+                DateShared = album.DateShared,
+                Songs = songResponse
+            };
+
+            return new ApiResponse<object>
+            {
+                Success = true,
+                Data = response,
+                Message = "Album with songs retrieved successfully."
             };
         }
         private async Task<ApiResponse<object>> DeleteAlbumAndFiles(int albumId)

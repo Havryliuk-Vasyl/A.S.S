@@ -12,7 +12,7 @@ namespace Backend.Controllers
     {
         private readonly IAlbumService albumService;
 
-        public AlbumController(AlbumService albumService)
+        public AlbumController(IAlbumService albumService)
         {
             this.albumService = albumService;
         }

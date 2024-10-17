@@ -171,6 +171,5 @@ namespace Backend.Services
                 return response.BadRequest("Token is not valid!");
             }
         }
-
     }
 }

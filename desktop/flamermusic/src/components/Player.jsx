@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/player.css';
-import PlayerButton from './PlayerButton.jsx';
+import AppButton from './AppButton.jsx';
 import PlayerInputSlider from './PlayerInputSlider.jsx';
 import { usePlayer } from '../context/PlayerContext.jsx';
 
-const Player = () => {
+const Player = ({ isModalOpen}) => {
     const { currentSong, isPlaying, handlePlayPause, currentTime, duration, volume, setVolume, audioRef } = usePlayer();
     const [isDragging, setIsDragging] = useState(false);
     const [sliderValue, setSliderValue] = useState(currentTime);
@@ -78,7 +78,7 @@ const Player = () => {
     }, [volume, handlePlayPause]);
 
     return (
-        <div className="player">
+        <div className={`player ${isModalOpen ? 'disabled' : ''}`}>
             <div className="player-audio-player">
                 <div className="player-controls">
                     <div className="player-song-information">
@@ -100,23 +100,25 @@ const Player = () => {
                     </div>
                     <div className="player-audio-control">
                         <div className="player-control-buttons">
-                            <PlayerButton
+                            <AppButton
                                 id="player-prevSongBtn"
                                 defaultIcon={require('../../public/assets/icons/player-icons/Prev.svg')}
                                 hoverIcon={require('../../public/assets/icons/player-icons/Prev_Hover.svg')}
+                                onClick={playPrevSong}
                                 altText={'Previous'}
                             />
-                            <PlayerButton
+                            <AppButton
                                 id="player-playPauseBtn"
                                 defaultIcon={isPlaying ? require('../../public/assets/icons/player-icons/Pause.svg') : require('../../public/assets/icons/player-icons/Play.svg')}
                                 hoverIcon={isPlaying ? require('../../public/assets/icons/player-icons/Pause_Hover.svg') : require('../../public/assets/icons/player-icons/Play_Hover.svg')}
                                 onClick={handlePlayPause}
                                 altText={isPlaying ? 'Pause' : 'Play'}
                             />
-                            <PlayerButton
+                            <AppButton
                                 id="player-nextSongBtn"
                                 defaultIcon={require('../../public/assets/icons/player-icons/Next.svg')}
                                 hoverIcon={require('../../public/assets/icons/player-icons/Next_Hover.svg')}
+                                onClick={playNextSong}
                                 altText={'Next'}
                             />
                         </div>
@@ -137,7 +139,7 @@ const Player = () => {
                         </div>
                     </div>
                     <div className="player-other-controllers">
-                        <PlayerButton
+                        <AppButton
                             id="player-queueBtn"
                             defaultIcon={require('../../public/assets/icons/player-icons/Queue.svg')}
                             hoverIcon={require('../../public/assets/icons/player-icons/Queue_Hover.svg')}

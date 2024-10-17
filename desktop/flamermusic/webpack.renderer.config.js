@@ -1,18 +1,30 @@
 const rules = require('./webpack.rules');
 
-rules.push({
-  test: /\.css$/,
-  use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-});
+// Modify the existing rules array to include the new rule for JSX and CSS
+rules.push(
+  {
+    test: /\.jsx?$/,
+    exclude: /node_modules/,
+    use: {
+      loader: 'babel-loader',
+      options: {
+        presets: ['@babel/preset-env', '@babel/preset-react'],
+      },
+    },
+  },
+  {
+    test: /\.css$/,  // Rule for CSS files
+    use: ['style-loader', 'css-loader'], // Use style-loader and css-loader
+  }
+);
 
 module.exports = {
-  // Put your normal webpack config below here
   module: {
-    rules,
+    rules, // Use the modified rules array
   },
   resolve: {
     fallback: {
-      "path": require.resolve("path-browserify")
-    }
+      path: require.resolve('path-browserify'),
+    },
   },
 };

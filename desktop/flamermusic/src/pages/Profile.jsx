@@ -49,7 +49,6 @@ const Profile = () => {
             if (!userData) return;
             
             try {
-                console.log(userData.id);
                 const response = await fetch(`https://localhost:7219/Playlist/${userData.id}`);
                 
                 if (!response.ok) {
@@ -57,7 +56,6 @@ const Profile = () => {
                 }
     
                 const data = await response.json();
-                console.log(data);
                 setUsersPlaylist(data.data.$values);
             } catch (error) {
                 console.error("Failed to fetch playlists:", error);
@@ -71,7 +69,7 @@ const Profile = () => {
         <div className="user-profile">
             <div className="profile-information">
                 <div className="profile-photo">
-                    <img className="profile-avatar" src={userData ? `https://localhost:7219/User/avatar/${userData.id}` : 'default-avatar-url'} alt="User Avatar"/>
+                    <img className="profile-avatar" src={`https://localhost:7219/User/avatar/${userData?.id}` || require('../../public/assets/icons/noimageuser.png')} alt="User Avatar"/>
                 </div>
                 <div className="user-info">
                     <div className="username" id="username">{userData?.username}</div>

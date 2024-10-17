@@ -1,0 +1,33 @@
+.menu-container {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #333;
+    color: #fff;
+    padding: 0.5em;
+    box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.2);
+    border-radius: 0.2em;
+    width: 12em;
+    z-index: 1000;
+}
+
+.dropdown-menu button {
+    display: block;
+    width: 100%;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    padding: 0.5em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.dropdown-menu button:hover {
+    background-color: #FF8224;
+}

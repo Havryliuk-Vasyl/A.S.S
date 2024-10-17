@@ -11,7 +11,7 @@ namespace Backend.Services
             this.context = context;
         }
         public async Task<ApiResponse<object>> Search(string data)
-        {
+        {   
             ApiResponse<object> response = new ApiResponse<object>();
 
             if (string.IsNullOrEmpty(data))

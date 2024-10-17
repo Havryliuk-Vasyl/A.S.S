@@ -1,13 +1,34 @@
 import React, { useState } from 'react';
-import { usePlayer } from '../context/PlayerContext.jsx';
+import SongOptions from './MenuConfig.jsx';
+import { useNavigate } from 'react-router-dom';
 
-const SongItem = ({ song, onPlay }) => {
+const SongItem = ({ song, onPlay, showArtist, showAlbum }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const { play } = usePlayer();
+  const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate(); 
+  const [menuType, setMenuType] = useState('song');
 
-  const handlePlaySong = () =>{
-    onPlay(song.song.id);
+  const handlePlaySong = () => {
+    onPlay(song.id);
+  };
+
+  const handleContextMenu = (event) => {
+    event.preventDefault();
+    setMenuPosition({ x: event.pageX, y: event.pageY });
+    setIsMenuOpen(true);
+    setMenuType('song');
+  };
+
+  const handleGoToUserPage = () => {
+    navigate(`/user?id=${song.artistId}`); 
+  };
+
+  const handleGoToAlbumPage = () => {
+    navigate(`/album?songId=${song.id}`);
   }
+
+  const closeMenu = () => setIsMenuOpen(false);
 
   const formatTime = (seconds) => {
     const totalSeconds = Math.floor(seconds);
@@ -17,11 +38,35 @@ const SongItem = ({ song, onPlay }) => {
   };
 
   return (
-    <tr className="song-item" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-      <td className="song-title"><img onClick={handlePlaySong} src={isHovered ? require('../../public/assets/icons/player-icons/Play_Greem.svg') : `https://localhost:7219/Song/photo/` + song.song.id} alt={song.song.title} />{song.song.title}</td>
-      <td className="song-artist">{song.artist}</td>
-      <td className="song-album">{song.song.albumTitle}</td>
-      <td> {formatTime(song.duration)} </td>
+    <tr 
+      className="song-item" 
+      onMouseEnter={() => setIsHovered(true)} 
+      onMouseLeave={() => setIsHovered(false)}
+      onContextMenu={handleContextMenu}
+    >
+      <td className="song-title">
+        <img 
+          onClick={handlePlaySong} 
+          src={isHovered ? require('../../public/assets/icons/player-icons/Play_Greem.svg') : `https://localhost:7219/Song/photo/${song.id}`}
+          alt={song.title} 
+        />
+        {song.title}
+      </td>
+      {showArtist && (
+        <td className="song-artist" onClick={handleGoToUserPage}>{song.artist}</td>
+      )}
+      {showAlbum && <td className="song-album" onClick={handleGoToAlbumPage}>{song.albumTitle}</td>}
+      <td>{formatTime(song.duration)}</td>
+
+      {isMenuOpen && (
+        <SongOptions 
+          menuType={menuType}
+          song={song} 
+          position={menuPosition} 
+          closeMenu={closeMenu} 
+          onPlay={handlePlaySong}
+        />
+      )}
     </tr>
   );
 };

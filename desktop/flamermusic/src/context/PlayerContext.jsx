@@ -14,8 +14,7 @@ export const PlayerProvider = ({ children }) => {
 
     const playFromList = async (songId, songs) => {
         setSongList(songs);
-        console.log(songs.findIndex(song => song.song.id === songId));
-        currentSongIndex.current = songs.findIndex(song => song.song.id === songId);
+        currentSongIndex.current = songs.findIndex(song => song.id === songId);
         await play(songId);
     };
 
@@ -54,13 +53,12 @@ export const PlayerProvider = ({ children }) => {
 
     const playNextSong = () => {
         if (songList.length > 0){
-            console.log(currentSongIndex.current);
             currentSongIndex.current += 1;
             if (currentSongIndex.current >= songList.length) {
                 currentSongIndex.current = 0;
             }
             const nextSong = songList[currentSongIndex.current];
-            play(nextSong.song.id);
+            play(nextSong.id);
         }
     }
 
@@ -71,7 +69,7 @@ export const PlayerProvider = ({ children }) => {
                 currentSongIndex.current = songList.length - 1;
             }
             const prevSong = songList[currentSongIndex.current];
-            play(prevSong.song.id);
+            play(prevSong.id);
         }
     }
 

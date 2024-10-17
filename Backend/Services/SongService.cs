@@ -80,7 +80,9 @@ namespace Backend.Services
                 {
                     response.Add(new
                     {
-                        song,
+                        id = song.Id,
+                        title = song.Title,
+                        albumTitle = song.AlbumTitle,
                         artist = user.Username,
                         artistId = user.Id,
                         duration = audio.Duration,

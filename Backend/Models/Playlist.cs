@@ -31,7 +31,6 @@ namespace Backend.Models
         public int PlaylistId { get; set; }
         [Column("song")]
         public int SongId { get; set; }
-
         public Playlist Playlist { get; set; }
         public Song Song { get; set; }
     }

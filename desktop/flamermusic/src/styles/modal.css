@@ -1,0 +1,24 @@
+.modal {
+    background-color: rgb(29, 29, 29);
+    margin: 15% auto;
+    padding: 20px;
+    width: 30%;
+    border-radius: 1em;
+    color: white;
+    position: relative; 
+    z-index: 1000; 
+}
+
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    z-index: 500; 
+}
+
+.confirmBtn, .cancelBtn{
+    background-color: blueviolet;
+    margin-right: 1em;
+}
+
+.confirmBtn:hover, .cancelBtn:hover{
+    background-color: rgb(102, 0, 255);
+}
