@@ -14,6 +14,12 @@ namespace Backend.Models
         [Column("date_shared")]
         public DateOnly DateShared { get; set; }
         public ICollection<AlbumSongs> AlbumSongs { get; set; }
+        public ICollection<AlbumGenre> AlbumGenres { get; set; }
+        public Album()
+        {
+            AlbumSongs = new List<AlbumSongs>();
+            AlbumGenres = new List<AlbumGenre>();
+        }
     }
 
     [Table("album_songs")]

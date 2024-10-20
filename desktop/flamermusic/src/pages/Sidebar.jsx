@@ -14,9 +14,9 @@ const Sidebar = ({ openModal }) => {
               </Link>
             </li>
             <li id="settingsBtnInMenu">
-              <a href="#" onClick={openModal}> 
+              <Link to="/settings" id="settings">
                 <img src={require('../../public/assets/icons/settings-icon.png')} alt="settings"/>
-              </a>
+              </Link>
             </li>
             <li id="catalogBtnInMenu">
               <Link to="/main_window">
@@ -35,18 +35,8 @@ const Sidebar = ({ openModal }) => {
         <nav>
           <ul>
           <li>
-            <a href="#">
-              {/* <img src={require('../../public/assets/icons/prev-icon.png')} alt="prev"/> */}
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              {/* <img src={require('../../public/assets/icons/play-icon.png')} alt="play"/> */}
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              {/* <img src={require('../../public/assets/icons/next-icon.png')} alt="next"/> */}
+            <a href="#" onClick={openModal}>
+              <img src={require('../../public/assets/icons/plus_img.png')} alt="Create Playlist"/>
             </a>
           </li>
           </ul>

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
@@ -7,38 +8,50 @@ namespace Backend.Models
     {
         [Column("id")]
         public int Id { get; set; }
+
         [Column("title")]
         public string Title { get; set; }
+
         [Column("artist")]
         public int Artist { get; set; }
+
         [Column("type")]
         public string Type { get; set; }
+
         [Column("albumTitle")]
         public string AlbumTitle { get; set; }
+
         [Column("date_shared")]
         public DateOnly DateShared { get; set; }
+
         public ICollection<Audio> Audios { get; set; }
+
+        public ICollection<AlbumGenre> SongGenres { get; set; }
+
         public Song()
         {
             Audios = new List<Audio>();
+            SongGenres = new List<AlbumGenre>();
+        }
+        public Song(int id, string title, int artist, string albumTitle, DateOnly dateShared)
+        {
+            Id = id;
+            Title = title;
+            Artist = artist;
+            AlbumTitle = albumTitle;
+            DateShared = dateShared;
+            Audios = new List<Audio>();
+            SongGenres = new List<AlbumGenre>();
         }
 
-        public Song(int id, string title, int artist, string albumTitle, DateOnly date_shared)
+        public Song(string title, int artist, string albumTitle, DateOnly dateShared)
         {
-            this.Id = id;
-            this.Title = title;
-            this.Artist = artist;
-            this.AlbumTitle = albumTitle;
-            this.DateShared = date_shared;
+            Title = title;
+            Artist = artist;
+            AlbumTitle = albumTitle;
+            DateShared = dateShared;
             Audios = new List<Audio>();
-        }
-        public Song(string title, int artist, string albumTitle, DateOnly date_shared)
-        {
-            this.Title = title;
-            this.Artist = artist;
-            this.AlbumTitle = albumTitle;
-            this.DateShared = date_shared;
-            Audios = new List<Audio>();
+            SongGenres = new List<AlbumGenre>();
         }
     }
 }

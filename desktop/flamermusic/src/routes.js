@@ -8,6 +8,7 @@ import Playlist from "./pages/Playlist.jsx";
 import { UserProvider } from './context/UserContext.jsx';
 import UserProfile from "./pages/User.jsx";
 import Album from "./pages/Album.jsx";
+import Settings from "./pages/Settings.jsx";
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: "playlist", element: <Playlist />},
       { path: "user", element: <UserProfile/> },
       { path: "album", element: <Album /> },
+      { path: "settings", element: <Settings /> },
     ],
   },
   { path: "/auth", element: <Authorization /> },

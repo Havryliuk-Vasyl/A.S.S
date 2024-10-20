@@ -6,7 +6,7 @@
     max-width: 20%;
 }
 
-.menu {
+.menu, .controls {
     background-color: rgb(29, 29, 29);
     border-radius: 1em;
     min-width: auto;
@@ -17,7 +17,7 @@
     float: 50%;
 }
 
-.menu ul {
+.menu ul, .controls ul {
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -26,16 +26,16 @@
     align-items: center;
 }
 
-.menu ul li {
+.menu ul li, .controls ul li {
     display: inline-block;
     margin: 0.5em;
 }
 
-.menu ul li a {
+.menu ul li a, .controls ul li a {
     display: inline-block;
 }
 
-.menu img {
+.menu img, .controls a img {
     border-radius: 50%;
     color: #fff;
     text-decoration: none;
@@ -48,7 +48,7 @@ a {
     text-decoration: none;
 }
 
-.menu ul li a img:hover {
+.menu ul li a img:hover, .controls ul li a img:hover {
     background-color: #777;
     cursor: pointer;
     border-radius: 100%;

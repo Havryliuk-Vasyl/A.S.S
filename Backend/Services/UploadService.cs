@@ -1,4 +1,6 @@
 ﻿using Backend.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace Backend.Services
 {
@@ -6,11 +8,13 @@ namespace Backend.Services
     {
         private readonly string _audioFilePath = "./media-files/audio";
         private readonly string _photoFilePath = "./media-files/photos";
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
+
         public UploadService(ApplicationDbContext context)
         {
-            this.context = context;
+            _context = context;
         }
+
         public async Task<ApiResponse<object>> Upload(AudioUploadModel audioUploadModel)
         {
             ApiResponse<object> response = new ApiResponse<object>();
@@ -20,23 +24,24 @@ namespace Backend.Services
                 return response.BadRequest("Values are not valid");
             }
 
-            using (var transaction = await context.Database.BeginTransactionAsync())
+            using (var transaction = await _context.Database.BeginTransactionAsync())
             {
                 try
                 {
                     var album = await CreateAlbumAsync(audioUploadModel);
                     await SaveAlbumPhotoAsync(audioUploadModel, album.Id);
+                    await LinkAlbumToGenresAsync(album.Id, audioUploadModel.GenreIds);
 
                     for (int i = 0; i < audioUploadModel.AudioFiles.Count; i++)
                     {
                         await ProcessAudioFileAsync(audioUploadModel, album.Id, i);
                     }
 
-                    await context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
                     await transaction.CommitAsync();
 
                     response.Success = true;
-                    response.Message = "Material uploaded successful!";
+                    response.Message = "Material uploaded successfully!";
                     return response;
                 }
                 catch (Exception ex)
@@ -53,7 +58,8 @@ namespace Backend.Services
                    audioUploadModel.AudioFiles != null && audioUploadModel.AudioFiles.Any() &&
                    audioUploadModel.PhotoFile != null &&
                    audioUploadModel.SongTitles != null &&
-                   audioUploadModel.SongTitles.Count == audioUploadModel.AudioFiles.Count;
+                   audioUploadModel.SongTitles.Count == audioUploadModel.AudioFiles.Count &&
+                   audioUploadModel.GenreIds != null && audioUploadModel.GenreIds.Count == audioUploadModel.AudioFiles.Count;
         }
 
         private async Task<Album> CreateAlbumAsync(AudioUploadModel audioUploadModel)
@@ -65,8 +71,8 @@ namespace Backend.Services
                 DateShared = DateOnly.FromDateTime(DateTime.Today),
             };
 
-            context.Albums.Add(album);
-            await context.SaveChangesAsync();
+            _context.Albums.Add(album);
+            await _context.SaveChangesAsync();
 
             return album;
         }
@@ -84,16 +90,17 @@ namespace Backend.Services
                 FilePath = photoAlbumFilePath
             };
 
-            context.AlbumPhotos.Add(photoAlbum);
-            await context.SaveChangesAsync();
+            _context.AlbumPhotos.Add(photoAlbum);
+            await _context.SaveChangesAsync();
         }
 
         private async Task ProcessAudioFileAsync(AudioUploadModel audioUploadModel, int albumId, int index)
         {
             var audioFile = audioUploadModel.AudioFiles[index];
             var songTitle = audioUploadModel.SongTitles[index];
+            var genreIds = audioUploadModel.GenreIds;
 
-            if (audioFile == null || string.IsNullOrWhiteSpace(songTitle))
+            if (audioFile == null || string.IsNullOrWhiteSpace(songTitle) || genreIds == null)
             {
                 return;
             }
@@ -109,6 +116,7 @@ namespace Backend.Services
             await LinkSongToAlbumAsync(albumId, song.Id);
             await SaveAudioAsync(song.Id, audioFilePath, audioDuration);
             await SaveSongPhotoAsync(audioUploadModel, song.Id);
+            await LinkAlbumToGenresAsync(albumId, genreIds);
         }
 
         private async Task SaveFileAsync(IFormFile file, string filePath)
@@ -144,8 +152,8 @@ namespace Backend.Services
                 Type = songType
             };
 
-            context.Songs.Add(song);
-            await context.SaveChangesAsync();
+            _context.Songs.Add(song);
+            await _context.SaveChangesAsync();
 
             return song;
         }
@@ -165,8 +173,8 @@ namespace Backend.Services
                 SongId = songId
             };
 
-            context.AlbumSongs.Add(albumSong);
-            await context.SaveChangesAsync();
+            _context.AlbumSongs.Add(albumSong);
+            await _context.SaveChangesAsync();
         }
 
         private async Task SaveAudioAsync(int songId, string filePath, float duration)
@@ -178,8 +186,8 @@ namespace Backend.Services
                 Duration = duration
             };
 
-            context.Audios.Add(audio);
-            await context.SaveChangesAsync();
+            _context.Audios.Add(audio);
+            await _context.SaveChangesAsync();
         }
 
         private async Task SaveSongPhotoAsync(AudioUploadModel audioUploadModel, int songId)
@@ -195,8 +203,36 @@ namespace Backend.Services
                 FilePath = photoFilePath
             };
 
-            context.Photos.Add(photo);
-            await context.SaveChangesAsync();
+            _context.Photos.Add(photo);
+            await _context.SaveChangesAsync();
         }
+
+        private async Task LinkAlbumToGenresAsync(int albumId, List<int> genreIds)
+        {
+            var existingGenres = await _context.Genres
+                .Where(g => genreIds.Contains(g.Id))
+                .Select(g => g.Id)
+                .ToListAsync();
+
+            foreach (var genreId in genreIds)
+            {
+                if (existingGenres.Contains(genreId))
+                {
+                    var albumGenre = new AlbumGenre
+                    {
+                        AlbumId = albumId,
+                        GenreId = genreId
+                    };
+
+                    _context.AlbumGenres.Add(albumGenre);
+                }
+                else
+                {
+                    Console.WriteLine($"Genre with ID {genreId} does not exist.");
+                }
+            }
+            await _context.SaveChangesAsync();
+        }
+
     }
 }

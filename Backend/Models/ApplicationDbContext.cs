@@ -17,6 +17,8 @@ namespace Backend.Models
         public DbSet<AlbumSongs> AlbumSongs { get; set; }
         public DbSet<AlbumPhoto> AlbumPhotos { get; set; }
         public DbSet<BecomeArtistModel> BecomeArtistModels { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<AlbumGenre> AlbumGenres { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -25,7 +27,6 @@ namespace Backend.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
             modelBuilder.Entity<PlaylistSong>()
                 .HasKey(ps => new { ps.PlaylistId, ps.SongId });
 
@@ -40,7 +41,7 @@ namespace Backend.Models
                 .HasForeignKey(ps => ps.SongId);
 
             modelBuilder.Entity<AlbumSongs>()
-            .HasKey(als => new { als.AlbumId, als.SongId });
+                .HasKey(als => new { als.AlbumId, als.SongId });
 
             modelBuilder.Entity<AlbumSongs>()
                 .HasOne(als => als.Album)
@@ -51,6 +52,19 @@ namespace Backend.Models
                 .HasOne(als => als.Song)
                 .WithMany()
                 .HasForeignKey(als => als.SongId);
+
+            modelBuilder.Entity<AlbumGenre>()
+                .HasKey(ag => new { ag.AlbumId, ag.GenreId });
+
+            modelBuilder.Entity<AlbumGenre>()
+                .HasOne(ag => ag.Album)
+                .WithMany(a => a.AlbumGenres)
+                .HasForeignKey(ag => ag.AlbumId);
+
+            modelBuilder.Entity<AlbumGenre>()
+                .HasOne(ag => ag.Genre)
+                .WithMany(g => g.AlbumGenres)
+                .HasForeignKey(ag => ag.GenreId);
 
             base.OnModelCreating(modelBuilder);
         }
