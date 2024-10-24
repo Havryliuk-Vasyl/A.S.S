@@ -11,7 +11,7 @@
 
 body {
   font-family: Ubuntu-Medium, sans-serif;
-  background-color: black;
+  background-color: #121212; /* Темний фон за замовчуванням */
   color: #fff;
   margin: 0;
   display: flex;
@@ -38,8 +38,8 @@ img {
   display: flex;
   flex-direction: row;
   flex: 1 1 80%;
-  padding: 1em;
-  padding-bottom: 0%;
+  padding: 1rem;
+  padding-bottom: 0;
   overflow: hidden;
 }
 
@@ -48,7 +48,7 @@ img {
   background-color: #222;
   color: #fff;
   margin: 0;
-  padding-left: 1em;
+  padding-left: 1rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -56,7 +56,112 @@ img {
   width: 80%;
   overflow-y: auto;
   user-select: none;
-  border-radius: 1em;
-  padding: 1em;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.settings {
   flex: 1;
+  background-color: #121212; /* Темний фон для налаштувань */
+  color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.125rem 0.9375rem rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.settings h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.settings .section {
+  margin-bottom: 2rem;
+}
+
+.settings .section-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.settings label {
+  display: block;
+  margin: 0.5rem 0;
+}
+
+.settings input[type="text"],
+.settings input[type="number"],
+.settings select {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #1e1e1e; /* Темний фон для інпутів */
+  color: #fff;
+  transition: background-color 0.3s, border 0.3s;
+}
+
+.settings input[type="text"]:focus,
+.settings input[type="number"]:focus,
+.settings select:focus {
+  background-color: #2b2b2b; /* Темніше при фокусі */
+  outline: none;
+}
+
+.settings button {
+  background-color: #dc5f00; /* Помаранчевий фон для кнопок */
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.settings button:hover {
+  background-color: #c65000; /* Темніший помаранчевий при наведенні */
+}
+
+.toggle-switch {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.toggle-switch input {
+  display: none;
+}
+
+.toggle-switch .switch {
+  width: 3.125rem;
+  height: 1.5rem;
+  background-color: #444; /* Темно-сірий для перемикача */
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-switch .switch::before {
+  content: "";
+  width: 1.25rem;
+  height: 1.25rem;
+  background-color: white; /* Білий колір для перемикача */
+  border-radius: 50%;
+  position: absolute;
+  left: 0.125rem;
+  bottom: 0.125rem;
+  transition: transform 0.3s;
+}
+
+.toggle-switch input:checked + .switch {
+  background-color: #dc5f00; /* Помаранчевий для активного перемикача */
+}
+
+.toggle-switch input:checked + .switch::before {
+  transform: translateX(1.625rem); /* Зсув перемикача при активації */
 }

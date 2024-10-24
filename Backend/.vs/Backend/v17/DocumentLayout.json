@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "F:\\Programming\\A.S.S\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\uploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\uploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -53,10 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\playlistcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\albumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -202,7 +202,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 212,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 44,
           "Children": [
             {
               "$type": "Bookmark",
@@ -222,7 +222,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "AlbumGenre.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\AlbumGenre.cs",
               "RelativeDocumentMoniker": "Models\\AlbumGenre.cs",
@@ -230,12 +230,11 @@
               "RelativeToolTip": "Models\\AlbumGenre.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAUAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T17:28:05.334Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-20T17:28:05.334Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Genre.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Genre.cs",
               "RelativeDocumentMoniker": "Models\\Genre.cs",
@@ -243,8 +242,7 @@
               "RelativeToolTip": "Models\\Genre.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T17:27:00.952Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-10-20T17:27:00.952Z"
             },
             {
               "$type": "Document",
@@ -260,13 +258,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "UploadService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\UploadService.cs",
               "RelativeDocumentMoniker": "Services\\UploadService.cs",
               "ToolTip": "F:\\Programming\\A.S.S\\Backend\\Services\\UploadService.cs",
               "RelativeToolTip": "Services\\UploadService.cs",
-              "ViewState": "AQIAAAUAAAAAAAAAAAAswBMAAAATAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-10-02T07:51:36.599Z",
               "EditorCaption": ""
@@ -345,7 +343,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "AdministratorService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\AdministratorService.cs",
               "RelativeDocumentMoniker": "Services\\AdministratorService.cs",
@@ -353,8 +351,7 @@
               "RelativeToolTip": "Services\\AdministratorService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAHkAAAApAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-30T18:46:29.796Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-30T18:46:29.796Z"
             },
             {
               "$type": "Document",
@@ -454,7 +451,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "UserService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
@@ -462,8 +459,7 @@
               "RelativeToolTip": "Services\\UserService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-12T07:27:24.631Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-12T07:27:24.631Z"
             },
             {
               "$type": "Document",
@@ -583,8 +579,7 @@
               "RelativeToolTip": "Models\\Artist.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T13:34:17.909Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-18T13:34:17.909Z"
             },
             {
               "$type": "Document",
@@ -624,7 +619,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "Administrator.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Administrator.cs",
               "RelativeDocumentMoniker": "Models\\Administrator.cs",
@@ -632,12 +627,11 @@
               "RelativeToolTip": "Models\\Administrator.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-23T15:50:39.206Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-23T15:50:39.206Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Models\\ApplicationDbContext.cs",
@@ -645,12 +639,11 @@
               "RelativeToolTip": "Models\\ApplicationDbContext.cs",
               "ViewState": "AQIAAAwAAAAAAAAAAAAAwBQAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-08T12:41:44.248Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-08T12:41:44.248Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
@@ -662,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "UploadController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\UploadController.cs",
               "RelativeDocumentMoniker": "Controllers\\UploadController.cs",
@@ -670,8 +663,7 @@
               "RelativeToolTip": "Controllers\\UploadController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAABAAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T11:00:53.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T11:00:53.852Z"
             },
             {
               "$type": "Document",
@@ -687,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "Song.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Song.cs",
               "RelativeDocumentMoniker": "Models\\Song.cs",
@@ -695,12 +687,11 @@
               "RelativeToolTip": "Models\\Song.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-05T16:46:53.693Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-05T16:46:53.693Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "AudioUploadModel.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\AudioUploadModel.cs",
               "RelativeDocumentMoniker": "Models\\AudioUploadModel.cs",
@@ -708,20 +699,20 @@
               "RelativeToolTip": "Models\\AudioUploadModel.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAuwAcAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T11:10:36.302Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T11:10:36.302Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 0,
               "Title": "PlaylistController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\PlaylistController.cs",
               "RelativeDocumentMoniker": "Controllers\\PlaylistController.cs",
               "ToolTip": "F:\\Programming\\A.S.S\\Backend\\Controllers\\PlaylistController.cs",
               "RelativeToolTip": "Controllers\\PlaylistController.cs",
-              "ViewState": "AQIAAAIAAAAAAAAAAAAiwCcAAABSAAAA",
+              "ViewState": "AQIAAB4AAAAAAAAAAAAIwEkAAAAhAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-29T14:02:25.029Z"
+              "WhenOpened": "2024-04-29T14:02:25.029Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -749,7 +740,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "Album.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Album.cs",
               "RelativeDocumentMoniker": "Models\\Album.cs",
@@ -757,8 +748,7 @@
               "RelativeToolTip": "Models\\Album.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T14:42:07.802Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T14:42:07.802Z"
             },
             {
               "$type": "Document",
@@ -774,7 +764,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "UserController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -782,8 +772,7 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AQIAAAsAAAAAAAAAAAAAwCoAAAAKAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T08:54:43.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T08:54:43.244Z"
             },
             {
               "$type": "Document",
