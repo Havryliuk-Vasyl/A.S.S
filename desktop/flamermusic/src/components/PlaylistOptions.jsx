@@ -5,7 +5,7 @@ import '../styles/playlistOptions.css';
 import EditPlaylistModal from "../components/modals/EditPlaylistModal.jsx";
 import { useNavigate } from 'react-router-dom';
 
-const PlaylistOptions = ({ playlist, EditPlaylistInformation }) => {
+const PlaylistOptions = ({ playlist, updatePlaylist }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const menuRef = useRef(null);
@@ -69,10 +69,10 @@ const PlaylistOptions = ({ playlist, EditPlaylistInformation }) => {
             )}
             
             <EditPlaylistModal 
-                playlist={playlist} 
+                playlistToEdit={playlist} 
                 isOpen={isModalOpen} 
                 closeModal={closeModal} 
-                playlistInformation={EditPlaylistInformation} 
+                updatePlaylist={updatePlaylist}
             />
         </div>
     );

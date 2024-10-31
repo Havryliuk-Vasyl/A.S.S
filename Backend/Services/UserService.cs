@@ -160,6 +160,7 @@ namespace Backend.Services
                 Message = "Photo retrieved successfully."
             };
         }
+        
         public async Task<ApiResponse<object>> EditUser(int userId, string newNickname)
         {
             User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == userId);
@@ -172,19 +173,21 @@ namespace Backend.Services
                     Message = "User not found!"
                 };
             }
+
             if (!string.IsNullOrEmpty(newNickname))
             {
                 user.Username = newNickname;
             }
             else
-            
+            { 
                 return new ApiResponse<object>
                 {
                     Success = false,
                     Data = null,
                     Message = "Something wrote wrong!"
                 };
-            
+            }
+
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
 
@@ -195,6 +198,7 @@ namespace Backend.Services
                 Message = "User updated successful!"
             };
         }
+
         public async Task<ApiResponse<object>> BecomeArtist(BecomeArtistModel newArtist)
         {
             User user = await _context.Users.FirstOrDefaultAsync(u => u.Id == newArtist.UserId);

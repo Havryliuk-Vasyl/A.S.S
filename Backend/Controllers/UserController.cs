@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Backend.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
@@ -53,6 +54,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("avatar/{userId}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAvatar(int userId)
         {
             var response = await userService.GetAvatar(userId);

@@ -1,4 +1,3 @@
-// App.jsx (оновлений)
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Player from './components/Player.jsx';

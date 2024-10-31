@@ -574,3 +574,7 @@ F:\Programming\A.S.S\Backend\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Win
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Scrutor.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Formats.Asn1.dll

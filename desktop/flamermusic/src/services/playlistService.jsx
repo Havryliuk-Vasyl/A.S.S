@@ -43,16 +43,15 @@ export const deletePlaylist = async (id) => {
   }
 }
 
-export const editTitle = async (playlist) => {
-  console.log(playlist);
+export const editTitle = async (newTitle) => {
+  console.log(newTitle);
   try {
-    console.log(playlist);
-    const response = await fetch(`${API_URL}Playlist/editplaylist?playlistId=${playlist.id}`, {
+    const response = await fetch(`${API_URL}Playlist/editplaylist?playlistId=${newTitle.playlistId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(playlist.title)
+      body: JSON.stringify(newTitle.playlistTitle)
     });
 
     if (!response.ok) {

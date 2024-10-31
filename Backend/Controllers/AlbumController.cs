@@ -38,7 +38,7 @@ namespace Backend.Controllers
             return response.Success ? File(response.Data, "image/jpeg") : BadRequest();
         }
 
-        [HttpDelete("{albumId}")]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteAlbum(int albumId)
         {
             var response = await albumService.DeleteAlbum(albumId);
@@ -52,7 +52,7 @@ namespace Backend.Controllers
             return response.Success ? Ok(response) : BadRequest();
         }
 
-        [HttpPut("{albumId}")]
+        [HttpPut("edit")]
         public async Task<IActionResult> EditAlbum(int albumId, [FromBody] string newAlbumName)
         {
             var response = await albumService.EditAlbum(albumId, newAlbumName);

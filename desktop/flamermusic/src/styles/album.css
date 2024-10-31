@@ -1,0 +1,89 @@
+.catalog-album {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    flex-wrap: wrap;
+    width: 100%;
+    height: fit-content;
+    border-radius: 1em;
+    margin-bottom: 1em;
+}
+
+.album-in-display-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    background-color: #121212;
+    width: 100%;
+    height: max-content;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.album-information {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    margin-bottom: 1em;
+}
+
+.album-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    margin-right: 1em;
+    border-radius: 1em;
+}
+
+.album-card:hover{
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.album-card-image img, .album-image img {
+    width: 10em;
+    height: 10em;
+    object-fit: cover;
+}
+
+.album-date-shared{
+    margin-bottom: 1em;
+}
+
+#album-image{
+    margin-right: 1em;
+    border-radius: 1em;
+}
+
+.album-card-name{
+    text-align: center;
+    margin-bottom: 0.5em;
+    width: 10em;
+    font-size: 1em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.album-name {
+    height: auto;
+    font-size: 3em;
+}
+
+.albums-artist {
+    align-content: center;
+}
+
+.albums-artist #album-artist-image{
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.atrist-username:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

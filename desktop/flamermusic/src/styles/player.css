@@ -14,12 +14,11 @@
 }
 
 .player.disabled {
-    pointer-events: none; /* Блокування всіх подій миші */
-    opacity: 0.5; /* Зменшення непрозорості, щоб показати, що плеєр неактивний */
+    pointer-events: none;
+    opacity: 0.5;
 }
 
 .player-audio-player {
-    background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     margin: 0;
     margin-bottom: 1em;

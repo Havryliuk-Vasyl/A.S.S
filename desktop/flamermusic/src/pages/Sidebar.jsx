@@ -1,8 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useUser } from '../context/UserContext.jsx';
 import "../styles/sidebar.css";
 
 const Sidebar = ({ openModal }) => {
+  const { user } = useUser();
+
   return (
     <div className="right-section">
       <div className="menu" id="menu">
@@ -28,17 +31,31 @@ const Sidebar = ({ openModal }) => {
                 <img src={require('../../public/assets/icons/search-icon.png')} alt="Search"/>
               </a>
             </li>
+            {user?.status === 'administrator' && (
+              <li id="adminBtnInMenu">
+                <Link to="/admin">
+                  <img src={require('../../public/assets/icons/Admin-icon.png')} alt="admin" />
+                </Link>
+              </li>
+            )}
+            {user?.status === 'artist' && (
+              <li id="artistBtnInMenu">
+                <Link to="/artist">
+                  <img src={require('../../public/assets/icons/artist-panel.png')} alt="artist" />
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
       </div>
       <div className="controls" id="controls">
         <nav>
           <ul>
-          <li>
-            <a href="#" onClick={openModal}>
-              <img src={require('../../public/assets/icons/plus_img.png')} alt="Create Playlist"/>
-            </a>
-          </li>
+            <li>
+              <a href="#" onClick={openModal}>
+                <img src={require('../../public/assets/icons/plus_img.png')} alt="Create Playlist"/>
+              </a>
+            </li>
           </ul>
         </nav>
       </div>

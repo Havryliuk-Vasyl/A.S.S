@@ -50,13 +50,13 @@ const SongItem = ({ song, onPlay, showArtist, showAlbum }) => {
           src={isHovered ? require('../../public/assets/icons/player-icons/Play_Greem.svg') : `https://localhost:7219/Song/photo/${song.id}`}
           alt={song.title} 
         />
-        {song.title}
+        <p onClick={handleGoToAlbumPage}>{song.title}</p>
       </td>
       {showArtist && (
         <td className="song-artist" onClick={handleGoToUserPage}>{song.artist}</td>
       )}
       {showAlbum && <td className="song-album" onClick={handleGoToAlbumPage}>{song.albumTitle}</td>}
-      <td>{formatTime(song.duration)}</td>
+      <td className="song-duration">{formatTime(song.duration)}</td>
 
       {isMenuOpen && (
         <SongOptions 

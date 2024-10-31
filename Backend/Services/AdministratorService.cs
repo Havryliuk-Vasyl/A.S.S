@@ -11,7 +11,7 @@ namespace Backend.Services
         }
         public async Task<ApiResponse<List<User>>> GetUsers()
         {
-            var users = await context.Users.ToListAsync();
+            var users = await context.Users.Where(u => u.status != "administrator").ToListAsync();
 
             return new ApiResponse<List<User>>
             {
@@ -59,7 +59,7 @@ namespace Backend.Services
                 Message = "User edited successful!"
             };
         }
-        public async Task<ApiResponse<object>> ConfitmBecomeArtist(BecomeArtistModel model)
+        public async Task<ApiResponse<object>> ConfirmBecomeArtist(BecomeArtistModel model)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.Id == model.UserId);
 
@@ -101,26 +101,35 @@ namespace Backend.Services
                 Message = "User did not become an artist successful!"
             };
         }
+
         public async Task<ApiResponse<List<RequestResponse>>> GetRequests()
         {
-            var requests = await(
-                from bam in context.BecomeArtistModels
-                join u in context.Users on bam.UserId equals u.Id
-                select new RequestResponse
-                {
-                    Id = bam.Id,
-                    UserId = u.Id,
-                    UserUsername = u.Username,
-                    Description = bam.Description
-                }
-            ).ToListAsync();
+            var requests = await context.BecomeArtistModels.ToListAsync();
+            var requestArray = new List<RequestResponse>();
 
-            return new ApiResponse<List<RequestResponse>>
+            foreach (var request in requests)
+            {
+                var user = await context.Users.FirstOrDefaultAsync(u => u.Id == request.UserId);
+                if (user != null)
+                {
+                    requestArray.Add(new RequestResponse
+                    {
+                        Id = request.Id,
+                        UserId = user.Id,
+                        UserUsername = user.Username,
+                        Description = request.Description
+                    });
+                }
+            }
+
+            var response = new ApiResponse<List<RequestResponse>>
             {
                 Success = true,
-                Data = requests,
-                Message = "Requests got!"
+                Data = requestArray,
+                Message = "Requests retrieved successfully!"
             };
+
+            return response;
         }
     }
 

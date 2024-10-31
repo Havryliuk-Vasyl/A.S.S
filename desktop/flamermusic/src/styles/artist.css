@@ -1,0 +1,290 @@
+.upload {
+    width: 100%;
+    min-height: 100%;
+    height: fit-content;
+    background-color: #121212;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="submit"],
+input[type="button"] {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(29, 29, 29);
+    color: #fff;
+}
+
+input[type="file"] {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(29, 29, 29);
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+}
+
+input[type="file"]:focus {
+    outline: none;
+    border-color: black;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    padding: 1em;
+    background-color: #6a5acd;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background-color: #7b69f3;
+}
+
+#selectedPhotoPreview {
+    display: none;
+    width: 15em;
+    height: 15em;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.choosen-song-file {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #222;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s; 
+}
+
+.choosen-song-file:hover {
+    cursor: cell;
+    background-color: #494949;
+}
+
+.choosen-song-file p {
+    margin: 0;
+    color: #ffffff;
+}
+
+.remove-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+    background-color: darkred;
+}
+
+.artist-catalog-album {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 100%;
+    padding: 1em;
+    border-radius: 1em;
+    background-color: #121212;
+}
+
+.artist-catalog-album h2{
+    margin: 0;
+    margin-bottom: 1em;
+    height: fit-content;
+}
+
+.artist-album-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #222;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    border-radius: 1em;
+    width: 11em;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.artist-album-card:hover {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+}
+
+.artist-album-card-image img {
+    width: 10em;
+    height: 10em;
+    margin-top: 0.5em;
+    object-fit: cover;
+    border-radius: 0.5em;
+}
+
+.artist-album-card-name {
+    text-align: center;
+    width: 100%;
+    padding-top: 0;
+    padding: 0.5em;
+    font-size: 1em;
+    color: #ffffff;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.artist-in-display-field {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    background-color: #121212;
+    width: 100%;
+    height: max-content;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.artist-album-name {
+    font-size: 3em;
+    color: #ffffff;
+    margin: 0.5em 0;
+}
+
+.artist-albums-artist {
+    display: flex;
+    align-items: center;
+}
+
+.artist-albums-artist #album-artist-image {
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 0.5em;
+}
+
+.artist-artist-username:hover {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #dddddd;
+}
+
+.artist-album {
+    background-color: #121212;
+    width: 100%;
+}
+
+.artist-album-div {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    height: fit-content;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.artist-album-photo {
+    margin-right: 1em;
+}
+
+.artist-album-photo img {
+    width: 20em;
+    height: 20em;
+    border-radius: 0.5em;   
+    object-fit: cover;
+}
+
+.artist-album-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.artist-album-info div {
+    margin-bottom: 1em;
+}
+
+.artist-album-control {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.artist-album-control div {
+    color: black;
+    width: fit-content;
+    height: auto;
+    padding: 0.5em;
+    border-radius: 0.2em;
+    margin-bottom: 1em;
+}
+
+.artist-album-control:hover {
+    cursor: pointer;
+}
+
+.artist-album-control .artist-album-control-edit-user {
+    background-color: blue;
+}
+
+.artist-album-control .artist-album-control-edit-user:hover {
+    background-color: rgb(0, 0, 144);
+}
+
+.artist-album-control .artist-album-control-save {
+    background-color: green;
+}
+
+.artist-album-control .artist-album-control-save:hover {
+    background-color: rgb(0, 72, 0);
+}
+
+.artist-album-control .artist-album-control-cancel {
+    background-color: rgb(119, 119, 119);
+}
+
+.artist-album-control .artist-album-control-cancel:hover {
+    background-color: rgb(49, 49, 49);
+}
+
+.artist-album-control .artist-album-control-delete-user {
+    background-color: red;
+}
+
+.artist-album-control .artist-album-control-delete-user:hover {
+    background-color: rgb(144, 0, 0);
+}
+
+button {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    margin: 0.5em;
+    padding: 1em;
+    background-color: #6a5acd;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#confirm {
+    background-color: green;
+}
+
+#cancel {
+    background-color: red;
+}

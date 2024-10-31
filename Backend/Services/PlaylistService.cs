@@ -256,7 +256,18 @@ namespace Backend.Services
                         Message = "Playlist not found."
                     };
                 }
-                
+
+                var playlistOwner = await context.Users.FirstOrDefaultAsync(u => u.Id == playlist.User);
+                if (playlistOwner == null)
+                {
+                    return new ApiResponse<object>
+                    {
+                        Success = false,
+                        Data = null,
+                        Message = "Playlist not found."
+                    };
+                }
+
                 var songResponse = new List<object>();
 
                 foreach (var s in playlist.PlaylistSongs)
@@ -285,6 +296,7 @@ namespace Backend.Services
 
                 var response = new
                 {
+                    User = playlistOwner.Id,
                     PlaylistId = playlist.Id,
                     PlaylistTitle = playlist.Title,
                     Songs = songResponse

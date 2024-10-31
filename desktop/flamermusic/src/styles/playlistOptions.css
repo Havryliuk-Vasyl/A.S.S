@@ -1,3 +1,8 @@
+#playlist-optionsBtn{
+    background-color: transparent;
+    margin: 0;
+}
+
 .menu-container {
     position: relative;
     display: inline-block;
@@ -6,19 +11,18 @@
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
     background-color: #333;
     color: #fff;
-    padding: 0.5em;
+    padding: auto;
     box-shadow: 0 0.2em 0.5em rgba(0, 0, 0, 0.2);
     border-radius: 0.2em;
-    width: 12em;
+    width: max-content;
     z-index: 1000;
 }
 
 .dropdown-menu button {
     display: block;
-    width: 100%;
+    width: 80%;
     background: none;
     border: none;
     color: #fff;

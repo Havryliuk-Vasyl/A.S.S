@@ -1,5 +1,6 @@
 ﻿using Backend.Models;
 using Backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,11 +8,12 @@ namespace Backend.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class AdminController : ControllerBase
     {
         private readonly IAdministratorService administratorService;
 
-        public AdminController(AdministratorService administratorService)
+        public AdminController(IAdministratorService administratorService)
         {
             this.administratorService = administratorService;
         }
@@ -26,7 +28,7 @@ namespace Backend.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("user")]
+        [HttpDelete("deleteuser")]
         public async Task<IActionResult> DeleteUserById(int userId)
         {
             var response = await administratorService.DeleteUserById(userId);
@@ -51,7 +53,7 @@ namespace Backend.Controllers
         [HttpPut("confirmBecomeArtist")]
         public async Task<ActionResult> ConfitmBecomeArtist(BecomeArtistModel model)
         {
-            var response = await administratorService.ConfitmBecomeArtist(model);
+            var response = await administratorService.ConfirmBecomeArtist(model);
             if (response.Success)
             {
                 return Ok(response);
@@ -71,6 +73,7 @@ namespace Backend.Controllers
         }
 
         [HttpGet("requests")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<RequestResponse>>> GetRequests()
         {
             var response = await administratorService.GetRequests();

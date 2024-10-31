@@ -1,27 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SongItem from './SongItem.jsx';
 import { usePlayer } from '../context/PlayerContext.jsx';
 import '../styles/song.css';
 
-const SongList = ({ songs , showArtist, showAlbum}) => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const { playFromList } = usePlayer();
-
-  useEffect(() => {
-  }, []);
+const SongList = ({ songs, showArtist, showAlbum, isPlayable }) => {
+  const { playFromList } = isPlayable ? usePlayer() : {};
 
   const handlePlaySong = (songId) => {
-    playFromList(songId, songs);
-  }
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+    if (isPlayable) {
+      playFromList(songId, songs);
+    }
+  };
 
   return (
     <div className="song-list">
@@ -36,7 +25,13 @@ const SongList = ({ songs , showArtist, showAlbum}) => {
         </thead>
         <tbody>
           {songs.map(song => (
-            <SongItem key={song.id} song={song} onPlay={handlePlaySong} showArtist={showArtist} showAlbum={showAlbum}/>
+            <SongItem
+              key={song.id}
+              song={song}
+              onPlay={handlePlaySong}
+              showArtist={showArtist}
+              showAlbum={showAlbum}
+            />
           ))}
         </tbody>
       </table>

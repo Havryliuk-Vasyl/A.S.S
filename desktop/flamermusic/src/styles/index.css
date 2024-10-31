@@ -11,7 +11,7 @@
 
 body {
   font-family: Ubuntu-Medium, sans-serif;
-  background-color: #121212; /* Темний фон за замовчуванням */
+  background-color: #121212;
   color: #fff;
   margin: 0;
   display: flex;
@@ -36,6 +36,7 @@ img {
 
 .main {
   display: flex;
+  height: 100vh;
   flex-direction: row;
   flex: 1 1 80%;
   padding: 1rem;
@@ -62,7 +63,7 @@ img {
 
 .settings {
   flex: 1;
-  background-color: #121212; /* Темний фон для налаштувань */
+  background-color: #121212;
   color: #fff;
   padding: 2rem;
   border-radius: 1rem;
@@ -100,7 +101,7 @@ img {
   margin-top: 0.5rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: #1e1e1e; /* Темний фон для інпутів */
+  background-color: #1e1e1e;
   color: #fff;
   transition: background-color 0.3s, border 0.3s;
 }
@@ -108,22 +109,24 @@ img {
 .settings input[type="text"]:focus,
 .settings input[type="number"]:focus,
 .settings select:focus {
-  background-color: #2b2b2b; /* Темніше при фокусі */
+  background-color: #2b2b2b;
   outline: none;
 }
 
 .settings button {
-  background-color: #dc5f00; /* Помаранчевий фон для кнопок */
+  text-align: center;
+  background-color: #dc5f00;
   color: #fff;
   border: none;
   padding: 0.75rem 1.5rem;
   border-radius: 0.5rem;
   cursor: pointer;
   transition: background-color 0.3s;
+  width: max-content;
 }
 
 .settings button:hover {
-  background-color: #c65000; /* Темніший помаранчевий при наведенні */
+  background-color: #c65000;
 }
 
 .toggle-switch {
@@ -150,7 +153,7 @@ img {
   content: "";
   width: 1.25rem;
   height: 1.25rem;
-  background-color: white; /* Білий колір для перемикача */
+  background-color: white;
   border-radius: 50%;
   position: absolute;
   left: 0.125rem;
@@ -159,9 +162,9 @@ img {
 }
 
 .toggle-switch input:checked + .switch {
-  background-color: #dc5f00; /* Помаранчевий для активного перемикача */
+  background-color: #dc5f00; 
 }
 
 .toggle-switch input:checked + .switch::before {
-  transform: translateX(1.625rem); /* Зсув перемикача при активації */
+  transform: translateX(1.625rem);
 }

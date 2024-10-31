@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../context/UserContext.jsx'; 
 
@@ -68,6 +68,7 @@ const Authorization = () => {
 
             if (response.ok) {
                 const data = await response.json();
+                console.log(data);
                 localStorage.setItem('token', data.data.token);
                 navigate('/');
             } else {
@@ -81,29 +82,31 @@ const Authorization = () => {
 
     return (
         <div className="container">
-            <h1>FlamerMusic</h1>
-            <h2>{isLoginForm ? 'Логін' : 'Реєстрація'}</h2>
-            {!isLoginForm ? (
-                <div id="registration">
-                    <form id="registrationForm" onSubmit={(e) => e.preventDefault()}>
-                        <input type="text" name="username" placeholder="Псевдонім користувача" value={formData.username} onChange={handleChange} required />
-                        <input type="text" name="name" placeholder="Ім'я" value={formData.name} onChange={handleChange} required />
-                        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-                        <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
-                        <input type="button" onClick={registrate} value="Зареєструватися" />
-                        <button type="button" onClick={toggleForm}>Увійти</button>
-                    </form>
-                </div>
-            ) : (
-                <div id="login">
-                    <form id="loginForm" onSubmit={(e) => e.preventDefault()}>
-                        <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-                        <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
-                        <input type="button" onClick={login} value="Увійти" />
-                        <button type="button" onClick={toggleForm}>Зареєструватися</button>
-                    </form>
-                </div>
-            )}
+            <div className="authorization">
+                <h1>FlamerMusic</h1>
+                <h2>{isLoginForm ? 'Логін' : 'Реєстрація'}</h2>
+                {!isLoginForm ? (
+                    <div id="registration">
+                        <form id="registrationForm" onSubmit={(e) => e.preventDefault()}>
+                            <input type="text" name="username" placeholder="Псевдонім користувача" value={formData.username} onChange={handleChange} required />
+                            <input type="text" name="name" placeholder="Ім'я" value={formData.name} onChange={handleChange} required />
+                            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+                            <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
+                            <input type="button" onClick={registrate} value="Зареєструватися" />
+                            <button type="button" onClick={toggleForm}>Увійти</button>
+                        </form>
+                    </div>
+                ) : (
+                    <div id="login">
+                        <form id="loginForm" onSubmit={(e) => e.preventDefault()}>
+                            <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
+                            <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
+                            <input type="button" onClick={login} value="Увійти" />
+                            <button type="button" onClick={toggleForm}>Зареєструватися</button>
+                        </form>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };

@@ -12,7 +12,6 @@ const AuthWrapper = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
     const checkToken = async () => {
       if (!token) {
         navigate('/auth');

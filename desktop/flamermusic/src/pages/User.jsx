@@ -4,13 +4,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import "../styles/profile.css";
 import SongList from "../components/SongList.jsx";
 import PlaylistCard from "../components/PlaylistCard.jsx";
+import AlbumCard from "../components/AlbumCard.jsx";
 
 const UserProfile = () => {
     const [userData, setUserData] = useState(null);
     
+    const location = useLocation();
     const query = new URLSearchParams(location.search);
     const userId = query.get("id");
     const [usersPlaylist, setUsersPlaylist] = useState([]);
+    const [usersAlbums, setUsersAlbums] = useState([]);
     const navigate = useNavigate();
 
     const handleBack = () => {
@@ -20,7 +23,11 @@ const UserProfile = () => {
     useEffect(() => {
         try {
             const fetchUserData = async () => {
-                const response = await fetch(`https://localhost:7219/User/id/${userId}`);
+                const response = await fetch(`https://localhost:7219/User/id/${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('token')}`
+                    }
+                });
                 if (!response.ok) {
                     throw new Error('Something went wrong!');
                 }
@@ -32,12 +39,11 @@ const UserProfile = () => {
         catch (Error){
             console.error("Failed to fetch user data:", error);
         }
-    });
+    }, [userId]);
 
     useEffect(() => {
         const getUsersPlaylists = async () => {
             if (!userData) return;
-            
             try {
                 const response = await fetch(`https://localhost:7219/Playlist/${userData.id}`);
                 
@@ -55,6 +61,27 @@ const UserProfile = () => {
         getUsersPlaylists();
     }, [userData]);
 
+    useEffect(() => {
+       const getUsersAlbums = async () => {
+           if (!userData) return;
+
+           try {
+               const response = await fetch(`https://localhost:7219/Album/artist/${userData.id}`);
+
+               if (!response.ok) {
+                   throw new Error('Something went wrong!');
+               }
+
+               const data = await response.json();
+               setUsersAlbums(data.data.$values);
+           } catch (error) {
+               console.error("Failed to fetch albums:", error);
+           }
+       } 
+
+       getUsersAlbums();
+    }, [userData]);
+
     return (
         <div className="user-profile">
             <div className="profile-information">
@@ -68,6 +95,13 @@ const UserProfile = () => {
                     <div className="date-joined">{userData?.dataJoined}</div>
                 </div>
             </div>
+            <h1>Albums</h1>
+            <div className="catalog-album">
+                {usersAlbums?.map((album) => (
+                    <AlbumCard key={album.id} album={album} />
+                ))}
+            </div>
+            <h1>Playlists</h1>
             <div className="catalog-playlist">
                 {usersPlaylist?.map((playlist) => (
                     <PlaylistCard key={playlist.id} playlist={playlist} />

@@ -56,6 +56,13 @@ th, td {
   border-radius: 0.5em;
 }
 
+.song-duration {
+  text-align: right;
+  width: 1%;
+  white-space: nowrap;
+}
+
+
 .song-title:hover, .song-artist:hover, .song-album:hover {
   text-decoration: underline;
   cursor: pointer;

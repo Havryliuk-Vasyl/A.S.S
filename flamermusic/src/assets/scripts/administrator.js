@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const usersDiv = document.createElement('div');
         usersDiv.classList.add("users-list");
 
-        users.$values.forEach(user => {
+        users.data.$values.forEach(user => {
             usersDiv.appendChild(renderUserCard(user));
         });
 
@@ -335,7 +335,6 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const requests = await getRequests();
 
-            requests.$values.forEach(request => {
                 const userName = request.userUsername;
                 const description = request.description;
                 const confirmButton = document.createElement("button");
@@ -364,7 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 cancelButton.addEventListener("click", () => {
                     cencelRequest(request);
                 });
-            });
+            
 
             requestsDiv.appendChild(requestsList);
             displayField.appendChild(requestsDiv);
@@ -375,13 +374,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function getRequests() {
         try {
-            const response = await fetch(`https://localhost:7219/Admin/requests`);
+            const response = await fetch(`https://localhost:7219/Admin/requests`, {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
+                }
+            });
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-
             const data = await response.json();
+            console.log(data.data.$values);
             return data;
         } catch (error) {
             console.error('An error occurred while fetching data:', error);
