@@ -82,7 +82,7 @@ const Album = () => {
                 </div>
             </div>
             <div id="songs-container" className="container-style">
-                {songs.length > 0 && <SongList songs={songs} showArtist={false} showAlbum={false} />}
+                {songs.length > 0 && <SongList songs={songs} showArtist={false} showAlbum={false} isPlayable={true} menuType={"album"}/>}
             </div>
         </div>
     );

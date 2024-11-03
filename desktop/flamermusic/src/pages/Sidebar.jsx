@@ -40,7 +40,7 @@ const Sidebar = ({ openModal }) => {
             )}
             {user?.status === 'artist' && (
               <li id="artistBtnInMenu">
-                <Link to="/artist">
+                <Link to={{ pathname: '/artist', search: `?id=${user.id}` }}>
                   <img src={require('../../public/assets/icons/artist-panel.png')} alt="artist" />
                 </Link>
               </li>

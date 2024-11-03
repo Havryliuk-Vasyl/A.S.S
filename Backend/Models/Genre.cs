@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Backend.Models
 {
-    [Table("genre")]
+    [Table("genres")]
     public class Genre
     {
         [Column("id")]
@@ -12,7 +12,7 @@ namespace Backend.Models
         [Column("name")]
         public string Name { get; set; }
 
-        public ICollection<AlbumGenre> AlbumGenres { get; set; } // Зв'язок з альбомами
+        public ICollection<AlbumGenre> AlbumGenres { get; set; }
 
         public Genre()
         {

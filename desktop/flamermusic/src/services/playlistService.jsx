@@ -80,3 +80,36 @@ export const changePhoto = async (playlist) => {
       console.error("Failed to change playlist photo:", error);
   }
 };
+
+export const addSongToPlaylist = async (playlistId, songId) => {
+  try {
+    const response = await fetch(`${API_URL}Playlist/${playlistId}/Addsong`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(songId)
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to add song to playlist');
+    }
+  } catch (error) {
+    console.error("Failed to add song to playlist:", error);
+  }
+}
+
+export const deleteSongFromPlaylist = async (playlistId, songId) => {
+  try {
+    const response = await fetch(`${API_URL}Playlist/${playlistId}/Removesong/${songId}`, {
+      method: 'DELETE',
+    });
+
+    console.log("Song deleted successfully");
+    if (!response.ok) {
+      throw new Error('Failed to delete song from playlist');
+    }
+  } catch (error) {
+    console.error("Failed to delete song from playlist:", error);
+  }
+}

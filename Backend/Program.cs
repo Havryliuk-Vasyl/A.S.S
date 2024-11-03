@@ -18,7 +18,8 @@ builder.Services
     .AddScoped<ISongService, SongService>()
     .AddScoped<IPlaylistService, PlaylistService>()
     .AddScoped<IUserService, UserService>()
-    .AddScoped<IUploadService, UploadService>();
+    .AddScoped<IUploadService, UploadService>()
+    .AddScoped<IGenreService, GenreService>();
 
 builder.Services.Configure<FormOptions>(options =>
 {

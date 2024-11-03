@@ -26,12 +26,9 @@ namespace Backend.Models
 
         public ICollection<Audio> Audios { get; set; }
 
-        public ICollection<AlbumGenre> SongGenres { get; set; }
-
         public Song()
         {
             Audios = new List<Audio>();
-            SongGenres = new List<AlbumGenre>();
         }
         public Song(int id, string title, int artist, string albumTitle, DateOnly dateShared)
         {
@@ -41,7 +38,6 @@ namespace Backend.Models
             AlbumTitle = albumTitle;
             DateShared = dateShared;
             Audios = new List<Audio>();
-            SongGenres = new List<AlbumGenre>();
         }
 
         public Song(string title, int artist, string albumTitle, DateOnly dateShared)
@@ -51,7 +47,6 @@ namespace Backend.Models
             AlbumTitle = albumTitle;
             DateShared = dateShared;
             Audios = new List<Audio>();
-            SongGenres = new List<AlbumGenre>();
         }
     }
 }

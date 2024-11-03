@@ -17,7 +17,7 @@ namespace Backend.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
@@ -59,14 +59,9 @@ namespace Backend.Migrations
                         .HasColumnType("int")
                         .HasColumnName("genre_id");
 
-                    b.Property<int?>("SongId")
-                        .HasColumnType("int");
-
                     b.HasKey("AlbumId", "GenreId");
 
                     b.HasIndex("GenreId");
-
-                    b.HasIndex("SongId");
 
                     b.ToTable("album_genres");
                 });
@@ -183,7 +178,7 @@ namespace Backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("genre");
+                    b.ToTable("genres");
                 });
 
             modelBuilder.Entity("Backend.Models.Photo", b =>
@@ -427,10 +422,6 @@ namespace Backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Backend.Models.Song", null)
-                        .WithMany("SongGenres")
-                        .HasForeignKey("SongId");
-
                     b.Navigation("Album");
 
                     b.Navigation("Genre");
@@ -505,8 +496,6 @@ namespace Backend.Migrations
             modelBuilder.Entity("Backend.Models.Song", b =>
                 {
                     b.Navigation("Audios");
-
-                    b.Navigation("SongGenres");
                 });
 #pragma warning restore 612, 618
         }

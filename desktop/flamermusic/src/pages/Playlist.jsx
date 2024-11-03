@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useUser } from "../context/UserContext.jsx";
 
 import EditPlaylistModal from "../components/modals/EditPlaylistModal.jsx";
 import SongList from "../components/SongList.jsx";
 import PlaylistOptions from "../components/PlaylistOptions.jsx";
+import { deleteSongFromPlaylist } from "../services/playlistService.jsx";
 
 const Playlist = () => {
     const location = useLocation();
@@ -12,6 +13,7 @@ const Playlist = () => {
     const playlistId = query.get("id");
 
     const { user } = useUser();
+    const navigate = useNavigate(); 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [playlist, setPlaylist] = useState({});
     const [songs, setSongs] = useState([]);
@@ -26,7 +28,12 @@ const Playlist = () => {
     const isNotUsersPlaylist = () => {
         return parseInt(playlist.user) !== parseInt(user?.id);
     };
-    
+
+    const removeSongFromPlaylist = async (songId) => {
+        deleteSongFromPlaylist(playlist.playlistId, songId);
+        navigate(0);
+    }
+
     useEffect(() => {
         const fetchPlaylist = async () => {
             try {
@@ -73,7 +80,7 @@ const Playlist = () => {
                 </div>
             )}
             <div id="songs-container" className="container-style">
-                {songs.length > 0 && <SongList songs={songs} showArtist={true} showAlbum={true} />}
+                {songs.length > 0 && <SongList songs={songs} showArtist={true} showAlbum={true} isPlayable={true} menuType={"playlist"} removeSongFromPlaylist={removeSongFromPlaylist}/>}
             </div>
             {!isNotUsersPlaylist() && (
                 <EditPlaylistModal 

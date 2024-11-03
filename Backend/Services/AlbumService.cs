@@ -359,7 +359,6 @@ namespace Backend.Services
                     .Where(p => albumSongs.Contains(p.SongId))
                     .ToListAsync();
 
-                // Delete files
                 foreach (var audioFile in audioFiles)
                 {
                     if (File.Exists(audioFile.FilePath))
@@ -384,7 +383,6 @@ namespace Backend.Services
                     }
                 }
 
-                // Remove database entries
                 context.AlbumSongs.RemoveRange(context.AlbumSongs.Where(als => als.AlbumId == albumId));
                 context.AlbumPhotos.RemoveRange(context.AlbumPhotos.Where(ap => ap.Album == albumId));
                 context.Audios.RemoveRange(audioFiles);

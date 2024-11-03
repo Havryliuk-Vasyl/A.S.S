@@ -306,6 +306,7 @@ F:\Programming\A.S.S\Backend\bin\Debug\net8.0\K4os.Compression.LZ4.Streams.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\K4os.Hash.xxHash.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNet.Identity.Core.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authorization.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Components.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Components.Forms.dll
@@ -335,8 +336,11 @@ F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abst
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Design.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Identity.Client.dll
@@ -379,6 +383,9 @@ F:\Programming\A.S.S\Backend\bin\Debug\net8.0\NuGet.ProjectModel.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\NuGet.Protocol.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\NuGet.Versioning.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Pomelo.EntityFrameworkCore.MySql.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Scrutor.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -389,12 +396,14 @@ F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Composition.Hosting.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Composition.Runtime.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Composition.TypedParts.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Configuration.ConfigurationManager.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Formats.Asn1.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Memory.Data.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Reflection.MetadataLoadContext.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Runtime.Caching.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Security.Cryptography.ProtectedData.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Security.Permissions.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Text.Json.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Windows.Extensions.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\ZstdSharp.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\af\Humanizer.resources.dll
@@ -548,6 +557,7 @@ F:\Programming\A.S.S\Backend\bin\Debug\net8.0\runtimes\win-x64\native\k5sprt64.d
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\runtimes\win-x64\native\krb5_64.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\runtimes\win-x64\native\krbcc64.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+F:\Programming\A.S.S\Backend\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
 F:\Programming\A.S.S\Backend\obj\Debug\net8.0\Backend.csproj.AssemblyReference.cache
 F:\Programming\A.S.S\Backend\obj\Debug\net8.0\Backend.GeneratedMSBuildEditorConfig.editorconfig
 F:\Programming\A.S.S\Backend\obj\Debug\net8.0\Backend.AssemblyInfoInputs.cache
@@ -568,13 +578,3 @@ F:\Programming\A.S.S\Backend\obj\Debug\net8.0\refint\Backend.dll
 F:\Programming\A.S.S\Backend\obj\Debug\net8.0\Backend.pdb
 F:\Programming\A.S.S\Backend\obj\Debug\net8.0\Backend.genruntimeconfig.cache
 F:\Programming\A.S.S\Backend\obj\Debug\net8.0\ref\Backend.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Text.Json.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\runtimes\win\lib\net8.0\System.Windows.Extensions.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Scrutor.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Swashbuckle.AspNetCore.Filters.Abstractions.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\System.Formats.Asn1.dll

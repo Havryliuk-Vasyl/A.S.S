@@ -12,7 +12,7 @@ namespace Backend.Services
 
         public UploadService(ApplicationDbContext context)
         {
-            _context = context;
+            _context = context; 
         }
 
         public async Task<ApiResponse<object>> Upload(AudioUploadModel audioUploadModel)
@@ -27,7 +27,7 @@ namespace Backend.Services
             using (var transaction = await _context.Database.BeginTransactionAsync())
             {
                 try
-                {
+                    {
                     var album = await CreateAlbumAsync(audioUploadModel);
                     await SaveAlbumPhotoAsync(audioUploadModel, album.Id);
                     await LinkAlbumToGenresAsync(album.Id, audioUploadModel.GenreIds);
@@ -116,7 +116,6 @@ namespace Backend.Services
             await LinkSongToAlbumAsync(albumId, song.Id);
             await SaveAudioAsync(song.Id, audioFilePath, audioDuration);
             await SaveSongPhotoAsync(audioUploadModel, song.Id);
-            await LinkAlbumToGenresAsync(albumId, genreIds);
         }
 
         private async Task SaveFileAsync(IFormFile file, string filePath)

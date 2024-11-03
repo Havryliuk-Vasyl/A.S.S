@@ -44,7 +44,7 @@ const Catalog = () => {
 
   return (
     <div className="catalog">
-      <SongList songs={songs} showAlbum={true} showArtist={true}/>
+      <SongList songs={songs} showAlbum={true} showArtist={true} isPlayable={true} menuType={"song"}/>
     </div>
   );
 };

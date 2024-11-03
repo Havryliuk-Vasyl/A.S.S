@@ -25,7 +25,6 @@ const ArtistAlbumEdit = () => {
                     throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                console.log(data.data);
                 setAlbum(data.data.data);
                 setSongs(data.data.data.songs.$values);
                 setInitialAlbum(data.data.data);
@@ -46,13 +45,11 @@ const ArtistAlbumEdit = () => {
     };
 
     const handleSave = async () => {
-        console.log(album);
-        saveAlbum(album);
-        navigate(0);
+        await saveAlbum(album);
     };
 
     const handleDelete = async () => {
-        deleteUser(album);
+        deleteAlbum(album);
         navigate(-1);
     };
 

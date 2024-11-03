@@ -86,7 +86,8 @@ const UserProfile = () => {
         <div className="user-profile">
             <div className="profile-information">
                 <div className="profile-photo">
-                    <img className="profile-avatar" src={`https://localhost:7219/User/avatar/${userData?.id}` || require('../../public/assets/icons/noimageuser.png')} alt="User Avatar"/>
+                    <img className="profile-avatar" src={`https://localhost:7219/User/avatar/${userData?.id}`} 
+                    onError={(e) => e.target.src = require('../../public/assets/icons/noimageuser.png')} alt="User Avatar"/>
                 </div>
                 <div className="user-info">
                     <div className="username" id="username">{userData?.username}</div>

@@ -14,16 +14,17 @@ const UserAlbums = () => {
 
     useEffect(() => {
         if (!userId) return;
-
+        console.log(userId);
         const getUsersAlbums = async () => {
             try {
                 const response = await fetch(`https://localhost:7219/Album/artist/${userId}`);
  
                 if (!response.ok) {
                     throw new Error('Something went wrong!');
-                }
+                }   
  
                 const data = await response.json();
+                console.log(data);
                 setAlbums(data.data.$values || []);
             } catch (error) {
                 console.error("Failed to fetch albums:", error);

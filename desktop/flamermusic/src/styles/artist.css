@@ -277,7 +277,7 @@ button {
     background-color: #6a5acd;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.5em;
     cursor: pointer;
 }
 
@@ -287,4 +287,42 @@ button {
 
 #cancel {
     background-color: red;
+}
+
+.albumPhoto {
+    margin-bottom: 1em;
+}
+
+.genres {
+    margin-bottom: 1em;
+}
+
+.genre-select {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 0.5em;
+    background-color: rgb(29, 29, 29);
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.genre-select:focus {
+    outline: none;
+    background-color: #222;
+}
+
+.selected-genres {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+}
+
+.selected-genre {
+    padding: 0.5em;
+    background-color:rgb(29, 29, 29);
+    border-radius: 0.5em;
 }

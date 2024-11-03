@@ -1,11 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../../styles/artist.css';
 
-const UploadAlbum = ({ artistId }) => {
+import { uploadAlbum, getGenres } from '../../services/artistService.jsx';
+
+const UploadAlbum = () => {
     const [title, setTitle] = useState('');
     const [photoFile, setPhotoFile] = useState(null);
     const [audioFiles, setAudioFiles] = useState([]);
     const [songTitles, setSongTitles] = useState([]);
+    const [genres, setGenres] = useState([]);
+    const [selectedGenres, setSelectedGenres] = useState([]);
+
+    const location = useLocation();
+    const query = new URLSearchParams(location.search);
+    const userId = query.get("id");
+
+    useEffect(() => {
+        const fetchGenres = async () => {
+            const data = await getGenres();
+            setGenres(data);
+        };
+        fetchGenres();
+    }, []);
 
     const handlePhotoChange = (event) => {
         setPhotoFile(event.target.files[0]);
@@ -32,11 +49,27 @@ const UploadAlbum = ({ artistId }) => {
         setSongTitles(updatedSongTitles);
     };
 
+    const handleGenreSelect = (event) => {
+        const genreId = Number(event.target.value);
+        const selectedGenre = genres.find((genre) => genre.id === genreId);
+        if (selectedGenre && !selectedGenres.some((genre) => genre.id === genreId)) {
+            setSelectedGenres((prevGenres) => [...prevGenres, selectedGenre]);
+        }
+        console.log(selectedGenres[0]);
+    };
+
+    const handleGenreRemove = (genreId) => {
+        const updatedSelectedGenres = selectedGenres.filter((genre) => genre.id !== genreId);
+        setSelectedGenres(updatedSelectedGenres);
+    };
+    
     const handleUpload = async () => {
+        console.log(userId);
         const formData = new FormData();
-        formData.append('ArtistId', artistId);
+        formData.append('ArtistId', userId);
         formData.append('AlbumTitle', title);
         formData.append('PhotoFile', photoFile);
+        formData.append('GenreIds', selectedGenres.map(g => g.id));
 
         audioFiles.forEach((file, index) => {
             formData.append('AudioFiles', file);
@@ -44,48 +77,26 @@ const UploadAlbum = ({ artistId }) => {
         });
 
         try {
-            const response = await fetch('https://localhost:7219/Upload/upload', {
-                method: 'POST',
-                body: formData,
-            });
-
+            const response = await uploadAlbum(formData);
             if (response.ok) {
-                alert('Audio uploaded successfully.');
+                alert('Альбом успішно завантажений');
                 setTitle('');
                 setPhotoFile(null);
                 setAudioFiles([]);
                 setSongTitles([]);
+                setSelectedGenres([]);
+                if (photoFile) URL.revokeObjectURL(photoFile);
             } else {
-                console.error('Error uploading audio:', await response.text());
+                const errorMsg = await response.text();
+                console.error('Помилка завантаження:', errorMsg);
+                alert(`Помилка завантаження: ${errorMsg}`);
             }
         } catch (error) {
-            console.error('Network error:', error);
+            console.error('Мережева помилка:', error);
+            alert('Мережева помилка. Спробуйте знову.');
         }
     };
 
-    // Додавання функцій для перетягування
-    const handleDragStart = (index) => {
-        const data = JSON.stringify(index);
-        event.dataTransfer.setData('text/plain', data);
-    };
-
-    const handleDrop = (index) => {
-        const draggedIndex = JSON.parse(event.dataTransfer.getData('text/plain'));
-        if (draggedIndex !== index) {
-            const updatedAudioFiles = [...audioFiles];
-            const updatedSongTitles = [...songTitles];
-
-            // Переміщення елементів
-            const [movedFile] = updatedAudioFiles.splice(draggedIndex, 1);
-            const [movedTitle] = updatedSongTitles.splice(draggedIndex, 1);
-
-            updatedAudioFiles.splice(index, 0, movedFile);
-            updatedSongTitles.splice(index, 0, movedTitle);
-
-            setAudioFiles(updatedAudioFiles);
-            setSongTitles(updatedSongTitles);
-        }
-    };
 
     return (
         <div className="upload">
@@ -113,6 +124,23 @@ const UploadAlbum = ({ artistId }) => {
                     accept=".png, .jpg"
                     required
                 />
+                <div className="genres">
+                    <p>Genres</p>
+                    <select onChange={handleGenreSelect} className="genre-select" required>
+                        <option value="">Choose Genres</option>
+                        {genres.map((g) => (
+                            <option key={g.id} value={g.id}>{g.name}</option>
+                        ))}
+                    </select>
+                    <div className="selected-genres">
+                        {selectedGenres.map((genre) =>(
+                            <div className="selected-genre" id="genre" key={genre.id}>
+                                <p>{genre.name}</p>
+                                <button onClick={() => handleGenreRemove(genre.id)}>Delete</button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
             <div className="section-2">
                 <p>Виберіть музичні файли</p>
@@ -127,11 +155,7 @@ const UploadAlbum = ({ artistId }) => {
                 {audioFiles.map((file, index) => (
                     <div 
                         key={index} 
-                        className="choosen-song-file" 
-                        draggable 
-                        onDragStart={() => handleDragStart(index)}
-                        onDrop={() => handleDrop(index)}
-                        onDragOver={(event) => event.preventDefault()}
+                        className="choosen-song-file"
                     >
                         <p>Вибраний трек: {file.name}</p>
                         <input

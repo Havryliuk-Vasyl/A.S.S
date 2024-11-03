@@ -3,7 +3,7 @@ import SongItem from './SongItem.jsx';
 import { usePlayer } from '../context/PlayerContext.jsx';
 import '../styles/song.css';
 
-const SongList = ({ songs, showArtist, showAlbum, isPlayable }) => {
+const SongList = ({ songs, showArtist, showAlbum, isPlayable, menuType, removeSongFromPlaylist }) => {
   const { playFromList } = isPlayable ? usePlayer() : {};
 
   const handlePlaySong = (songId) => {
@@ -31,6 +31,8 @@ const SongList = ({ songs, showArtist, showAlbum, isPlayable }) => {
               onPlay={handlePlaySong}
               showArtist={showArtist}
               showAlbum={showAlbum}
+              menuType={menuType}
+              removeSongFromPlaylist={removeSongFromPlaylist}
             />
           ))}
         </tbody>
