@@ -51,26 +51,28 @@ const UploadAlbum = () => {
 
     const handleGenreSelect = (event) => {
         const genreId = Number(event.target.value);
-        const selectedGenre = genres.find((genre) => genre.id === genreId);
-        if (selectedGenre && !selectedGenres.some((genre) => genre.id === genreId)) {
-            setSelectedGenres((prevGenres) => [...prevGenres, selectedGenre]);
+        if (!selectedGenres.includes(genreId)) {
+            setSelectedGenres((prevGenres) => [...prevGenres, genreId]);
         }
-        console.log(selectedGenres[0]);
+    };
+
+    const VerifyData = () => {
+        console.log(selectedGenres);
     };
 
     const handleGenreRemove = (genreId) => {
-        const updatedSelectedGenres = selectedGenres.filter((genre) => genre.id !== genreId);
+        const updatedSelectedGenres = selectedGenres.filter((id) => id !== genreId);
         setSelectedGenres(updatedSelectedGenres);
     };
-    
+
     const handleUpload = async () => {
-        console.log(userId);
         const formData = new FormData();
         formData.append('ArtistId', userId);
         formData.append('AlbumTitle', title);
         formData.append('PhotoFile', photoFile);
-        formData.append('GenreIds', selectedGenres.map(g => g.id));
-
+        selectedGenres.forEach((genreId) => {
+            formData.append('GenreIds', genreId);
+        });
         audioFiles.forEach((file, index) => {
             formData.append('AudioFiles', file);
             formData.append('SongTitles[]', songTitles[index]);
@@ -96,7 +98,6 @@ const UploadAlbum = () => {
             alert('Мережева помилка. Спробуйте знову.');
         }
     };
-
 
     return (
         <div className="upload">
@@ -133,12 +134,15 @@ const UploadAlbum = () => {
                         ))}
                     </select>
                     <div className="selected-genres">
-                        {selectedGenres.map((genre) =>(
-                            <div className="selected-genre" id="genre" key={genre.id}>
-                                <p>{genre.name}</p>
-                                <button onClick={() => handleGenreRemove(genre.id)}>Delete</button>
-                            </div>
-                        ))}
+                        {selectedGenres.map((genreId) => {
+                            const genre = genres.find((g) => g.id === genreId);
+                            return (
+                                <div className="selected-genre" id="genre" key={genreId}>
+                                    <p>{genre ? genre.name : "Unknown Genre"}</p>
+                                    <button onClick={() => handleGenreRemove(genreId)}>Delete</button>
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
@@ -170,6 +174,7 @@ const UploadAlbum = () => {
                 ))}
             </div>
             <button onClick={handleUpload}>Upload</button>
+            <button onClick={VerifyData}>Verify</button>
         </div>
     );
 };

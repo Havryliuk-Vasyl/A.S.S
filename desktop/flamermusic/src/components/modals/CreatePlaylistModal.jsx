@@ -1,14 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import { createPlaylist } from '../../services/playlistService.jsx';
 import { useUser } from '../../context/UserContext.jsx';
 import '../../styles/modal.css';
 
-Modal.setAppElement('#root');
-
 const CreatePlaylistModal = ({ isOpen, closeModal }) => {
   const [playlistName, setPlaylistName] = useState('');
   const { user } = useUser();
+
+  useEffect(() => {
+    if (isOpen) {
+      setPlaylistName('');
+    }
+  }, [isOpen]);
+
   const handleCreatePlaylist = () => {
     if (user && user.id) {
       createPlaylist(playlistName, user.id);
@@ -19,7 +24,7 @@ const CreatePlaylistModal = ({ isOpen, closeModal }) => {
   };
 
   return (
-    <Modal isOpen={isOpen} onRequestClose={closeModal} className="modal">
+    <Modal isOpen={isOpen} onRequestClose={closeModal} className="modal" ariaHideApp={false}>
       <h2>Create Playlist</h2>
       <input
         type="text"

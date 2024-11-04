@@ -6,7 +6,7 @@ export const saveUser = async (user) => {
         name: user.name,
         username: user.username,
     };
-    
+    console.log(request);
     try {
         const response = await fetch(`${API_URL}edituser`, {
             method: 'PUT',

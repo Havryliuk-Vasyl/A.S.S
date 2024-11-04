@@ -42,7 +42,7 @@ const EditUser = () => {
     };
 
     const handleSave = async () => {
-        saveUser(user);
+        await saveUser(user);
         navigate(0);
     };
 

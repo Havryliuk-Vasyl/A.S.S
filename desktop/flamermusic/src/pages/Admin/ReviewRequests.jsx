@@ -33,7 +33,7 @@ const ReviewRequests = () => {
             <h2>Review Requests</h2>
             <div className="requests-div">
                 {requests.length === 0 ? (
-                    <div>Немає запитів</div>
+                    <div>List of requests is empty</div>
                 ) : (
                     requests.map((request) => (
                         <div key={request.id} className="request">

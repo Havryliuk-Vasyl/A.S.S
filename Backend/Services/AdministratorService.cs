@@ -38,6 +38,7 @@ namespace Backend.Services
                 Message = "User deleted successful!"
             };
         }
+
         public async Task<ApiResponse<object>> EditUser(EditUserModel newUser)
         {
             var user = await context.Users.FirstOrDefaultAsync(u => u.Id == newUser.UserId);

@@ -59,7 +59,7 @@ namespace Backend.Services
                    audioUploadModel.PhotoFile != null &&
                    audioUploadModel.SongTitles != null &&
                    audioUploadModel.SongTitles.Count == audioUploadModel.AudioFiles.Count &&
-                   audioUploadModel.GenreIds != null && audioUploadModel.GenreIds.Count == audioUploadModel.AudioFiles.Count;
+                   audioUploadModel.GenreIds != null;
         }
 
         private async Task<Album> CreateAlbumAsync(AudioUploadModel audioUploadModel)

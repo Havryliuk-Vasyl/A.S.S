@@ -11,7 +11,7 @@
 
 .ReactModal__Overlay {
     background-color: rgba(0, 0, 0, 0.7) !important;
-    z-index: 500; 
+    z-index: 1;
 }
 
 .confirmBtn, .cancelBtn{
