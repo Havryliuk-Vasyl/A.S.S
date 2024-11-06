@@ -37,9 +37,9 @@ const Sidebar = () => {
               </Link>
             </li>
             <li id="searchBtnInMenu">
-              <a href="#">
+              <Link to="/search">
                 <img src={require('../../public/assets/icons/search-icon.png')} alt="Search" />
-              </a>
+              </Link>
             </li>
             {user?.status === 'administrator' && (
               <li id="adminBtnInMenu">

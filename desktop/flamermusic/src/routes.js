@@ -9,6 +9,7 @@ import { UserProvider } from './context/UserContext.jsx';
 import UserProfile from "./pages/User.jsx";
 import Album from "./pages/Album.jsx";
 import Settings from "./pages/Settings.jsx";
+import Search from "./pages/Search.jsx";
 import Admin from "./pages/Admin/Admin.jsx";
 import EditAccounts from "./pages/Admin/EditAccounts.jsx";
 import ReviewRequests from "./pages/Admin/ReviewRequests.jsx";
@@ -29,6 +30,7 @@ const router = createHashRouter([
       { path: "user", element: <UserProfile /> },
       { path: "album", element: <Album /> },
       { path: "settings", element: <Settings /> },
+      { path: "search", element: <Search /> },
     ],
   },
   { path: "/auth", element: <Authorization /> },

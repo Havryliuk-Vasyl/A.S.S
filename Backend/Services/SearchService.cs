@@ -21,17 +21,17 @@ namespace Backend.Services
 
             var userResults = await context.Users
                 .Where(u => u.Username.Contains(data))
-                .Select(u => new SearchResult { Type = "User", Name = u.Username, Id = u.Id })
+                .Select(u => new SearchResult { Type = "User", Title = u.Username, Id = u.Id })
                 .ToListAsync();
 
             var songResults = await context.Songs
                 .Where(s => s.Title.Contains(data))
-                .Select(s => new SearchResult { Type = "Song", Name = s.Title, Id = s.Id })
+                .Select(s => new SearchResult { Type = "Song", Title = s.Title, Id = s.Id })
                 .ToListAsync();
 
             var albumResults = await context.Albums
                 .Where(a => a.Title.Contains(data))
-                .Select(a => new SearchResult { Type = "Album", Name = a.Title, Id = a.Id })
+                .Select(a => new SearchResult { Type = "Album", Title = a.Title, Id = a.Id })
                 .ToListAsync();
 
             var results = userResults
