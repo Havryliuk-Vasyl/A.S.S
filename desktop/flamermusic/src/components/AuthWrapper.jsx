@@ -6,20 +6,22 @@ import { useUser } from '../context/UserContext.jsx';
 
 import '../styles/auth.css';
 
+const API_URL = "https://localhost:7219/";
+
 const AuthWrapper = () => {
   const navigate = useNavigate();
   const { updateUser } = useUser();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
+    console.log(token);
     const checkToken = async () => {
       if (!token) {
         navigate('/auth');
         return;
       }
-
       try {
-        const response = await fetch("https://localhost:7219/Authorization/validateToken", {
+        const response = await fetch(`${API_URL}Authorization/validateToken`, {
           method: "GET",
           headers: { 
             "Authorization": `Bearer ${token}`

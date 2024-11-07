@@ -4,6 +4,8 @@ import AppButton from './AppButton.jsx';
 import PlayerInputSlider from './PlayerInputSlider.jsx';
 import { usePlayer } from '../context/PlayerContext.jsx';
 
+const API_URL = "https://localhost:7219/";
+
 const Player = ({ isModalOpen}) => {
     const { currentSong, isPlaying, handlePlayPause, currentTime, duration, volume, setVolume, audioRef } = usePlayer();
     const [isDragging, setIsDragging] = useState(false);
@@ -85,7 +87,7 @@ const Player = ({ isModalOpen}) => {
                         <div className="player-song-image">
                             <img
                                 id="player-song-image"
-                                src={currentSong?.id ? `https://localhost:7219/Song/photo/${currentSong.id}` : require('../../public/assets/icons/empty-playlist.png')}
+                                src={currentSong?.id ? `${API_URL}Song/photo/${currentSong.id}` : require('../../public/assets/icons/empty-playlist.png')}
                                 alt={currentSong?.title || "No name"}
                             />
                         </div>

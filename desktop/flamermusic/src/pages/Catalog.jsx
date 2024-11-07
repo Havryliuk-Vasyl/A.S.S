@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import SongList from "../components/SongList.jsx";
 
+const API_URL = "https://localhost:7219/";
+
 const Catalog = () => {
   const [songs, setSongs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -10,7 +12,7 @@ const Catalog = () => {
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const response = await fetch('https://localhost:7219/Song');
+        const response = await fetch(`${API_URL}Song`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

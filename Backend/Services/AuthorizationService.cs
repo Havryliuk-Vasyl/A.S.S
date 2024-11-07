@@ -155,11 +155,6 @@ namespace Backend.Services
                     return response.BadRequest("User not found");
                 }
 
-                if (user.Username != username || user.Email != email || user.status != status)
-                {
-                    return response.BadRequest("Token is not valid!");
-                }
-
                 response.Success = true;
                 response.Data = new { Username = username, Email = email, Status = status, Id = id };
                 response.Message = "Token is valid!";

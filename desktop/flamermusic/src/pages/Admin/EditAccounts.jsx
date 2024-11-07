@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = "https://localhost:7219/";
+
 const EditAccounts = () => {
     const [users, setUsers] = useState([]);
     const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
@@ -14,7 +16,7 @@ const EditAccounts = () => {
     }, []);
 
     const loadUsers = async (token) => {
-        const response = await fetch('https://localhost:7219/Admin/users', {
+        const response = await fetch(`${API_URL}Admin/users`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -74,7 +76,7 @@ const EditAccounts = () => {
                                     <td className="user-photo">
                                         <img 
                                             className="user-avatar" 
-                                            src={`https://localhost:7219/User/avatar/${user.id}`} 
+                                            src={`${API_URL}User/avatar/${user.id}`} 
                                             alt={user.username}
                                             onError={(e) => {
                                                 e.target.onerror = null; 

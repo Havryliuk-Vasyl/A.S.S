@@ -41,8 +41,7 @@ namespace Backend.Controllers
         }
 
         [HttpPost("uploadAvatar")]
-        //[Produces("multipart/form-data")]
-        public async Task<IActionResult> UploadAvatar([FromBody] IFormFile avatarFile, int userId)
+        public async Task<IActionResult> UploadAvatar(IFormFile avatarFile, [FromForm] int userId)
         {
             if (avatarFile == null || avatarFile.Length == 0)
             {

@@ -62,22 +62,20 @@ export const editTitle = async (newTitle) => {
   }
 }
 
-export const changePhoto = async (playlist) => {
-  const formData = new FormData();
-  formData.append("photo", playlist.photo);
-  formData.append("playlistId", playlist.playlistId);
-
+export const changePhoto = async (formData) => {
   try {
-      const response = await fetch(`${API_URL}Playlist/editplaylistphoto`, {
-          method: 'PUT',
-          body: formData
+      const response = await fetch(`${API_URL}Playlist/uploadPhoto`, {
+          method: "POST",
+          body: formData,
       });
-
+      
       if (!response.ok) {
-          throw new Error('Failed to change playlist photo');
+          throw new Error("Failed to upload photo");
       }
+
+      return await response.json();
   } catch (error) {
-      console.error("Failed to change playlist photo:", error);
+      console.error("Error uploading photo:", error);
   }
 };
 

@@ -3,6 +3,8 @@ import SongOptions from './MenuConfig.jsx';
 import AddSongToPlaylistModal from './modals/AddSongToPlaylistModal.jsx';
 import { useNavigate } from 'react-router-dom';
 
+const API_URL = "https://localhost:7219/";
+
 const SongItem = ({ song, onPlay, showArtist, showAlbum, menuType, removeSongFromPlaylist }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [menuPosition, setMenuPosition] = useState({ x: 0, y: 0 });
@@ -60,7 +62,7 @@ const SongItem = ({ song, onPlay, showArtist, showAlbum, menuType, removeSongFro
         <td className="song-title">
           <img 
             onClick={handlePlaySong} 
-            src={isHovered ? require('../../public/assets/icons/player-icons/Play_Greem.svg') : `https://localhost:7219/Song/photo/${song.id}`}
+            src={isHovered ? require('../../public/assets/icons/player-icons/Play_Greem.svg') : `${API_URL}Song/photo/${song.id}`}
             alt={song.title} 
           />
           <p onClick={handleGoToAlbumPage}>{song.title}</p>

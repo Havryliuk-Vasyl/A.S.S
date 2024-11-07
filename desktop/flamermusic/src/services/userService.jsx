@@ -62,10 +62,33 @@ export const editUserProfile = async (userId, newNickname) => {
       body: JSON.stringify(newNickname)
     });
 
+
+    console.log(localStorage.getItem('token'));
     if (!response.ok) {
       throw new Error('Failed to update user profile');
     }
     
+  } catch (error) {
+    console.error("Failed:", error);
+    return null;
+  }
+}
+
+export const changeUserAvatar = async (formData) => {
+  try {
+    const response = await fetch(`${API_URL}uploadAvatar`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: formData
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update user profile');
+    }
+
+    return await response.json();
   } catch (error) {
     console.error("Failed:", error);
     return null;

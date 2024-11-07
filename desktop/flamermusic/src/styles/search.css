@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: column;
     width: 100%;
+    min-height: 100%;
+    height: fit-content;
     padding: 1em;
     margin: auto;
-    background-color: rgb(29, 29, 29);
+    background-color: #121212;
     border-radius: 1em;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -59,24 +61,7 @@
     color: #ccc;
 }
 
-.album {
-    background-color: rgb(29, 29, 29);
-    color: #fff;
-    border-radius: 1em;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 1em;
-    width: fit-content;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
 
-.album:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
-}
 
 .album-photo {
     border-radius: 0.5em;

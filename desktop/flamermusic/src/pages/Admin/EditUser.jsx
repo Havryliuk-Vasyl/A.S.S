@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { saveUser, deleteUser } from "../../services/adminService.jsx";
 
+const API_URL = "https://localhost:7219/";
+
 const EditUser = () => {
     const location = useLocation();
     const [user, setUser] = useState(null);
@@ -14,7 +16,7 @@ const EditUser = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await fetch(`https://localhost:7219/User/id/${userId}`, {
+                const response = await fetch(`${API_URL}User/id/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
@@ -63,7 +65,7 @@ const EditUser = () => {
             <div className="user-account-photo">
                 <img 
                     className="user-account-avatar" 
-                    src={`https://localhost:7219/User/avatar/${userId}`} 
+                    src={`${API_URL}User/avatar/${userId}`} 
                     alt="User avatar"
                     onError={(e) => {
                         e.target.onerror = null; 

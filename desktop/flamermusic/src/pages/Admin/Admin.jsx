@@ -3,6 +3,8 @@ import { Outlet, Link } from 'react-router-dom';
 import '../../styles/administrator.css';
 import '../../styles/index.css';
 
+const API_URL = "https://localhost:7219/";
+
 const Admin = () => {
     return (
         <div className="main">

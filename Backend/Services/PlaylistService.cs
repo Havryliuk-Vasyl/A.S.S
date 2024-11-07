@@ -146,7 +146,8 @@ namespace Backend.Services
                 };
             }
         }
-        public async Task<ApiResponse<object>> SetPlaylistPhoto(byte[] photoBytes, int playlistId)
+
+        public async Task<ApiResponse<object>> SetPlaylistPhoto(byte[] photoBytes, int playlistId, string fileExtension)
         {
             if (photoBytes == null || photoBytes.Length == 0)
             {
@@ -170,7 +171,7 @@ namespace Backend.Services
                     context.PlaylistPhotos.Remove(existingPhoto);
                 }
 
-                var uniqueFileName = Guid.NewGuid().ToString() + ".png";
+                var uniqueFileName = Guid.NewGuid().ToString() + fileExtension;
                 var uploadsFolder = Path.Combine(_playlistPhotoFilePath, uniqueFileName);
 
                 await File.WriteAllBytesAsync(uploadsFolder, photoBytes);

@@ -4,6 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import ArtistAlbumCard from '../../components/ArtistAlbumCard.jsx';
 import '../../styles/artist.css';
 
+const API_URL = "https://localhost:7219/";
+
 const UserAlbums = () => {
     const [albums, setAlbums] = useState([]);
 
@@ -17,7 +19,7 @@ const UserAlbums = () => {
         console.log(userId);
         const getUsersAlbums = async () => {
             try {
-                const response = await fetch(`https://localhost:7219/Album/artist/${userId}`);
+                const response = await fetch(`${API_URL}Album/artist/${userId}`);
  
                 if (!response.ok) {
                     throw new Error('Something went wrong!');

@@ -1,18 +1,27 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/search.css";
+import SongList from "../components/SongList.jsx";
+import AlbumCard from "../components/AlbumCard.jsx";
+import UserCard from "../components/UserCard.jsx";
+
+const API_URL = "https://localhost:7219/";
 
 const Search = () => {
+  const navigate = useNavigate();
+  
   const [query, setQuery] = useState("");
   const [results, setResults] = useState({
     songs: [],
     albums: [],
     users: []
   });
+  const [hasSearched, setHasSearched] = useState(false);
 
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `https://localhost:7219/Search/all?data=${encodeURIComponent(query)}`,
+        `${API_URL}Search/all?data=${encodeURIComponent(query)}`,
         {
           headers: { accept: "*/*" }
         }
@@ -24,22 +33,31 @@ const Search = () => {
 
       const data = await response.json();
       console.log(data);
-      displaySearchResults(data.data);
+      displaySearchResults(data?.data?.$values || []);
+      setHasSearched(true);
     } catch (error) {
       console.error("Error during search:", error);
     }
   };
 
-  const displaySearchResults = (response) => {
-    if (response && response.$values) {
-      const songs = response.$values.filter(item => item.type === "Song");
-      const albums = response.$values.filter(item => item.type === "Album");
-      const users = response.$values.filter(item => item.type === "User");
+  const displaySearchResults = (items) => {
+    const songs = items.filter(item => item.type === "Song");
+    const albums = items.filter(item => item.type === "Album");
+    const users = items.filter(item => item.type === "User");
 
-      setResults({ songs, albums, users });
-    } else {
-      setResults({ songs: [], albums: [], users: [] });
-    }
+    setResults({ songs, albums, users });
+  };
+
+  const handleGoToUser = (userId) => {
+    navigate(`/user?id=${userId}`);
+  };
+
+  const handleGoToAlbum = (albumId) => {
+    navigate(`/album?albumId=${albumId}`);
+  };
+
+  const handleGoToSong = (playlistId) => {
+    navigate(`/playlist?id=${playlistId}`);
   };
 
   const formatDuration = (durationInSeconds) => {
@@ -61,60 +79,44 @@ const Search = () => {
           onChange={(e) => setQuery(e.target.value)}
         />
         <button id="searchButton" onClick={handleSearch}>
-          Шукати
+          Search
         </button>
       </div>
 
-      <div id="searchResults">
-        <div className="search-song">
-          <div className="result-info-type">Songs</div>
-          {results.songs.map((song) => (
-            <div key={song.id} className="catalog-song" data-id={song.id}>
-              <div className="catalog-song-information">
-                <div className="catalog-song-photo">
-                  <img
-                    src={`https://localhost:7219/Song/photo/${song.id}`}
-                    alt="Photo"
-                    style={{ maxWidth: "50px", maxHeight: "50px", width: "100%", height: "100%" }}
-                  />
-                </div>
-                <div className="catalog-song-name">{song.title}</div>
-                <div className="catalog-artist">{song.artistName}</div>
-              </div>
-              <div className="catalog-song-play-control">
-                <div className="catalog-duration">{formatDuration(song.duration)}</div>
-                <button onClick={() => {}}>▶</button>
-              </div>
-            </div>
-          ))}
-        </div>
+      {hasSearched && (
+        <div id="searchResults">
+          <div className="search-song">
+            <div className="result-info-type">Songs</div>
+            {results.songs.length > 0 ? (
+              <SongList songs={results.songs} showArtist={false} showAlbum={false} isPlayable={true} menuType="song" />
+            ) : (
+              <div>No songs found</div>
+            )}
+          </div>
 
-        <div className="search-album">
-          <div className="result-info-type">Albums</div>
-          {results.albums.map((album) => (
-            <div key={album.id} className="album">
-              <div className="album-photo">
-                <img src={`https://localhost:7219/Album/photo/${album.id}`} alt="Album" />
-              </div>
-              <div className="album-title">{album.name}</div>
-            </div>
-          ))}
-        </div>
+          <div className="search-album">
+            <div className="result-info-type">Albums</div>
+            {results.albums.length > 0 ? (
+              results.albums.map((album) => (
+                <AlbumCard key={album.id} album={album} />
+              ))
+            ) : (
+              <div>No albums found</div>
+            )}
+          </div>
 
-        <div className="search-user">
-          <div className="result-info-type">Users</div>
-          {results.users.map((user) => (
-            <div key={user.id} className="catalog-user" data-id={user.id}>
-              <div className="catalog-user-information">
-                <div className="album-photo">
-                  <img src={`https://localhost:7219/User/avatar/${user.id}`} alt="User" />
-                </div>
-                <div className="catalog-user-name">{user.name}</div>
-              </div>
-            </div>
-          ))}
+          <div className="search-user">
+            <div className="result-info-type">Users</div>
+            {results.users.length > 0 ? (
+              results.users.map((user) => (
+                <UserCard key={user.id} user={user}/>
+              ))
+            ) : (
+              <div>No users found</div>
+            )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

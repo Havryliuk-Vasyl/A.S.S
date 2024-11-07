@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { saveAlbum, deleteAlbum } from "../../services/artistService.jsx";
 import SongList from "../../components/SongList.jsx";
 
+const API_URL = "https://localhost:7219/";
+
 const ArtistAlbumEdit = () => {
     const location = useLocation();
     const [album, setAlbum] = useState(null);
@@ -16,7 +18,7 @@ const ArtistAlbumEdit = () => {
     useEffect(() => {
         const fetchAlbum = async () => {
             try {
-                const response = await fetch(`https://localhost:7219/Album/album/${albumId}`, {
+                const response = await fetch(`${API_URL}Album/album/${albumId}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
@@ -66,7 +68,7 @@ const ArtistAlbumEdit = () => {
                 <div className="artist-album-photo">
                     <img 
                         className="artist-album-avatar" 
-                        src={`https://localhost:7219/Album/photo/${album.id}`} 
+                        src={`${API_URL}Album/photo/${album.id}`} 
                         alt={album.title}
                     />
                 </div>

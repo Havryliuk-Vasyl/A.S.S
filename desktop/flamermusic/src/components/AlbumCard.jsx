@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import '../styles/album.css';
 
+const API_URL = "https://localhost:7219/";
+
 const AlbumCard = ({album}) => {
     const navigate = useNavigate();
 
@@ -14,7 +16,7 @@ const AlbumCard = ({album}) => {
         <div className="album-card" onClick={handleOnClick}>
             <div className="album-card-image">
             <img 
-              src={`https://localhost:7219/Album/photo/${album.id}`} 
+              src={`${API_URL}Album/photo/${album.id}`} 
               alt={album.title} 
               onError={(e) => { 
                 e.target.onerror = null; 

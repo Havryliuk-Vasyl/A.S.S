@@ -101,7 +101,6 @@ namespace Backend.Services
                 var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(avatarFile.FileName);
                 var uploadsFolder = Path.Combine(_userPhotoFilePath, uniqueFileName);
 
-                // Збереження файлу на сервері
                 using (var fileStream = new FileStream(uploadsFolder, FileMode.Create))
                 {
                     await avatarFile.CopyToAsync(fileStream);

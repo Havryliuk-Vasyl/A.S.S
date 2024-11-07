@@ -7,6 +7,8 @@ import plusIcon from '../../../public/assets/icons/plus_img.png';
 import '../../styles/artist.css';
 import '../../styles/index.css';
 
+const API_URL = "https://localhost:7219/";
+
 const Artist = () => {
     const location = useLocation();
     const query = new URLSearchParams(location.search);

@@ -4,6 +4,8 @@ import '../../styles/artist.css';
 
 import { uploadAlbum, getGenres } from '../../services/artistService.jsx';
 
+const API_URL = "https://localhost:7219/";
+
 const UploadAlbum = () => {
     const [title, setTitle] = useState('');
     const [photoFile, setPhotoFile] = useState(null);

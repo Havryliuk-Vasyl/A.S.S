@@ -6,6 +6,8 @@ import '../../styles/modal.css';
 
 Modal.setAppElement('#root');
 
+const API_URL = "https://localhost:7219/"
+
 const AddSongToPlaylistModal = ({ isOpen, closeModal, song }) => {
     const [playlists, setPlaylists] = useState([]);
     const [playlistId, setPlaylistId] = useState();
@@ -24,7 +26,7 @@ const AddSongToPlaylistModal = ({ isOpen, closeModal, song }) => {
         if (user && user.id) {
             const fetchPlaylists = async () => {
                 try {
-                    const response = await fetch(`https://localhost:7219/Playlist/${user.id}`, {
+                    const response = await fetch(`${API_URL}Playlist/${user.id}`, {
                         method: 'GET',
                         headers: {
                             'Content-Type': 'application/json',

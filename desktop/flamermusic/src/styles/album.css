@@ -29,23 +29,29 @@
 }
 
 .album-card {
+    background-color: rgb(29, 29, 29);
+    color: #fff;
+    border-radius: 1em;
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #222;
+    text-align: center;
+    padding: 0;
+    width: fit-content;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     margin-right: 1em;
-    border-radius: 1em;
 }
 
-.album-card:hover{
+.album-card:hover {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.03);
 }
 
 .album-card-image img, .album-image img {
     width: 10em;
     height: 10em;
     object-fit: cover;
+    border-radius: 0.5em;
 }
 
 .album-date-shared{

@@ -2,7 +2,7 @@
     background-color: rgb(29, 29, 29);
     margin: 15% auto;
     padding: 20px;
-    width: 30%;
+    width: fit-content;
     border-radius: 1em;
     color: white;
     position: relative; 

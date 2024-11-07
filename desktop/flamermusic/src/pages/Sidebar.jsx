@@ -4,6 +4,8 @@ import { useUser } from '../context/UserContext.jsx';
 import CreatePlaylistModal from '../components/modals/CreatePlaylistModal.jsx';
 import "../styles/sidebar.css";
 
+const API_URL = "https://localhost:7219/";
+
 const Sidebar = () => {
   const { user } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -19,7 +21,7 @@ const Sidebar = () => {
             <li id="profileBtnInMenu">
               <Link to="/profile" id="profile">
                 <img 
-                  src={`https://localhost:7219/User/avatar/${user?.id}`}
+                  src={`${API_URL}User/avatar/${user?.id}`}
                   onError={(e) => { e.target.onerror = null; e.target.src = require('../../public/assets/icons/noimageuser.png'); }}
                   alt="user's image" 
                   id="userImage"

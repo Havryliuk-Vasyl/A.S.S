@@ -5,6 +5,8 @@ import SongList from "../components/SongList.jsx";
 import emptyPlaylistIcon from '../../public/assets/icons/empty-playlist.png';
 import { getAtrist } from "../services/userService.jsx";
 
+const API_URL = "https://localhost:7219/";
+
 const Album = () => {
     const location = useLocation();
     const query = new URLSearchParams(location.search);
@@ -21,9 +23,9 @@ const Album = () => {
             try {
                 let response;
                 if (songInAlbumId) {
-                    response = await fetch(`https://localhost:7219/Album/song/${songInAlbumId}`);
+                    response = await fetch(`${API_URL}Album/song/${songInAlbumId}`);
                 } else {
-                    response = await fetch(`https://localhost:7219/Album/album/${albumId}`);
+                    response = await fetch(`${API_URL}Album/album/${albumId}`);
                 }
 
                 if (!response.ok) {
@@ -56,7 +58,7 @@ const Album = () => {
                 <div className="album-image">
                     <img 
                         id="album-image"
-                        src={`https://localhost:7219/Album/photo/${album.id}`} 
+                        src={`${API_URL}Album/photo/${album.id}`} 
                         alt={album.title} 
                         onError={(e) => { 
                             e.target.onerror = null; 
@@ -70,7 +72,7 @@ const Album = () => {
                     <div className="albums-artist" id="album-artist">
                     <img
                         id="album-artist-image"
-                        src={`https://localhost:7219/User/avatar/${artist.id}`}
+                        src={`${API_URL}User/avatar/${artist.id}`}
                         alt={artist.username}
                         onError={(e) => {
                             e.target.onerror = null;
@@ -82,7 +84,7 @@ const Album = () => {
                 </div>
             </div>
             <div id="songs-container" className="container-style">
-                {songs.length > 0 && <SongList songs={songs} showArtist={false} showAlbum={false} isPlayable={true} menuType={"album"}/>}
+                {songs.length > 0 && <SongList songs={songs} showArtist={false} showAlbum={false} isPlayable={true} menuType={"song"}/>}
             </div>
         </div>
     );

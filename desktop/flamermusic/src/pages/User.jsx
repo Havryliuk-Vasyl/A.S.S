@@ -6,6 +6,8 @@ import SongList from "../components/SongList.jsx";
 import PlaylistCard from "../components/PlaylistCard.jsx";
 import AlbumCard from "../components/AlbumCard.jsx";
 
+const API_URL = "https://localhost:7219/";
+
 const UserProfile = () => {
     const [userData, setUserData] = useState(null);
     
@@ -23,7 +25,7 @@ const UserProfile = () => {
     useEffect(() => {
         try {
             const fetchUserData = async () => {
-                const response = await fetch(`https://localhost:7219/User/id/${userId}`, {
+                const response = await fetch(`${API_URL}User/id/${userId}`, {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('token')}`
                     }
@@ -45,7 +47,7 @@ const UserProfile = () => {
         const getUsersPlaylists = async () => {
             if (!userData) return;
             try {
-                const response = await fetch(`https://localhost:7219/Playlist/${userData.id}`);
+                const response = await fetch(`${API_URL}Playlist/${userData.id}`);
                 
                 if (!response.ok) {
                     throw new Error('Something went wrong!');
@@ -66,7 +68,7 @@ const UserProfile = () => {
            if (!userData) return;
 
            try {
-               const response = await fetch(`https://localhost:7219/Album/artist/${userData.id}`);
+               const response = await fetch(`${API_URL}Album/artist/${userData.id}`);
 
                if (!response.ok) {
                    throw new Error('Something went wrong!');
@@ -86,7 +88,7 @@ const UserProfile = () => {
         <div className="user-profile">
             <div className="profile-information">
                 <div className="profile-photo">
-                    <img className="profile-avatar" src={`https://localhost:7219/User/avatar/${userData?.id}`} 
+                    <img className="profile-avatar" src={`${API_URL}User/avatar/${userData?.id}`} 
                     onError={(e) => e.target.src = require('../../public/assets/icons/noimageuser.png')} alt="User Avatar"/>
                 </div>
                 <div className="user-info">

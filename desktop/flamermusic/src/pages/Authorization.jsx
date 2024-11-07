@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from '../context/UserContext.jsx'; 
 
+const API_URL = "https://localhost:7219/";
+
 const Authorization = () => {
     const navigate = useNavigate();
     const { updateUser } = useUser();
@@ -32,7 +34,7 @@ const Authorization = () => {
         };
 
         try {
-            const response = await fetch("https://localhost:7219/Authorization/register", {
+            const response = await fetch(`${API_URL}Authorization/register`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user),
@@ -60,7 +62,7 @@ const Authorization = () => {
         };
 
         try {
-            const response = await fetch("https://localhost:7219/Authorization/login", {
+            const response = await fetch(`${API_URL}Authorization/login`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userLogin),

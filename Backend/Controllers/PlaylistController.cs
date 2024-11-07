@@ -37,11 +37,16 @@ namespace Backend.Controllers
         }
 
         [HttpPost("uploadPhoto")]
-        public async Task<ActionResult<object>> SetPlaylistPhoto([FromForm] byte[] photoFile, [FromForm] int playlistId)
+        public async Task<ActionResult<object>> SetPlaylistPhoto(IFormFile photoFile,[FromForm] int playlistId)
         {
-            var response = await playlistService.SetPlaylistPhoto(photoFile, playlistId);
+            string fileExtension = Path.GetExtension(photoFile.FileName);
+            using var memoryStream = new MemoryStream();
+            await photoFile.CopyToAsync(memoryStream);
+
+            var response = await playlistService.SetPlaylistPhoto(memoryStream.ToArray(), playlistId, fileExtension);
             return response.Success ? Ok(response) : BadRequest();
         }
+
 
         [HttpGet("photo")]
         public async Task<ActionResult<byte[]>> GetPhoto(int playlistId)

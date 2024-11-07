@@ -5,6 +5,8 @@ import '../../styles/modal.css';
 
 import { editTitle, changePhoto } from "../../services/playlistService.jsx";
 
+const API_URL = "https://localhost:7219/";
+
 const EditPlaylistModal = ({ isOpen, closeModal, playlistToEdit, updatePlaylist }) => {
     const [newImage, setNewImage] = useState(null);
     const [newTitle, setNewTitle] = useState('');
@@ -29,22 +31,28 @@ const EditPlaylistModal = ({ isOpen, closeModal, playlistToEdit, updatePlaylist 
         setNewTitle(title);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (playlistRef.current) {
-            const newPhoto = {
-                playlistId: playlistRef.current.playlistId,
-                photo: newImage
-            };
-
             const newTitleData = {
                 playlistId: playlistRef.current.playlistId,
                 playlistTitle: newTitle
             };
 
-            editTitle(newTitleData);
-            // changePhoto(newPhoto);
+            await editTitle(newTitleData);
 
-            updatePlaylist({ ...playlistRef.current, playlistTitle: newTitle });
+            if (newImage) {
+                const formData = new FormData();
+                formData.append("playlistId", playlistRef.current.playlistId);
+                formData.append("photoFile", newImage);
+                
+                await changePhoto(formData);
+            }
+
+            updatePlaylist({ 
+                ...playlistRef.current, 
+                playlistTitle: newTitle, 
+                photo: newImage ? URL.createObjectURL(newImage) : playlistRef.current.photo
+            });
         } else {
             console.error('Playlist information is missing');
         }
@@ -61,7 +69,7 @@ const EditPlaylistModal = ({ isOpen, closeModal, playlistToEdit, updatePlaylist 
             <div className="playlist-image" onClick={triggerImageUpload}>
                 <img 
                     id="playlist-image"
-                    src={newImage ? URL.createObjectURL(newImage) : `https://localhost:7219/Playlist/photo?playlistId=${playlistRef.current.playlistId}`} 
+                    src={newImage ? URL.createObjectURL(newImage) : `${API_URL}Playlist/photo?playlistId=${playlistRef.current.playlistId}`} 
                     alt={playlistRef.current.title} 
                     onError={(e) => { 
                         e.target.onerror = null; 
