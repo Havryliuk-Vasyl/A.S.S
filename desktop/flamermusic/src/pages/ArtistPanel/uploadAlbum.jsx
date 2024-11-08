@@ -13,6 +13,7 @@ const UploadAlbum = () => {
     const [songTitles, setSongTitles] = useState([]);
     const [genres, setGenres] = useState([]);
     const [selectedGenres, setSelectedGenres] = useState([]);
+    const [draggedIndex, setDraggedIndex] = useState(null);
 
     const location = useLocation();
     const query = new URLSearchParams(location.search);
@@ -58,10 +59,6 @@ const UploadAlbum = () => {
         }
     };
 
-    const VerifyData = () => {
-        console.log(selectedGenres);
-    };
-
     const handleGenreRemove = (genreId) => {
         const updatedSelectedGenres = selectedGenres.filter((id) => id !== genreId);
         setSelectedGenres(updatedSelectedGenres);
@@ -83,7 +80,7 @@ const UploadAlbum = () => {
         try {
             const response = await uploadAlbum(formData);
             if (response.ok) {
-                alert('Альбом успішно завантажений');
+                alert('Album uploaded successfully!');
                 setTitle('');
                 setPhotoFile(null);
                 setAudioFiles([]);
@@ -92,28 +89,55 @@ const UploadAlbum = () => {
                 if (photoFile) URL.revokeObjectURL(photoFile);
             } else {
                 const errorMsg = await response.text();
-                console.error('Помилка завантаження:', errorMsg);
-                alert(`Помилка завантаження: ${errorMsg}`);
+                console.error('Uploading error:', errorMsg);
+                alert(`Uploading error: ${errorMsg}`);
             }
         } catch (error) {
-            console.error('Мережева помилка:', error);
-            alert('Мережева помилка. Спробуйте знову.');
+            console.error('Network error:', error);
+            alert('Network error. Try again.');
         }
+    };
+
+    const handleDragStart = (index) => {
+        setDraggedIndex(index);
+    };
+
+    const handleDragOver = (index) => {
+        if (draggedIndex === index) return;
+        const updatedAudioFiles = [...audioFiles];
+        const updatedSongTitles = [...songTitles];
+        
+        const draggedItem = updatedAudioFiles[draggedIndex];
+        const draggedTitle = updatedSongTitles[draggedIndex];
+        
+        updatedAudioFiles.splice(draggedIndex, 1);
+        updatedSongTitles.splice(draggedIndex, 1);
+        
+        updatedAudioFiles.splice(index, 0, draggedItem);
+        updatedSongTitles.splice(index, 0, draggedTitle);
+
+        setAudioFiles(updatedAudioFiles);
+        setSongTitles(updatedSongTitles);
+        setDraggedIndex(index);
+    };
+
+    const handleDragEnd = () => {
+        setDraggedIndex(null);
     };
 
     return (
         <div className="upload">
             <div className="section-1">
-                <p>Назва релізу</p>
+                <p>Release name</p>
                 <input
                     type="text"
                     value={title}
                     onChange={(e) => setTitle(e.target.value)}
-                    placeholder="Назва релізу"
+                    placeholder="Release name"
                     required
                 />
 
-                <p>Зображення</p>
+                <p>Images</p>
                 <img
                     id="selectedPhotoPreview"
                     src={photoFile ? URL.createObjectURL(photoFile) : ''}
@@ -149,7 +173,7 @@ const UploadAlbum = () => {
                 </div>
             </div>
             <div className="section-2">
-                <p>Виберіть музичні файли</p>
+                <p>Choose audio files</p>
                 <input
                     type="file"
                     onChange={handleAudioChange}
@@ -159,24 +183,30 @@ const UploadAlbum = () => {
                     required
                 />
                 {audioFiles.map((file, index) => (
-                    <div 
-                        key={index} 
+                    <div
+                        key={index}
                         className="choosen-song-file"
+                        draggable
+                        onDragStart={() => handleDragStart(index)}
+                        onDragOver={(e) => {
+                            e.preventDefault();
+                            handleDragOver(index);
+                        }}
+                        onDragEnd={handleDragEnd}
                     >
-                        <p>Вибраний трек: {file.name}</p>
+                        <p>Chosen song: {file.name}</p>
                         <input
                             type="text"
                             value={songTitles[index]}
                             onChange={(e) => handleTitleChange(index, e.target.value)}
-                            placeholder="Назва пісні"
+                            placeholder="Song title"
                             required
                         />
-                        <button onClick={() => handleRemoveAudioFile(index)}>Видалити</button>
+                        <button onClick={() => handleRemoveAudioFile(index)}>Delete</button>
                     </div>
                 ))}
             </div>
             <button onClick={handleUpload}>Upload</button>
-            <button onClick={VerifyData}>Verify</button>
         </div>
     );
 };

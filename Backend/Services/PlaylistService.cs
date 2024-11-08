@@ -387,6 +387,17 @@ namespace Backend.Services
                     };
                 }
 
+                var playlistPhoto = await context.PlaylistPhotos.FirstOrDefaultAsync(p => p.Playlist == playlistId);
+                if (playlistPhoto != null)
+                {
+                    if (File.Exists(playlistPhoto.FilePath))
+                    {
+                        File.Delete(playlistPhoto.FilePath);
+                    }
+
+                    context.PlaylistPhotos.Remove(playlistPhoto);
+                }
+
                 context.Playlists.Remove(playlist);
                 await context.SaveChangesAsync();
 
@@ -394,7 +405,7 @@ namespace Backend.Services
                 {
                     Success = true,
                     Data = null,
-                    Message = "Playlist deleted successfully."
+                    Message = "Playlist and its photo deleted successfully."
                 };
             }
             catch (Exception ex)
@@ -408,6 +419,7 @@ namespace Backend.Services
                 };
             }
         }
+
 
         public async Task<ApiResponse<object>> EditPlaylist(int playlistId, string newPlaylistName)
         {

@@ -52,6 +52,7 @@ const ArtistAlbumEdit = () => {
 
     const handleDelete = async () => {
         deleteAlbum(album);
+        navigate(0);
         navigate(-1);
     };
 

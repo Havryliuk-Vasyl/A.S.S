@@ -50,6 +50,7 @@ const EditUser = () => {
 
     const handleDelete = async () => {
         deleteUser(user);
+        navigate(0);
         navigate(-1);
     };
 

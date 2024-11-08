@@ -24,9 +24,8 @@ export const saveAlbum = async (album) => {
 };
 
 export const deleteAlbum = async (album) => {
-    console.log("Deleting: " + album);
     try {
-        const response = await fetch(`${API_URL}delete?userId=${album.id}`, {
+        const response = await fetch(`${API_URL}delete?albumId=${album.id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
@@ -36,7 +35,6 @@ export const deleteAlbum = async (album) => {
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
-        console.log("Deleting was successful!");
     }
     catch (error) {
         console.error('An error occurred while fetching data:', error);

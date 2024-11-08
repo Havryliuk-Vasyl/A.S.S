@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from '../context/UserContext.jsx'; 
+import { useUser } from '../context/UserContext.jsx';
 
 const API_URL = "https://localhost:7219/";
 
@@ -25,7 +25,37 @@ const Authorization = () => {
         setFormData({ ...formData, [name]: value });
     };
 
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+    const validateForm = () => {
+        if (!formData.email || !formData.password || (!isLoginForm && (!formData.username || !formData.name))) {
+            alert('Будь ласка, заповніть усі поля');
+            setTimeout(() => setFormData({ ...formData }), 0);
+            return false;
+        }
+        if (!validateEmail(formData.email)) {
+            alert('Введіть коректний email');
+            setTimeout(() => setFormData({ ...formData }), 0);
+            return false;
+        }
+        if (formData.password.length < 8) {
+            alert('Пароль має бути не менше 8 символів');
+            setTimeout(() => setFormData({ ...formData }), 0);
+            return false;
+        }
+        return true;
+    };
+    
+
     const registrate = async () => {
+        if (!validateForm()) {
+            setFormData({ ...formData });
+            return;
+        }
+
         const user = {
             username: formData.username,
             name: formData.name,
@@ -39,23 +69,28 @@ const Authorization = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user),
             });
-
+            console.log(response);
             if (response.ok) {
                 toggleForm();
-            } else if (response.status === 409) {
+            } else if (response.status === false) {
                 const error = await response.text();
                 if (error.includes("already exists")) {
-                    alert('User with this email already exists');
+                    alert('User with this email alreade exists!');
                 }
             } else {
-                console.error("Error while sending data:", response.statusText);
+                console.error("Error:", response.statusText);
             }
         } catch (error) {
-            console.error("Error while sending data:", error);
+            console.error("Error:", error);
         }
     };
 
     const login = async () => {
+        if (!validateForm()) {
+            setFormData({ ...formData });
+            return;
+        }
+
         const userLogin = {
             email: formData.email,
             password: formData.password,
@@ -74,11 +109,11 @@ const Authorization = () => {
                 localStorage.setItem('token', data.data.token);
                 navigate('/');
             } else {
-                console.error("Error while logging in:", response.statusText);
-                alert('Incorrect email or password');
+                console.error("Помилка під час входу:", response.statusText);
+                alert('Невірний email або пароль');
             }
         } catch (error) {
-            console.error("Error while logging in:", error);
+            console.error("Помилка під час входу:", error);
         }
     };
 
@@ -94,7 +129,7 @@ const Authorization = () => {
                             <input type="text" name="name" placeholder="Ім'я" value={formData.name} onChange={handleChange} required />
                             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
                             <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
-                            <input type="button" onClick={registrate} value="Зареєструватися" />
+                            <input type="button" onClick={registrate} id="reg_button" value="Зареєструватися" />
                             <button type="button" onClick={toggleForm}>Увійти</button>
                         </form>
                     </div>
@@ -103,7 +138,7 @@ const Authorization = () => {
                         <form id="loginForm" onSubmit={(e) => e.preventDefault()}>
                             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
                             <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
-                            <input type="button" onClick={login} value="Увійти" />
+                            <input type="button" onClick={login} id="log_button" value="Увійти" />
                             <button type="button" onClick={toggleForm}>Зареєструватися</button>
                         </form>
                     </div>

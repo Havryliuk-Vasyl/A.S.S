@@ -7,6 +7,8 @@ if (require('electron-squirrel-startup')) {
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
+    title: "FlamerMusic",
+    icon: "../public/assets/icons/artist-panel.png",
     width: 800,
     height: 600,
     webPreferences: {

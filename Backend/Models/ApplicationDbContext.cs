@@ -66,6 +66,7 @@ namespace Backend.Models
                 .WithMany(g => g.AlbumGenres)
                 .HasForeignKey(ag => ag.GenreId);
 
+
             base.OnModelCreating(modelBuilder);
         }
     }
