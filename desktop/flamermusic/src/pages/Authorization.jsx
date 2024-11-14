@@ -69,16 +69,13 @@ const Authorization = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(user),
             });
-            console.log(response);
-            if (response.ok) {
-                toggleForm();
-            } else if (response.status === false) {
-                const error = await response.text();
-                if (error.includes("already exists")) {
-                    alert('User with this email alreade exists!');
-                }
+            var data = await response.json();
+            console.log(data);
+            if (data.success === false) {
+                navigate(0);
+                alert('User with this email alreade exists!');
             } else {
-                console.error("Error:", response.statusText);
+                toggleForm();
             }
         } catch (error) {
             console.error("Error:", error);
@@ -87,8 +84,7 @@ const Authorization = () => {
 
     const login = async () => {
         if (!validateForm()) {
-            setFormData({ ...formData });
-            return;
+            
         }
 
         const userLogin = {
@@ -125,7 +121,7 @@ const Authorization = () => {
                 {!isLoginForm ? (
                     <div id="registration">
                         <form id="registrationForm" onSubmit={(e) => e.preventDefault()}>
-                            <input type="text" name="username" placeholder="Псевдонім користувача" value={formData.username} onChange={handleChange} required />
+                            <input type="text" name="username" placeholder="Псевдонім користувача" value={formData.username} onChange={handleChange} required autoFocus/>
                             <input type="text" name="name" placeholder="Ім'я" value={formData.name} onChange={handleChange} required />
                             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
                             <input type="password" name="password" placeholder="Пароль" value={formData.password} onChange={handleChange} required />
