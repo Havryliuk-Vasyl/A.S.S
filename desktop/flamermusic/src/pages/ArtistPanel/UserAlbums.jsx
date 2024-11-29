@@ -27,7 +27,7 @@ const UserAlbums = () => {
  
                 const data = await response.json();
                 console.log(data);
-                setAlbums(data.data.$values || []);
+                setAlbums(data.data || []);
             } catch (error) {
                 console.error("Failed to fetch albums:", error);
             }

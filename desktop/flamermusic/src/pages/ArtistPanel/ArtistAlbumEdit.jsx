@@ -28,7 +28,7 @@ const ArtistAlbumEdit = () => {
                 }
                 const data = await response.json();
                 setAlbum(data.data.data);
-                setSongs(data.data.data.songs.$values);
+                setSongs(data.data.data.songs);
                 setInitialAlbum(data.data.data);
             } catch (error) {
                 console.error('Failed to fetch user data:', error);

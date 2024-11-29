@@ -70,7 +70,7 @@ export const getGenres = async () => {
         }
 
         const data = await response.json();
-        return data.data.$values;
+        return data.data;
     } catch (error) {
         console.error('An error occurred while fetching genres:', error);
         return [];

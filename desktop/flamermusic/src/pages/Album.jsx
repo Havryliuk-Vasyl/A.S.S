@@ -34,7 +34,7 @@ const Album = () => {
                 const data = await response.json();
                 console.log(data.data.data);
                 setAlbum(data.data.data);
-                setSongs(data.data.data.songs.$values);
+                setSongs(data.data.data.songs);
 
                 const artistResponse = await getAtrist(data.data.data.artistId);
                 setArist(artistResponse.data);

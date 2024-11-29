@@ -57,8 +57,7 @@ export const getRequests = async () => {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
         const data = await response.json();
-        console.log(data.data.$values);
-        return data.data.$values;
+        return data.data;
     } catch (error) {
         console.error('An error occurred while fetching data:', error);
         return [];

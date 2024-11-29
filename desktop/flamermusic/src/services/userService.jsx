@@ -14,7 +14,6 @@ export const getAtrist = async (userId) => {
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Failed to get artist:", error);
@@ -43,7 +42,6 @@ export const becomeArtist = async (userId, description) =>{
     }
 
     const data = await response.json();
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Failed:", error);
@@ -62,8 +60,6 @@ export const editUserProfile = async (userId, newNickname) => {
       body: JSON.stringify(newNickname)
     });
 
-
-    console.log(localStorage.getItem('token'));
     if (!response.ok) {
       throw new Error('Failed to update user profile');
     }

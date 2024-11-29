@@ -63,7 +63,8 @@ const Profile = () => {
                 }
     
                 const data = await response.json();
-                setUsersPlaylist(data.data.$values);
+                console.log(data.data);
+                setUsersPlaylist(data.data);
             } catch (error) {
                 console.error("Failed to fetch playlists:", error);
             }

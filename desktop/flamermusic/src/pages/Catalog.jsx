@@ -17,8 +17,8 @@ const Catalog = () => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        setSongs(data.data.$values);
-        setLoading(false);
+        console.log(data);
+        setSongs(data.data);
       } catch (error) {
         //setError(error.message);
       } finally {

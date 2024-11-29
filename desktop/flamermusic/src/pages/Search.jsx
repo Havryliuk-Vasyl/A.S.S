@@ -33,7 +33,7 @@ const Search = () => {
 
       const data = await response.json();
       console.log(data);
-      displaySearchResults(data?.data?.$values || []);
+      displaySearchResults(data?.data || []);
       setHasSearched(true);
     } catch (error) {
       console.error("Error during search:", error);

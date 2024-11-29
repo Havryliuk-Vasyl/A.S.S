@@ -13,7 +13,8 @@ namespace Backend.Controllers
     {
         private readonly IAuthorizationService _authorizationService;
         private readonly ApplicationDbContext _context;
-        public AuthorizationController(ApplicationDbContext context,IAuthorizationService authorizationService)
+
+        public AuthorizationController(ApplicationDbContext context, IAuthorizationService authorizationService)
         {
             this._context = context;
             this._authorizationService = authorizationService;

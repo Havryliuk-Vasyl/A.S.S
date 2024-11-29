@@ -22,7 +22,7 @@ const EditAccounts = () => {
         
         if (response.ok) {
             const data = await response.json();
-            setUsers(data.data.$values || []);
+            setUsers(data.data || []);
         } else {
             console.error('Failed to load users');
         }

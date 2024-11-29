@@ -47,7 +47,7 @@ const Playlist = () => {
                 }
                 const data = await response.json();
                 setPlaylist(data.data);
-                setSongs(data.data.songs.$values);
+                setSongs(data.data.songs);
             } catch (error) {
                 console.error(error);
             }
@@ -63,7 +63,7 @@ const Playlist = () => {
             <div className="playlist-image">
                 <img 
                     id="playlist-image"
-                    src={`${API_URL}Playlist/photo?playlistId=${playlist.playlistId}&t=${imageTimestamp}`} // Додаємо timestamp для уникнення кешування
+                    src={`${API_URL}Playlist/photo?playlistId=${playlist.playlistId}&t=${imageTimestamp}`}
                     alt={playlist.title} 
                     onError={(e) => { 
                         e.target.onerror = null; 

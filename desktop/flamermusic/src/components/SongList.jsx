@@ -33,6 +33,7 @@ const SongList = ({ songs, showArtist, showAlbum, isPlayable, menuType, removeSo
               showAlbum={showAlbum}
               menuType={menuType}
               removeSongFromPlaylist={removeSongFromPlaylist}
+              isPlayable={isPlayable}
             />
           ))}
         </tbody>
