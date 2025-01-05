@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "X6nBZlHFwNs=",
+  "dgSpecHash": "Hh2I7p9/85c=",
   "success": true,
   "projectFilePath": "F:\\Programming\\A.S.S\\Backend\\Backend.csproj",
   "expectedPackageFiles": [
@@ -134,7 +134,6 @@
     "C:\\Users\\gavry\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\gavry\\.nuget\\packages\\mono.texttemplating\\2.3.1\\mono.texttemplating.2.3.1.nupkg.sha512",
     "C:\\Users\\gavry\\.nuget\\packages\\mysql.data\\9.1.0\\mysql.data.9.1.0.nupkg.sha512",
-    "C:\\Users\\gavry\\.nuget\\packages\\mysql.entityframeworkcore\\8.0.8\\mysql.entityframeworkcore.8.0.8.nupkg.sha512",
     "C:\\Users\\gavry\\.nuget\\packages\\mysqlconnector\\2.3.7\\mysqlconnector.2.3.7.nupkg.sha512",
     "C:\\Users\\gavry\\.nuget\\packages\\naudio\\2.2.1\\naudio.2.2.1.nupkg.sha512",
     "C:\\Users\\gavry\\.nuget\\packages\\naudio.asio\\2.2.1\\naudio.asio.2.2.1.nupkg.sha512",

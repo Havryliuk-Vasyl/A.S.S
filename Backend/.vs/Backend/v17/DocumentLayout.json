@@ -3,6 +3,34 @@
   "WorkspaceRootPath": "F:\\Programming\\A.S.S\\Backend\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\authorizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\authorizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\models\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\controllers\\genrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\genrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\albumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\albumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,20 +43,12 @@
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\ialbumservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\controllers\\authorizationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\authorizationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\iauthorizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\iauthorizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\controllers\\genrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\genrecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -41,10 +61,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\uploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\uploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\authorizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\authorizationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\models\\apiresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -99,20 +115,12 @@
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\searchservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:backend.http||{5703B403-55E7-4C63-8C88-A8F52C7A45C5}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\administratorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\administratorservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:backend.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\models\\searchresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -125,10 +133,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\services\\iuploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:services\\iuploadservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\models\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:models\\genre.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\models\\album.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -161,10 +165,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\controllers\\audiocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:controllers\\audiocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{39AE39AA-78CD-4FD4-B335-10315FACA82F}|Backend.csproj|f:\\programming\\a.s.s\\backend\\models\\administrator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -222,7 +222,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 212,
-          "SelectedChildIndex": 36,
+          "SelectedChildIndex": 11,
           "Children": [
             {
               "$type": "Bookmark",
@@ -242,7 +242,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "20241107185853_InitialCreate.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Migrations\\20241107185853_InitialCreate.cs",
               "RelativeDocumentMoniker": "Migrations\\20241107185853_InitialCreate.cs",
@@ -254,7 +254,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "ApplicationDbContextModelSnapshot.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Migrations\\ApplicationDbContextModelSnapshot.cs",
               "RelativeDocumentMoniker": "Migrations\\ApplicationDbContextModelSnapshot.cs",
@@ -266,7 +266,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 35,
+              "DocumentIndex": 36,
               "Title": "IGenreService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\IGenreService.cs",
               "RelativeDocumentMoniker": "Services\\IGenreService.cs",
@@ -278,7 +278,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 34,
+              "DocumentIndex": 35,
               "Title": "GenreService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\GenreService.cs",
               "RelativeDocumentMoniker": "Services\\GenreService.cs",
@@ -290,7 +290,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 32,
               "Title": "IUploadService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\IUploadService.cs",
               "RelativeDocumentMoniker": "Services\\IUploadService.cs",
@@ -302,7 +302,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "GenreController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\GenreController.cs",
               "RelativeDocumentMoniker": "Controllers\\GenreController.cs",
@@ -315,7 +315,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 19,
               "Title": "PlaylistService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\PlaylistService.cs",
               "RelativeDocumentMoniker": "Services\\PlaylistService.cs",
@@ -327,19 +327,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 0,
               "Title": "Backend.csproj",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Backend.csproj",
               "RelativeDocumentMoniker": "Backend.csproj",
               "ToolTip": "F:\\Programming\\A.S.S\\Backend\\Backend.csproj",
               "RelativeToolTip": "Backend.csproj",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAcwA4AAAAVAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAA9AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2024-10-01T15:31:26.117Z"
+              "WhenOpened": "2024-10-01T15:31:26.117Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 21,
               "Title": "PlaylistController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\PlaylistController.cs",
               "RelativeDocumentMoniker": "Controllers\\PlaylistController.cs",
@@ -351,7 +352,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 29,
               "Title": "appsettings.json",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -363,19 +364,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 40,
+              "DocumentIndex": 5,
               "Title": "launchSettings.json",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Properties\\launchSettings.json",
               "RelativeDocumentMoniker": "Properties\\launchSettings.json",
               "ToolTip": "F:\\Programming\\A.S.S\\Backend\\Properties\\launchSettings.json",
               "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAIBJwBcAAAAgAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABcAAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-10-01T15:20:38.181Z"
+              "WhenOpened": "2024-10-01T15:20:38.181Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 2,
               "Title": "Backend.http",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Backend.http",
               "RelativeDocumentMoniker": "Backend.http",
@@ -383,11 +385,12 @@
               "RelativeToolTip": "Backend.http",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003502|",
-              "WhenOpened": "2024-10-09T07:49:36.425Z"
+              "WhenOpened": "2024-10-09T07:49:36.425Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 3,
               "Title": "Genre.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Genre.cs",
               "RelativeDocumentMoniker": "Models\\Genre.cs",
@@ -395,24 +398,25 @@
               "RelativeToolTip": "Models\\Genre.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABIAAAAHAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-10-20T17:27:00.952Z"
+              "WhenOpened": "2024-10-20T17:27:00.952Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "F:\\Programming\\A.S.S\\Backend\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAADgAAAAAAAAA",
+              "ViewState": "AQIAAE4AAAAAAAAAAAAQwFwAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-08T12:07:19.723Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 14,
               "Title": "UploadService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\UploadService.cs",
               "RelativeDocumentMoniker": "Services\\UploadService.cs",
@@ -436,7 +440,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 37,
+              "DocumentIndex": 38,
               "Title": "SongController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\SongController.cs",
               "RelativeDocumentMoniker": "Controllers\\SongController.cs",
@@ -460,7 +464,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 28,
               "Title": "AdministratorService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\AdministratorService.cs",
               "RelativeDocumentMoniker": "Services\\AdministratorService.cs",
@@ -472,7 +476,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 36,
+              "DocumentIndex": 37,
               "Title": "IAdministratorService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\IAdministratorService.cs",
               "RelativeDocumentMoniker": "Services\\IAdministratorService.cs",
@@ -484,7 +488,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 24,
               "Title": "Video.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Video.cs",
               "RelativeDocumentMoniker": "Models\\Video.cs",
@@ -508,7 +512,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 27,
               "Title": "SearchService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\SearchService.cs",
               "RelativeDocumentMoniker": "Services\\SearchService.cs",
@@ -532,7 +536,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 20,
               "Title": "AudioService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\AudioService.cs",
               "RelativeDocumentMoniker": "Services\\AudioService.cs",
@@ -556,7 +560,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 39,
+              "DocumentIndex": 40,
               "Title": "AudioController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\AudioController.cs",
               "RelativeDocumentMoniker": "Controllers\\AudioController.cs",
@@ -568,7 +572,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 22,
               "Title": "UserService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
@@ -592,7 +596,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 1,
               "Title": "AuthorizationService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\AuthorizationService.cs",
               "RelativeDocumentMoniker": "Services\\AuthorizationService.cs",
@@ -600,11 +604,12 @@
               "RelativeToolTip": "Services\\AuthorizationService.cs",
               "ViewState": "AQIAAE8AAAAAAAAAAAAgwGIAAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T11:49:27.165Z"
+              "WhenOpened": "2024-09-10T11:49:27.165Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 11,
               "Title": "IAuthorizationService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\IAuthorizationService.cs",
               "RelativeDocumentMoniker": "Services\\IAuthorizationService.cs",
@@ -612,12 +617,11 @@
               "RelativeToolTip": "Services\\IAuthorizationService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAiAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T11:48:56.716Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T11:48:56.716Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "AuthorizationController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\AuthorizationController.cs",
               "RelativeDocumentMoniker": "Controllers\\AuthorizationController.cs",
@@ -625,25 +629,24 @@
               "RelativeToolTip": "Controllers\\AuthorizationController.cs",
               "ViewState": "AQIAABIAAAAAAAAAAAAAAB0AAAAsAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T11:47:18.606Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T11:47:18.606Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "AlbumService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\AlbumService.cs",
               "RelativeDocumentMoniker": "Services\\AlbumService.cs",
               "ToolTip": "F:\\Programming\\A.S.S\\Backend\\Services\\AlbumService.cs",
               "RelativeToolTip": "Services\\AlbumService.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAAACsAAAANAAAA",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAADUAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-09-10T08:22:50.92Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 9,
               "Title": "IAlbumService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\IAlbumService.cs",
               "RelativeDocumentMoniker": "Services\\IAlbumService.cs",
@@ -651,12 +654,11 @@
               "RelativeToolTip": "Services\\IAlbumService.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAyAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-10T08:22:47.168Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-10T08:22:47.168Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "ApiResponse.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\ApiResponse.cs",
               "RelativeDocumentMoniker": "Models\\ApiResponse.cs",
@@ -668,7 +670,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 25,
               "Title": "IPlaylistService.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Services\\IPlaylistService.cs",
               "RelativeDocumentMoniker": "Services\\IPlaylistService.cs",
@@ -692,7 +694,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 31,
               "Title": "AdminController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
@@ -704,7 +706,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 30,
               "Title": "SearchResult.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\SearchResult.cs",
               "RelativeDocumentMoniker": "Models\\SearchResult.cs",
@@ -716,7 +718,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 38,
+              "DocumentIndex": 39,
               "Title": "SearchController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\SearchController.cs",
               "RelativeDocumentMoniker": "Controllers\\SearchController.cs",
@@ -740,7 +742,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "Models\\ApplicationDbContext.cs",
@@ -752,7 +754,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "UploadController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\UploadController.cs",
               "RelativeDocumentMoniker": "Controllers\\UploadController.cs",
@@ -764,7 +766,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 23,
               "Title": "UserPhoto.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\UserPhoto.cs",
               "RelativeDocumentMoniker": "Models\\UserPhoto.cs",
@@ -776,7 +778,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "Song.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Song.cs",
               "RelativeDocumentMoniker": "Models\\Song.cs",
@@ -788,7 +790,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 26,
               "Title": "AudioUploadModel.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\AudioUploadModel.cs",
               "RelativeDocumentMoniker": "Models\\AudioUploadModel.cs",
@@ -812,7 +814,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 8,
               "Title": "AlbumController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\AlbumController.cs",
               "RelativeDocumentMoniker": "Controllers\\AlbumController.cs",
@@ -820,12 +822,11 @@
               "RelativeToolTip": "Controllers\\AlbumController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAAAB0AAAALAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-08T14:40:40.391Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-08T14:40:40.391Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "Album.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Models\\Album.cs",
               "RelativeDocumentMoniker": "Models\\Album.cs",
@@ -849,7 +850,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 12,
               "Title": "UserController.cs",
               "DocumentMoniker": "F:\\Programming\\A.S.S\\Backend\\Controllers\\UserController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserController.cs",
@@ -857,8 +858,7 @@
               "RelativeToolTip": "Controllers\\UserController.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAgwDUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-07T08:54:43.244Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-04-07T08:54:43.244Z"
             },
             {
               "$type": "Document",

@@ -364,7 +364,6 @@ F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGen
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\Mono.TextTemplating.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\MySql.Data.dll
-F:\Programming\A.S.S\Backend\bin\Debug\net8.0\MySql.EntityFrameworkCore.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\MySqlConnector.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\NAudio.dll
 F:\Programming\A.S.S\Backend\bin\Debug\net8.0\NAudio.Asio.dll
