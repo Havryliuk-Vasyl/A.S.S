@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TpLugfp5oNyKSvV/a9C9kf51V/hT+2ml7cczvX6oZdc=",
+  "Hash": "14C9jRdcaYbdHSuv9EWjzj1DFdM1W2thYm3pwH+RYlo=",
   "Source": "Backend",
   "BasePath": "_content/Backend",
   "Mode": "Default",
@@ -9,10 +9,10 @@
   "DiscoveryPatterns": [],
   "Assets": [
     {
-      "Identity": "C:\\Users\\gavry\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.8\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
+      "Identity": "/home/flamerman/.nuget/packages/microsoft.aspnetcore.components.quickgrid/8.0.8/staticwebassets/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\gavry\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.8\\staticwebassets\\",
+      "ContentRoot": "/home/flamerman/.nuget/packages/microsoft.aspnetcore.components.quickgrid/8.0.8/staticwebassets/",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css",
       "AssetKind": "All",
@@ -25,13 +25,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\gavry\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.8\\staticwebassets\\Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
+      "OriginalItemSpec": "/home/flamerman/.nuget/packages/microsoft.aspnetcore.components.quickgrid/8.0.8/staticwebassets/Microsoft.AspNetCore.Components.QuickGrid.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\gavry\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.8\\staticwebassets\\QuickGrid.razor.js",
+      "Identity": "/home/flamerman/.nuget/packages/microsoft.aspnetcore.components.quickgrid/8.0.8/staticwebassets/QuickGrid.razor.js",
       "SourceId": "Microsoft.AspNetCore.Components.QuickGrid",
       "SourceType": "Package",
-      "ContentRoot": "C:\\Users\\gavry\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.8\\staticwebassets\\",
+      "ContentRoot": "/home/flamerman/.nuget/packages/microsoft.aspnetcore.components.quickgrid/8.0.8/staticwebassets/",
       "BasePath": "_content/Microsoft.AspNetCore.Components.QuickGrid",
       "RelativePath": "QuickGrid.razor.js",
       "AssetKind": "All",
@@ -44,13 +44,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\gavry\\.nuget\\packages\\microsoft.aspnetcore.components.quickgrid\\8.0.8\\staticwebassets\\QuickGrid.razor.js"
+      "OriginalItemSpec": "/home/flamerman/.nuget/packages/microsoft.aspnetcore.components.quickgrid/8.0.8/staticwebassets/QuickGrid.razor.js"
     },
     {
-      "Identity": "F:\\Programming\\A.S.S\\Backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Backend.styles.css",
+      "Identity": "/home/flamerman/A.S.S/Backend/obj/Debug/net8.0/scopedcss/bundle/Backend.styles.css",
       "SourceId": "Backend",
       "SourceType": "Computed",
-      "ContentRoot": "F:\\Programming\\A.S.S\\Backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "ContentRoot": "/home/flamerman/A.S.S/Backend/obj/Debug/net8.0/scopedcss/bundle/",
       "BasePath": "_content/Backend",
       "RelativePath": "Backend.styles.css",
       "AssetKind": "All",
@@ -63,7 +63,7 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "F:\\Programming\\A.S.S\\Backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\Backend.styles.css"
+      "OriginalItemSpec": "/home/flamerman/A.S.S/Backend/obj/Debug/net8.0/scopedcss/bundle/Backend.styles.css"
     }
   ]
 }

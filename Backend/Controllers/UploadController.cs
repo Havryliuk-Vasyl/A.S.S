@@ -14,7 +14,7 @@ namespace Backend.Controllers
     {
         private readonly IUploadService uploadService;
 
-        public UploadController(UploadService uploadService)
+        public UploadController(IUploadService uploadService)
         {
             this.uploadService = uploadService;
         }

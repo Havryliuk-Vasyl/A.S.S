@@ -59,7 +59,7 @@ const Authorization = () => {
         };
 
         try {
-            const response = await fetch("https://localhost:7219/Authorization/login", {
+            const response = await fetch("http://localhost:7219/Authorization/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(userLogin),

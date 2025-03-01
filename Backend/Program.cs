@@ -7,8 +7,19 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
+using Serilog;
+
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Logging.ClearProviders().AddConsole();
+
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Logging.AddSerilog();
+
 builder.Services
     .AddScoped<IAlbumService, AlbumService>()
     .AddScoped<IAuthorizationService, AuthorizationService>()

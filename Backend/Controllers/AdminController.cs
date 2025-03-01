@@ -11,7 +11,7 @@ namespace Backend.Controllers
     {
         private readonly IAdministratorService administratorService;
 
-        public AdminController(AdministratorService administratorService)
+        public AdminController(IAdministratorService administratorService)
         {
             this.administratorService = administratorService;
         }

@@ -75,7 +75,6 @@ namespace Backend.Services
             };
         }
 
-
         public async Task<ApiResponse<object>> Register(UserRegistrate userRegistrate)
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.Email == userRegistrate.email);
@@ -105,7 +104,6 @@ namespace Backend.Services
                 };
             }
         }
-
 
         public async Task<User> IsEmailAndPasswordCorrectAsync(string email, string password)
         {
